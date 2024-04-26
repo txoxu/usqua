@@ -55,4 +55,4 @@
   量の管理機能
 
 画面遷移図
-https://www.figma.com/file/HVdmhaA0lOg1dRpmfNnEVA/%E3%82%A6%E3%82%A4%E3%82%B9%E3%82%AD%E3%83%BC%E7%AE%A1%E7%90%86%E3%82%A2%E3%83%97%E3%83%AA%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?type=design&node-id=0-1&mode=design&t=uOAIqU5Vn8flFJiT-0https://www.figma.com/file/HVdmhaA0lOg1dRpmfNnEVA/%E3%82%A6%E3%82%A4%E3%82%B9%E3%82%AD%E3%83%BC%E7%AE%A1%E7%90%86%E3%82%A2%E3%83%97%E3%83%AA%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?type=design&node-id=0-1&mode=design&t=uOAIqU5Vn8flFJiT-0
+https://www.figma.com/file/HVdmhaA0lOg1dRpmfNnEVA/%E3%82%A6%E3%82%A4%E3%82%B9%E3%82%AD%E3%83%BC%E7%AE%A1%E7%90%86%E3%82%A2%E3%83%97%E3%83%AA%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?type=design&node-id=0%3A1&mode=design&t=010p6aVfEfHnlSdQ-1
