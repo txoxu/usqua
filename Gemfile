@@ -32,8 +32,9 @@ gem "jbuilder"
 #デバックを容易にするgem
 gem "better_errors"
 
-gem "bootstrap"
+gem 'bootstrap', '~> 5.3.3'
 
+gem 'jquery-rails'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
