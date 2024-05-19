@@ -1,2 +1,29 @@
-<h1>Pages#mypage</h1>
-<p>Find me in app/views/pages/mypage.html.erb</p>
+<div class="mypage-container">
+  <div class="total-container">
+
+    <div class="total-frame">
+      <div class="total-text">
+        <p>総登録数</p>
+      </div>
+
+      <div class="total-number">
+        <%= @whiskeys.count %>
+      </div>
+    </div>
+    
+  </div>
+
+  <div class="whiskey-container">
+    <% @categories.each do |category| %>
+      <div class="whiskey-frame">
+        <div class="whiskey-text">
+          <%= category.name %>
+        </div>
+
+        <div class="whiskey-number">
+          <%= @whiskey_count_by_category[category.id] || 0 %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+ja:
+  enums:
+    name:
+      american_whiskey: 'アメリカンウイスキー'
+      scotch_whiskey: 'スコッチウイスキー'
+      canadian_whiskey: 'カナディアンウイスキー'
+      japanese_whiskey: 'ジャパニーズウイスキー'
+      irish_whiskey: 'アイリッシュウイスキー'
+    category_type:
+      single_malt: 'シングルモルトウイスキー'
+      single_grain: 'シングルグレーンウイスキー'
+      blended: 'ブレンデッドウイスキー'
+      blended_malt: 'ブレンデッドモルトウイスキー'
+      blended_grain: 'ブレンデッドグレーンウイスキー'
