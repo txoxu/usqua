@@ -37,6 +37,8 @@ gem 'bootstrap', '~> 5.3.3'
 gem 'jquery-rails'
 
 gem 'rubocop', '~> 1.63', '>= 1.63.5'
+
+gem 'carrierwave', '~> 3.0', '>= 3.0.7'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
