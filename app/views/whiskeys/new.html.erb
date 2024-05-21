@@ -1,0 +1,43 @@
+<div class="whiskey-container">
+  <div class="whiskey-frame">
+
+    <div class="whiskey-new">
+      <h1>ウイスキー登録</h1>
+    </div>
+  <%= form_with model: @whiskey, local: true do |f| %>
+    <div class="whiskey-name">
+      <%= f.label :name, "ウイスキー名" %>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="whiskey-text">
+      <%= f.label :text, "ウイスキーの説明" %>
+      <%= f.text_field :text %>
+    </div>
+
+    <div class="whiskey-image">
+      <%= f.label :image, "画像を追加" %>
+      <%= f.file_field :image %>
+    </div>
+
+    <div class="whiskey-category-name">
+      <%= f.label :category_id, "生産国ウイスキー" %>
+      <%= f.collection_select :category_id, @categories, :id, :name, prompt: "選択してください" %>
+    </div>
+
+    <div class="whiskey-category-type">
+      <%= f.label :category_id, "原料別ウイスキー" %>
+      <%= f.collection_select :category_id, @category_types, :id, :category_type, prompt: "選択してください" %>
+    </div>
+  <% end %>
+  </div>
+
+  <div class="image-container">
+    <% if @whiskey.image? %>
+      <%= image_tag @whiskey.image.url %>
+    <% end %>
+  </div>
+
+  <div class="quantity-container">
+  </div>
+</div>
