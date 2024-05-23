@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_21_085254) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_23_111325) do
   create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "category_type", null: false
-    t.string "name", null: false
+    t.string "category_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -30,7 +30,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_21_085254) do
   create_table "whiskeys", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.string "text"
-    t.string "image" #carrierwave使用で、string型へ変更
+    t.string "image"
     t.integer "remmaining_quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

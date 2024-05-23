@@ -9,7 +9,7 @@
 #   end
 
 # Create categories by name
-names = [
+category_names = [
   'american_whiskey',
   'scotch_whiskey',
   'canadian_whiskey',
@@ -26,10 +26,10 @@ category_types = [
   'blended_grain'
 ]
 
-# Create category records
-names.each do |name|
+category_names.each do |category_name|
   category_types.each do |category_type|
-    new_category = Category.find_or_create_by!(name: I18n.t("names.#{name}"), category_type: I18n.t("category_types.#{category_type}"))
-    puts "Created category: #{new_category.name} - #{new_category.category_type}"
+    Category.create(category_name: category_name, category_type: category_type)
   end
 end
+
+puts "Categories seeded successfully."

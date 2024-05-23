@@ -2,10 +2,10 @@ class Category < ApplicationRecord
   has_many :whiskey_categories
   has_many :whiskeys, through: :whiskey_categories
 
-  validates :name, presence: true
+  validates :category_name, presence: true, uniqueness: { scope: :category_type }
   validates :category_type, presence: true
 
-  enum name: {
+  enum category_name: {
     'アメリカンウイスキー' => 'american_whiskey',
     'スコッチウイスキー' => 'scotch_whiskey',
     'カナディアンウイスキー' => 'canadian_whiskey',

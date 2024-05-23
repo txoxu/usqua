@@ -4,7 +4,7 @@
     <div class="whiskey-new">
       <h1>ウイスキー登録</h1>
     </div>
-    <%= form_with model: @whiskey, multiple: true, local: true do |f| %>
+    <%= form_with model: @whiskey, local: true do |f| %>
       <div class="whiskey-name">
         <%= f.label :name, "ウイスキー名" %>
         <%= f.text_field :name %>
@@ -21,13 +21,13 @@
       </div>
 
       <div class="whiskey-category-name">
-        <%= f.label :category_id, "生産国ウイスキー" %>
-        <%= f.collection_select :category_ids, @categories, :id, :name, prompt: "選択してください" %>
+        <%= f.label :category_names, "生産国ウイスキー" %>
+        <%= f.select :category_names, @category_names.map { |c| [c.category_name, c.category_name] }, { prompt: "選択してください" } %>
       </div>
 
       <div class="whiskey-category-type">
-        <%= f.label :category_id, "原料別ウイスキー" %>
-        <%= f.collection_select :category_ids, @category_types, :id, :category_type, prompt: "選択してください" %>
+        <%= f.label :category_types, "原料別ウイスキー" %>
+        <%= f.select :category_types, @category_types.map { |c| [c.category_type, c.category_type] }, { prompt: "選択してください" } %>
       </div>
 
       <div class="actions">
