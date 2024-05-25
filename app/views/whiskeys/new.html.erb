@@ -4,7 +4,7 @@
     <div class="whiskey-new">
       <h1>ウイスキー登録</h1>
     </div>
-    <%= form_with model: @whiskey, local: true do |f| %>
+    <%= form_with model: @whiskey, id: 'new_whiskey', local: true do |f| %>
       <div class="whiskey-name">
         <%= f.label :name, "ウイスキー名" %>
         <%= f.text_field :name %>
@@ -16,8 +16,8 @@
       </div>
 
       <div class="whiskey-image">
-        <%= f.label :image, "画像を追加" %>
-        <%= f.file_field :image, id: 'image_input' %>
+        <%= f.label :image, "画像を追加", id: "previews"%>
+        <%= f.file_field :image %>
       </div>
 
       <div class="whiskey-category-name">
