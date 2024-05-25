@@ -16,7 +16,7 @@
       </div>
 
       <div class="whiskey-image">
-        <%= f.label :image, "画像を追加", id: "previews"%>
+        <%= f.label :image, "画像を追加" %>
         <%= f.file_field :image %>
       </div>
 
@@ -37,9 +37,8 @@
   </div>
 
   <div class="image-container">
-    <% if @whiskey.image? %>
-      <%= image_tag @whiskey.image.url, id: 'image_preview' %>
-    <% end %>
+    <div id="previews">
+    </div>
   </div>
 
   <div class="quantity-container">
