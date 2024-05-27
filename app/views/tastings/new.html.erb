@@ -3,18 +3,25 @@
     <h1>テイスティング登録</h1>
   </div>
 
+  <%= form_with model: @tasting, local: true do |f| %>
+    <div class="tasting-frame">
+      <div class="tasting-flavor">
+        <%= f.label :flavor, "ウイスキーの味" %>
+        <%= f.text_field :flavor %>
+      </div>
 
-  <div class="tasting-frame">
-    <div class="tasting-flavor">
+      <div class="tasting-aroma">
+        <%= f.label :aroma, "ウイスキーの香り" %>
+        <%= f.text_field :aroma %>
+      </div>
+
+      <div class="tag">
+      </div>
     </div>
 
-    <div class="tasting-aroma">
+    <div class="tasting-explanation">
+        <%= f.label :tasting_text, "その他" %>
+        <%= f.text_field :tasting_text %>
     </div>
-
-    <div class="tag">
-    </div>
-  </div>
-
-  <div class="tasting-explanation">
-  </div>
+  <% end %>
 </div>
