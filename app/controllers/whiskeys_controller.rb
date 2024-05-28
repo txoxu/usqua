@@ -11,7 +11,7 @@ class WhiskeysController < ApplicationController
     logger.debug "Parameters: #{params.inspect}"
     if categories.any? && @whiskey.save
       @whiskey.categories << categories
-      redirect_to choose_next_step_whiskeys_path, notice: 'ウイスキーの登録が完了しました'
+      redirect_to choose_next_step_whiskey_path(@whiskey), notice: 'ウイスキーの登録が完了しました'
     else
       @category_names = Category.select(:id, :category_name).distinct
       @category_types = Category.select(:id, :category_type).distinct
@@ -19,7 +19,9 @@ class WhiskeysController < ApplicationController
     end
   end
 
-  def choose_next_step ;end
+  def choose_next_step
+    @whiskey = Whiskey.find(params[:id])
+  end
 
 
   private
