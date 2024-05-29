@@ -16,14 +16,19 @@
       </div>
 
       <div class="tag">
-        <%= f.text_field :tag_ids, class: "form-control", id:'tag_ids',\
-          placeholder: "タグをつける。複数つけるには','で区切ってください。" %>
+        <%= f.label :tag_ids, "タグ" %>
+        <%= f.text_field :tag_ids, id:'tag_ids',\
+          placeholder: "','で区切ってください" %>
       </div>
     </div>
 
     <div class="tasting-explanation">
         <%= f.label :tasting_text, "その他" %>
-        <%= f.text_field :tasting_text %>
+        <%= f.text_area :tasting_text %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "登録" %>
     </div>
   <% end %>
 </div>

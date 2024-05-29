@@ -11,7 +11,7 @@ class TastingsController < ApplicationController
 
     if @tasting.save
       @tasting.save_tags(tag_list)
-      redirect_to whiskey_path(@whiskey)
+      redirect_to root_path
     else
       render 'new'
     end
@@ -25,5 +25,5 @@ def set_whiskey
 end
 
 def tasting_params
-  params.require(:tasting).permit(:flavor, :aroma, :tasting_text, :whiskey_id, :tag_ids[])
+  params.require(:tasting).permit(:flavor, :aroma, :tasting_text, :whiskey_id, tag_ids: [])
 end
