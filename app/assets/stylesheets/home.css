@@ -1,0 +1,28 @@
+.home-container {
+  background: #f8f9fa; /* 例として背景色を追加 */
+  padding: 20px;
+  text-align: center;
+  height: 100%;
+}
+
+.title-container {
+  margin-bottom: 20px;
+}
+
+.app-title p {
+  margin-top: 200px;
+  font-size: 36px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.link-container {
+  margin-top: 200px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.whisky-list-link, .my-page-link, .whisky-registration-link {
+  font-size: 18px;
+}

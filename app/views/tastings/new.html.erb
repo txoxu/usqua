@@ -1,0 +1,34 @@
+<div class="tasting-container">
+  <div class="tasting-new">
+    <h1>テイスティング登録</h1>
+  </div>
+
+  <%= form_with model: @tasting, url: whiskey_tasting_path(@whiskey), local: true do |f| %>
+    <div class="tasting-frame">
+      <div class="tasting-flavor">
+        <%= f.label :flavor, "ウイスキーの味" %>
+        <%= f.text_field :flavor %>
+      </div>
+
+      <div class="tasting-aroma">
+        <%= f.label :aroma, "ウイスキーの香り" %>
+        <%= f.text_field :aroma %>
+      </div>
+
+      <div class="tag">
+        <%= f.label :tag_ids, "タグ" %>
+        <%= f.text_field :tag_ids, id:'tag_ids',\
+          placeholder: "','で区切ってください" %>
+      </div>
+    </div>
+
+    <div class="tasting-explanation">
+        <%= f.label :tasting_text, "その他" %>
+        <%= f.text_area :tasting_text %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "登録" %>
+    </div>
+  <% end %>
+</div>
