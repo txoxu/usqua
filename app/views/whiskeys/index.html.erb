@@ -1,0 +1,33 @@
+<% @whiskeys.each do |whiskey| %>
+  <div class="index-container">
+  <% if whiskey.image.present? %>
+    <div class="image-frame">
+      <%= image_tag whiskey.image.url %>
+    </div>
+  <% end %>
+
+    <div class="index-name">
+      <%= whiskey.name %>
+    </div>
+
+  <% whiskey.categories.each do |category| %>
+    <div class="index-categoryname">
+      <%= category.category_name %>
+    </div>
+
+    <div class="index-categorytype">
+      <%= category.category_type %>
+    </div>
+  <% end %>
+
+    <div class="index-tags">
+      <% if whiskey.tasting.present? %>
+        <% whiskey.tasting.tags.each do |tag|%>
+          <span class="tag"><%= tag.tag_name %></span>
+        <% end %>
+      <% else %>
+        <p>まだ、テイスティングは登録されていません</p>
+      <% end %>
+    </div>
+  </div>
+<% end %>

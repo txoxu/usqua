@@ -32,8 +32,6 @@ gem "jbuilder"
 #デバックを容易にするgem
 gem 'better_errors', '~> 2.10', '>= 2.10.1'
 
-gem 'bootstrap', '~> 5.3.3'
-
 gem 'jquery-rails'
 
 gem 'rubocop', '~> 1.63', '>= 1.63.5'

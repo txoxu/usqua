@@ -19,6 +19,10 @@ class WhiskeysController < ApplicationController
     end
   end
 
+  def index
+    @whiskeys = Whiskey.all.includes(:categories, tasting: :tags)
+  end
+
   def choose_next_step
     @whiskey = Whiskey.find(params[:id])
   end
