@@ -16,14 +16,15 @@ class TastingsController < ApplicationController
       render 'new'
     end
   end
-end
 
-private
+  private
 
-def set_whiskey
-  @whiskey = Whiskey.find(params[:whiskey_id])
-end
+  def set_whiskey
+    @whiskey = Whiskey.find(params[:whiskey_id])
+  end
 
-def tasting_params
-  params.require(:tasting).permit(:flavor, :aroma, :tasting_text, :whiskey_id, tag_ids: [])
+  def tasting_params
+    params.require(:tasting).permit(:flavor, :aroma, :tasting_text, :whiskey_id, tag_ids: [])
+  end
+
 end
