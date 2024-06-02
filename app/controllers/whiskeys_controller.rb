@@ -27,6 +27,11 @@ class WhiskeysController < ApplicationController
     @category_types = Category.select(:category_type).distinct
   end
 
+  def show
+    @whiskey = Whiskey.find(params[:id])
+    @categories = @whiskey.categories
+  end
+
   def edit
     @whiskey = Whiskey.find(params[:id])
     @category_names = Category.select(:category_name).distinct
@@ -47,8 +52,8 @@ class WhiskeysController < ApplicationController
 
   def destroy
     @whiskey = Whiskey.find(params[:id])
-    @whiskey.destroy
-    redirect_to whiskeys_path, notice: 'ウイスキーが削除されました'
+    @whiskey.destroy!
+    redirect_to whiskeys_path, notice: 'ウイスキーが削除されました', status: :see_other
   end
 
 

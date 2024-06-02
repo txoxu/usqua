@@ -1,0 +1,38 @@
+<div class="show-container">
+  <div class="show-frame">
+    <div class="whiskey-show">
+      <h1>ウイスキー詳細</h1>
+    </div>
+
+    <div class="show-name">
+      <%= @whiskey.name %>
+    </div>
+
+    <% @categories.each do |c| %>
+      <div class="show-category-name">
+        <%= c.category_name %>
+      </div>
+
+      <div class="show-category-type">
+        <%= c.category_type %>
+      </div>
+    <% end %>
+
+    <div class="show-text">
+      <%= @whiskey.text %>
+    </div>
+
+    <div class="index-actions">
+      <%= link_to '編集', '#', class: 'btn btn-primary' %>
+      <%= link_to '削除', whiskey_path(@whiskey), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+    </div>
+  </div>
+
+  <div class="image-container">
+    <div id="previews">
+    </div>
+  </div>
+
+  <div class="quantity-container">
+  </div>
+</div>
