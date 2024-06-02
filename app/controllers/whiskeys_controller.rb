@@ -20,7 +20,11 @@ class WhiskeysController < ApplicationController
   end
 
   def index
-    @whiskeys = Whiskey.all.includes(:categories, tasting: :tags)
+    @search_form = SearchWhiskeysForm.new(search_params)
+    @whiskeys = @search_form.search
+
+    @category_names = Category.select(:category_name).distinct
+    @category_types = Category.select(:category_type).distinct
   end
 
   def edit
@@ -64,5 +68,9 @@ class WhiskeysController < ApplicationController
     category_types = params[:whiskey][:category_types]
 
     Category.where(category_name: category_names).where(category_type: category_types)
+  end
+
+  def search_params
+    params.fetch(:search_whiskeys_form, {}).permit(:category_names, :category_types, :name, :text)
   end
 end

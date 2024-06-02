@@ -6,4 +6,8 @@ class Whiskey < ApplicationRecord
   mount_uploader :image, ImageUploader
 
   validates :name, presence: true, uniqueness: true
+
+  scope :by_category_ids, -> (ids) { joins(:categories).where(categories: { id: ids }) }
+  scope :name_contain, -> (word) { where('name LIKE ?', "%#{word}%") }
+  scope :text_contain, -> (word) { where('text LIKE ?', "%#{word}%") }
 end
