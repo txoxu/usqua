@@ -29,8 +29,11 @@
   </div>
 
   <div class="image-container">
-    <div id="previews">
-    </div>
+    <% if whiskey.image.present? %>
+      <div class="image-frame">
+        <%= image_tag whiskey.image.url %>
+      </div>
+    <% end %>
   </div>
 
   <div class="quantity-container">
