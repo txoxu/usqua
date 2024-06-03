@@ -8,7 +8,7 @@ class WhiskeysController < ApplicationController
   def create
     @whiskey = Whiskey.new(whiskey_params)
     categories = find_existing_categories
-    logger.debug "Parameters: #{params.inspect}"
+
     if categories.any? && @whiskey.save
       @whiskey.categories << categories
       redirect_to choose_next_step_whiskey_path(@whiskey), notice: 'ウイスキーの登録が完了しました'
@@ -18,6 +18,39 @@ class WhiskeysController < ApplicationController
       render :new
     end
   end
+
+  def index
+    @search_form = SearchWhiskeysForm.new(search_params)
+    @whiskeys = @search_form.search
+
+    @category_names = Category.select(:category_name).distinct
+    @category_types = Category.select(:category_type).distinct
+  end
+
+  def edit
+    @whiskey = Whiskey.find(params[:id])
+    @category_names = Category.select(:category_name).distinct
+    @category_types = Category.select(:category_type).distinct
+  end
+
+  def update
+    @whiskey = Whiskey.find(params[:id])
+    categories = find_existing_categories
+    
+    if @whiskey.update(whiskey_params)
+      @whiskey.categories = categories
+      redirect_to whiskeys_path, notice: 'ウイスキーが更新されました'
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @whiskey = Whiskey.find(params[:id])
+    @whiskey.destroy
+    redirect_to whiskeys_path, notice: 'ウイスキーが削除されました'
+  end
+
 
   def choose_next_step
     @whiskey = Whiskey.find(params[:id])
@@ -35,5 +68,9 @@ class WhiskeysController < ApplicationController
     category_types = params[:whiskey][:category_types]
 
     Category.where(category_name: category_names).where(category_type: category_types)
+  end
+
+  def search_params
+    params.fetch(:search_whiskeys_form, {}).permit(:category_names, :category_types, :name, :text)
   end
 end
