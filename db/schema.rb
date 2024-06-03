@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_28_150633) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_03_144427) do
   create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "category_type", null: false
     t.string "category_name", null: false
@@ -43,9 +43,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_28_150633) do
   end
 
   create_table "tastings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "aroma"
+    t.string "flavor"
+    t.string "tasting_text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "whiskey_id", null: false
+    t.string "tasting_type"
     t.index ["whiskey_id"], name: "index_tastings_on_whiskey_id"
   end
 

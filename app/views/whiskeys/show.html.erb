@@ -22,10 +22,22 @@
       <%= @whiskey.text %>
     </div>
 
-    <div class="index-actions">
+    <div class="show-actions">
       <%= link_to '編集', edit_whiskey_path(@whiskey), class: 'btn btn-primary' %>
       <%= link_to '削除', whiskey_path(@whiskey), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
     </div>
+  </div>
+
+  <div class="show-tasting">
+    <% if @whiskey.tastings.present? %>
+      <% @whiskey.tastings.each do |t| %>
+        <%= link_to whiskey_tasting_path(@whiskey, t) do %>
+          <%= t.tasting_type %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <p>テイスティングが1件もありません</p>
+    <% end %>
   </div>
 
   <div class="image-container">

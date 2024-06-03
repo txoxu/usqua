@@ -30,6 +30,7 @@ class WhiskeysController < ApplicationController
   def show
     @whiskey = Whiskey.find(params[:id])
     @categories = @whiskey.categories
+    @tastings = @whiskey.tastings
   end
 
   def edit
@@ -54,7 +55,7 @@ class WhiskeysController < ApplicationController
 
   def destroy
     @whiskey = Whiskey.find(params[:id])
-    @whiskey.destroy!
+    @whiskey.destroy
     redirect_to whiskeys_path, notice: 'ウイスキーが削除されました', status: :see_other
   end
 

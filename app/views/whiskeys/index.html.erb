@@ -22,9 +22,11 @@
         </div>
       <% end %>
       <div class="index-tags">
-        <% if whiskey.tasting.present? %>
-          <% whiskey.tasting.tags.each do |tag|%>
-            <span class="tag"><%= tag.tag_name %></span>
+        <% if whiskey.tastings.present? %>
+          <% whiskey.tastings.each do |tasting| %>
+              <% tasting.tags.each do |tag| %>
+                <span class="tag"><%= tag.tag_name %></span>
+              <% end %>
           <% end %>
         <% else %>
           <p>まだ、テイスティングは登録されていません</p>
@@ -33,8 +35,9 @@
     </div>
 
         <div class="index-actions">
+          <%= link_to 'テイスティングを追加', new_whiskey_tasting_path(whiskey), class: 'btn btn-primary' %>
           <%= link_to '編集', edit_whiskey_path(whiskey), class: 'btn btn-primary' %>
-          <%= link_to '削除', whiskey_path(whiskey), method: :delete,remote: true, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+          <%= link_to '削除', whiskey_path(whiskey), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
         </div>
       </div>
   <% end %>
