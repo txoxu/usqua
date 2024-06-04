@@ -17,6 +17,25 @@ class TastingsController < ApplicationController
     end
   end
 
+  def show
+    @tasting = Tasting.find(params[:id])
+    tags = @tasting.tags
+  end
+
+  def edit
+
+  end
+
+  def update
+
+  end
+
+  def destroy
+    @tasting = Tasting.find(params[:id])
+    @tasting.destroy
+    redirect_to whiskey_path(@whiskey), notice: 'テイスティングを削除しました', status: :see_other
+  end
+
   private
 
   def set_whiskey

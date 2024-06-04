@@ -1,0 +1,36 @@
+<div class="tasting-show-container">
+  <div class="tasting-show">
+    <h1>テイスティング詳細</h1>
+  </div>
+
+  <div class="tasting-show-frame">
+    <div class="tasting-show-type">
+      <%= @tasting.tasting_type %>
+    </div>
+
+    <div class="tasting-show-aroma">
+      <%= @tasting.aroma %>
+    </div>
+
+    <div class="tasting-show-flavor">
+     <%= @tasting.flavor %>
+    </div>
+    
+    <div class="tasting-show-text">
+       <%= @tasting.tasting_text %>
+    </div>
+
+    <div class="tasting-tags">
+      <% if @tasting.tags.present? %>
+        <% @tasting.tags.each do |t| %>
+          <%= t.tag_name %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="show-actions">
+    <%= link_to '編集', edit_whiskey_tasting_path(@tasting), class: 'btn btn-primary' %>
+    <%= link_to '削除', whiskey_tasting_path(@tasting), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+  </div>
+</div>

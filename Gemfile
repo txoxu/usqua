@@ -41,6 +41,7 @@ gem 'rubocop', '~> 1.63', '>= 1.63.5'
 gem 'carrierwave', '~> 3.0', '>= 3.0.7'
 
 gem 'ransack', '~> 4.1', '>= 4.1.1'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 

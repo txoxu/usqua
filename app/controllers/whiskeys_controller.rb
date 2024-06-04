@@ -37,8 +37,6 @@ class WhiskeysController < ApplicationController
     @whiskey = Whiskey.find(params[:id])
     @category_names = Category.select(:category_name).distinct
     @category_types = Category.select(:category_type).distinct
-
-    #@selected_category_name = @whiskey.categories.pluck(:category_name).first
   end
 
   def update
