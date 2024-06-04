@@ -1,0 +1,46 @@
+<div class="edit-container">
+  <div class="edit-frame">
+
+    <div class="whiskey-edit">
+      <h1>ウイスキー編集</h1>
+    </div>
+    <%= form_with model: @whiskey, id: 'edit_whiskey', local: true do |f| %>
+      <div class="whiskey-edit-name">
+        <%= f.label :name, "ウイスキー名" %>
+        <%= f.text_field :name %>
+      </div>
+
+      <div class="whiskey-edit-text">
+        <%= f.label :text, "ウイスキーの説明" %>
+        <%= f.text_field :text %>
+      </div>
+
+      <div class="whiskey-edit-image">
+        <%= f.label :image, "画像を追加" %>
+        <%= f.file_field :image %>
+      </div>
+
+      <div class="whiskey-edit-category-name">
+        <%= f.label :category_names, "生産国ウイスキー" %>
+        <%= f.select :category_names, @category_names.map { |c| c.category_name }, { prompt: "選択してください" } %>
+      </div>
+
+      <div class="whiskey-edit-category-type">
+        <%= f.label :category_types, "原料別ウイスキー" %>
+        <%= f.select :category_types, @category_types.map { |c| c.category_type }, { prompt: "選択してください" } %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "登録" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="image-container">
+    <div id="previews">
+    </div>
+  </div>
+
+  <div class="quantity-container">
+  </div>
+</div>

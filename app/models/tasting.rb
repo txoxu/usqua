@@ -3,6 +3,8 @@ class Tasting < ApplicationRecord
   has_many :tasting_tags, dependent: :destroy
   has_many :tags, through: :tasting_tags
 
+  validates :tasting_type, presence: true
+
   def save_tags(tag_list)
     tag_list.each do |tag_name|
       tag = Tag.find_or_create_by(tag_name: tag_name.strip)

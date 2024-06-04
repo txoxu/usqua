@@ -1,0 +1,53 @@
+<div class="show-container">
+  <div class="show-frame">
+    <div class="whiskey-show">
+      <h1>ウイスキー詳細</h1>
+    </div>
+
+    <div class="show-name">
+      <%= @whiskey.name %>
+    </div>
+
+    <% @categories.each do |c| %>
+      <div class="show-category-name">
+        <%= c.category_name %>
+      </div>
+
+      <div class="show-category-type">
+        <%= c.category_type %>
+      </div>
+    <% end %>
+
+    <div class="show-text">
+      <%= @whiskey.text %>
+    </div>
+
+    <div class="show-actions">
+      <%= link_to '編集', edit_whiskey_path(@whiskey), class: 'btn btn-primary' %>
+      <%= link_to '削除', whiskey_path(@whiskey), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+    </div>
+  </div>
+
+  <div class="show-tasting">
+    <% if @whiskey.tastings.present? %>
+      <% @whiskey.tastings.each do |t| %>
+        <%= link_to whiskey_tasting_path(@whiskey, t) do %>
+          <%= t.tasting_type %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <p>テイスティングが1件もありません</p>
+    <% end %>
+  </div>
+
+  <div class="image-container">
+    <% if @whiskey.image.present? %>
+      <div class="image-frame">
+        <%= image_tag @whiskey.image.url %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="quantity-container">
+  </div>
+</div>

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     member do
       get 'choose_next_step'
     end
-    resource :tasting, only: [:new, :create, :edit, :update, :show, :destroy]
+    resources :tastings, only: [:new, :create, :edit, :update, :show, :destroy]
   end
 
   resources :tags, only: [:index, :show]

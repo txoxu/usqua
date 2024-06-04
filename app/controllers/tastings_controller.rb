@@ -2,19 +2,38 @@ class TastingsController < ApplicationController
   before_action :set_whiskey
 
   def new
-    @tasting = @whiskey.build_tasting
+    @tasting = @whiskey.tastings.build
   end
 
   def create
-    @tasting = @whiskey.build_tasting(tasting_params)
+    @tasting = @whiskey.tastings.build(tasting_params)
     tag_list = params[:tasting][:tag_ids].split(',')
 
     if @tasting.save
       @tasting.save_tags(tag_list)
-      redirect_to root_path
+      redirect_to choose_next_step_whiskey_path(@whiskey), notice: 'テイスティングを登録しました'
     else
       render 'new'
     end
+  end
+
+  def show
+    @tasting = Tasting.find(params[:id])
+    tags = @tasting.tags
+  end
+
+  def edit
+
+  end
+
+  def update
+
+  end
+
+  def destroy
+    @tasting = Tasting.find(params[:id])
+    @tasting.destroy
+    redirect_to whiskey_path(@whiskey), notice: 'テイスティングを削除しました', status: :see_other
   end
 
   private
@@ -24,7 +43,7 @@ class TastingsController < ApplicationController
   end
 
   def tasting_params
-    params.require(:tasting).permit(:flavor, :aroma, :tasting_text, :whiskey_id, tag_ids: [])
+    params.require(:tasting).permit(:tasting_type, :flavor, :aroma, :tasting_text, :whiskey_id, tag_ids: [])
   end
 
 end
