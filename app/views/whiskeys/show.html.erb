@@ -34,6 +34,8 @@
         <%= link_to whiskey_tasting_path(@whiskey, t) do %>
           <%= t.tasting_type %>
         <% end %>
+          <%= link_to '編集', edit_whiskey_tasting_path(@whiskey, t), class: 'btn btn-primary' %>
+          <%= link_to '削除', whiskey_path(@whiskey), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
       <% end %>
     <% else %>
       <p>テイスティングが1件もありません</p>
