@@ -5,8 +5,12 @@ html, body {
   height: 100%;
 }
 
+.fixed-header {
+  background-color: #8B4513;
+}
+
 .home-container {
-  background-color: #0ef20e; /* 例として背景色を追加 */
+  background-color: #0ef20e;
   padding: 20px;
   text-align: center;
   height: 100%;

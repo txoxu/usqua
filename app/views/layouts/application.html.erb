@@ -13,6 +13,9 @@
   </head>
 
   <body>
+  <% unless controller_name == 'pages' && action_name == 'home' %>
+    <%= render 'shared/header' %>
+  <% end %>
     <%= yield %>
   </body>
 </html>
