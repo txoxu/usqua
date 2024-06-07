@@ -1,0 +1,29 @@
+.home-container {
+  background-color: #fefefe;
+  padding: 20px 20px 100px 20px;
+  height: 100%;
+}
+
+.app-title p {
+  font-style: italic;
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.link-container {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.whisky-list-link, .my-page-link, .whisky-registration-link {
+  font-size: 18px;
+  font-style: italic;
+}
+
+.mypage-container {
+  height: 100%;
+  padding: 72px 20px 104px 20px;
+}

@@ -25,5 +25,6 @@
         </div>
       </div>
     <% end %>
+    <%= pie_chart Whiskey.joins(:categories).group('categories.category_name').count %>
   </div>
 </div>
