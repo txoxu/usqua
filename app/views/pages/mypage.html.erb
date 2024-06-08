@@ -7,7 +7,7 @@
       </div>
 
       <div class="total-number">
-        <%= @whiskeys.count %>
+        <%= @whiskeys.count %>本
       </div>
     </div>
     
@@ -21,10 +21,10 @@
         </div>
 
         <div class="whiskey-number">
-          <%= @whiskey_count_by_category[category] || 0 %>
+          <%= @whiskey_count_by_category[category] || 0 %>本
         </div>
       </div>
     <% end %>
-    <%= pie_chart Whiskey.joins(:categories).group('categories.category_name').count %>
   </div>
+  <%= pie_chart @whiskey_count_by_category %>
 </div>

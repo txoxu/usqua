@@ -4,7 +4,7 @@
     <div class="whiskey-new">
       <h1>ウイスキー登録</h1>
     </div>
-    <%= form_with model: @whiskey, id: 'new_whiskey', local: true do |f| %>
+    <%= form_with model: @whiskey, id: 'new_whiskey', data: { controller: "image-preview" }, local: true do |f| %>
       <div class="whiskey-name">
         <%= f.label :name, "ウイスキー名" %>
         <%= f.text_field :name %>
@@ -17,7 +17,7 @@
 
       <div class="whiskey-image">
         <%= f.label :image, "画像を追加" %>
-        <%= f.file_field :image %>
+        <%= f.file_field :image, data: { "image-preview-target": "input" } %>
       </div>
 
       <div class="whiskey-category-name">
@@ -37,7 +37,7 @@
   </div>
 
   <div class="image-container">
-    <div id="previews">
+    <div id="previews" data-image-preview-target="preview">
     </div>
   </div>
 
