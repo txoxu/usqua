@@ -1,0 +1,57 @@
+.image-container {
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.preview-image {
+  max-width: 50%;
+  height: auto;
+}
+
+.whiskey-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem; // Adjust the space between items as needed
+}
+
+.whiskey-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px; // Adjust the width as needed
+  margin-bottom: 2rem; // Space between rows
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.image-frame {
+  width: 100%;
+  height: 200px; // Set the desired height for the images
+  overflow: hidden;
+}
+
+.whiskey-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; // Maintain aspect ratio and cover the area
+}
+
+.index-frame {
+  padding: 1rem;
+  text-align: center;
+}
+
+.index-actions {
+  margin-top: 1rem;
+}
+
+.tag {
+  display: inline-block;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  padding: 0.2rem 0.5rem;
+  margin: 0.2rem;
+}

@@ -1,29 +1,59 @@
-.home-container {
-  background-color: #fefefe;
-  padding: 20px 20px 100px 20px;
+.mypage-container {
+  padding: 20px;
+}
+
+.total-container {
+  padding: 20px;
+}
+
+.total-frame, .whiskey-frame {
+  margin-bottom: 20px;
+}
+
+.total-text p, .total-number {
+  margin: 0;
+  padding: 0;
+}
+
+.chart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100%;
 }
 
+.chart-container .chartkick {
+  max-width: 100%;
+}
+
+.home-container {
+  height: 100vh; // Full height of the viewport
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+}
+
 .app-title p {
-  font-style: italic;
-  font-size: 50px;
+  font-size: 3rem;
   font-weight: bold;
+  color: #343a40;
 }
 
 .link-container {
-  position: absolute;
-  top: 70%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  gap: 1rem; // Space between buttons
+  bottom: 20%; // Adjust the bottom position as needed
 }
 
-
-.whisky-list-link, .my-page-link, .whisky-registration-link {
-  font-size: 18px;
-  font-style: italic;
+.link-item {
+  display: flex;
+  justify-content: center;
 }
 
-
-.total-container {
-  font-size: 50px;
+.link-container .btn {
+  font-size: 1.2rem;
+  padding: 10px 20px;
 }
