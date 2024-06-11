@@ -11,9 +11,11 @@ export default class extends Controller {
     this.inputTarget.addEventListener('change', this.previewImage.bind(this));
   }
 
+  
   previewImage(event) {
     const file = event.target.files[0];
     if (!file) return;
+    location.reload();
 
     // Remove existing preview if any
     if (this.hasPreviewTarget) {

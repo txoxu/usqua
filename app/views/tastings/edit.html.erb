@@ -1,38 +1,36 @@
-<div class="tasting-edit-container">
+<div class="tasting-edit-container container">
   <div class="tasting-edit-frame">
-
     <div class="tasting-edit">
       <h1>テイスティング編集</h1>
     </div>
     <%= form_with model: [@whiskey, @tasting], id: 'edit_whiskey_tasting', local: true do |f| %>
-      <div class="tasting-edit-type">
-        <%= f.label :tasting_type, "ウイスキー飲み方" %>
-        <%= f.text_field :tasting_type %>
+      <div class="form-group tasting-edit-type">
+        <%= f.label :tasting_type, "ウイスキーの飲み方" %>
+        <%= f.text_field :tasting_type, class: "form-control" %>
       </div>
 
-      <div class="tasting-edit-aroma">
+      <div class="form-group tasting-edit-aroma">
         <%= f.label :aroma, "ウイスキーの味" %>
-        <%= f.text_field :aroma %>
+        <%= f.text_field :aroma, class: "form-control" %>
       </div>
 
-      <div class="tasting-edit-flavor">
+      <div class="form-group tasting-edit-flavor">
         <%= f.label :flavor, "ウイスキーの香り" %>
-        <%= f.text_field :flavor %>
+        <%= f.text_field :flavor, class: "form-control" %>
       </div>
 
-      <div class="tasting-edit-text">
+      <div class="form-group tasting-edit-text">
         <%= f.label :tasting_text, "その他" %>
-        <%= f.text_area :tasting_text %>
+        <%= f.text_area :tasting_text, class: "form-control" %>
       </div>
 
-      <div class="tasting-edit-tag">
+      <div class="form-group tasting-edit-tag">
         <%= f.label :tag_names, "タグ" %>
-        <%= f.text_field :tag_names, value: @tag_names.join(','),\
-          placeholder: "','で区切ってください" %>
+        <%= f.text_field :tag_names, value: @tag_names.join(','), class: "form-control", placeholder: "','で区切ってください" %>
       </div>
 
       <div class="actions">
-        <%= f.submit "更新" %>
+        <%= f.submit "更新", class: "btn btn-primary" %>
       </div>
     <% end %>
   </div>

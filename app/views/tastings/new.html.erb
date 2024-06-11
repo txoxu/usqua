@@ -1,39 +1,37 @@
-<div class="tasting-container">
+<div class="tasting-container container">
   <div class="tasting-new">
     <h1>テイスティング登録</h1>
   </div>
 
   <%= form_with model: @tasting, url: whiskey_tastings_path(@whiskey), local: true do |f| %>
     <div class="tasting-frame">
-
-      <div class="tasting-type">
+      <div class="form-group tasting-type">
         <%= f.label :tasting_type, "ウイスキーの飲み方" %>
-        <%= f.text_field :tasting_type %>
+        <%= f.text_field :tasting_type, class: "form-control" %>
       </div>
-      <div class="tasting-flavor">
+      <div class="form-group tasting-flavor">
         <%= f.label :flavor, "ウイスキーの味" %>
-        <%= f.text_field :flavor %>
+        <%= f.text_field :flavor, class: "form-control" %>
       </div>
 
-      <div class="tasting-aroma">
+      <div class="form-group tasting-aroma">
         <%= f.label :aroma, "ウイスキーの香り" %>
-        <%= f.text_field :aroma %>
+        <%= f.text_field :aroma, class: "form-control" %>
       </div>
 
-      <div class="tag">
+      <div class="form-group tag">
         <%= f.label :tag_names, "タグ" %>
-        <%= f.text_field :tag_names,\
-          placeholder: "','で区切ってください" %>
+        <%= f.text_field :tag_names, class: "form-control", placeholder: "','で区切ってください" %>
       </div>
     </div>
 
-    <div class="tasting-explanation">
-        <%= f.label :tasting_text, "その他" %>
-        <%= f.text_area :tasting_text %>
+    <div class="form-group tasting-explanation">
+      <%= f.label :tasting_text, "その他" %>
+      <%= f.text_area :tasting_text, class: "form-control" %>
     </div>
 
     <div class="actions">
-      <%= f.submit "登録" %>
+      <%= f.submit "登録", class: "btn btn-primary" %>
     </div>
   <% end %>
 </div>
