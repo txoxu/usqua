@@ -1,29 +1,34 @@
-<div class="mypage-container">
-  <div class="total-container">
-
-    <div class="total-frame">
-      <div class="total-text">
-        <p>総登録数</p>
-      </div>
-
-      <div class="total-number">
-        <%= @whiskeys.count %>
+<div class="container mypage-container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="total-container">
+        <div class="total-frame">
+          <div class="total-text">
+            <p>総登録数</p>
+          </div>
+          <div class="total-number">
+            <%= @whiskeys.count %>本
+          </div>
+        </div>
+        
+        <div class="whiskey-container">
+          <% @categories.each do |category| %>
+            <div class="whiskey-frame">
+              <div class="whiskey-text">
+                <%= category %>
+              </div>
+              <div class="whiskey-number">
+                <%= @whiskey_count_by_category[category] || 0 %>本
+              </div>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
-    
-  </div>
-
-  <div class="whiskey-container">
-    <% @categories.each do |category| %>
-      <div class="whiskey-frame">
-        <div class="whiskey-text">
-          <%= category %>
-        </div>
-
-        <div class="whiskey-number">
-          <%= @whiskey_count_by_category[category] || 0 %>
-        </div>
+    <div class="col-md-6">
+      <div class="chart-container">
+        <%= pie_chart @whiskey_count_by_category %>
       </div>
-    <% end %>
+    </div>
   </div>
 </div>

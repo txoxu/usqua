@@ -44,6 +44,11 @@ class WhiskeysController < ApplicationController
     categories = find_existing_categories
     
     if @whiskey.update(whiskey_params)
+      if params[:whiskey][:image].present?
+        @whiskey.update(image: params[:whiskey][:image])
+      else
+        @whiskey.update(image: File.open(Rails.root.join('app','assets','images','image.png')))
+      end
       @whiskey.categories = categories
       redirect_to whiskeys_path, notice: 'ウイスキーが更新されました'
     else

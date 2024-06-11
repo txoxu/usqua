@@ -1,0 +1,39 @@
+.tasting-edit-container,
+.tasting-container {
+  padding: 20px;
+}
+
+.tasting-edit-frame,
+.tasting-frame {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.tasting-edit h1,
+.tasting-new h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.tasting-edit-type,
+.tasting-edit-aroma,
+.tasting-edit-flavor,
+.tasting-edit-text,
+.tasting-edit-tag,
+.tasting-type,
+.tasting-flavor,
+.tasting-aroma,
+.tag,
+.tasting-explanation {
+  margin-bottom: 15px;
+}
+
+.actions {
+  text-align: right;
+}
+
+.tag {
+  margin-left: 100px;
+}

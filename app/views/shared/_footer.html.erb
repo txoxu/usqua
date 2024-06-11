@@ -1,17 +1,19 @@
-<footer id='footer' class='footer-bottom bg-light fixed-bottom'>
+<footer id='footer' class='footer-bottom bg-light py-3'>
   <div class='container'>
     <div class='row'>
-          <ul class='list-unstyled text-start'>
-            <li>
-              <%= link_to "#" do %><%= '利用規約' %><% end %>
-            </li>
-            <li>
-              <%= link_to "#" do %><%= 'プライバシーポリシー' %><% end %>
-            </li>
-          </ul>
-        <div class='copyright text-end'>
-          <p>Copyright © 2024. TXOXU</p>
-        </div>
+      <div class='col-md-6 text-start'>
+        <ul class='list-unstyled'>
+          <li>
+            <%= link_to "#" do %>利用規約<% end %>
+          </li>
+          <li>
+            <%= link_to "#" do %>プライバシーポリシー<% end %>
+          </li>
+        </ul>
+      </div>
+      <div class='col-md-6 text-end'>
+        <p class="mb-0">Copyright © 2024. TXOXU</p>
+      </div>
     </div>
   </div>
 </footer>

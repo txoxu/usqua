@@ -1,36 +1,47 @@
-<div class="tasting-show-container">
-  <div class="tasting-show">
-    <h1>テイスティング詳細</h1>
-  </div>
-
-  <div class="tasting-show-frame">
-    <div class="tasting-show-type">
-      <%= @tasting.tasting_type %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2 tasting-frame">
+      <h1 class="text-center">テイスティング詳細</h1>
+        <div class="form-group row tasting-type">
+        <label class="col-md-3 col-form-label">ウイスキーの飲み方</label>
+          <div class="col-md-9">
+            <p class="form-control-plaintext"><%= @tasting.tasting_type %></p>
+          </div>
+        </div>
+        <div class="form-group row tasting-flavor">
+        <label class="col-md-3 col-form-label">ウイスキーの味</label>
+          <div class="col-md-9">
+            <p class="form-control-plaintext"><%= @tasting.flavor %></p>
+          </div>
+        </div>
+        <div class="form-group row tasting-aroma">
+        <label class="col-md-3 col-form-label">ウイスキーの香り</label>
+          <div class="col-md-9">
+            <p class="form-control-plaintext"><%= @tasting.aroma %></p>
+          </div>
+        </div>
+        <div class="form-group row tasting-text">
+        <label class="col-md-3 col-form-label">その他</label>
+          <div class="col-md-9">
+            <p class="form-control-plaintext"><%= @tasting.tasting_text %></p>
+          </div>
+        </div>
+        <div class="form-group row">
+        <label class="col-md-3 col-form-label">タグ</label>
+          <div class="col-md-9 tag">
+            <% if @tasting.tags.present? %>
+              <% @tasting.tags.each do |t| %>
+                <p class="form-control-plaintext">
+                  <%= t.tag_name %>
+                </p>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+        <div class="actions text-right">
+          <%= link_to '編集', edit_whiskey_tasting_path(@whiskey, @tasting), class: 'btn btn-primary' %>
+          <%= link_to '削除', whiskey_path(@whiskey), class: 'btn btn-danger' %>
+        </div>
     </div>
-
-    <div class="tasting-show-aroma">
-      <%= @tasting.aroma %>
-    </div>
-
-    <div class="tasting-show-flavor">
-     <%= @tasting.flavor %>
-    </div>
-    
-    <div class="tasting-show-text">
-       <%= @tasting.tasting_text %>
-    </div>
-
-    <div class="tasting-tags">
-      <% if @tasting.tags.present? %>
-        <% @tasting.tags.each do |t| %>
-          <%= t.tag_name %>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="show-actions">
-    <%= link_to '編集', edit_whiskey_tasting_path(@whiskey), class: 'btn btn-primary' %>
-    <%= link_to '削除', whiskey_tasting_path(@whiskey), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
   </div>
 </div>

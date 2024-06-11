@@ -1,46 +1,49 @@
-<div class="whiskey-container">
-  <div class="whiskey-frame">
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="whiskey-frame">
+        <div class="whiskey-new">
+          <h1>ウイスキー登録</h1>
+        </div>
+        <%= form_with model: @whiskey, id: 'new_whiskey', data: { controller: "image-preview" }, local: true do |f| %>
+          <div class="mb-3">
+            <%= f.label :name, "ウイスキー名" %>
+            <%= f.text_field :name, class: "form-control" %>
+          </div>
 
-    <div class="whiskey-new">
-      <h1>ウイスキー登録</h1>
+          <div class="mb-3">
+            <%= f.label :text, "ウイスキーの説明" %>
+            <%= f.text_area :text, class: "form-control" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :image, "画像を追加" %>
+            <%= f.file_field :image, class: "form-control", data: { "image-preview-target": "input" } %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :category_names, "生産国ウイスキー" %>
+            <%= f.select :category_names, @category_names.map { |c| [c.category_name, c.category_name] }, { prompt: "選択してください" }, class: "form-control" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :category_types, "原料別ウイスキー" %>
+            <%= f.select :category_types, @category_types.map { |c| [c.category_type, c.category_type] }, { prompt: "選択してください" }, class: "form-control" %>
+          </div>
+
+          <div class="actions">
+            <%= f.submit "登録", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
     </div>
-    <%= form_with model: @whiskey, id: 'new_whiskey', local: true do |f| %>
-      <div class="whiskey-name">
-        <%= f.label :name, "ウイスキー名" %>
-        <%= f.text_field :name %>
-      </div>
 
-      <div class="whiskey-text">
-        <%= f.label :text, "ウイスキーの説明" %>
-        <%= f.text_field :text %>
+    <div class="col-md-6">
+      <div class="image-container text-center">
+        <div id="previews" data-image-preview-target="preview" class="border p-3">
+          プレビュー画像がここに表示されます。
+        </div>
       </div>
-
-      <div class="whiskey-image">
-        <%= f.label :image, "画像を追加" %>
-        <%= f.file_field :image %>
-      </div>
-
-      <div class="whiskey-category-name">
-        <%= f.label :category_names, "生産国ウイスキー" %>
-        <%= f.select :category_names, @category_names.map { |c| [c.category_name, c.category_name] }, { prompt: "選択してください" } %>
-      </div>
-
-      <div class="whiskey-category-type">
-        <%= f.label :category_types, "原料別ウイスキー" %>
-        <%= f.select :category_types, @category_types.map { |c| [c.category_type, c.category_type] }, { prompt: "選択してください" } %>
-      </div>
-
-      <div class="actions">
-        <%= f.submit "登録" %>
-      </div>
-    <% end %>
-  </div>
-
-  <div class="image-container">
-    <div id="previews">
     </div>
-  </div>
-
-  <div class="quantity-container">
   </div>
 </div>
