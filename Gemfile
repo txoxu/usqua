@@ -44,6 +44,11 @@ gem 'ransack', '~> 4.1', '>= 4.1.1'
 
 gem 'chartkick'
 
+gem 'gretel', '~> 5.0'
+
+gem 'sorcery', '~> 0.17.0'
+
+gem 'rails-i18n', '~> 7.0', '>= 7.0.9'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 

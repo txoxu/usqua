@@ -1,4 +1,4 @@
-<%= render 'whiskeys/search_form' %>
+<%= render 'shared/search_form' %>
 <% if @whiskeys.present? %>
   <div class="whiskey-list">
     <% @whiskeys.each do |whiskey| %>
@@ -28,18 +28,18 @@
                 <% end %>
               <% end %>
             <% else %>
-              <p>まだ、テイスティングは登録されていません</p>
+              <p><%= t('.not_tastings') %></p>
             <% end %>
           </div>
           <div class="index-actions">
-            <%= link_to 'テイスティングを追加', new_whiskey_tasting_path(whiskey), class: 'btn btn-primary' %>
-            <%= link_to '編集', edit_whiskey_path(whiskey), class: 'btn btn-primary' %>
-            <%= link_to '削除', whiskey_path(whiskey), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+            <%= link_to t('.add_tasting'), new_whiskey_tasting_path(whiskey), class: 'btn btn-primary' %>
+            <%= link_to t('helpers.btn.edit'), edit_whiskey_path(whiskey), class: 'btn btn-primary' %>
+            <%= link_to t('helpers.btn.destroy'), whiskey_path(whiskey), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
           </div>
         </div>
       </div>
     <% end %>
   </div>
 <% else %>
-  <p>ウイスキーが登録されていません</p>
+  <p><%= t('.not_whiskeys') %></p>
 <% end %>

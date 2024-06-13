@@ -12,9 +12,10 @@ class TastingsController < ApplicationController
 
     if @tasting.save
       @tasting.save_tags(tag_list)
-      redirect_to choose_next_step_whiskey_path(@whiskey), notice: 'テイスティングを登録しました'
+      redirect_to choose_next_step_whiskey_path(@whiskey), success: t('tastings.create.success')
     else
-      render 'new'
+      flash.now[:danger] = t('tastings.create.danger')
+      render :new
     end
   end
 
@@ -31,9 +32,9 @@ class TastingsController < ApplicationController
 
     if @tasting.update(tasting_params)
       @tasting.save_tags(tag_list)
-      redirect_to whiskey_tasting_path(@whiskey), notice: 'テイスティングを編集しました'
+      redirect_to whiskey_tasting_path(@whiskey)
     else
-      render 'edit'
+      render :edit
     end
   end
 

@@ -1,0 +1,26 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      tasting: テイスティング
+      whiskey: ウイスキー
+    attributes:
+      user:
+        email: メールアドレス
+        last_name: 姓
+        first_name: 名
+        password: パスワード
+        password_confirmation: パスワード確認
+      tasting:
+        tasting_type: ウイスキーの飲み方
+        flavor: ウイスキーの味
+        aroma: ウイスキーの香り
+        tag_names: タグ
+        tasting_text: その他
+      whiskey:
+        category_names: 生産国ウイスキー
+        category_types: 原料別ウイスキー
+        name: ウイスキーの名前
+        text: ウイスキーの説明
+        image: 画像を追加
+

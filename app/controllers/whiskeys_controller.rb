@@ -11,10 +11,11 @@ class WhiskeysController < ApplicationController
 
     if categories.any? && @whiskey.save
       @whiskey.categories << categories
-      redirect_to choose_next_step_whiskey_path(@whiskey), notice: 'ウイスキーの登録が完了しました'
+      redirect_to choose_next_step_whiskey_path(@whiskey), success: t('whiskeys.create.success')
     else
       @category_names = Category.select(:id, :category_name).distinct
       @category_types = Category.select(:id, :category_type).distinct
+      flash.now[:danger] = t('whiskeys.create.danger')
       render :new
     end
   end
