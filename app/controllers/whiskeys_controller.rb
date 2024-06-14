@@ -10,6 +10,11 @@ class WhiskeysController < ApplicationController
     categories = find_existing_categories
 
     if categories.any? && @whiskey.save
+      if params[:whiskey][:image].present?
+        @whiskey.update(image: params[:whiskey][:image])
+      else
+        @whiskey.update(image: File.open(Rails.root.join('app','assets','images','image.png')))
+      end
       @whiskey.categories << categories
       redirect_to choose_next_step_whiskey_path(@whiskey), success: t('whiskeys.create.success')
     else
@@ -51,8 +56,9 @@ class WhiskeysController < ApplicationController
         @whiskey.update(image: File.open(Rails.root.join('app','assets','images','image.png')))
       end
       @whiskey.categories = categories
-      redirect_to whiskeys_path, notice: 'ウイスキーが更新されました'
+      redirect_to whiskeys_path, success: t('whiskeys.update.success')
     else
+      flash.now[:danger] = t('whiskeys.update.danger')
       render :edit
     end
   end
@@ -60,7 +66,7 @@ class WhiskeysController < ApplicationController
   def destroy
     @whiskey = Whiskey.find(params[:id])
     @whiskey.destroy
-    redirect_to whiskeys_path, notice: 'ウイスキーが削除されました', status: :see_other
+    redirect_to whiskeys_path, danger: t('whiskeys.destroy.danger'), status: :see_other
   end
 
 

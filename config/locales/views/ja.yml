@@ -62,11 +62,16 @@ ja:
       title: テイスティング登録
     edit:
       title: テイスティング編集
+    update:
+      success: テイスティングを更新しました
+      danger: テイスティングの更新に失敗しました
     show:
       title: テイスティング詳細
     create:
       success: テイスティングを登録しました
       danger: テイスティング登録に失敗しました
+    destroy:
+      danger: テイスティングを削除しました
   whiskeys:
     choose_next_step:
       title: ウイスキーの登録が完了しました
@@ -80,6 +85,11 @@ ja:
       danger: ウイスキー登録が失敗しました
     edit:
       title: ウイスキー編集
+    update:
+      success: ウイスキーが更新されました
+      danger: ウイスキーの更新に失敗しました
+    destroy:
+      danger: ウイスキーが削除されました
     show:
       title: ウイスキー詳細
       not_tasting: テイスティングが1件もありません

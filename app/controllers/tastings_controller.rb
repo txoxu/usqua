@@ -32,15 +32,16 @@ class TastingsController < ApplicationController
 
     if @tasting.update(tasting_params)
       @tasting.save_tags(tag_list)
-      redirect_to whiskey_tasting_path(@whiskey)
+      redirect_to whiskey_tasting_path(@whiskey), success: t('tastings.update.success')
     else
+      flash.now[:danger] = t('tastings.update.danger')
       render :edit
     end
   end
 
   def destroy
     @tasting.destroy
-    redirect_to whiskey_path(@whiskey), notice: 'テイスティングを削除しました', status: :see_other
+    redirect_to whiskey_path(@whiskey), danger: t('tastings.destroy.danger'), status: :see_other
   end
 
   private
