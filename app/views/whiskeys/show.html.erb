@@ -3,7 +3,7 @@
     <div class="col-md-6">
       <div class="show-frame mb-3">
         <div class="whiskey-show">
-          <h1>ウイスキー詳細</h1>
+          <h1><%= t('.title') %></h1>
         </div>
         <div class="mb-3">
           <%= @whiskey.name %>
@@ -20,8 +20,8 @@
             <%= @whiskey.text %>
           </div>
           <div class="show-actions">
-            <%= link_to '編集', edit_whiskey_path(@whiskey), class: 'btn btn-primary' %>
-            <%= link_to '削除', whiskey_path(@whiskey), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+            <%= link_to t('helpers.btn.edit'), edit_whiskey_path(@whiskey), id: "button-edit-#{@whiskey.id}", class: 'btn btn-primary' %>
+            <%= link_to t('helpers.btn.destroy'), whiskey_path(@whiskey), id: "button-delete-#{@whiskey.id}", data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
           </div>
       </div>
       <% if @whiskey.tastings.present? %>
@@ -31,13 +31,13 @@
               <%= t.tasting_type %>
           <% end %>
               <div class="ms-3">
-              <%= link_to '編集', edit_whiskey_tasting_path(@whiskey, t), class: 'btn btn-primary' %>
-              <%= link_to '削除', whiskey_path(@whiskey), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+              <%= link_to t('helpers.btn.edit'), edit_whiskey_tasting_path(@whiskey, t), class: 'btn btn-primary' %>
+              <%= link_to t('helpers.btn.destroy'), whiskey_path(@whiskey, t), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: 'btn btn-danger' %>
               </div>
             </div>
         <% end %>
       <% else %>
-        <p>テイスティングが1件もありません</p>
+        <p><%= t('.not_tasting') %></p>
       <% end %>
     </div>
     <div class="col-md-6">

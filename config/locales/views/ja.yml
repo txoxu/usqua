@@ -1,0 +1,101 @@
+ja:
+  helpers:
+    preview: プレビュー画像がここに表示されます。
+    submit:
+      create: 登録
+      submit: 保存
+      update: 更新
+      search: 検索
+    btn:
+      edit: 編集
+      destroy: 削除
+    label:
+      email: メールアドレス
+      password: パスワード
+      tasting_type: ウイスキーの飲み方
+      flavor: ウイスキーの味
+      aroma: ウイスキーの香り
+      tag_names: タグ
+      tasting_text: その他
+  user_sessions:
+    new:
+      title: ログイン
+      login: ログイン
+      to_register_page: 登録ページへ
+      password_forget: パスワードをお忘れの方はこちら
+    create:
+      success: ログインしました
+      danger: ログインに失敗しました
+  users:
+    new:
+      title: ユーザー登録
+      to_login_page: ログインページへ
+    create:
+      success: ユーザー登録が完了しました
+      danger: ユーザ登録に失敗しました
+  static_pages:
+    top:
+      title: USQUA
+      login: ログイン
+      new_create: 新規登録
+  shared:
+    header:
+      title: "USQUA"
+      whiskey: ウイスキー
+      whiskey_new: ウイスキー登録
+      whiskey_index: ウイスキー一覧
+      mypage: マイページ
+      logout: ログアウト
+    footer:
+      rule: 利用規約
+      private: プライバシーポリシー
+    search_form:
+      category_names: 国別
+      category_types: 原料別
+      name: 名前
+      text: 説明
+  pages:
+    mypage:
+      sum_create: 総登録数
+  tastings:
+    new:
+      title: テイスティング登録
+    edit:
+      title: テイスティング編集
+    update:
+      success: テイスティングを更新しました
+      danger: テイスティングの更新に失敗しました
+    show:
+      title: テイスティング詳細
+    create:
+      success: テイスティングを登録しました
+      danger: テイスティング登録に失敗しました
+    destroy:
+      danger: テイスティングを削除しました
+  whiskeys:
+    choose_next_step:
+      title: ウイスキーの登録が完了しました
+      select: 次に進むアクションを選択してください
+      next_tasting: テイスティングを登録する
+      whiskeys: ウイスキー一覧に戻る
+    new:
+      title: ウイスキー登録
+    create:
+      success: ウイスキー登録が完了しました
+      danger: ウイスキー登録が失敗しました
+    edit:
+      title: ウイスキー編集
+    update:
+      success: ウイスキーが更新されました
+      danger: ウイスキーの更新に失敗しました
+    destroy:
+      danger: ウイスキーが削除されました
+    show:
+      title: ウイスキー詳細
+      not_tasting: テイスティングが1件もありません
+    index:
+      not_tastings: まだ、テイスティングは登録されていません
+      add_tasting: テイスティング追加
+      not_whiskeys: ウイスキーが登録されていません
+
+

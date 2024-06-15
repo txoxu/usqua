@@ -1,0 +1,13 @@
+<div class="home-container position-relative">
+  <div class="app-title position-absolute top-30 start-50 translate-middle-x">
+    <p><%= t('.title') %></p>
+  </div>
+  <div class="link-container position-absolute bottom-30 start-50 translate-middle-x">
+    <div class="link-item">
+      <%= link_to t('.login'), login_path, class: 'btn btn-primary' %>
+    </div>
+    <div class="link-item">
+      <%= link_to t('.new_create'), new_user_path, class: 'btn btn-secondary' %>
+    </div>
+  </div>
+</div>

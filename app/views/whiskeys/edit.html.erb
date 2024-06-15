@@ -3,36 +3,36 @@
     <div class="col-md-6">
       <div class="edit-frame">
         <div class="whiskey-edit">
-          <h1>ウイスキー編集</h1>
+          <h1><%= t('.title') %></h1>
         </div>
         <%= form_with model: @whiskey, id: 'edit_whiskey', data: { controller: "image-preview" }, local: true do |f| %>
           <div class="mb-3">
-            <%= f.label :name, "ウイスキー名" %>
+            <%= f.label :name %>
             <%= f.text_field :name, class: "form-control" %>
           </div>
 
           <div class="mb-3">
-            <%= f.label :text, "ウイスキーの説明" %>
+            <%= f.label :text %>
             <%= f.text_field :text, class: "form-control" %>
           </div>
 
           <div class="mb-3">
-            <%= f.label :image, "画像を追加" %>
+            <%= f.label :image %>
             <%= f.file_field :image, class: "form-control", data: { "image-preview-target": "input" } %>
           </div>
 
           <div class="mb-3">
-            <%= f.label :category_names, "生産国ウイスキー" %>
+            <%= f.label :category_names %>
             <%= f.select :category_names, @category_names.map { |c| c.category_name }, { prompt: "選択してください" }, class: "form-control" %>
           </div>
 
           <div class="mb-3">
-            <%= f.label :category_types, "原料別ウイスキー" %>
+            <%= f.label :category_types %>
             <%= f.select :category_types, @category_types.map { |c| c.category_type }, { prompt: "選択してください" }, class: "form-control" %>
           </div>
 
           <div class="actions">
-            <%= f.submit "登録", class: "btn btn-primary" %>
+            <%= f.submit t('helpers.submit.create'), class: "btn btn-primary" %>
           </div>
         <% end %>
       </div>
@@ -41,7 +41,7 @@
     <div class="col-md-6">
       <div class="image-container text-center">
         <div id="previews" data-image-preview-target="preview" class="border p-3">
-          プレビュー画像がここに表示されます。
+          <%= t('helpers.preview') %>
         </div>
       </div>
     </div>

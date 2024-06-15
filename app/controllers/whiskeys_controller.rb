@@ -6,20 +6,27 @@ class WhiskeysController < ApplicationController
   end
   
   def create
-    @whiskey = Whiskey.new(whiskey_params)
+    @whiskey = current_user.whiskeys.build(whiskey_params)
     categories = find_existing_categories
 
     if categories.any? && @whiskey.save
+      if params[:whiskey][:image].present?
+        @whiskey.update(image: params[:whiskey][:image])
+      else
+        @whiskey.update(image: File.open(Rails.root.join('app','assets','images','image.png')))
+      end
       @whiskey.categories << categories
-      redirect_to choose_next_step_whiskey_path(@whiskey), notice: 'ウイスキーの登録が完了しました'
+      redirect_to choose_next_step_whiskey_path(@whiskey), success: t('whiskeys.create.success')
     else
       @category_names = Category.select(:id, :category_name).distinct
       @category_types = Category.select(:id, :category_type).distinct
+      flash.now[:danger] = t('whiskeys.create.danger')
       render :new
     end
   end
 
   def index
+    @whiskeys = current_user.whiskeys.all
     @search_form = SearchWhiskeysForm.new(search_params)
     @whiskeys = @search_form.search
 
@@ -34,13 +41,13 @@ class WhiskeysController < ApplicationController
   end
 
   def edit
-    @whiskey = Whiskey.find(params[:id])
+    @whiskey = current_user.whiskeys.find(params[:id])
     @category_names = Category.select(:category_name).distinct
     @category_types = Category.select(:category_type).distinct
   end
 
   def update
-    @whiskey = Whiskey.find(params[:id])
+    @whiskey = current_user.whiskeys.find(params[:id])
     categories = find_existing_categories
     
     if @whiskey.update(whiskey_params)
@@ -50,28 +57,29 @@ class WhiskeysController < ApplicationController
         @whiskey.update(image: File.open(Rails.root.join('app','assets','images','image.png')))
       end
       @whiskey.categories = categories
-      redirect_to whiskeys_path, notice: 'ウイスキーが更新されました'
+      redirect_to whiskeys_path, success: t('whiskeys.update.success')
     else
-      render :edit
+      flash.now[:danger] = t('whiskeys.update.danger')
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @whiskey = Whiskey.find(params[:id])
-    @whiskey.destroy
-    redirect_to whiskeys_path, notice: 'ウイスキーが削除されました', status: :see_other
+    @whiskey = current_user.whiskeys.find(params[:id])
+    @whiskey.destroy!
+    redirect_to whiskeys_path, danger: t('whiskeys.destroy.danger'), status: :see_other
   end
 
 
   def choose_next_step
-    @whiskey = Whiskey.find(params[:id])
+    @whiskey = current_user.whiskeys.find(params[:id])
   end
 
 
   private
 
   def whiskey_params
-    params.require(:whiskey).permit(:name, :text, :image, :remmaining_quantity, category_names: [], category_types: [])
+    params.require(:whiskey).permit(:name, :text, :image, :remaining_quantity, category_names: [], category_types: [])
   end
 
   def find_existing_categories

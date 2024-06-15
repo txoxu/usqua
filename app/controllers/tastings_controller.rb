@@ -12,17 +12,20 @@ class TastingsController < ApplicationController
 
     if @tasting.save
       @tasting.save_tags(tag_list)
-      redirect_to choose_next_step_whiskey_path(@whiskey), notice: 'テイスティングを登録しました'
+      redirect_to choose_next_step_whiskey_path(@whiskey), success: t('tastings.create.success')
     else
-      render 'new'
+      flash.now[:danger] = t('tastings.create.danger')
+      render :new
     end
   end
 
   def show
+    @tasting = @whiskey.tastings.find(params[:id])
     tags = @tasting.tags
   end
 
   def edit
+    @tasting = @whiskey.tastings.find(params[:id])
     @tag_names = @tasting.tags.pluck(:tag_name)
   end
 
@@ -31,15 +34,17 @@ class TastingsController < ApplicationController
 
     if @tasting.update(tasting_params)
       @tasting.save_tags(tag_list)
-      redirect_to whiskey_tasting_path(@whiskey), notice: 'テイスティングを編集しました'
+      redirect_to whiskey_tasting_path(@whiskey), success: t('tastings.update.success')
     else
-      render 'edit'
+      flash.now[:danger] = t('tastings.update.danger')
+      render :edit
     end
   end
 
   def destroy
-    @tasting.destroy
-    redirect_to whiskey_path(@whiskey), notice: 'テイスティングを削除しました', status: :see_other
+    @tasting = @whiskey.tastings.find(params[:id])
+    @tasting.destroy!
+    redirect_to whiskey_path(@whiskey), danger: t('tastings.destroy.danger'), status: :see_other
   end
 
   private
