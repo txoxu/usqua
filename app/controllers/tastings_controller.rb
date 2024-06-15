@@ -20,10 +20,12 @@ class TastingsController < ApplicationController
   end
 
   def show
+    @tasting = @whiskey.tastings.find(params[:id])
     tags = @tasting.tags
   end
 
   def edit
+    @tasting = @whiskey.tastings.find(params[:id])
     @tag_names = @tasting.tags.pluck(:tag_name)
   end
 
@@ -40,7 +42,8 @@ class TastingsController < ApplicationController
   end
 
   def destroy
-    @tasting.destroy
+    @tasting = @whiskey.tastings.find(params[:id])
+    @tasting.destroy!
     redirect_to whiskey_path(@whiskey), danger: t('tastings.destroy.danger'), status: :see_other
   end
 

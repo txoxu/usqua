@@ -3,9 +3,9 @@ class PagesController < ApplicationController
   def home; end
 
   def mypage
-    @whiskeys = Whiskey.all
+    @whiskeys = current_user.whiskeys
     @categories = Category.pluck(:category_name).uniq
-    @whiskey_count_by_category = Whiskey.joins(:categories).group('categories.category_name').count
+    @whiskey_count_by_category = current_user.whiskeys.joins(:categories).group('categories.category_name').count
   end
 
 end

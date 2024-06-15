@@ -6,7 +6,7 @@ class WhiskeysController < ApplicationController
   end
   
   def create
-    @whiskey = Whiskey.new(whiskey_params)
+    @whiskey = current_user.whiskeys.build(whiskey_params)
     categories = find_existing_categories
 
     if categories.any? && @whiskey.save
@@ -26,6 +26,7 @@ class WhiskeysController < ApplicationController
   end
 
   def index
+    @whiskeys = current_user.whiskeys.all
     @search_form = SearchWhiskeysForm.new(search_params)
     @whiskeys = @search_form.search
 
@@ -40,13 +41,13 @@ class WhiskeysController < ApplicationController
   end
 
   def edit
-    @whiskey = Whiskey.find(params[:id])
+    @whiskey = current_user.whiskeys.find(params[:id])
     @category_names = Category.select(:category_name).distinct
     @category_types = Category.select(:category_type).distinct
   end
 
   def update
-    @whiskey = Whiskey.find(params[:id])
+    @whiskey = current_user.whiskeys.find(params[:id])
     categories = find_existing_categories
     
     if @whiskey.update(whiskey_params)
@@ -59,26 +60,26 @@ class WhiskeysController < ApplicationController
       redirect_to whiskeys_path, success: t('whiskeys.update.success')
     else
       flash.now[:danger] = t('whiskeys.update.danger')
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
-    @whiskey = Whiskey.find(params[:id])
-    @whiskey.destroy
+    @whiskey = current_user.whiskeys.find(params[:id])
+    @whiskey.destroy!
     redirect_to whiskeys_path, danger: t('whiskeys.destroy.danger'), status: :see_other
   end
 
 
   def choose_next_step
-    @whiskey = Whiskey.find(params[:id])
+    @whiskey = current_user.whiskeys.find(params[:id])
   end
 
 
   private
 
   def whiskey_params
-    params.require(:whiskey).permit(:name, :text, :image, :remmaining_quantity, category_names: [], category_types: [])
+    params.require(:whiskey).permit(:name, :text, :image, :remaining_quantity, category_names: [], category_types: [])
   end
 
   def find_existing_categories

@@ -1,7 +1,8 @@
 class Whiskey < ApplicationRecord
   has_many :whiskey_categories, dependent: :destroy
   has_many :categories, through: :whiskey_categories
-  has_many :tastings
+  has_many :tastings, dependent: :destroy
+  belongs_to :user
 
   mount_uploader :image, ImageUploader
 
