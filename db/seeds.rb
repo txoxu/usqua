@@ -9,6 +9,7 @@
 #   end
 
 # Create categories by name
+=begin
 category_names = [
   'american_whiskey',
   'scotch_whiskey',
@@ -33,3 +34,20 @@ category_names.each do |category_name|
 end
 
 puts "Categories seeded successfully."
+=end
+quantities = [
+  '0ml',
+  '100ml',
+  '200ml',
+  '300ml',
+  '400ml',
+  '500ml',
+  '600ml',
+  '700ml'
+]
+
+quantities.each do |quantity|
+  RemmainingQuantity.create(quantity: quantity)
+end
+
+puts "Remaining quantities seeded successfully."
