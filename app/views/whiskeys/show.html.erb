@@ -8,6 +8,9 @@
         <div class="mb-3">
           <%= @whiskey.name %>
         </div>
+        <div class="mb-3">
+          <%= @whiskey.remmaining_quantity.quantity %>
+        </div>
         <% @categories.each do |c| %>
           <div class="mb-3">
             <%= c.category_name %>

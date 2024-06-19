@@ -1,3 +1,3 @@
 class RemmainingQuantity < ApplicationRecord
-  belongs_to :whiskey
+  has_many :whiskeys
 end

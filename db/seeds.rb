@@ -51,3 +51,20 @@ quantities.each do |quantity|
 end
 
 puts "Remaining quantities seeded successfully."
+
+quantity_images = [
+  '0ml.jpg',
+  '100ml.jpg',
+  '200ml.jpg',
+  '300ml.jpg',
+  '400ml.jpg',
+  '500ml.jpg',
+  '600ml.jpg',
+  '700ml.jpg'
+]
+
+quantity_images.each do |image|
+  RemmainingQuantity.create(quantity_image: quantity_image)
+end
+
+puts "Remaining quantities image seeded successfully."

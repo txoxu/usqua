@@ -17,6 +17,11 @@
           </div>
 
           <div class="mb-3">
+            <%= f.label :remmaining_quantity_id %>
+            <%= f.select :remmaining_quantity_id, @quantities.map { |r| [r.quantity, r.id] }, { prompt: "量を選択してください" }, class: "form-control" %>
+          </div>
+
+          <div class="mb-3">
             <%= f.label :image %>
             <%= f.file_field :image, class: "form-control", data: { "image-preview-target": "input" } %>
           </div>

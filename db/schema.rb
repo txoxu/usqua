@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_17_092647) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_19_111803) do
   create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "category_type", null: false
     t.string "category_name", null: false
@@ -31,6 +31,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_17_092647) do
     t.string "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "quantity_image"
   end
 
   create_table "tags", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -86,6 +87,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_17_092647) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.bigint "remmaining_quantity_id"
+    t.index ["remmaining_quantity_id"], name: "index_whiskeys_on_remmaining_quantity_id"
     t.index ["user_id"], name: "index_whiskeys_on_user_id"
   end
 
@@ -96,5 +99,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_17_092647) do
   add_foreign_key "tastings", "whiskeys"
   add_foreign_key "whiskey_categories", "categories"
   add_foreign_key "whiskey_categories", "whiskeys"
+  add_foreign_key "whiskeys", "remmaining_quantities"
   add_foreign_key "whiskeys", "users"
 end

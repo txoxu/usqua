@@ -23,5 +23,5 @@ ja:
         name: ウイスキーの名前
         text: ウイスキーの説明
         image: 画像を追加
-        remmaining_quantity: ウイスキーの量
+        remmaining_quantity_id: ウイスキーの量
 

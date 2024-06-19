@@ -17,8 +17,8 @@
           </div>
 
           <div class="mb-3">
-            <%= f.label :remmaining_quantity %>
-            <%= f.select :remmaining_quantity, @remmaining_quantitys.map { |r| [r.remmaining_quantity, r.remmaining_quantity] }, { prompt: "量を選択してください" }, class: "form-control" %>
+            <%= f.label :remmaining_quantity_id %>
+            <%= f.select :remmaining_quantity_id, @quantities.map { |r| [r.quantity, r.id] }, { prompt: "量を選択してください" }, class: "form-control" %>
           </div>
 
           <div class="mb-3">
