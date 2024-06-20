@@ -1,26 +1,24 @@
-// app/javascript/controllers/image_preview_controller.js
-
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["input", "preview"];
+  static targets = ["input", "preview", "quantityInput", "quantityPreview"];
 
   connect() {
-    if (!this.hasInputTarget || !this.hasPreviewTarget) return;
+    if (this.hasInputTarget) {
+      this.inputTarget.addEventListener('change', this.previewImage.bind(this));
+    }
 
-    this.inputTarget.addEventListener('change', this.previewImage.bind(this));
+    if (this.hasQuantityInputTarget) {
+      this.quantityInputTarget.addEventListener('change', this.updateQuantityImagePreview.bind(this));
+    }
   }
 
-  
   previewImage(event) {
     const file = event.target.files[0];
     if (!file) return;
-    location.reload();
 
     // Remove existing preview if any
-    if (this.hasPreviewTarget) {
-      this.previewTarget.innerHTML = '';
-    }
+    this.previewTarget.innerHTML = '';
 
     // Create URL for the selected file
     const blob = window.URL.createObjectURL(file);
@@ -32,5 +30,27 @@ export default class extends Controller {
 
     // Append the img element to the preview target
     this.previewTarget.appendChild(img);
+  }
+
+  updateQuantityImagePreview(event) {
+    const selectedQuantityId = event.target.value;
+
+    if (!selectedQuantityId) {
+      this.quantityPreviewTarget.innerHTML = '';
+      return;
+    }
+
+    fetch(`/remmaining_quantities/${selectedQuantityId}/image_path`)
+      .then(response => response.json())
+      .then(data => {
+        this.quantityPreviewTarget.innerHTML = '';
+
+        if (data.image_path) {
+          const img = document.createElement('img');
+          img.setAttribute('src', data.image_path);
+          img.setAttribute('class', 'preview-image');
+          this.quantityPreviewTarget.appendChild(img);
+        }
+      });
   }
 }

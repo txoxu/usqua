@@ -64,7 +64,25 @@ quantity_images = [
 ]
 
 quantity_images.each do |image|
-  RemmainingQuantity.create(quantity_image: quantity_image)
+  quantity = image.gsub('.jpg', '') # '0ml.jpg' -> '0ml'
+  remaining_quantity = RemmainingQuantity.find_by(quantity: quantity)
+  
+  unless remaining_quantity.nil?
+    image_path = Rails.root.join('app', 'assets', 'images', image).to_s
+    
+    # 更新処理をログに表示して確認する
+    puts "Updating quantity: #{quantity}, with image: #{image_path}"
+    
+    remaining_quantity.update(quantity_image: image_path)
+    
+    if remaining_quantity.save
+      puts "Image #{image} attached to quantity #{quantity} successfully."
+    else
+      puts "Failed to attach image #{image} to quantity #{quantity}."
+    end
+  else
+    puts "No record found for quantity #{quantity}"
+  end
 end
 
-puts "Remaining quantities image seeded successfully."
+puts "Remaining quantities images seeded successfully."

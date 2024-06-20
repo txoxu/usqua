@@ -18,7 +18,7 @@
 
           <div class="mb-3">
             <%= f.label :remmaining_quantity_id %>
-            <%= f.select :remmaining_quantity_id, @quantities.map { |r| [r.quantity, r.id] }, { prompt: "量を選択してください" }, class: "form-control" %>
+            <%= f.select :remmaining_quantity_id, @quantities.map { |r| [r.quantity, r.id] }, { prompt: "量を選択してください" }, class: "form-control", data: { "image-preview-target": "quantity" %>
           </div>
 
           <div class="mb-3">
@@ -43,15 +43,18 @@
       </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-3">
       <div class="image-container text-center">
         <div id="previews" data-image-preview-target="preview" class="border p-3">
           <%= t('helpers.preview') %>
         </div>
       </div>
     </div>
-
-    <div class="quantity-container">
+  <div class="col-md-3">
+    <div id="quantity-previews" data-quantity-image-target="preview" class="border p-3">
+      <div class="quantity-container">
+        <%= t('helpers.preview') %>
+      </div>
     </div>
   </div>
 </div>
