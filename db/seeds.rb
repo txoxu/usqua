@@ -8,7 +8,6 @@
 #   end
 
 # Create categories by name
-=begin
 category_names = [
   'american_whiskey',
   'scotch_whiskey',
@@ -33,7 +32,6 @@ category_names.each do |category_name|
 end
 
 puts "Categories seeded successfully."
-=end
 quantities = [
   '0ml',
   '100ml',

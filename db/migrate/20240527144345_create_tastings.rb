@@ -4,6 +4,7 @@ class CreateTastings < ActiveRecord::Migration[7.1]
       t.string :aroma
       t.string :flavor
       t.string :tasting_text
+      t.string :tasting_type
 
 
       t.timestamps

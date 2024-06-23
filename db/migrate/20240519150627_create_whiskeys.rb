@@ -3,8 +3,7 @@ class CreateWhiskeys < ActiveRecord::Migration[7.1]
     create_table :whiskeys do |t|
       t.string :name
       t.string :text
-      t.blob :image
-      t.integer :remmaining_quantity
+      t.string :image
 
       t.timestamps
     end
