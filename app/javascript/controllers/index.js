@@ -4,5 +4,10 @@
 
 import { application } from "./application"
 
+<<<<<<< HEAD
 import ImagePreviewController from "./image_preview_controller"
 application.register("image-preview", ImagePreviewController)
+=======
+import HelloController from "./hello_controller"
+application.register("hello", HelloController)
+>>>>>>> 81dd2749b47c942904553ec36883c554e458af9b
