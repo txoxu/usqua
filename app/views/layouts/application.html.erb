@@ -8,7 +8,7 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
-    <%= javascript_include_tag "preview", type: "module" %>
+    <%= javascript_include_tag "preview", type: "module", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
@@ -18,8 +18,9 @@
     <% end %>
 
     <%= render 'shared/flash_message' %>
-    <%= yield %>
-  
+    <div class="main-content">
+      <%= yield %>
+    </div>
     <%= render 'shared/footer' %>
   </body>
 </html>

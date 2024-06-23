@@ -12,12 +12,15 @@
           <div class="index-name">
             <%= link_to whiskey.name, whiskey_path(whiskey) %>
           </div>
-          <% whiskey.categories.each do |category| %>
+            <div class="index-quantity">
+              <%= whiskey.remmaining_quantity.quantity %>
+            </div>
+          <% whiskey.categories.each do |c| %>
             <div class="index-categoryname">
-              <%= category.category_name %>
+              <%= c.category_name %>
             </div>
             <div class="index-categorytype">
-              <%= category.category_type %>
+              <%= c.category_type %>
             </div>
           <% end %>
           <div class="index-tags">

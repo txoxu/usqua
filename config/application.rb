@@ -30,5 +30,10 @@ module Myapp
     end
 
     config.i18n.default_locale = :ja
+
+    config.assets.paths << Rails.root.join('app', 'assets', 'images')
+
+    config.autoload_paths << Rails.root.join('app/uploaders')
+    config.eager_load_paths << Rails.root.join('app/uploaders')
   end
 end

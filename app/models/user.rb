@@ -8,4 +8,10 @@ class User < ApplicationRecord
   validates :first_name, presence: true, length: { maximum: 255 }
   validates :last_name, presence: true, length: { maximum: 255 }
   validates :email, presence: true, uniqueness: true
+
+  private
+
+  def password_confirmation_match
+    errors.add(:password_confirmation, 'パスワードが一致していません') if password != password_confirmation
+  end
 end

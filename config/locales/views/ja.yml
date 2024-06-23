@@ -50,7 +50,7 @@ ja:
       rule: 利用規約
       private: プライバシーポリシー
     search_form:
-      category_names: 国別
+      category_names: 生産国別
       category_types: 原料別
       name: 名前
       text: 説明
