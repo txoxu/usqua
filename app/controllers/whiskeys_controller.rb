@@ -43,7 +43,7 @@ class WhiskeysController < ApplicationController
     @whiskey = Whiskey.find(params[:id])
     @categories = @whiskey.categories
     @tastings = @whiskey.tastings
-    @quantity = RemmainingQuantity.select(:quantity)
+    @quantities = RemmainingQuantity.all
   end
 
   def edit

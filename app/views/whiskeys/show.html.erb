@@ -43,15 +43,18 @@
         <p><%= t('.not_tasting') %></p>
       <% end %>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-3">
       <% if @whiskey.image.present? %>
         <div class="image-container text-center border p-3">
-          <%= image_tag @whiskey.image.url %>
+          <%= image_tag @whiskey.image.url, class: "preview-image" %>
         </div>
       <% end %>
     </div>
 
-    <div class="quantity-container">
+    <div class="col-md-3">
+      <div class="quantity-container text-center border p-3">
+        <%= image_tag @whiskey.remmaining_quantity.quantity_image, class: "preview-image" %>
+      </div>
     </div>
   </div>
 </div>

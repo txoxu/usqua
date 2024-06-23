@@ -5,7 +5,7 @@
         <div class="whiskey-edit">
           <h1><%= t('.title') %></h1>
         </div>
-        <%= form_with model: @whiskey, id: 'edit_whiskey', data: { controller: "image-preview" }, local: true do |f| %>
+        <%= form_with model: @whiskey, id: 'edit_whiskey', local: true do |f| %>
           <div class="mb-3">
             <%= f.label :name %>
             <%= f.text_field :name, class: "form-control" %>
@@ -18,12 +18,15 @@
 
           <div class="mb-3">
             <%= f.label :remmaining_quantity_id %>
-            <%= f.select :remmaining_quantity_id, @quantities.map { |r| [r.quantity, r.id] }, { prompt: "量を選択してください" }, class: "form-control" %>
+            <%= f.collection_radio_buttons :remmaining_quantity_id, @quantities, :id, :quantity, class: "form-check-input" do |rb| %>
+              <%= rb.radio_button %>
+              <%= rb.label(class: "form-check-label") %>
+            <% end %>
           </div>
-
+          
           <div class="mb-3">
             <%= f.label :image %>
-            <%= f.file_field :image, class: "form-control", data: { "image-preview-target": "input" } %>
+            <%= f.file_field :image, class: "form-control" %>
           </div>
 
           <div class="mb-3">
@@ -43,15 +46,68 @@
       </div>
     </div>
   
-    <div class="col-md-6">
+    <div class="col-md-3">
       <div class="image-container text-center">
-        <div id="previews" data-image-preview-target="preview" class="border p-3">
+        <div id="previews" class="border p-3">
           <%= t('helpers.preview') %>
         </div>
       </div>
     </div>
-    <div class="quantity-container">
+    <div class="col-md-3">
+      <div class="quantity-container text-center">
+        <div id="quantity-previews" class="border p-3">
+          <%= t('helpers.preview') %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const radioButtons = document.querySelectorAll('input[name="whiskey[remmaining_quantity_id]"]');
+    const preview = document.getElementById('quantity-previews');
+
+const selectedQuantityId = document.querySelector('input[name="whiskey[remmaining_quantity_id]"]:checked');
+  if (selectedQuantityId) {
+    const initialQuantity = findQuantityById(selectedQuantityId.value);
+    if (initialQuantity && initialQuantity.quantity_image) {
+      const imagePath = '/assets/images/' + initialQuantity.quantity_image;
+      preview.innerHTML = `<img src="${imagePath}" class="preview-image">`;
+      preview.style.display = 'block';
+    }
+  }
+    radioButtons.forEach(radio => {
+      radio.addEventListener('change', function () {
+        const selectedQuantityId = this.value;
+        const selectedQuantity = findQuantityById(selectedQuantityId);
+        
+        if (selectedQuantity && selectedQuantity.quantity_image) {
+          const imagePath = '/assets/images/' + selectedQuantity.quantity_image;
+          preview.innerHTML = `<img src="${imagePath}" class="preview-image">`;
+          preview.style.display = 'block';
+        } else {
+          preview.innerHTML = '';
+          preview.style.display = 'none';
+        }
+      });
+    });
+
+    function findQuantityById(id) {
+      const quantities = [
+        { id: 1, quantity_image: '0ml.jpg' },
+        { id: 2, quantity_image: '100ml.jpg' },
+        { id: 3, quantity_image: '200ml.jpg' },
+        { id: 4, quantity_image: '300ml.jpg' },
+        { id: 5, quantity_image: '400ml.jpg' },
+        { id: 6, quantity_image: '500ml.jpg' },
+        { id: 7, quantity_image: '600ml.jpg' },
+        { id: 8, quantity_image: '700ml.jpg' }
+      ];
+
+      return quantities.find(quantity => quantity.id.toString() === id);
+    }
+  });
+</script>
 
