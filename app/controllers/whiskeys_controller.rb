@@ -30,7 +30,6 @@ class WhiskeysController < ApplicationController
   end
 
   def index
-    @whiskeys = current_user.whiskeys.all
     @search_form = SearchWhiskeysForm.new(search_params)
     @whiskeys = @search_form.search
 
@@ -88,7 +87,7 @@ class WhiskeysController < ApplicationController
   private
 
   def whiskey_params
-    params.require(:whiskey).permit(:name, :text, :image, :remmaining_quantity_id, :category_names, :category_types)
+    params.require(:whiskey).permit(:name, :text, :image, :remmaining_quantity_id, category_names: [], category_types: [])
   end
 
   def find_existing_categories

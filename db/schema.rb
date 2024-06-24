@@ -53,6 +53,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_24_114221) do
     t.string "aroma"
     t.string "flavor"
     t.string "tasting_text"
+    t.string "tasting_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "whiskey_id", null: false
