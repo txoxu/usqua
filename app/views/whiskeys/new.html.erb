@@ -74,7 +74,7 @@
         const selectedQuantity = findQuantityById(selectedQuantityId);
         
         if (selectedQuantity && selectedQuantity.quantity_image) {
-          const imagePath = '/assets/images/' + selectedQuantity.quantity_image;
+          const imagePath = 'app/assets/images/' + selectedQuantity.quantity_image;
           preview.innerHTML = `<img src="${imagePath}" class="preview-image">`;
           preview.style.display = 'block';
         } else {
