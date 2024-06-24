@@ -4,6 +4,8 @@ class Tasting < ApplicationRecord
   has_many :tags, through: :tasting_tags
 
   validates :tasting_type, presence: true
+  validates :aroma, presence: true
+  validates :flavor, presence: true
 
   def save_tags(tag_list)
     tag_list.each do |tag_name|

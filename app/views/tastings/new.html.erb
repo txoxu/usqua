@@ -4,23 +4,23 @@
       <h1 class="text-center"><%= t('.title') %></h1>
       <%= form_with model: @tasting, url: whiskey_tastings_path(@whiskey), local: true do |f| %>
         <div class="form-group row tasting-type">
-          <%= f.label :tasting_type, class: "col-md-3 col-form-label" %>
+          <%= f.label :tasting_type, class: "col-md-3 col-form-label" %><span class="text-danger">*</span>
           <div class="col-md-9">
-            <%= f.text_field :tasting_type, class: "form-control" %>
+            <%= f.text_field :tasting_type, class: "form-control", required: true %>
           </div>
         </div>
 
         <div class="form-group row tasting-flavor">
-          <%= f.label :flavor, class: "col-md-3 col-form-label" %>
+          <%= f.label :flavor, class: "col-md-3 col-form-label" %><span class="text-danger">*</span>
           <div class="col-md-9">
-            <%= f.text_field :flavor, class: "form-control" %>
+            <%= f.text_field :flavor, class: "form-control", required: true %>
           </div>
         </div>
 
         <div class="form-group row tasting-aroma">
-          <%= f.label :aroma, class: "col-md-3 col-form-label" %>
+          <%= f.label :aroma, class: "col-md-3 col-form-label" %><span class="text-danger">*</span>
           <div class="col-md-9">
-            <%= f.text_field :aroma, class: "form-control" %>
+            <%= f.text_field :aroma, class: "form-control", required: true %>
           </div>
         </div>
 

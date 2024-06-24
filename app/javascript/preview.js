@@ -1,6 +1,8 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener('turbo:load', function() {
 
   
+    console.log('turbo無効化');
+
   const whiskeyForm = document.getElementById("new_whiskey") || document.getElementById("edit_whiskey");
 
   if (!whiskeyForm) return;

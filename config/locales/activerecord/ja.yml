@@ -43,8 +43,10 @@ ja:
             password_confirmation:
               blank: "を入力してください"
               confirmation: "と確認用が一致しません"
-        whiskey:
-          attributes:
-            name:
-              blank: "を入力してください"
+  errors:
+    models:
+      whiskey:
+        attributes:
+          name:
+            blank: "を入力してください"
 

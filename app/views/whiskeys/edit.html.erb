@@ -7,8 +7,8 @@
         </div>
         <%= form_with model: @whiskey, id: 'edit_whiskey', local: true do |f| %>
           <div class="mb-3">
-            <%= f.label :name %>
-            <%= f.text_field :name, class: "form-control" %>
+            <%= f.label :name %><span class="text-danger">*</span>
+            <%= f.text_field :name, class: "form-control", required: true %>
           </div>
 
           <div class="mb-3">
@@ -17,8 +17,8 @@
           </div>
 
           <div class="mb-3">
-            <%= f.label :remmaining_quantity_id %>
-            <%= f.collection_radio_buttons :remmaining_quantity_id, @quantities, :id, :quantity, class: "form-check-input" do |rb| %>
+            <%= f.label :remmaining_quantity_id %><span class="text-danger">*</span>
+            <%= f.collection_radio_buttons :remmaining_quantity_id, @quantities, :id, :quantity, class: "form-check-input", required: true do |rb| %>
               <%= rb.radio_button %>
               <%= rb.label(class: "form-check-label") %>
             <% end %>
@@ -30,13 +30,13 @@
           </div>
 
           <div class="mb-3">
-            <%= f.label :category_names %>
-            <%= f.select :category_names, @category_names.map { |c| c.category_name }, { prompt: "選択してください" }, class: "form-control" %>
+            <%= f.label :category_names %><span class="text-danger">*</span>
+            <%= f.select :category_names, @category_names.map { |c| c.category_name }, { prompt: "選択してください" }, class: "form-control", required: true %>
           </div>
 
           <div class="mb-3">
-            <%= f.label :category_types %>
-            <%= f.select :category_types, @category_types.map { |c| c.category_type }, { prompt: "選択してください" }, class: "form-control" %>
+            <%= f.label :category_types %><span class="text-danger">*</span>
+            <%= f.select :category_types, @category_types.map { |c| c.category_type }, { prompt: "選択してください" }, class: "form-control", required: true %>
           </div>
 
           <div class="actions">
@@ -65,7 +65,7 @@
 
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('turbo:load', function() {
     const radioButtons = document.querySelectorAll('input[name="whiskey[remmaining_quantity_id]"]');
     const preview = document.getElementById('quantity-previews');
 
