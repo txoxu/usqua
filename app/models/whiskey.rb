@@ -6,7 +6,8 @@ class Whiskey < ApplicationRecord
   belongs_to :remmaining_quantity
 
   mount_uploader :image, ImageUploader, ignore_integrity_errors: true
-
+  attr_accessor :category_names
+  attr_accessor :category_types
   
   validates :name, presence: true, uniqueness: true
   validate :validate_image

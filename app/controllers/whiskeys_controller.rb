@@ -25,7 +25,7 @@ class WhiskeysController < ApplicationController
       @category_types = Category.select(:id, :category_type).distinct
       @quantities = RemmainingQuantity.all
       flash.now[:danger] = t('whiskeys.create.danger')
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -88,7 +88,7 @@ class WhiskeysController < ApplicationController
   private
 
   def whiskey_params
-    params.require(:whiskey).permit(:name, :text, :image, :remmaining_quantity_id, category_names: [], category_types: [])
+    params.require(:whiskey).permit(:name, :text, :image, :remmaining_quantity_id, :category_names, :category_types)
   end
 
   def find_existing_categories
