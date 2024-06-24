@@ -75,7 +75,7 @@
         
         if (selectedQuantity && selectedQuantity.quantity_image) {
           const imagePath = selectedQuantity.quantity_image;
-          preview.innerHTML = `<img src="${imagePath}" class="preview-image">`;
+          preview.innerHTML = `<%= image_tag "${imagePath}"%> class="preview-image">`;
           preview.style.display = 'block';
         } else {
           preview.innerHTML = '';
