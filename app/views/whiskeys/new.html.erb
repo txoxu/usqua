@@ -72,7 +72,7 @@ const selectedQuantityId = document.querySelector('input[name="whiskey[remmainin
   if (selectedQuantityId) {
     const initialQuantity = findQuantityById(selectedQuantityId.value);
     if (initialQuantity && initialQuantity.quantity_image) {
-       const imagePath = `/assets/${initialQuantity.quantity_image}`;
+      const imagePath = '/assets/' + initialQuantity.quantity_image;
       preview.innerHTML = `<img src="${imagePath}" class="preview-image">`;
       preview.style.display = 'block';
     }
@@ -83,7 +83,7 @@ const selectedQuantityId = document.querySelector('input[name="whiskey[remmainin
         const selectedQuantity = findQuantityById(selectedQuantityId);
         
         if (selectedQuantity && selectedQuantity.quantity_image) {
-           const imagePath = `/assets/${selectedQuantity.quantity_image}`;
+          const imagePath = '/assets/' + selectedQuantity.quantity_image;
           preview.innerHTML = `<img src="${imagePath}" class="preview-image">`;
           preview.style.display = 'block';
         } else {
