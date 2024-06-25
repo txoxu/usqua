@@ -21,8 +21,8 @@ class WhiskeysController < ApplicationController
       @whiskey.remmaining_quantity = remmaining_quantity
       redirect_to choose_next_step_whiskey_path(@whiskey), success: t('whiskeys.create.success')
     else
-      @category_names = Category.select(:id, :category_name).distinct
-      @category_types = Category.select(:id, :category_type).distinct
+      @category_names = Category.select(:category_name).distinct
+      @category_types = Category.select(:category_type).distinct
       @quantities = RemmainingQuantity.all
       flash.now[:danger] = t('whiskeys.create.danger')
       render :new, status: :unprocessable_entity

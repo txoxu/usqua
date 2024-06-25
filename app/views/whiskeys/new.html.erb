@@ -68,21 +68,22 @@
     const radioButtons = document.querySelectorAll('input[name="whiskey[remmaining_quantity_id]"]');
     const preview = document.getElementById('quantity-previews');
 
-    const selectedQuantityId = document.querySelector('input[name="whiskey[remmaining_quantity_id]"]:checked');
-      if (selectedQuantityId) {
-        const initialQuantity = findQuantityById(selectedQuantityId.value);
-        if (initialQuantity && initialQuantity.quantity_image) {
-          const imagePath = '/assets/images/' + initialQuantity.quantity_image;
-          preview.innerHTML = `<img src="${imagePath}" class="preview-image">`;
-          preview.style.display = 'block';
-        }
+const selectedQuantityId = document.querySelector('input[name="whiskey[remmaining_quantity_id]"]:checked');
+  if (selectedQuantityId) {
+    const initialQuantity = findQuantityById(selectedQuantityId.value);
+    if (initialQuantity && initialQuantity.quantity_image) {
+      const imagePath = '/assets/' + initialQuantity.quantity_image;
+      preview.innerHTML = `<img src="${imagePath}" class="preview-image">`;
+      preview.style.display = 'block';
     }
+  }
     radioButtons.forEach(radio => {
       radio.addEventListener('change', function () {
         const selectedQuantityId = this.value;
         const selectedQuantity = findQuantityById(selectedQuantityId);
+        
         if (selectedQuantity && selectedQuantity.quantity_image) {
-          const imagePath = '/assets/images/' + selectedQuantity.quantity_image;
+          const imagePath = '/assets/' + selectedQuantity.quantity_image;
           preview.innerHTML = `<img src="${imagePath}" class="preview-image">`;
           preview.style.display = 'block';
         } else {
