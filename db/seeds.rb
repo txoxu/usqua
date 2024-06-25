@@ -52,7 +52,7 @@ puts "Remaining quantities seeded successfully."
 quantity_images = [
   '0ml.jpg',
   '100ml.jpg',
-  '200ml-60b110b7cc6a0164de1821f3905805f5f52725a119106913b914dd503db87032.jpg',
+  '200ml.jpg',
   '300ml.jpg',
   '400ml.jpg',
   '500ml.jpg',
@@ -61,16 +61,13 @@ quantity_images = [
 ]
 
 
-quantity_images.each do |image|
-  # 正規表現で数量部分を抽出
-  quantity_match = image.match(/(\d+ml)/)
-  if quantity_match
-    quantity = quantity_match[1] # キャプチャグループから数量を取得
+  quantity_images.each do |image|
+    quantity = image.gsub('.jpg', '') # '0ml.jpg' -> '0ml'
     remaining_quantity = RemmainingQuantity.find_by(quantity: quantity)
-
-    if remaining_quantity
+    
+    unless remaining_quantity.nil?
       # 画像の名前だけを保存
-      remaining_quantity.quantity_image = image
+      remaining_quantity.update(quantity_image: image)
       
       if remaining_quantity.save
         puts "Image #{image} attached to quantity #{quantity} successfully."
@@ -80,7 +77,6 @@ quantity_images.each do |image|
     else
       puts "No record found for quantity #{quantity}"
     end
-  else
-    puts "No quantity found in image filename #{image}"
   end
-end
+  
+  puts "Remaining quantities images seeded successfully."

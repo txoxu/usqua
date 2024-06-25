@@ -27,6 +27,7 @@ Rails.application.configure do
   # config.assets.css_compressor = :sass
 
   # Do not fall back to assets pipeline if a precompiled asset is missed.
+  config.action_controller.asset_host = https://usqua-b00a6d1e8961.herokuapp.com/
   config.assets.compile = false
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
