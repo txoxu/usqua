@@ -72,7 +72,7 @@
       if (selectedQuantityId) {
         const initialQuantity = findQuantityById(selectedQuantityId.value);
         if (initialQuantity && initialQuantity.quantity_image) {
-          const imagePath = '/assets/images/' + initialQuantity.quantity_image;
+          const imagePath = "<%= asset_path('images/') %>" + initialQuantity.quantity_image;
           preview.innerHTML = `<img src="${imagePath}" class="preview-image">`;
           preview.style.display = 'block';
         }
@@ -82,7 +82,7 @@
         const selectedQuantityId = this.value;
         const selectedQuantity = findQuantityById(selectedQuantityId);
         if (selectedQuantity && selectedQuantity.quantity_image) {
-          const imagePath = '/assets/images/' + selectedQuantity.quantity_image;
+          const imagePath = "<%= asset_path('images/') %>" + selectedQuantity.quantity_image;
           preview.innerHTML = `<img src="${imagePath}" class="preview-image">`;
           preview.style.display = 'block';
         } else {
