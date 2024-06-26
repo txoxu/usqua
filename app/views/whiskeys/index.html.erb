@@ -1,7 +1,7 @@
 <%= render 'shared/search_form' %>
 <% if current_user.whiskeys.present? %>
   <div class="whiskey-list">
-    <% current_user.whiskeys.each do |whiskey| %>
+    <% @whiskeys.each do |whiskey| %>
       <div class="whiskey-item">
         <% if whiskey.image.present? %>
           <div class="image-frame">
