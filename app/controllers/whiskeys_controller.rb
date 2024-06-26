@@ -31,7 +31,7 @@ class WhiskeysController < ApplicationController
 
   def index
     @search_form = SearchWhiskeysForm.new(search_params)
-    @whiskeys = @search_form.search
+    @whiskeys = @search_form.search.where(user_id: current_user.id)
 
     @category_names = Category.select(:category_name).distinct
     @category_types = Category.select(:category_type).distinct
