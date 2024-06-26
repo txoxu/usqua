@@ -34,7 +34,7 @@ class TastingsController < ApplicationController
 
     if @tasting.update(tasting_params)
       @tasting.save_tags(tag_list)
-      redirect_to whiskey_tasting_path(@whiskey), success: t('tastings.update.success')
+      redirect_to whiskey_path(@whiskey), success: t('tastings.update.success')
     else
       flash.now[:danger] = t('tastings.update.danger')
       render :edit
