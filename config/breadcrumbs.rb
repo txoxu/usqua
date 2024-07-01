@@ -1,5 +1,25 @@
+crumb :mypage do
+  link "マイページ", mypage_path
+end
+
+crumb :new_whiskey do 
+  link 'ウイスキー登録', new_whiskey_path
+  parent :mypage
+end
+
+crumb :whiskeys do
+  link 'ウイスキー一覧', whiskeys_path
+  parent :mypage
+end
+
+crumb :new_tasting do |whiskey|
+  link 'テイスティング登録', new_whiskey_tasting_path(whiskey)
+  parent :whiskeys
+end
+
 crumb :whiskey do |whiskey|
   link 'ウイスキー詳細', whiskey_path(whiskey)
+  parent :whiskeys
 end
 
 crumb :edit_whiskey do |whiskey|
@@ -9,12 +29,12 @@ end
 
 crumb :whiskey_tasting do |tasting|
   link 'テイスティング詳細', whiskey_tasting_path(tasting)
-  parent :whiskey, whiskey
+  parent :whiskey, tasting
 end
 
 crumb :edit_whiskey_tasting do |tasting|
-  link 'テイスティング編集', edit_whiskey_tasting_path
-  parent :whiskey_tasting, whiskey_tasting
+  link 'テイスティング編集', edit_whiskey_tasting_path(tasting)
+  parent :whiskey_tasting, tasting
 end
 # crumb :projects do
 #   link "Projects", projects_path
