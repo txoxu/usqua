@@ -44,6 +44,7 @@
       </div>
     <% end %>
   </div>
+  <%= paginate @whiskeys, theme: 'kaminari' %>
 <% else %>
   <p><%= t('.not_whiskeys') %></p>
 <% end %>
