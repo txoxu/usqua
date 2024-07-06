@@ -49,3 +49,38 @@
   padding: 0.2rem 0.5rem;
   margin: 0.2rem;
 }
+
+.pagination {
+  display: inline-block;
+  padding-left: 0;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.pagination li {
+  display: inline;
+}
+
+.pagination a {
+  color: #007bff;
+  text-decoration: none;
+  padding: 6px 12px;
+  border: 1px solid #dee2e6;
+  margin-left: -1px;
+}
+
+.pagination a:hover {
+  background-color: #e9ecef;
+}
+
+.pagination .current {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.pagination .disabled a {
+  color: #6c757d;
+  pointer-events: none;
+  cursor: not-allowed;
+}
