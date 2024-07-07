@@ -31,6 +31,12 @@
           </div>
 
           <div class="mb-3">
+            <video id="video"></video>
+            <canvas id="canvas" style="display: none;"></canvas>
+            <img id="image">
+          </div>
+
+          <div class="mb-3">
             <%= f.label :category_names %><span class="text-danger">*</span>
             <%= f.select :category_names, @category_names.map { |c| [c.category_name, c.category_name] }, { prompt: "選択してください" }, { class: "form-control", required: true } %>
           </div>
@@ -64,6 +70,67 @@
     </div>
   </div>
 </div>
+<%= javascript_tag do %>
+  document.addEventListener("DOMContentLoaded", function() {
+    var stream;
+    var video = document.getElementById('video');
+    var constraints = {
+      video: {
+        mandatory: {
+          maxWidth: 320,
+          maxHeight: 240
+        }
+      },
+      audio: false
+    };
+
+    navigator.mediaDevices.getUserMedia(constraints).then(function (mediaStream) {
+      stream = mediaStream;
+      video.srcObject = stream;
+      video.play();
+    }).catch(function (error) {
+      console.error('mediaDevices.getUserMedia() error:', error);
+    });
+
+    document.getElementById('submit-btn').addEventListener('click', function(event) {
+      event.preventDefault();
+      var canvas = document.getElementById('canvas');
+      var ctx = canvas.getContext('2d');
+      var w = video.offsetWidth;
+      var h = video.offsetHeight;
+      canvas.width = w;
+      canvas.height = h;
+      ctx.drawImage(video, 0, 0, w, h);
+      canvas.toBlob(function(blob) {
+        var img = document.getElementById('image');
+        img.src = URL.createObjectURL(blob);
+
+        var formData = new FormData(document.querySelector('form'));
+        formData.append('whiskey[image]', blob, '<%= Time.now.strftime("%Y%m%d%H%M") %>.jpg');
+
+        var request = new XMLHttpRequest();
+        request.open('POST', '<%= whiskeys_path %>');
+        request.setRequestHeader('X-CSRF-Token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
+        request.onload = function() {
+          if (request.status >= 200 && request.status < 400) {
+            // Success!
+            console.log(request.responseText);
+          } else {
+            // We reached our target server, but it returned an error
+            console.error('Server error:', request.status, request.statusText);
+          }
+        };
+        request.onerror = function() {
+          // There was a connection error of some sort
+          console.error('Connection error');
+        };
+        request.send(formData);
+      }, 'image/jpg', 0.95);
+      stream.getTracks().forEach(track => track.stop());
+    });
+  });
+<% end %>
+
 <script>
   document.addEventListener('turbo:load', function() {
     const radioButtons = document.querySelectorAll('input[name="whiskey[remmaining_quantity_id]"]');
