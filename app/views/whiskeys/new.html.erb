@@ -33,6 +33,7 @@
           <div class="mb-3">
             <video id="video"></video>
             <canvas id="canvas" style="display: none;"></canvas>
+            <img id="image">
           </div>
 
           <div class="mb-3">
@@ -101,14 +102,14 @@
       canvas.height = h;
       ctx.drawImage(video, 0, 0, w, h);
       canvas.toBlob(function(blob) {
-        var img = document.getElementById('previews');
+        var img = document.getElementById('image');
         img.src = URL.createObjectURL(blob);
 
         var formData = new FormData(document.querySelector('form'));
         formData.append('whiskey[image]', blob, '<%= Time.now.strftime("%Y%m%d%H%M") %>.jpg');
 
         var request = new XMLHttpRequest();
-        request.open('POST', '<%= whiskey_path %>');
+        request.open('POST', '<%= whiskeys_path %>');
         request.setRequestHeader('X-CSRF-Token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
         request.onload = function() {
           if (request.status >= 200 && request.status < 400) {
