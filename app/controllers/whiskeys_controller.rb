@@ -9,7 +9,7 @@ class WhiskeysController < ApplicationController
   def create
     @whiskey = current_user.whiskeys.build(whiskey_params)
     categories = find_existing_categories
-    remmaining_quantity = RemmainingQuantity.find_by(id: params[:whiskey][:remmaining_quantity_id])
+    quantity = RemmainingQuantity.find_by(quantity: params[:whiskey][:quantity])
 
     if categories.any? && remmaining_quantity && @whiskey.save
       if params[:whiskey][:image].present?
