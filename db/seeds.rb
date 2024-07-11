@@ -8,6 +8,7 @@
 #   end
 
 # Create categories by name
+=begin
 category_names = [
   'american_whiskey',
   'scotch_whiskey',
@@ -83,4 +84,7 @@ quantity_images = [
   else
     puts "No quantity found in image filename #{image}"
   end
+=end
+
+
 end
