@@ -29,8 +29,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_11_135936) do
 
   create_table "cocktails", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "cocktail_name"
-    t.string "cocktail_recipe"
-    t.string "cocktail_url"
+    t.text "cocktail_create"
+    t.text "cocktail_origin"
+    t.text "cocktail_recipe"
+    t.text "cocktail_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
