@@ -90,23 +90,14 @@ quantity_images = [
     {id: 1, cocktail_name: 'アバディーン・アンガス', cocktail_create: 'ドランブイ以外の材料をグラスに注ぐ。ドランブイは温めて火をつけ、発火している状態で注ぐ。', cocktail_origin: 'スコットランド原産の黒毛の牛の正式名称', cocktail_recipe: 'スコッチウイスキー:60ml, 蜂蜜:15ml, ライムジュース:30ml, ドランブイ:30ml', cocktail_url: 'https://www.instagram.com/reel/C1CGP9HrxOj/'},
     {id: 2, cocktail_name: 'アフィニティー', cocktail_create: 'すべての材料を混ぜる。ステアして、カクテルグラスに注ぐ。', cocktail_origin: '「新和性」、「相性」の意味で、ベースとなる材料の原産国の関係を表しているとされる', cocktail_recipe: 'スコッチウイスキー:1/3, ドライベルモット:1/3, スイートベルモット:1/3, アンゴラスチュラビターズ:2ダッシュ', cocktail_url: 'https://www.instagram.com/reel/C571nSXy9Bc/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=='},
     {id: 3, cocktail_name: 'アソール・ブロス', cocktail_create: '十分に温めたロックグラスに材料を注ぎ、混ぜる。', cocktail_origin: 'スコッチウイスキーをベースに香草類を配合したリキュールが同名で存在する。', cocktail_recipe: 'スコッチウイスキー:30ml, 蜂蜜:30ml, 生クリーム:30ml', cocktail_url: ''},
-    {id: 4, cocktail_name: 'ボニー・スコット', cocktail_create: 'シェークして、カクテルグラスに注ぐ', cocktail_origin: '「ボニー」はスコットランド語で「可愛らしい」という意味。', cocktail_recipe: 'スコッチウイスキー:1/2, ドランブイ:1/4, レモンジュース:1/4', cocktail_url: ''},
-    {id: , cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
-    {id: , cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
-    {id: , cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
-    {id: , cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
-    {id: , cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
-    {id: , cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
-    {id: , cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
-    {id: , cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
-    {id: , cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
-    {id: , cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
-    {id: , cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
-    {id: , cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
-    {id: , cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
-    {id: , cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
-    {id: , cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
-    {id: , cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
-    {id: , cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
+    {id: 4, cocktail_name: 'ボニー・スコット', cocktail_create: 'シェイクして、カクテルグラスに注ぐ', cocktail_origin: '「ボニー」はスコットランド語で「可愛らしい」という意味。', cocktail_recipe: 'スコッチウイスキー:1/2, ドランブイ:1/4, レモンジュース:1/4', cocktail_url: ''},
+    {id: 5, cocktail_name: 'フライング・スコッチマン', cocktail_create: 'シェイクして、カクテルグラスに注ぐ', cocktail_origin: 'ロンドンとエジンバラ間で運行されている特急列車の名称', cocktail_recipe: 'スコッチウイスキー:2/3, スイートベルモット:1/3, ビターズ:1ダッシュ, シュガーシロップ:1ダッシュ', cocktail_url: ''},
+    {id: 6, cocktail_name: 'チャーチル', cocktail_create: 'シェイクしてカクテルグラスに注ぐ', cocktail_origin: 'イギリス首相サー・ウィンストン・チャーチルにちなんだと思われるカクテル', cocktail_recipe: 'スコッチウイスキー:3/6, コアントロー:1/6, スイートベルモット:1/6, ライムジュース:1/6', cocktail_url: 'https://youtu.be/bIJJtaan7K0?si=wHM2zGtb8vB2zfJL'},
+    {id: 7, cocktail_name: 'エリカ', cocktail_create: 'シェイクしてカクテルグラスに注ぐ。ミントチェリーとカスミソウを飾る', cocktail_origin: '銀座のバー「絵里香」の中村健二氏オリジナルカクテル', cocktail_recipe: 'スコッチウイスキー:3/6, クレームドカシス:2/6, グレープフルーツジュース:1/6, グレデンシロップ:1ティースプーン, レモンジュース:1ディースプーン', cocktail_url: 'https://youtube.com/shorts/l3dJIzdHFTg?si=HPvMTu-J4sUMPnsl'},
+    {id: 8, cocktail_name: 'ハイランドクリーム', cocktail_create: 'シェイカーに2/3氷を入れ、材料を入れてシェイクしてカクテルグラスに注ぐ。チョコレートパウダー少々を飾る', cocktail_origin: 'ホテル・リッツ・パリのバーテンダー、コリー・ピーター・フィールド氏の考案カクテル', cocktail_recipe: 'グランツ（スコッチウイスキー）:1/10, コーヒーリキュール:2/10, クレーム・ド・カカオ・ブリュン（ダーク）:2/10, エスプレッソ（ブラック）:1/10, 生クリーム:4/10', cocktail_url: ''},
+    {id: 9, cocktail_name: 'オールド・アライアンス', cocktail_create: 'シェイクして、グラス注ぐ。レモネードを浮かべるとなおよい', cocktail_origin: 'カクテル名は「昔の仲間」「同盟関係」', cocktail_recipe: 'スコッチウイスキー:25ml, レモンジュース:1/2個, コアントロー:15ml, シュガーシロップ:適量, レモネード:適量', cocktail_url: ''}
   ]
-end
+
+  cocktails.each do |cocktail|
+    Cocktail.create(cocktail)
+  end
