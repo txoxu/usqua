@@ -95,7 +95,16 @@ quantity_images = [
     {id: 6, cocktail_name: 'チャーチル', cocktail_create: 'シェイクしてカクテルグラスに注ぐ', cocktail_origin: 'イギリス首相サー・ウィンストン・チャーチルにちなんだと思われるカクテル', cocktail_recipe: 'スコッチウイスキー:3/6, コアントロー:1/6, スイートベルモット:1/6, ライムジュース:1/6', cocktail_url: 'https://youtu.be/bIJJtaan7K0?si=wHM2zGtb8vB2zfJL'},
     {id: 7, cocktail_name: 'エリカ', cocktail_create: 'シェイクしてカクテルグラスに注ぐ。ミントチェリーとカスミソウを飾る', cocktail_origin: '銀座のバー「絵里香」の中村健二氏オリジナルカクテル', cocktail_recipe: 'スコッチウイスキー:3/6, クレームドカシス:2/6, グレープフルーツジュース:1/6, グレデンシロップ:1ティースプーン, レモンジュース:1ディースプーン', cocktail_url: 'https://youtube.com/shorts/l3dJIzdHFTg?si=HPvMTu-J4sUMPnsl'},
     {id: 8, cocktail_name: 'ハイランドクリーム', cocktail_create: 'シェイカーに2/3氷を入れ、材料を入れてシェイクしてカクテルグラスに注ぐ。チョコレートパウダー少々を飾る', cocktail_origin: 'ホテル・リッツ・パリのバーテンダー、コリー・ピーター・フィールド氏の考案カクテル', cocktail_recipe: 'グランツ（スコッチウイスキー）:1/10, コーヒーリキュール:2/10, クレーム・ド・カカオ・ブリュン（ダーク）:2/10, エスプレッソ（ブラック）:1/10, 生クリーム:4/10', cocktail_url: ''},
-    {id: 9, cocktail_name: 'オールド・アライアンス', cocktail_create: 'シェイクして、グラス注ぐ。レモネードを浮かべるとなおよい', cocktail_origin: 'カクテル名は「昔の仲間」「同盟関係」', cocktail_recipe: 'スコッチウイスキー:25ml, レモンジュース:1/2個, コアントロー:15ml, シュガーシロップ:適量, レモネード:適量', cocktail_url: ''}
+    {id: 9, cocktail_name: 'オールド・アライアンス', cocktail_create: 'シェイクして、グラス注ぐ。レモネードを浮かべるとなおよい', cocktail_origin: 'カクテル名は「昔の仲間」「同盟関係」', cocktail_recipe: 'スコッチウイスキー:25ml, レモンジュース:1/2個, コアントロー:15ml, シュガーシロップ:適量, レモネード:適量', cocktail_url: ''},
+    {id: 10, cocktail_name: 'ゲーリック・コーヒー', cocktail_create: 'コーヒーカップに適量のコーヒーシュガーとコーヒーを７分目注ぐ。ウイスキーを加え混ぜ、生クリームをフローとする', cocktail_origin: 'ゲーリックとは「ゲール人の」という意味で、アイルランド人やスコットランド人の祖先にあたる。アイリッシュウィスキーを用いれば「アイリッシュ・コーヒー」', cocktail_recipe: 'スコッチウイスキー:30ml, コーヒー:適量, コーヒーシュガー:適量, 生クリーム:適量', cocktail_url: 'https://youtu.be/41qWY4PE3vk?si=cTE0_eOPqkIuQeaH'},
+    {id: 11, cocktail_name: 'ロブ・ロイ', cocktail_create: 'すべての材料をステアし、カクテルグラスに注ぐ。カクテルピンを刺したマラスキーのチェリーを添え、レモンピールを絞る', cocktail_origin: '実在した義賊ロバート・マクレガーの愛称', cocktail_recipe: 'スコッチウイスキー:3/4, スイートベルモット:1/4, アンゴラスチュラビターズ:1ダッシュ', cocktail_url: 'https://www.instagram.com/reel/C32AMR0y9fv/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=='},
+    {id: 11, cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
+    {id: 11, cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
+    {id: 11, cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
+    {id: 11, cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
+    {id: 11, cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
+    {id: 11, cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
+    
   ]
 
   cocktails.each do |cocktail|

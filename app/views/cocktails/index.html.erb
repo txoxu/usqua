@@ -1,26 +1,13 @@
 <%= render 'shared/cocktail_search_form' %>
-<div class="cocktail-list">
+<div class="cocktail-list text-center">
   <% @cocktails.each do |c| %>
-    <div class="cocktail-item">
+    <div class="cocktail-item mb-3">
       <div class="index-frame">
         <div class="index-name">
           <%= link_to c.cocktail_name, '#' %>
         </div>
         <div class="index-cocktail_origin">
           <%= c.cocktail_origin %>
-        </div>
-        <div class="index-cocktail_recipe">
-          <%= c.cocktail_recipe %>
-        </div>
-        <div class="index-create">
-          <%= c.cocktail_create %>
-        </div>
-        <div class="index-cocktail_url">
-          <% if c.cocktail_url.present? %>
-            <%= link_to c.cocktail_url, c.cocktail_url, target: '_blank' %>
-          <% else %>
-            <p>動画はありません</p>
-          <% end %>
         </div>
       </div>
     </div>
