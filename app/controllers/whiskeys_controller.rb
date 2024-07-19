@@ -44,6 +44,9 @@ class WhiskeysController < ApplicationController
     @categories = @whiskey.categories
     @tastings = @whiskey.tastings
     @quantities = RemmainingQuantity.all
+
+    @next_whiskey = current_user.whiskeys.where('id > ?', @whiskey.id).order(:id).first
+    @prev_whiskey = current_user.whiskeys.where('id < ?', @whiskey.id).order(:id).last
   end
 
   def edit

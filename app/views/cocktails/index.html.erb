@@ -1,10 +1,11 @@
+<h1>カクテル一覧</h1>
 <%= render 'shared/cocktail_search_form' %>
 <div class="cocktail-list text-center">
   <% @cocktails.each do |c| %>
     <div class="cocktail-item mb-3">
       <div class="index-frame">
         <div class="index-name">
-          <%= link_to c.cocktail_name, '#' %>
+          <%= link_to c.cocktail_name, cocktail_path(c) %>
         </div>
         <div class="index-cocktail_origin">
           <%= c.cocktail_origin %>
