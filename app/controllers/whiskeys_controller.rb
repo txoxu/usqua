@@ -9,7 +9,7 @@ class WhiskeysController < ApplicationController
   def create
     @whiskey = current_user.whiskeys.build(whiskey_params)
     categories = find_existing_categories
-    remmaining_quantity = RemmainingQuantity.find_by(id: params[:whiskey][:remmaining_quantity_id])
+    quantity = RemmainingQuantity.find_by(quantity: params[:whiskey][:quantity])
 
     if categories.any? && remmaining_quantity && @whiskey.save
       if params[:whiskey][:image].present?
@@ -32,7 +32,7 @@ class WhiskeysController < ApplicationController
   def index
     @search_form = SearchWhiskeysForm.new(search_params)
     @whiskeys = @search_form.search.where(user_id: current_user.id)
-    @whiskeys = Whiskey.page(params[:page])
+    @whiskeys = @whiskeys.page(params[:page])
 
     @category_names = Category.select(:category_name).distinct
     @category_types = Category.select(:category_type).distinct

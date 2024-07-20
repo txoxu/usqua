@@ -1,0 +1,10 @@
+<%= form_with model: @cocktail_search_form, url: cocktails_path, method: :get, local: true, class: 'search-form text-center' do |f| %>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <%= f.text_field :keyword, class: 'form-control', placeholder: 'キーワードを入力' %>
+    </div>
+    <div class="col-md-1 d-flex align-items-end">
+      <%= f.submit t('helpers.submit.search'), class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>
