@@ -7,7 +7,12 @@ Rails.application.routes.draw do
   post 'login', to: 'user_sessions#create'
   delete 'logout', to: 'user_sessions#destroy'
 
-
+  get "password/reset", to: "password_resets#new"
+  post "password/reset", to: "password_resets#create"
+  get "password/reset/edit", to: "password_resets#edit"
+  patch "password/reset/edit", to: "password_resets#update"
+  mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
+  
   resources :users, only: %i[new create]
     resources :cocktails do
       collection do
