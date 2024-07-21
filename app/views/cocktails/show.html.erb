@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="show-frame mb-3">
+        <div class="mb-5">
+          <h1><%= @cocktail.cocktail_name %></h1>
+        </div>
+        <div class="mb-5">
+          <%= @cocktail.cocktail_origin %>
+        </div>
+        <div class="mb-5">
+          <%= @cocktail.cocktail_recipe %>
+        </div>
+        <div class="mb-5">
+          <%= @cocktail.cocktail_create %>
+        </div>
+        <%= render 'cocktails/bookmark_button', cocktail: @cocktail %>
+      </div>
+    </div>
+    <div class="col-md-6">
+        <% if @cocktail.cocktail_url.present? %>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @cocktail.cocktail_url %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <% else %>
+          <p class='text-center mt-md-5'>動画はありません</p>
+        <% end %>
+    </div>
+      <%= render 'shared/cocktail_pagenate' %>
+  </div>
+</div>

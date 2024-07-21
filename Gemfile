@@ -34,6 +34,8 @@ gem "jbuilder"
 #デバックを容易にするgem
 gem 'better_errors', '~> 2.10', '>= 2.10.1'
 
+gem 'binding_of_caller', '~> 1.0', '>= 1.0.1'
+
 gem 'jquery-rails'
 
 gem 'rubocop', '~> 1.63', '>= 1.63.5'
@@ -55,6 +57,7 @@ gem 'draper', '~> 4.0', '>= 4.0.2'
 gem 'kaminari', '~> 1.2', '>= 1.2.2'
 
 gem 'bootstrap-kaminari-views', '~> 0.0.5'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 

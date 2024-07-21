@@ -1,0 +1,10 @@
+<div class='col-md-2'>
+  <% if @prev_whiskey %>
+    <%= link_to '前のウイスキー', whiskey_path(@prev_whiskey) %>
+  <% end %>
+</div>
+<div class='col-md-2'>
+  <% if @next_whiskey %>
+    <%= link_to '次のウイスキー', whiskey_path(@next_whiskey) %>
+  <% end %>
+</div>

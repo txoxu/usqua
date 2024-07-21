@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_11_135936) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_20_075527) do
+  create_table "bookmarks", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "cocktail_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cocktail_id"], name: "index_bookmarks_on_cocktail_id"
+    t.index ["user_id", "cocktail_id"], name: "index_bookmarks_on_user_id_and_cocktail_id", unique: true
+    t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
+
   create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "category_type", null: false
     t.string "category_name", null: false
@@ -102,6 +112,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_11_135936) do
     t.index ["user_id"], name: "index_whiskeys_on_user_id"
   end
 
+  add_foreign_key "bookmarks", "cocktails"
+  add_foreign_key "bookmarks", "users"
   add_foreign_key "category_tags", "categories"
   add_foreign_key "category_tags", "tags"
   add_foreign_key "tasting_tags", "tags"
