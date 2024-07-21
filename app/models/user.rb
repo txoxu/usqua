@@ -12,6 +12,10 @@ class User < ApplicationRecord
   validates :last_name, presence: true, length: { maximum: 255 }
   validates :email, presence: true, uniqueness: true
 
+  def user_name
+    "#{last_name} #{first_name}"
+  end
+
   def bookmark(cocktail)
     bookmark_cocktails << cocktail
   end
