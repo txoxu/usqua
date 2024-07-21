@@ -1,35 +1,95 @@
 <% breadcrumb :mypage %>
 <div class="container mypage-container">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
       <div class="total-container">
         <div class="total-frame">
-          <div class="total-text">
-            <p><%= t('.sum_create') %></p>
-          </div>
-          <div class="total-number">
-            <%= current_user.whiskeys.count %>本
+          <div class="row">
+            <div class="col total-text">
+              <h3><%= t('.sum_create') %></h3>
+            </div>
+            <div class="col total-number">
+              <h3><%= current_user.whiskeys.count %>本</h3>
+            </div>
           </div>
         </div>
         
         <div class="whiskey-container">
-          <% @categories.each do |category| %>
-            <div class="whiskey-frame">
-              <div class="whiskey-text">
-                <%= category %>
-              </div>
-              <div class="whiskey-number">
-                <%= @whiskey_count_by_category[category] || 0 %>本
-              </div>
-            </div>
-          <% end %>
+          <table class="table table-bordered shadow-lg">
+            <thead>
+              <tr>
+                <th>ウィスキーの種類</th>
+                <th>本数</th>
+              </tr>
+            </thead>
+            <tbody>
+             <% @whiskey_count_by_category.each do |category, count| %>
+                <tr>
+                  <td><h3><%= category %></h3></td>
+                  <td><h3><%= count %>本</h3></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+
+    <div class="col-md-4">
       <div class="chart-container">
-        <%= pie_chart @whiskey_count_by_category %>
+        <%= pie_chart @whiskey_count_by_category, library: {
+          animation: {
+              startup: true,
+              duration: 1000,
+              easing: 'out',
+            }
+        } %>
       </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="chart-container">
+        <%= bar_chart @whiskey_count_by_category, library: {
+            hAxis: {
+              title: 'ウィスキーの種類',
+              titleTextStyle: { color: '#333' }
+            },
+            vAxis: {
+              title: '本数',
+              minValue: 0,
+              format: 'decimal',
+              titleTextStyle: { color: '#333' }
+            },
+             animation: {
+              startup: true,
+              duration: 1000,
+              easing: 'out',
+            }
+          } %>
+      </div>
+    </div>
+
+  <div class='shadow-lg'>
+    <h1>お気に入りカクテル</h1>
+    <div class='bookmark-container col-md-4'>
+      <% if @bookmark_cocktails.present? %>
+        <div class='shadow-lg rounded-pill text-center'>
+          <% @bookmark_cocktails.each do |b| %>
+            <div class='mb-3 mt-md-4'>
+              <%= link_to b.cocktail_name, cocktail_path(b) %>
+            </div>
+            <div class='mb-3'>
+              <%= b.cocktail_origin %>
+            </div>
+            <%= render 'cocktails/unbookmark', { cocktail: b } %>
+          <% end %>
+        </div>
+      <% else %>
+        <div class='mb-3'>
+          <p>登録されているカクテルはありません</p>
+        </div>
+      <% end %>
+    </div>
     </div>
   </div>
 </div>

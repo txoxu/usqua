@@ -2,6 +2,8 @@ class User < ApplicationRecord
   authenticates_with_sorcery!
   has_many :whiskeys, dependent: :destroy
   has_many :cocktails
+  has_many :bookmarks, dependent: :destroy
+  has_many :bookmark_cocktails, through: :bookmarks, source: :cocktail
 
   validates :password, length: { minimum: 3 }, if: -> { new_record? || changes[:crypted_password] }
   validates :password, confirmation: true, if: -> { new_record? || changes[:crypted_password] }
@@ -9,6 +11,18 @@ class User < ApplicationRecord
   validates :first_name, presence: true, length: { maximum: 255 }
   validates :last_name, presence: true, length: { maximum: 255 }
   validates :email, presence: true, uniqueness: true
+
+  def bookmark(cocktail)
+    bookmark_cocktails << cocktail
+  end
+
+  def unbookmark(cocktail)
+    bookmark_cocktails.destroy(cocktail)
+  end
+
+  def bookmark?(cocktail)
+    bookmark_cocktails.include?(cocktail)
+  end
 
   private
 

@@ -11,6 +11,7 @@ class CocktailsController < ApplicationController
     @prev_cocktail = Cocktail.where('id < ?', @cocktail.id).order(:id).last
   end
 
+
   private
 
   def search_params
