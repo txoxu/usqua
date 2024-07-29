@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       collection do
         get :bookmarks
       end
+      resources :cocktail_tasting, only: %i[create new]
     end
     resources :bookmarks, only: %i[create destroy]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

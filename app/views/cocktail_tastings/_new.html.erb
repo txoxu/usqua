@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2 tasting-edit-frame">
+      <h1 class="text-center">カクテルテイスティング登録</h1>
+      <%= form_with model: @cocktail_tasting, url: new_cocktail_cocktail_tasting_path(@cocktail), local: true do |f| %>
+        <div class="form-group row whiskey-cocktail">
+          <%= f.label :name, class: "col-md-3 col-form-label" %><span class="text-danger">*</span>
+          <div class="col-md-9">
+            <%= f.select :name, @whiskeys, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group row cocktail-flavor">
+          <%= f.label :cocktail_flavor, class: "col-md-3 col-form-label" %>
+          <div class="col-md-9">
+            <%= f.text_field :cocktail_flavor, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group row tasting-recipe">
+          <%= f.label :tasting_recipe, class: "col-md-3 col-form-label" %>
+          <div class="col-md-9">
+            <%= f.text_field :tasting_recipe, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="actions text-right">
+          <%= f.submit t('helpers.submit.create'), class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

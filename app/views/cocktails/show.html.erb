@@ -16,6 +16,14 @@
         </div>
         <%= render 'cocktails/bookmark_button', cocktail: @cocktail %>
       </div>
+      <div class="cocktail-tasting mb-3">
+        <div class="nav-item dropdown dropdown-slide">
+          <%= link_to 'カクテルテイスティング登録', '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' } %>
+            <div class='dropdown-menu dropdown-menu-end'>
+              <%= render 'cocktail_tastings/new' %>
+            </div>
+        </div>
+      </div>
     </div>
     <div class="col-md-6">
         <% if @cocktail.cocktail_url.present? %>
