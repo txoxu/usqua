@@ -17,11 +17,11 @@
         <%= render 'cocktails/bookmark_button', cocktail: @cocktail %>
       </div>
       <div class="cocktail-tasting mb-3">
-        <div class="nav-item dropdown dropdown-slide">
+        <div id='showFormButton'>
           <%= link_to 'カクテルテイスティング登録', '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' } %>
-            <div class='dropdown-menu dropdown-menu-end'>
-              <%= render 'cocktail_tastings/new' %>
-            </div>
+        </div>
+        <div id='myForm'>
+          <%= render 'cocktail_tastings/new' %>
         </div>
       </div>
     </div>
@@ -35,3 +35,14 @@
       <%= render 'shared/cocktail_pagenate' %>
   </div>
 </div>
+<script>
+    // JavaScriptでフォームの表示・非表示を切り替える
+    document.getElementById('showFormButton').addEventListener('click', function() {
+        var form = document.getElementById('myForm');
+        if (form.style.display === 'none' || form.style.display === '') {
+            form.style.display = 'block';
+        } else {
+            form.style.display = 'none';
+        }
+    });
+</script>

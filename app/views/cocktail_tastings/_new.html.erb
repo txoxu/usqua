@@ -4,9 +4,9 @@
       <h1 class="text-center">カクテルテイスティング登録</h1>
       <%= form_with model: @cocktail_tasting, url: new_cocktail_cocktail_tasting_path(@cocktail), local: true do |f| %>
         <div class="form-group row whiskey-cocktail">
-          <%= f.label :name, class: "col-md-3 col-form-label" %><span class="text-danger">*</span>
+          <%= f.label :names, class: "col-md-3 col-form-label" %><span class="text-danger">*</span>
           <div class="col-md-9">
-            <%= f.select :name, @whiskeys, class: "form-control" %>
+            <%= f.select :names, @names.each { |name| name }, { prompt: "選択してください" }, class: "form-control" %>
           </div>
         </div>
 

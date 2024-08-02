@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_29_155306) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_02_115150) do
   create_table "bookmarks", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "cocktail_id", null: false
@@ -43,14 +43,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_29_155306) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "cocktail_id"
-    t.index ["cocktail_id"], name: "index_cocktail_tastings_on_cocktail_id"
-  end
-
-  create_table "cocktail_tastings_whiskeys", id: false, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "whiskey_id", null: false
-    t.bigint "cocktail_tasting_id", null: false
-    t.index ["cocktail_tasting_id", "whiskey_id"], name: "idx_on_cocktail_tasting_id_whiskey_id_2e7fb5e38e"
-    t.index ["whiskey_id", "cocktail_tasting_id"], name: "idx_on_whiskey_id_cocktail_tasting_id_c17935fffd"
+    t.index ["cocktail_id"], name: "index_cocktail_tastings_on_cocktail_id"
+    t.index ["whiskey_id"], name: "index_cocktail_tastings_on_whiskey_id"
   end
 
   create_table "cocktails", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -133,8 +128,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_29_155306) do
   add_foreign_key "category_tags", "categories"
   add_foreign_key "category_tags", "tags"
   add_foreign_key "cocktail_tastings", "cocktails"
-  add_foreign_key "cocktail_tastings_whiskeys", "cocktail_tastings"
-  add_foreign_key "cocktail_tastings_whiskeys", "whiskeys"
+  add_foreign_key "cocktail_tastings", "whiskeys"
   add_foreign_key "tasting_tags", "tags"
   add_foreign_key "tasting_tags", "tastings"
   add_foreign_key "tastings", "whiskeys"

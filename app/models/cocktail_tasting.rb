@@ -1,4 +1,4 @@
 class CocktailTasting < ApplicationRecord
-  has_many :cocktail_tastings_whiskeys
   belongs_to :cocktail
+  belongs_to :whiskey
 end
