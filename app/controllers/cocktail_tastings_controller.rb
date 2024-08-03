@@ -1,18 +1,21 @@
 class CocktailTastingsController < ApplicationController
 
   def new
-    @cocktail_tasting = Cocktail_tasting.new
-    @names = current_user.whiskeys.pluck(:name)
+    @cocktail = Cocktail.find(params[:cocktail_id])
+    @cocktail_tasting = @cocktail.cocktail_tastings.build
+    @whiskeys = current_user.whiskeys
   end
 
   def create
+    @cocktail = Cocktail.find(params[:cocktail_id])
     @cocktail_tasting = @cocktail.cocktail_tastings.build(cocktail_tasting_params)
-
+    whiskey_name = params[:cocktail_tasting][:name]
+    whiskey = current_user.whiskeys.find_by(name: whiskey_name)
+    @cocktail_tasting.whiskey_id = whiskey.id
     if @cocktail_tasting.save
-      @cocktail_tasting.names << names
-      redirect_to cocktail_path(cocktail)
+      redirect_to cocktails_path, success: t('cocktail_tastings.create.success')
     else
-      flash.now[:danger] = 'カクテルテイスティング登録できませんでした'
+      flash.now[:danger] = t('cocktail_tastings.create.danger')
       render :new
     end
   end
@@ -20,6 +23,6 @@ class CocktailTastingsController < ApplicationController
   private
 
   def cocktail_tasting_params
-    params.require(:cocktail_tasting).permit(:cocktail_flavor, :tasting_recipe, names: [])
+    params.require(:cocktail_tasting).permit(:cocktail_flavor, :tasting_recipe, :whiskey_id)
   end
 end

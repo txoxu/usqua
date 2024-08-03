@@ -97,5 +97,18 @@ ja:
       not_tastings: まだ、テイスティングは登録されていません
       add_tasting: テイスティング追加
       not_whiskeys: ウイスキーが登録されていません
+  cocktail_tastings:
+    new:
+      title: カクテルテイスティング登録
+    create:
+      success: テイスティング登録しました
+      danger: カクテルテイスティング登録できませんでした
+  cocktails:
+    index: 
+      title: カクテル一覧
+    show:
+      link: カクテルテイスティング登録
+      nul : 動画はありません
+
 
 

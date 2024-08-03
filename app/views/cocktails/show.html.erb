@@ -1,3 +1,4 @@
+<% breadcrumb :cocktail, @cocktail %>
 <div class="container">
   <div class="row">
     <div class="col-md-6">
@@ -17,32 +18,16 @@
         <%= render 'cocktails/bookmark_button', cocktail: @cocktail %>
       </div>
       <div class="cocktail-tasting mb-3">
-        <div id='showFormButton'>
-          <%= link_to 'カクテルテイスティング登録', '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' } %>
-        </div>
-        <div id='myForm'>
-          <%= render 'cocktail_tastings/new' %>
-        </div>
+          <%= link_to t('cocktails.show.link'), new_cocktail_cocktail_tasting_path(@cocktail) %>
       </div>
     </div>
     <div class="col-md-6">
         <% if @cocktail.cocktail_url.present? %>
           <iframe width="560" height="315" src="https://www.youtube.com/embed/<%= @cocktail.cocktail_url %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         <% else %>
-          <p class='text-center mt-md-5'>動画はありません</p>
+          <p class='text-center mt-md-5'><%= t('cocktails.show.nul') %></p>
         <% end %>
     </div>
       <%= render 'shared/cocktail_pagenate' %>
   </div>
 </div>
-<script>
-    // JavaScriptでフォームの表示・非表示を切り替える
-    document.getElementById('showFormButton').addEventListener('click', function() {
-        var form = document.getElementById('myForm');
-        if (form.style.display === 'none' || form.style.display === '') {
-            form.style.display = 'block';
-        } else {
-            form.style.display = 'none';
-        }
-    });
-</script>

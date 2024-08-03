@@ -1,12 +1,13 @@
+<% breadcrumb :cocktail_tasting, @cocktail %>
 <div class="container">
   <div class="row">
     <div class="col-md-8 offset-md-2 tasting-edit-frame">
-      <h1 class="text-center">カクテルテイスティング登録</h1>
-      <%= form_with model: @cocktail_tasting, url: new_cocktail_cocktail_tasting_path(@cocktail), local: true do |f| %>
+      <h1 class="text-center"><%= t('.title') %></h1>
+      <%= form_with model: @cocktail_tasting, url: cocktail_cocktail_tastings_path(@cocktail), local: true do |f| %>
         <div class="form-group row whiskey-cocktail">
-          <%= f.label :names, class: "col-md-3 col-form-label" %><span class="text-danger">*</span>
+          <%= f.label :name, class: "col-md-3 col-form-label" %><span class="text-danger">*</span>
           <div class="col-md-9">
-            <%= f.select :names, @names.each { |name| name }, { prompt: "選択してください" }, class: "form-control" %>
+            <%= f.select :name, @whiskeys.map { |whiskey| [whiskey.name, whiskey.name] }, { prompt: "選択してください" }, class: "form-control" %>
           </div>
         </div>
 

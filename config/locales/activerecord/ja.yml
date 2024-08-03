@@ -24,6 +24,10 @@ ja:
         text: ウイスキーの説明
         image: 画像を追加
         remmaining_quantity_id: ウイスキーの量
+      cocktail_tasting:
+        name: ウイスキー
+        cocktail_flavor: カクテルの味
+        tasting_recipe: カクテルの材料、量
     errors:
       models:
         user:

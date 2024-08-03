@@ -15,10 +15,10 @@ Rails.application.routes.draw do
   
   resources :users, only: %i[new create]
     resources :cocktails do
+      resources :cocktail_tastings, only: %i[create new]
       collection do
         get :bookmarks
       end
-      resources :cocktail_tasting, only: %i[create new]
     end
     resources :bookmarks, only: %i[create destroy]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
