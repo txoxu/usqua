@@ -1,4 +1,5 @@
-<h1>カクテル一覧</h1>
+<% breadcrumb :cocktails %>
+<h1><%= t('.title') %></h1>
 <%= render 'shared/cocktail_search_form' %>
 <div class="cocktail-list text-center">
   <% @cocktails.each do |c| %>
@@ -10,7 +11,16 @@
         <div class="index-cocktail_origin">
           <%= c.cocktail_origin %>
         </div>
-        <%= render 'cocktails/bookmark_button', cocktail: c %>
+        <div class="d-md-inline-flex align-items-center">
+          <div class="bookmark-button me-3">
+            <%= render 'cocktails/bookmark_button', cocktail: c %>
+          </div>
+          <div class="cocktail-tasting-presence">
+            <% if current_user && c.cocktail_tastings.where(user_id: current_user.id).present? %>
+              <i class="fa-solid fa-martini-glass-citrus ", title= "テイスティング登録してあります"></i>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   <% end %>
