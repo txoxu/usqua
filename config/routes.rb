@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   
   resources :users, only: %i[new create]
     resources :cocktails do
-      resources :cocktail_tastings, only: %i[create new]
+      resources :cocktail_tastings, only: %i[create new edit update destroy]
       collection do
         get :bookmarks
       end

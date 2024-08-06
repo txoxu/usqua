@@ -17,11 +17,52 @@
           </div>
           <div class="cocktail-tasting-presence">
             <% if current_user && c.cocktail_tastings.where(user_id: current_user.id).present? %>
-              <i class="fa-solid fa-martini-glass-citrus ", title= "テイスティング登録してあります"></i>
-            <% end %>
+              <div class='showFormButton'>
+                <i class="fa-solid fa-martini-glass-citrus" title="クリックしてカクテルテイスティングを確認できます"></i>
+              </div>
           </div>
         </div>
+        <div class='myForm' style="display: none;">
+          <% c.cocktail_tastings.where(user_id: current_user.id).each do |f| %>
+            <div class="cocktail-tasting col-md-6 d-md-inline">
+              <strong>ウイスキー:</strong> <%= f.whiskey.name %>
+            <div class="cocktail-flavor">
+              <strong>カクテルの味:</strong> <%= f.cocktail_flavor %>
+            </div>
+            <div class="tasting-recipe">
+              <strong>カクテル材料:</strong> <%= f.tasting_recipe %>
+            </div>
+            <div class="actions text-right">
+              <%= link_to t('helpers.btn.edit'), edit_cocktail_cocktail_tasting_path(c, f), class: 'btn btn-primary' %>
+              <%= link_to t('helpers.btn.destroy'), cocktail_cocktail_tasting_path(c, f), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+            </div>
+          <% end %>
+        </div>
+        <% end %>
       </div>
     </div>
   <% end %>
 </div>
+<script>	
+
+document.addEventListener('turbo:load', function() {
+    var showFormButtons = document.querySelectorAll('.showFormButton');
+    var forms = document.querySelectorAll('.myForm');
+
+    showFormButtons.forEach(function(button, index) {
+        // リスナーを登録する前に、既存のリスナーを削除
+        var newButton = button.cloneNode(true);
+        button.replaceWith(newButton);
+        newButton.addEventListener('click', function() {
+            var form = forms[index];
+            if (form.style.display === 'none' || form.style.display === '') {
+                form.style.display = 'block';
+            } else {
+                form.style.display = 'none';
+            }
+        });
+    });
+});
+
+
+</script>
