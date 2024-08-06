@@ -16,7 +16,7 @@
             <%= render 'cocktails/bookmark_button', cocktail: c %>
           </div>
           <div class="cocktail-tasting-presence">
-            <% if c.cocktail_tastings.present? %>
+            <% if current_user && c.cocktail_tastings.where(user_id: current_user.id).present? %>
               <i class="fa-solid fa-martini-glass-citrus ", title= "テイスティング登録してあります"></i>
             <% end %>
           </div>

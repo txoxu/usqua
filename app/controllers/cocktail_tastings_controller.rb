@@ -12,11 +12,12 @@ class CocktailTastingsController < ApplicationController
     whiskey_name = params[:cocktail_tasting][:name]
     whiskey = current_user.whiskeys.find_by(name: whiskey_name)
     @cocktail_tasting.whiskey_id = whiskey.id
+    @cocktail_tasting.user_id = current_user.id
     if @cocktail_tasting.save
       redirect_to cocktails_path, success: t('cocktail_tastings.create.success')
     else
       flash.now[:danger] = t('cocktail_tastings.create.danger')
-      render :new
+      render :newq
     end
   end
 

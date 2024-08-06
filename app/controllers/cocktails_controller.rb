@@ -3,7 +3,6 @@ class CocktailsController < ApplicationController
   def index
     @cocktail_search_form = SearchCocktailsForm.new(search_params)
     @cocktails = @cocktail_search_form.search
-    
   end
 
   def show
