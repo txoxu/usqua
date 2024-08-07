@@ -105,13 +105,7 @@ cocktails = [
   {id: 15, cocktail_name: 'スコッチ・キルト', cocktail_create: 'すべての材料をステアして、カクテルグラスに注ぐ。レモンピールを絞りかける。', cocktail_origin: 'キルトとは、スコットランドのタータン・チェックのプリーツスカート風民族衣装のこと', cocktail_recipe: 'スコッチウイスキー: 2/3, ドランブイ: 1/3, オレンジビターズ: 2ダッシュ', cocktail_url: '6jrx_ZJGfOo?si=24HGepzuWQEc6ClY'},
   {id: 16, cocktail_name: 'セント・アンドリュース', cocktail_create: 'シェイクして、カクテルグラスに注ぐ。', cocktail_origin: 'セント・アンドリュースはスコットランドの守護聖人。ゴルフの発祥地の名前でもある', cocktail_recipe: 'スコッチウイスキー: 1/3, ドランブイ: 1/3, オレンジジュース:1/3', cocktail_url: 'Ru-CjyZStcI?si=i-RAfyF3i2uf7W05'},
   {id: 17, cocktail_name: 'ローヤル・アンバサダー', cocktail_create: 'すべての材料をステアして、カクテルグラスに注ぐ。ミントチェリー、マラスキーのチェリーを添える', cocktail_origin: '中村健二氏オリジナルカクテル', cocktail_recipe: 'スコッチウイスキー: 4/6, ドランブイ: 2/6, レモンジュース: 1ティースプーン', cocktail_url: ''},
-  {id: 18, cocktail_name: 'ロッホ・ローモンド', cocktail_create: 'シェイクして、カクテルグラスに注ぐ。', cocktail_origin: 'スコットランド最大の湖の名前。同名でウイスキーとしても存在する', cocktail_recipe: 'スコッチウイスキー: 90ml, アンゴラスチュラビターズ: 3~5ダッシュ, シュガーシロップ: 15ml', cocktail_url: 'LSPUK09-WEM?si=RkjMFjd8U_Md2m8d'},
-  {id: 19, cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
-  {id: 20, cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
-  {id: 21, cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
-  {id: 22, cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
-  {id: 23, cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
-  
+  {id: 18, cocktail_name: 'ロッホ・ローモンド', cocktail_create: 'シェイクして、カクテルグラスに注ぐ。', cocktail_origin: 'スコットランド最大の湖の名前。同名でウイスキーとしても存在する', cocktail_recipe: 'スコッチウイスキー: 90ml, アンゴラスチュラビターズ: 3~5ダッシュ, シュガーシロップ: 15ml', cocktail_url: 'LSPUK09-WEM?si=RkjMFjd8U_Md2m8d'}
 ]
 
 
