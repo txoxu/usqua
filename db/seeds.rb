@@ -109,6 +109,11 @@ cocktails = [
 ]
 
 
-  cocktails.each do |cocktail|
-    Cocktail.create(cocktail)
+cocktails.each do |cocktail|
+  begin
+    Cocktail.create!(cocktail)
+    Rails.logger.info "Created cocktail: #{cocktail[:cocktail_name]}"
+  rescue StandardError => e
+    Rails.logger.error "Failed to create cocktail: #{cocktail[:cocktail_name]}, Error: #{e.message}"
   end
+end
