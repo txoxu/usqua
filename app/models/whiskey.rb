@@ -2,7 +2,7 @@ class Whiskey < ApplicationRecord
   has_many :whiskey_categories, dependent: :destroy
   has_many :categories, through: :whiskey_categories
   has_many :tastings, dependent: :destroy
-  has_many :cocktail_tastings
+  has_many :cocktail_tasting
   belongs_to :user
   belongs_to :remmaining_quantity
 

@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
   has_many :whiskeys, dependent: :destroy
+  has_many :cocktails
   has_many :bookmarks, dependent: :destroy
   has_many :bookmark_cocktails, through: :bookmarks, source: :cocktail
 
