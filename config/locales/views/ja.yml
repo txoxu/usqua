@@ -100,9 +100,16 @@ ja:
   cocktail_tastings:
     new:
       title: カクテルテイスティング登録
+    edit:
+      title: カクテルテイスティング編集
     create:
       success: テイスティング登録しました
       danger: カクテルテイスティング登録できませんでした
+    update:
+      success: テイスティングを更新しました
+      danger: テイスティング更新に失敗しました
+    destroy:
+      danger: テイスティングを削除しました
   cocktails:
     index: 
       title: カクテル一覧

@@ -30,8 +30,9 @@ class CocktailTastingsController < ApplicationController
     @cocktail_tasting.whiskey_id = whiskey.id
     @cocktail_tasting.user_id = current_user.id
     if @cocktail_tasting.update(cocktail_tasting_params)
-      redirect_to cocktails_path
+      redirect_to cocktails_path, success: t('cocktail_tasting.update.success')
     else
+      flash.now[:danger] = t('cocktail_tastings.update.danger')
       render :new
     end
   end
@@ -39,7 +40,7 @@ class CocktailTastingsController < ApplicationController
   def destroy
     @cocktail_tasting = @cocktail.cocktail_tastings.find(params[:id])
     @cocktail_tasting.destroy!
-    redirect_to cocktails_path
+    redirect_to cocktails_path, danger: t('cocktail_tastings.destroy.danger')
   end
 
   private
