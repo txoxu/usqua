@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8 offset-md-2 tasting-edit-frame">
-      <h1 class="text-center">カクテルテイスティング編集</h1>
+      <h1 class="text-center"><%= t('.title') %></h1>
       <%= form_with model: [@cocktail, @cocktail_tasting], id: 'edit_cocktail_cocktail_tasting' , local: true do |f| %>
         <div class="form-group row whiskey-cocktail">
           <%= f.label :name, class: "col-md-3 col-form-label" %><span class="text-danger">*</span>
