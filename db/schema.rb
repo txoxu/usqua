@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_05_035029) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_11_092838) do
   create_table "bookmarks", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "cocktail_id", null: false
@@ -56,6 +56,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_05_035029) do
     t.text "cocktail_origin"
     t.text "cocktail_recipe"
     t.text "cocktail_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "distilleries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "distillery_name"
+    t.string "distillery_url"
+    t.string "prefectures"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "region_id", null: false
+    t.index ["region_id"], name: "index_distilleries_on_region_id"
+  end
+
+  create_table "regions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "region_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -132,6 +148,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_05_035029) do
   add_foreign_key "cocktail_tastings", "cocktails"
   add_foreign_key "cocktail_tastings", "users"
   add_foreign_key "cocktail_tastings", "whiskeys"
+  add_foreign_key "distilleries", "regions"
   add_foreign_key "tasting_tags", "tags"
   add_foreign_key "tasting_tags", "tastings"
   add_foreign_key "tastings", "whiskeys"
