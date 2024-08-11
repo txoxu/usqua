@@ -64,27 +64,27 @@ quantity_images = [
 
   quantity_images.each do |image|
   # 正規表現で数量部分を抽出
-  quantity_match = image.match(/(\d+ml)/)
-  if quantity_match
-    quantity = quantity_match[1] # キャプチャグループから数量を取得
-    remaining_quantity = RemmainingQuantity.find_by(quantity: quantity)
+    quantity_match = image.match(/(\d+ml)/)
+    if quantity_match
+      quantity = quantity_match[1] # キャプチャグループから数量を取得
+      remaining_quantity = RemmainingQuantity.find_by(quantity: quantity)
 
-    if remaining_quantity
-      # 画像の名前だけを保存
-      remaining_quantity.quantity_image = image
-      
-      if remaining_quantity.save
-        puts "Image #{image} attached to quantity #{quantity} successfully."
+      if remaining_quantity
+        # 画像の名前だけを保存
+        remaining_quantity.quantity_image = image
+
+        if remaining_quantity.save
+          puts "Image #{image} attached to quantity #{quantity} successfully."
+        else
+          puts "Failed to attach image #{image} to quantity #{quantity}."
+        end
       else
-        puts "Failed to attach image #{image} to quantity #{quantity}."
+        puts "No record found for quantity #{quantity}"
       end
     else
-      puts "No record found for quantity #{quantity}"
+      puts "No quantity found in image filename #{image}"
     end
-  else
-    puts "No quantity found in image filename #{image}"
   end
-=end
 
 
 cocktails = [
@@ -105,16 +105,65 @@ cocktails = [
   {id: 15, cocktail_name: 'スコッチ・キルト', cocktail_create: 'すべての材料をステアして、カクテルグラスに注ぐ。レモンピールを絞りかける。', cocktail_origin: 'キルトとは、スコットランドのタータン・チェックのプリーツスカート風民族衣装のこと', cocktail_recipe: 'スコッチウイスキー: 2/3, ドランブイ: 1/3, オレンジビターズ: 2ダッシュ', cocktail_url: '6jrx_ZJGfOo?si=24HGepzuWQEc6ClY'},
   {id: 16, cocktail_name: 'セント・アンドリュース', cocktail_create: 'シェイクして、カクテルグラスに注ぐ。', cocktail_origin: 'セント・アンドリュースはスコットランドの守護聖人。ゴルフの発祥地の名前でもある', cocktail_recipe: 'スコッチウイスキー: 1/3, ドランブイ: 1/3, オレンジジュース:1/3', cocktail_url: 'Ru-CjyZStcI?si=i-RAfyF3i2uf7W05'},
   {id: 17, cocktail_name: 'ローヤル・アンバサダー', cocktail_create: 'すべての材料をステアして、カクテルグラスに注ぐ。ミントチェリー、マラスキーのチェリーを添える', cocktail_origin: '中村健二氏オリジナルカクテル', cocktail_recipe: 'スコッチウイスキー: 4/6, ドランブイ: 2/6, レモンジュース: 1ティースプーン', cocktail_url: ''},
-  {id: 18, cocktail_name: 'ロッホ・ローモンド', cocktail_create: 'シェイクして、カクテルグラスに注ぐ。', cocktail_origin: 'スコットランド最大の湖の名前。同名でウイスキーとしても存在する', cocktail_recipe: 'スコッチウイスキー: 90ml, アンゴラスチュラビターズ: 3~5ダッシュ, シュガーシロップ: 15ml', cocktail_url: 'LSPUK09-WEM?si=RkjMFjd8U_Md2m8d'},
-  {id: 19, cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
-  {id: 20, cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
-  {id: 21, cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
-  {id: 22, cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
-  {id: 23, cocktail_name: '', cocktail_create: '', cocktail_origin: '', cocktail_recipe: '', cocktail_url: ''},
-  
+  {id: 18, cocktail_name: 'ロッホ・ローモンド', cocktail_create: 'シェイクして、カクテルグラスに注ぐ。', cocktail_origin: 'スコットランド最大の湖の名前。同名でウイスキーとしても存在する', cocktail_recipe: 'スコッチウイスキー: 90ml, アンゴラスチュラビターズ: 3~5ダッシュ, シュガーシロップ: 15ml', cocktail_url: 'LSPUK09-WEM?si=RkjMFjd8U_Md2m8d'}
 ]
 
 
-  cocktails.each do |cocktail|
-    Cocktail.create(cocktail)
+cocktails.each do |cocktail|
+  begin
+    Cocktail.create!(cocktail)
+    Rails.logger.info "Created cocktail: #{cocktail[:cocktail_name]}"
+  rescue StandardError => e
+    Rails.logger.error "Failed to create cocktail: #{cocktail[:cocktail_name]}, Error: #{e.message}"
+  end
+end
+
+
+
+
+  regions = [
+    {id: 1, region_name: '九州-沖縄'},
+    {id: 2, region_name: '四国'},
+    {id: 3, region_name: '中国'},
+    {id: 4, region_name: '近畿'},
+    {id: 5, region_name: '中部'},
+    {id: 6, region_name: '関東'},
+    {id: 7, region_name: '東北'},
+    {id: 8, region_name: '北海道'}
+  ]
+
+  regions.each do |region|
+    begin
+      Region.find_or_create_by(id: region[:id]) do |r|
+        r.region_name = region[:region_name]
+      end
+      Rails.logger.info "Create or find region: #{region[:region_name]}"
+    rescue StandardError => e
+      Rails.logger.error "Failed to create region: #{region[:region_name]}, Error: #{e.message}"
+    end
+  end
+=end
+  distilleries = [
+  {id: 1, distillery_name: '嘉之助蒸留所', distillery_url: 'https://kanosuke.com/', prefectures: '鹿児島県', region_id: 1},
+  {id: 2, distillery_name: 'マルス津貫蒸留所', distillery_url: 'https://kanosuke.com/', prefectures: '鹿児島県', region_id: 1},
+  {id: 3, distillery_name: '山鹿蒸留所', distillery_url: 'https://yamagadistillery.co.jp/', prefectures: '熊本県', region_id: 1},
+  {id: 4, distillery_name: '久住蒸留所', distillery_url: 'https://kujudistillery.jp/', prefectures: '大分県', region_id: 1},
+  {id: 5, distillery_name: '尾鈴山蒸留所', distillery_url: 'https://osuzuyama.co.jp/', prefectures: '宮崎県', region_id: 1},
+  {id: 6, distillery_name: '御岳蒸留所', distillery_url: 'https://www.nishi-shuzo.co.jp/ontake/', prefectures: '鹿児島県', region_id: 1},
+  {id: 7, distillery_name: '新道蒸留所', distillery_url: 'https://shindo-lab.jp/', prefectures: '福岡県', region_id: 1}
+  
+  ]
+
+  distilleries.each do |distillery|
+    begin
+      Distillery.find_or_create_by(id: distillery[:id]) do |d|
+        d.distillery_name = distillery[:distillery_name]
+        d.distillery_url = distillery[:distillery_url]
+        d.prefectures = distillery[:prefectures]
+        d.region_id = distillery[:region_id]
+      end
+      Rails.logger.info "Create or find distillery: #{distillery[:distillery_name]}"
+    rescue StandardError => e
+      Rails.logger.error "Failed to create distillery: #{distillery[:distillery_name]}, Error: #{e.message}"
+    end
   end

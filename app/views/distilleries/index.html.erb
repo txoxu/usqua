@@ -1,0 +1,44 @@
+  
+<h1>蒸留所一覧</h1>
+<% @regions.each do |r| %>
+  <div class="showFormButton text-center">
+    <%= r.region_name %>
+  </div>
+      <div class="myForm text-center", style="display: none;">
+        <% r.distilleries.each do |d| %>
+          <div class="distillery-item mb-3">
+            <div class="index-frame">
+              <div class="index-name">
+                <%= link_to d.distillery_name, distillery_path(d) %>
+              </div>
+              <div class="index-distillery_url">
+                <%= link_to d.distillery_url %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+<% end %>
+<script>	
+
+document.addEventListener('turbo:load', function() {
+    var showFormButtons = document.querySelectorAll('.showFormButton');
+    var forms = document.querySelectorAll('.myForm');
+
+    showFormButtons.forEach(function(button, index) {
+        // リスナーを登録する前に、既存のリスナーを削除
+        var newButton = button.cloneNode(true);
+        button.replaceWith(newButton);
+        newButton.addEventListener('click', function() {
+            var form = forms[index];
+            if (form.style.display === 'none' || form.style.display === '') {
+                form.style.display = 'block';
+            } else {
+                form.style.display = 'none';
+            }
+        });
+    });
+});
+
+
+</script>
