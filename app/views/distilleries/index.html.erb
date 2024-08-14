@@ -1,44 +1,31 @@
-  
-<h1>蒸留所一覧</h1>
-<% @regions.each do |r| %>
-  <div class="showFormButton text-center">
-    <%= r.region_name %>
-  </div>
-      <div class="myForm text-center", style="display: none;">
-        <% r.distilleries.each do |d| %>
-          <div class="distillery-item mb-3">
-            <div class="index-frame">
-              <div class="index-name">
-                <%= link_to d.distillery_name, distillery_path(d) %>
-              </div>
-              <div class="index-distillery_url">
-                <%= link_to d.distillery_url %>
-              </div>
-            </div>
-          </div>
-        <% end %>
+<div class="container">
+  <div class="row">
+    <h1>蒸留所一覧</h1>
+      <div style="width: 100%; height: 600px;">
+        <gmpx-api-loader key="AIzaSyCuqaZ0cxoX5OtcvfKPP6vjfDBA89d6IJM" solution-channel="GMP_QB_locatorplus_v10_cABCDE"></gmpx-api-loader>
+        <gmpx-store-locator map-id="DEMO_MAP_ID" ></gmpx-store-locator>
       </div>
-<% end %>
-<script>	
+  </div>
+</div>
 
-document.addEventListener('turbo:load', function() {
-    var showFormButtons = document.querySelectorAll('.showFormButton');
-    var forms = document.querySelectorAll('.myForm');
-
-    showFormButtons.forEach(function(button, index) {
-        // リスナーを登録する前に、既存のリスナーを削除
-        var newButton = button.cloneNode(true);
-        button.replaceWith(newButton);
-        newButton.addEventListener('click', function() {
-            var form = forms[index];
-            if (form.style.display === 'none' || form.style.display === '') {
-                form.style.display = 'block';
-            } else {
-                form.style.display = 'none';
-            }
-        });
-    });
-});
-
-
+<script type="module">
+  document.addEventListener('turbo:load', async () => {
+    await customElements.whenDefined('gmpx-store-locator');
+    const locator = document.querySelector('gmpx-store-locator');
+    locator.configureFromQuickBuilder(CONFIGURATION);
+  });
+  const CONFIGURATION = {
+    "locations": [
+      {"title":"株式会社 山鹿蒸溜所","address1":"日本、〒861-0565 熊本県山鹿市鹿央町合里９８０−１","coords":{"lat":32.97943200012109,"lng":130.67809419325405},"placeId":"ChIJicP-2Ur5QDURGM_mnlTe9cU"},
+      {"title":"嘉之助蒸溜所 KANOSUKE DISTILLERY","address1":"日本、〒899-2421 鹿児島県日置市日吉町神之川８４５−３","coords":{"lat":31.602986830536178,"lng":130.3356401392868},"placeId":"ChIJtQGddGRrPjURJrw14nU1ve0"},
+      {"title":"御岳蒸留所","address1":"日本、〒891-0144 鹿児島県鹿児島市下福元町","coords":{"lat":31.520355354156063,"lng":130.451500035582},"placeId":"ChIJz1_GL1hvPjUR9HvqUv7Bx4Q"},
+      {"title":"新道蒸溜所","address1":"日本、〒838-1303 福岡県朝倉市比良松６２６−１","coords":{"lat":33.381626800000014,"lng":130.72804509140164},"placeId":"ChIJY5OykPhzQTUR1AGp15yCpI8"},
+      {"title":"マルス津貫蒸溜所 津貫貴匠蔵 本坊酒造","address1":"日本、〒899-3611 鹿児島県南さつま市加世田津貫６５９４","coords":{"lat":31.358966838392984,"lng":130.28601766441807},"placeId":"ChIJvU_IL13gPTURZoPY8OB1tww"},
+      {"title":"久住蒸溜所","address1":"日本、〒878-0201 大分県竹田市久住町大字久住６４２６","coords":{"lat":33.02171170249879,"lng":131.29740003558197},"placeId":"ChIJYQBx77jMRjUR8uUlnCDEZgo"},
+      {"title":"（株）尾鈴山蒸留所","address1":"日本、〒884-0104 宮崎県児湯郡木城町石河内６５６−１７","coords":{"lat":32.221635108079916,"lng":131.42111436441803},"placeId":"ChIJFXEyXz9XRzURRQzZ9JIIXqI"}
+    ],
+    "mapOptions": {"center":{"lat":38.0,"lng":-100.0},"fullscreenControl":true,"mapTypeControl":false,"streetViewControl":false,"zoom":8,"zoomControl":true,"maxZoom":17,"mapId":""},
+    "mapsApiKey": "AIzaSyCuqaZ0cxoX5OtcvfKPP6vjfDBA89d6IJM",
+    "capabilities": {"input":true,"autocomplete":true,"directions":true,"distanceMatrix":true,"details":true,"actions":false}
+  }
 </script>
