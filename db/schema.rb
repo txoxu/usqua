@@ -63,7 +63,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_11_092838) do
   create_table "distilleries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "distillery_name"
     t.string "distillery_url"
-    t.string "prefectures"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "region_id", null: false
