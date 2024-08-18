@@ -6,46 +6,41 @@
         <div class="whiskey-new">
           <h1><%= t('.title') %></h1>
         </div>
-        <%= form_with model: @whiskey, id: 'new_whiskey', local: true do |f| %>
-          <div class="mb-3">
-            <%= f.label :name %><span class="text-danger">*</span>
-            <%= f.text_field :name, class: "form-control", required: true %>
+        <%= form_with model: @whiskey, id: 'new_whiskey', local: true, html: { class: 'row g-3' } do |f| %>
+          <div class="col-md-6">
+            <%= f.label :name, class: 'form-label' %><span class="text-danger">*</span>
+            <%= f.text_field :name, class: 'form-control', id: 'inputName', required: true %>
           </div>
-
-          <div class="mb-3">
-            <%= f.label :text %>
-            <%= f.text_area :text, class: "form-control" %>
+          <div class="col-md-6">
+            <%= f.label :text, class: 'form-label' %>
+            <%= f.text_area :text, class: 'form-control', id: 'inputText' %>
           </div>
-
-          <div class="mb-3">
-            <%= f.label :remmaining_quantity_id %><span class="text-danger">*</span>
-            <%= f.collection_radio_buttons :remmaining_quantity_id, @quantities, :id, :quantity, class: "form-check-input", required: true do |rb| %>
+          <div class="col-12">
+            <%= f.label :remmaining_quantity_id, class: 'form-label' %><span class="text-danger">*</span>
+            <%= f.collection_radio_buttons :remmaining_quantity_id, @quantities, :id, :quantity, class: 'form-check-input', required: true do |rb| %>
               <%= rb.radio_button %>
-              <%= rb.label(class: "form-check-label") %>
+              <%= rb.label(class: 'form-check-label') %>
             <% end %>
           </div>
-
-          <div class="mb-3">
-            <%= f.label :image %>
-            <%= f.file_field :image, class: "form-control" %>
+          <div class="col-12">
+            <%= f.label :image, class: 'form-label' %>
+            <%= f.file_field :image, class: 'form-control', id: 'inputImage' %>
           </div>
-
-          <div class="mb-3">
-            <%= f.label :category_names %><span class="text-danger">*</span>
-            <%= f.select :category_names, @category_names.map { |c| [c.category_name, c.category_name] }, { prompt: "選択してください" }, { class: "form-control", required: true } %>
+          <div class="col-md-6">
+            <%= f.label :category_names, class: 'form-label' %><span class="text-danger">*</span>
+            <%= f.select :category_names, @category_names.map { |c| [c.category_name, c.category_name] }, { prompt: '選択してください' }, { class: 'form-select', required: true } %>
           </div>
-
-          <div class="mb-3">
-            <%= f.label :category_types %><span class="text-danger">*</span>
-            <%= f.select :category_types, @category_types.map { |c| [c.category_type, c.category_type] }, { prompt: "選択してください" }, { class: "form-control", required: true } %>
+          <div class="col-md-6">
+            <%= f.label :category_types, class: 'form-label' %><span class="text-danger">*</span>
+            <%= f.select :category_types, @category_types.map { |c| [c.category_type, c.category_type] }, { prompt: '選択してください' }, { class: 'form-select', required: true } %>
           </div>
-
-          <div class="actions">
-            <%= f.submit t('helpers.submit.create'), class: "btn btn-primary" %>
+          <div class="col-12">
+            <%= f.submit t('helpers.submit.create'), class: 'btn btn-outline-primary' %>
           </div>
         <% end %>
       </div>
     </div>
+
 
     <div class="col-md-3">
       <div class="image-container text-center">

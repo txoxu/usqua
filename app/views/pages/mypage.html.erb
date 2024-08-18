@@ -15,9 +15,9 @@
         </div>
         
         <div class="whiskey-container">
-          <table class="table table-bordered shadow-lg">
+          <table class="table table-hover">
             <thead>
-              <tr>
+              <tr> 
                 <th>ウィスキーの種類</th>
                 <th>本数</th>
               </tr>
@@ -69,27 +69,23 @@
       </div>
     </div>
 
-  <div class='shadow-lg'>
+  
     <h1>お気に入りカクテル</h1>
-    <div class='bookmark-container col-md-4'>
       <% if @bookmark_cocktails.present? %>
-        <div class='shadow-lg rounded-pill text-center'>
           <% @bookmark_cocktails.each do |b| %>
-            <div class='mb-3 mt-md-4'>
-              <%= link_to b.cocktail_name, cocktail_path(b) %>
+            <div class="card" style="width: 18rem; margin-left: 2rem; margin-top: 2rem;">
+                <div class="card-body">
+                  <h5 class="card-title"><%= b.cocktail_name %></h5>
+                  <p class="card-text"><%= b.cocktail_origin %></p>
+                  <div><%= render 'cocktails/unbookmark', { cocktail: b } %></div>
+                  <%= link_to "詳細ページ", cocktail_path(b), class: "link-success link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" %>
+                </div>
             </div>
-            <div class='mb-3'>
-              <%= b.cocktail_origin %>
-            </div>
-            <%= render 'cocktails/unbookmark', { cocktail: b } %>
           <% end %>
-        </div>
       <% else %>
         <div class='mb-3'>
           <p>登録されているカクテルはありません</p>
         </div>
       <% end %>
-    </div>
-    </div>
   </div>
 </div>
