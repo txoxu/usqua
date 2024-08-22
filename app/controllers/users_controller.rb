@@ -8,11 +8,28 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      login
       redirect_to mypage_path, success: t('users.create.success')
     else
       flash.now[:danger] = t('users.create.danger')
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def show
+    current_user
+  end
+
+  def edit
+
+  end
+
+  def update
+
+  end
+
+  def destroy
+
   end
 
   private

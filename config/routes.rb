@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   patch "password/reset/edit", to: "password_resets#update"
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
   
-  resources :users, only: %i[new create]
+  resources :users, only: %i[new create show edit update destroy]
     resources :cocktails do
       resources :cocktail_tastings, only: %i[create new edit update destroy]
       collection do
