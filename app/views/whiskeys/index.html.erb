@@ -1,3 +1,6 @@
+<div class="container ">
+  <div class="row">
+
 <% breadcrumb :whiskeys %>
 <%= render 'shared/search_form' %>
 <% if current_user.whiskeys.present? %>
@@ -12,7 +15,7 @@
           <%= image_tag 'image.png', alt: 'Example Image', size: '200x298' %>
         <% end %>
         <div class="index-frame">
-          <div class="index-name">
+          <div class="icon-link">
             <%= link_to whiskey.name, whiskey_path(whiskey) %>
           </div>
             <div class="index-quantity">
@@ -38,9 +41,9 @@
             <% end %>
           </div>
           <div class="index-actions">
-            <%= link_to t('.add_tasting'), new_whiskey_tasting_path(whiskey), class: 'btn btn-primary' %>
-            <%= link_to t('helpers.btn.edit'), edit_whiskey_path(whiskey), class: 'btn btn-primary' %>
-            <%= link_to t('helpers.btn.destroy'), whiskey_path(whiskey), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+            <%= link_to t('.add_tasting'), new_whiskey_tasting_path(whiskey), class: 'btn btn-outline-primary btn-sm' %>
+            <%= link_to t('helpers.btn.edit'), edit_whiskey_path(whiskey), class: 'btn btn-outline-secondary btn-sm' %>
+            <%= link_to t('helpers.btn.destroy'), whiskey_path(whiskey), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-outline-danger btn-sm' %>
           </div>
         </div>
       </div>
@@ -50,3 +53,5 @@
 <% else %>
   <p><%= t('.not_whiskeys') %></p>
 <% end %>
+</div>
+</div>
