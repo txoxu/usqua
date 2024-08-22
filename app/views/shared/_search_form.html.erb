@@ -1,5 +1,4 @@
 <%= form_with model: @search_form, url: whiskeys_path, method: :get, local: true, class: 'search-form' do |f| %>
-  <div class="row">
     <div class="col-md-2">
       <%= f.select :category_names, options_for_select(@category_names.map(&:category_name)), include_blank: '生産国別', class: 'form-select g-3 align-items-center' %>
     </div>
@@ -8,16 +7,15 @@
       <%= f.select :category_types, options_for_select(@category_types.map(&:category_type)), include_blank: '原産国別', class: 'form-select g-3 align-items-center' %>
     </div>
     
-    <div class="col-md-2">
+    <div class="col-md-3">
       <%= f.text_field :name, class: 'form-control g-3 align-items-center', placeholder: 'ウイスキーの名前' %>
     </div>
     
-    <div class="col-md-2">
+    <div class="col-md-3">
       <%= f.text_field :text, class: 'form-control g-3 align-items-center', placeholder: 'キーワード' %>
     </div>
     
     <div class="col-md-2 d-flex align-items-end">
-      <%= f.submit t('helpers.submit.search'), class: 'btn btn-primary' %>
+      <%= f.submit t('helpers.submit.search'), class: 'btn btn-outline-success' %>
     </div>
-  </div>
 <% end %>

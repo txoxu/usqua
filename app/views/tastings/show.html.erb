@@ -40,8 +40,8 @@
           </div>
         </div>
         <div class="actions text-right">
-          <%= link_to t('helpers.btn.edit'), edit_whiskey_tasting_path(@whiskey, @tasting), class: 'btn btn-primary' %>
-          <%= link_to t('helpers.btn.destroy'), whiskey_tasting_path(@whiskey, @tasting), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+          <%= link_to t('helpers.btn.edit'), edit_whiskey_tasting_path(@whiskey, @tasting), class: 'btn btn-outline-primary' %>
+          <%= link_to t('helpers.btn.destroy'), whiskey_tasting_path(@whiskey, @tasting), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-outline-danger' %>
         </div>
     </div>
   </div>

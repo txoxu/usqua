@@ -19,11 +19,11 @@
     <% end %>
 
     
-    <div class="main-content">
+    <main class="main-content">
       <%= render 'shared/flash_message' %>
       <%= breadcrumbs separator: " &rsaquo; " %>
       <%= yield %>
+    </main>
       <%= render 'shared/footer' %>
-    </div>
   </body>
 </html>

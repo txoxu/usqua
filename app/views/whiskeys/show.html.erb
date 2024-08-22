@@ -1,64 +1,64 @@
 <% content_for :breadcrumbs do %>
   <%= breadcrumb :whiskey, @whiskey %>
 <% end %>
-<div class="container">
-  <div class="row">
-    <div class="col-md-6">
-      <div class="show-frame mb-3">
-        <div class="whiskey-show">
-          <h1><%= t('.title') %></h1>
-        </div>
-        <div class="mb-3">
-          <%= @whiskey.name %>
-        </div>
-        <div class="mb-3">
-          <%= @whiskey.remmaining_quantity.quantity %>
-        </div>
-        <% @categories.each do |c| %>
-          <div class="mb-3">
-            <%= c.category_name %>
-          </div>
-          <div class="mb-3">
-            <%= c.category_type %>
-          </div>
-        <% end %>
-          <div class="mb-3">
-            <%= @whiskey.text %>
-          </div>
-          <div class="show-actions">
-            <%= link_to t('helpers.btn.edit'), edit_whiskey_path(@whiskey), id: "button-edit-#{@whiskey.id}", class: 'btn btn-primary' %>
-            <%= link_to t('helpers.btn.destroy'), whiskey_path(@whiskey), id: "button-delete-#{@whiskey.id}", data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
-          </div>
-      </div>
-      <% if @whiskey.tastings.present? %>
-        <% @whiskey.tastings.each do |t| %>
-          <%= link_to whiskey_tasting_path(@whiskey, t) do %>
-            <div class="mb-3">
-              <%= t.tasting_type %>
-          <% end %>
-              <div class="ms-3">
-              <%= link_to t('helpers.btn.edit'), edit_whiskey_tasting_path(@whiskey, t), class: 'btn btn-primary' %>
-              <%= link_to t('helpers.btn.destroy'), whiskey_tasting_path(@whiskey, t), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: 'btn btn-danger' %>
-              </div>
-            </div>
-        <% end %>
-      <% else %>
-        <p><%= t('.not_tasting') %></p>
-      <% end %>
-    </div>
-    <div class="col-md-3">
-      <% if @whiskey.image.present? %>
-        <div class="image-container text-center border p-3">
-          <%= image_tag @whiskey.image.url, class: "preview-image" %>
-        </div>
-      <% end %>
-    </div>
 
-    <div class="col-md-3">
-      <div class="quantity-container text-center border p-3">
-        <%= image_tag convert_quantity_image_filename(@whiskey.remmaining_quantity.quantity_image), class: "preview-image" %>
+<div class="container my-4">
+  <div class="card border-0 shadow-lg">
+    <div class="card-body">
+      <h1 class="card-title text-center mb-4" style="font-size: 2rem;"><%= t('.title') %></h1>
+      
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-4">
+            <h2 class="h4"><%= @whiskey.name %></h2>
+            <p><strong>量:</strong> <%= @whiskey.remmaining_quantity.quantity %></p>
+            <% @categories.each do |c| %>
+              <p><strong>カテゴリ名:</strong> <%= c.category_name %></p>
+              <p><strong>種類:</strong> <%= c.category_type %></p>
+            <% end %>
+            <p class="mt-3"><%= @whiskey.text %></p>
+          </div>
+
+          <div class="text-center mb-4">
+            <%= link_to t('helpers.btn.edit'), edit_whiskey_path(@whiskey), class: 'btn btn-outline-primary me-2' %>
+            <%= link_to t('helpers.btn.destroy'), whiskey_path(@whiskey), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-outline-danger' %>
+          </div>
+
+          <% if @whiskey.tastings.present? %>
+            <% @whiskey.tastings.each do |t| %>
+              <div class="mb-3 p-2 border rounded">
+                <%= link_to whiskey_tasting_path(@whiskey, t), class: 'text-decoration-none text-dark' do %>
+                  <p class="mb-0"><strong>飲み方:</strong> <%= t.tasting_type %></p>
+                <% end %>
+                <div class="text-center mt-2">
+                  <%= link_to t('helpers.btn.edit'), edit_whiskey_tasting_path(@whiskey, t), class: 'btn btn-outline-primary btn-sm me-2' %>
+                  <%= link_to t('helpers.btn.destroy'), whiskey_tasting_path(@whiskey, t), data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" }, class: 'btn btn-outline-danger btn-sm' %>
+                </div>
+              </div>
+            <% end %>
+          <% else %>
+            <p class="text-center mt-md-5"><%= t('.not_tasting') %></p>
+          <% end %>
+        </div>
+
+        <div class="col-md-3">
+          <% if @whiskey.image.present? %>
+            <div class="text-center mb-4">
+              <%= image_tag @whiskey.image.url, class: "img-fluid rounded shadow-sm", style: "max-width: 100%; height: auto;" %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="col-md-3">
+          <div class="text-center mb-4">
+            <%= image_tag convert_quantity_image_filename(@whiskey.remmaining_quantity.quantity_image), class: "img-fluid rounded shadow-sm", style: "max-width: 80%; height: 505;" %>
+          </div>
+        </div>
       </div>
     </div>
-      <%= render 'shared/whiskey_pagenate' %>
+  </div>
+  
+  <div class="mt-4">
+    <%= render 'shared/whiskey_pagenate' %>
   </div>
 </div>
