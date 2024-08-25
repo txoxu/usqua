@@ -13,6 +13,8 @@
         </div>
         <%= f.submit t('.login'), class: "btn btn-outline-primary" %>
       <% end %>
+      <%= link_to "googleで登録", user_google_oauth2_omniauth_authorize_path, method: :post %>
+
       <div class='text-center'>
         <%= link_to t('.to_register_page'), new_user_path %>
         <%= link_to t('.password_forget'), password_reset_path, class: 'link-secondary d-inline-block ms-3' %>
@@ -20,3 +22,4 @@
     </div>
   </div>
 </div>
+  

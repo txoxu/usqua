@@ -58,7 +58,13 @@ gem 'kaminari', '~> 1.2', '>= 1.2.2'
 
 gem 'bootstrap-kaminari-views', '~> 0.0.5'
 
+gem 'googleauth', '~> 1.11'
 
+gem 'devise'
+
+gem 'omniauth-google-oauth2'
+
+gem 'dotenv-rails', groups: [:development, :test]
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 

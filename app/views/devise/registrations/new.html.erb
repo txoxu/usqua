@@ -1,0 +1,14 @@
+<% if session["devise.google_data"].present? %>
+  <%= hidden_field_tag :user_provider_auth, true %>
+<% else %>
+  <div class="field">
+    <%= f.label :password %>
+    <br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation %>
+    <br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+<% end %>
