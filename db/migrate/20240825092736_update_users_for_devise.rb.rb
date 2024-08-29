@@ -1,38 +1,17 @@
 class UpdateUsersForDevise < ActiveRecord::Migration[7.1]
-  def change
-    # Remove crypted_password column if it exists
-    if column_exists?(:users, :crypted_password)
-      remove_column :users, :crypted_password
+   def change
+    # カラムが存在すれば削除
+    remove_column :users, :salt if column_exists?(:users, :salt)
+    remove_column :users, :crypted_password if column_exists?(:users, :crypted_password)
+    remove_column :users, :first_name if column_exists?(:users, :first_name)
+    remove_column :users, :last_name if column_exists?(:users, :last_name)
+    
+    # カラムが存在しなければ追加
+    add_column :users, :name, :string, null: false, default: "" unless column_exists?(:users, :name)
+
+    # インデックスの存在を確認し、必要であれば追加
+    unless index_exists?(:users, :email, unique: true)
+      add_index :users, :email, unique: true
     end
-
-    # Add encrypted_password column if it doesn't exist
-    unless column_exists?(:users, :encrypted_password)
-      add_column :users, :encrypted_password, :string
-    end
-
-    # Add missing columns if they don't already exist
-    unless column_exists?(:users, :reset_password_token)
-      add_column :users, :reset_password_token, :string
-      add_index :users, :reset_password_token, unique: true
-    end
-
-    unless column_exists?(:users, :reset_password_sent_at)
-      add_column :users, :reset_password_sent_at, :datetime
-    end
-
-    unless column_exists?(:users, :remember_created_at)
-      add_column :users, :remember_created_at, :datetime
-    end
-
-    # Uncomment these if using confirmable and/or lockable
-    # unless column_exists?(:users, :confirmation_token)
-    #   add_column :users, :confirmation_token, :string
-    #   add_index :users, :confirmation_token, unique: true
-    # end
-
-    # unless column_exists?(:users, :unlock_token)
-    #   add_column :users, :unlock_token, :string
-    #   add_index :users, :unlock_token, unique: true
-    # end
   end
 end

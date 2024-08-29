@@ -1,5 +1,5 @@
-class Users::RegistrationsController < Devise::OmniauthCallbacksController
-
+class Users::RegistrationsController <  Devise::RegistrationsController
+  skip_before_action :require_login, only: [:create]
   def create
     if params[:user_provider_auth] == 'true'
       pass = Devise.friendly_token    # PWの自動生成
