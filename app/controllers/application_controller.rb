@@ -9,17 +9,15 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def not_authenticated
-    redirect_to login_path
-  end
+  #def not_authenticated
+  #  redirect_to new_user_session_path
+  #end
 
   def after_sign_in_path_for(resource)
     mypage_path # カスタムリダイレクト先
   end
-  
 
-  
   def configure_permitted_parameters  # メールアドレス以外の自分で追加したカラムを許可
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :password, :password_confirmation])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end
 end

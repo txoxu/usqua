@@ -14,7 +14,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '78f21b7b2a37b94dfe0577fb147bfb1496827429ab14f5365b59d4247cc994ee1d5498dece97354c7d87cb1e7b463b9d0e918fca7f0b548cf0daacfc8b8dd5ca'
+  # config.secret_key = '300fdc8c69fb4763a4460f6704c43b098d6a8d1161ee9273598952d1ea1622f26493f2d7a31f422680e1625671f15d1fc011698a7cd45ae4574966dc540fda73'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -24,7 +24,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = 'no-reply@gmail.com'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -126,7 +126,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '1d46f82ff8683b1f351c01d31349c1334e3a3207d4fd99e698740dfe6b7714b5313ba3a0f9cd932b3cbb72d80240673245b34546832b88a69600babef8f97e83'
+  # config.pepper = '5226f02cb1eaded3a9d89cc8200f944b4ad933bdd19dfdb818ed83e0c05c9b0e67ba17eaf298eb28386c0bff7ed6bfe4a61b18de5cc1f20eb6eb4d7240f35629'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -164,7 +164,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :rememberable
   # The time the user will be remembered without asking for credentials again.
-  # config.remember_for = 2.weeks
+  config.remember_for = 2.weeks
 
   # Invalidates all the remember me tokens when the user signs out.
   config.expire_all_remember_me_on_sign_out = true
@@ -272,7 +272,7 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-
+  config.omniauth :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET']
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

@@ -9,37 +9,69 @@
     </button>
 
     <div class='collapse navbar-collapse text-sm-end' id='navbarSupportedContent'>
-      <ul class='navbar-nav ms-auto main-nav align-items-center'>
-        <li class='nav-item dropdown dropdown-slide'>
-        <%= link_to t('.whiskey'), '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-board-menu' %>
-        <div class='dropdown-menu dropdown-menu-end'>
-            <%= link_to t('.whiskey_new'), new_whiskey_path, class: 'dropdown-item' %>
-            <%= link_to t('.whiskey_index'), whiskeys_path, class: 'dropdown-item' %>
-        </div>
-        <li class='nav-item dropdown dropdown-slide'>
-        <%= link_to 'カクテル', '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-board-menu' %>
-        <div class='dropdown-menu dropdown-menu-end'>
-            <%= link_to 'カクテル一覧', cocktails_path, class: 'dropdown-item' %>
-        </div>
-        <li class='nav-item dropdown dropdown-slide'>
-        <%= link_to '蒸留所', '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-board-menu' %>
-        <div class='dropdown-menu dropdown-menu-end'>
-            <%= link_to '蒸留所一覧', distilleries_path, class: 'dropdown-item' %>
-        </div>
-        <li class='nav-item'>
-          <%= link_to mypage_path, class: 'nav-link' do %><%= t('.mypage') %><% end %>
-        </li>
-        <li class='nav-item dropdown dropdown-slide'>
-          <%= link_to '#', class: 'nav-link', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-profile' do %>
-            <%= image_tag 'top.jpg', class: 'rounded-circle mr15', style: "border: 1px solid #000;", width: '40', height: '40' %>
-          <% end %>
+      <% if user_signed_in? %>
+        <ul class='navbar-nav ms-auto main-nav align-items-center'>
+          <li class='nav-item dropdown dropdown-slide'>
+          <%= link_to t('.whiskey'), '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-board-menu' %>
           <div class='dropdown-menu dropdown-menu-end'>
-            <div class='dropdown-item'><%= link_to current_user.decorate.full_name, user_path(current_user) %></div>
-            <div class='dropdown-divider'></div>
-            <%= link_to t('.logout'), logout_path, class: 'dropdown-item', data: { turbo_method: :delete } %>
+              <%= link_to t('.whiskey_new'), new_whiskey_path, class: 'dropdown-item' %>
+              <%= link_to t('.whiskey_index'), whiskeys_path, class: 'dropdown-item' %>
           </div>
-        </li>
-      </ul>
+          <li class='nav-item dropdown dropdown-slide'>
+          <%= link_to 'カクテル', '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-board-menu' %>
+          <div class='dropdown-menu dropdown-menu-end'>
+              <%= link_to 'カクテル一覧', cocktails_path, class: 'dropdown-item' %>
+          </div>
+          <li class='nav-item dropdown dropdown-slide'>
+          <%= link_to '蒸留所', '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-board-menu' %>
+          <div class='dropdown-menu dropdown-menu-end'>
+              <%= link_to '蒸留所一覧', distilleries_path, class: 'dropdown-item' %>
+          </div>
+          <li class='nav-item'>
+            <%= link_to mypage_path, class: 'nav-link' do %><%= t('.mypage') %><% end %>
+          </li>
+          <li class='nav-item dropdown dropdown-slide'>
+            <%= link_to '#', class: 'nav-link', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-profile' do %>
+              <%= image_tag 'top.jpg', class: 'rounded-circle mr15', style: "border: 1px solid #000;", width: '40', height: '40' %>
+            <% end %>
+            <div class='dropdown-menu dropdown-menu-end'>
+              <div class='dropdown-item'><%= link_to current_user.name, user_path(current_user) %></div>
+              <div class='dropdown-divider'></div>
+              <%= link_to t('.logout'), destroy_user_session_path, class: 'dropdown-item', data: { turbo_method: :delete } %>
+            </div>
+          </li>
+        </ul>
+      <% else %>
+        <ul class='navbar-nav ms-auto main-nav align-items-center'>
+          <li class='nav-item dropdown dropdown-slide'>
+          <%= link_to t('.whiskey'), '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-board-menu' %>
+          <div class='dropdown-menu dropdown-menu-end'>
+              <%= link_to t('.whiskey_new'), new_whiskey_path, class: 'dropdown-item' %>
+              <%= link_to t('.whiskey_index'), whiskeys_path, class: 'dropdown-item' %>
+          </div>
+          <li class='nav-item dropdown dropdown-slide'>
+          <%= link_to 'カクテル', '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-board-menu' %>
+          <div class='dropdown-menu dropdown-menu-end'>
+              <%= link_to 'カクテル一覧', cocktails_path, class: 'dropdown-item' %>
+          </div>
+          <li class='nav-item dropdown dropdown-slide'>
+          <%= link_to '蒸留所', '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-board-menu' %>
+          <div class='dropdown-menu dropdown-menu-end'>
+              <%= link_to '蒸留所一覧', distilleries_path, class: 'dropdown-item' %>
+          </div>
+          <li class='nav-item dropdown dropdown-slide'>
+            <%= link_to '#', class: 'nav-link', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-profile' do %>
+              <%= image_tag 'top.jpg', class: 'rounded-circle mr15', style: "border: 1px solid #000;", width: '40', height: '40' %>
+            <% end %>
+            <div class='dropdown-menu dropdown-menu-end'>
+              <div class='dropdown-item'>未登録ユーザー</div>
+              <div class='dropdown-divider'></div>
+              <%= link_to "新規登録", new_user_registration_path, class: 'dropdown-item' %>
+              <%= link_to "ログイン", new_user_session_path, class: 'dropdown-item' %>
+            </div>
+          </li>
+        </ul>
+      <% end %>
     </div>
   </nav>
 </header>

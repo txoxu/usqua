@@ -17,19 +17,19 @@ ja:
       aroma: ウイスキーの香り
       tag_names: タグ
       tasting_text: その他
-  user_sessions:
-    new:
-      title: ログイン
-      login: ログイン
+  devise:
+    sessions:
+      new:
+        title: ログイン
+        login: ログイン
       to_register_page: 登録ページへ
       password_forget: パスワードをお忘れの方はこちら
-    create:
-      success: ログインしました
-      danger: ログインに失敗しました
-  users:
-    new:
-      title: ユーザー登録
-      to_login_page: ログインページへ
+      create:
+        success: ログインしました
+        danger: ログインに失敗しました
+    registrations:
+      new:
+        title: ユーザー登録
     create:
       success: ユーザー登録が完了しました
       danger: ユーザ登録に失敗しました

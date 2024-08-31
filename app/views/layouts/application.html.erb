@@ -15,11 +15,7 @@
   </head>
 
   <body>
-    <% if logged_in? %>
       <%= render 'shared/header' %>
-    <% end %>
-
-    
     <main class="main-content">
       <%= render 'shared/flash_message' %>
       <%= breadcrumbs separator: " &rsaquo; " %>
