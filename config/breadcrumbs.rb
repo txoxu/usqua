@@ -51,6 +51,11 @@ crumb :cocktail_tasting do |cocktail|
   link 'カクテルテイスティング登録', new_cocktail_cocktail_tasting_path(cocktail)
   parent :cocktail, cocktail
 end
+
+crumb :distilleries do
+  link '蒸留所一覧', distilleries_path
+  parent :mypage
+end
 # crumb :projects do
 #   link "Projects", projects_path
 # end

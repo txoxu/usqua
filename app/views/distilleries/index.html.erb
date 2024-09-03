@@ -1,3 +1,4 @@
+<% breadcrumb :distilleries %>
 <div class="container">
   <div class="row">
     <h1>蒸留所一覧</h1>
@@ -12,7 +13,11 @@
   document.addEventListener('turbo:load', async () => {
     await customElements.whenDefined('gmpx-store-locator');
     const locator = document.querySelector('gmpx-store-locator');
+    if (locator) {
     locator.configureFromQuickBuilder(CONFIGURATION);
+  } else {
+    console.error('gmpx-store-locator not found');
+  }
   });
   const CONFIGURATION = {
     "locations": [

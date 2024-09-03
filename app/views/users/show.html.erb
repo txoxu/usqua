@@ -2,10 +2,14 @@
   <div class="row">
     <div class="card bg-body-secondary" style="width: 40rem; ">
       <div class="card-body">
-        <h3 class="card-title mb-5">プロフィール</h3>
-        <h5 class="card-name mb-5"><span style="margin-right: 100px;">名前：</span><%= current_user.decorate.full_name %></h5>
-        <h5 class="card-email mb-5"><span style="margin-right: 30px;">メールアドレス：</span><%= current_user.email %></h5>
-        <%= link_to 'プロフィールを編集する', edit_user_path(current_user), class: 'btn btn-outline-secondary' %>
+        <h3 class="card-title mb-4">プロフィール</h3>
+        <h5 class="card-name mb-4"><span style="margin-right: 100px;">名前：</span><%= current_user.name %></h5>
+        <h5 class="card-email mb-4"><span style="margin-right: 30px;">メールアドレス：</span><%= current_user.email %></h5>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <%= link_to 'プロフィールを編集する', edit_user_path(current_user), class: 'btn btn-outline-secondary' %>
+          <%= link_to "アカウントを解約する", registration_path(current_user), data: { confirm: "本当に解約しますか？", turbo_confirm: "本当に解約しますか？" }, method: :delete, class: "btn btn-outline-danger" %>
+          <%= link_to "パスワードを変更する", edit_registration_path(current_user), class: 'btn btn-outline-info' %>
+        </div>
       </div>
     </div>
   </div>

@@ -1,19 +1,29 @@
 Rails.application.routes.draw do
+
+  devise_for :users, controllers: {
+  omniauth_callbacks: 'users/omniauth_callbacks',
+  registrations: 'users/registrations',
+  sessions: 'users/sessions',
+  passwords: 'users/passwords'
+  }
+
   get 'home', to: 'pages#home'
   get 'mypage', to: 'pages#mypage'
   root "static_pages#top"
-
-  get 'login', to: 'user_sessions#new'
-  post 'login', to: 'user_sessions#create'
-  delete 'logout', to: 'user_sessions#destroy'
-
-  get "password/reset", to: "password_resets#new"
-  post "password/reset", to: "password_resets#create"
-  get "password/reset/edit", to: "password_resets#edit"
-  patch "password/reset/edit", to: "password_resets#update"
-  mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
   
-  resources :users, only: %i[new create show edit update destroy]
+
+
+  #get 'login', to: 'user_sessions#new'
+  #post 'login', to: 'user_sessions#create'
+  #delete 'logout', to: 'user_sessions#destroy'
+
+  #get "password/reset", to: "password_resets#new"
+  #post "password/reset", to: "password_resets#create"
+  #get "password/reset/edit", to: "password_resets#edit"
+  #patch "password/reset/edit", to: "password_resets#update"
+  #mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
+  
+  resources :users, only: %i[show edit update destroy]
     resources :cocktails do
       resources :cocktail_tastings, only: %i[create new edit update destroy]
       collection do
@@ -30,7 +40,6 @@ Rails.application.routes.draw do
   end
 
   resources :tags, only: %i[index show]
-
   resources :distilleries, only: %i[index show]
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

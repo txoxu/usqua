@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_11_092838) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_25_124630) do
   create_table "bookmarks", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "cocktail_id", null: false
@@ -63,6 +63,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_11_092838) do
   create_table "distilleries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "distillery_name"
     t.string "distillery_url"
+    t.string "prefectures"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "region_id", null: false
@@ -108,15 +109,26 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_11_092838) do
     t.index ["whiskey_id"], name: "index_tastings_on_whiskey_id"
   end
 
-  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "email", null: false
-    t.string "crypted_password"
-    t.string "salt"
-    t.string "first_name", null: false
-    t.string "last_name", null: false
+  create_table "user_providers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "provider"
+    t.string "uid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_providers_on_user_id"
+  end
+
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "encrypted_password", default: ""
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "name", default: "", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   create_table "whiskey_categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -151,6 +163,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_11_092838) do
   add_foreign_key "tasting_tags", "tags"
   add_foreign_key "tasting_tags", "tastings"
   add_foreign_key "tastings", "whiskeys"
+  add_foreign_key "user_providers", "users"
   add_foreign_key "whiskey_categories", "categories"
   add_foreign_key "whiskey_categories", "whiskeys"
   add_foreign_key "whiskeys", "remmaining_quantities"
