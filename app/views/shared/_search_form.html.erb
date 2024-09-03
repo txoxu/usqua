@@ -1,12 +1,22 @@
 <%= form_with model: @search_form, url: whiskeys_path, method: :get, local: true, class: 'search-form' do |f| %>
     <div class="col-md-2">
-      <%= f.select :category_names, options_for_select(@category_names.map(&:category_name)), include_blank: '生産国別', class: 'form-select g-3 align-items-center' %>
+      <select class="form-select form-select-md" aria-label=".form-select-lg example">
+        <option value="" disabled selected>生産国別</option>
+        <% @category_names.each do |category| %>
+          <option value="<%= category.id %>"><%= category.category_name %></option>
+        <% end %>
+      </select>
     </div>
-    
+
     <div class="col-md-2">
-      <%= f.select :category_types, options_for_select(@category_types.map(&:category_type)), include_blank: '原産国別', class: 'form-select g-3 align-items-center' %>
+      <select class="form-select form-select-md" aria-label=".form-select-lg example">
+        <option value="" disabled selected>原産国別</option>
+        <% @category_types.each do |category_type| %>
+          <option value="<%= category_type.id %>"><%= category_type.category_type %></option>
+        <% end %>
+      </select>
     </div>
-    
+
     <div class="col-md-3">
       <%= f.text_field :name, class: 'form-control g-3 align-items-center', placeholder: 'ウイスキーの名前' %>
     </div>

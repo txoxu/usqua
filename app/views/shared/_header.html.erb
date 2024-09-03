@@ -25,7 +25,7 @@
           <li class='nav-item dropdown dropdown-slide'>
           <%= link_to '蒸留所', '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-board-menu' %>
           <div class='dropdown-menu dropdown-menu-end'>
-              <%= link_to '蒸留所一覧', distilleries_path, class: 'dropdown-item' %>
+              <%= link_to '蒸留所一覧', distilleries_path, class: 'dropdown-item', data: {"turbolinks" => false} %>
           </div>
           <li class='nav-item'>
             <%= link_to mypage_path, class: 'nav-link' do %><%= t('.mypage') %><% end %>

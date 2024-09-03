@@ -47,18 +47,20 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_in_and_redirect @user, event: :authentication   # authenticationのcallbackメソッドを呼んで、@user でログイン
       set_flash_message(:notice, :success, kind: provider_name) if is_navigational_format?
     else                # ユーザー未登録(新規登録画面へ遷移)
-      @user_provider_id = user_provider_info[:user_provider].id
-      # 一時的にパスワードなしで保存
-      @user.password = Devise.friendly_token[0, 20]  # 一時的なパスワードを設定
-      @user.password_confirmation = @user.password
-      
-      if @user.save
-        flash[:notice] = "Google認証が完了しました。次に、パスワードを設定してください。"
-        redirect_to edit_user_registration_path  # パスワード設定ページにリダイレクト
-      else
-        flash[:alert] = 'Googleアカウントを使った登録に失敗しました。再度お試しください。'
-        redirect_to new_user_registration_path
+       # ユーザーが存在しない場合、新規登録処理
+    @user.password = Devise.friendly_token[0, 20]  # 一時的なパスワードを設定
+    @user.password_confirmation = @user.password
+
+    if @user.save
+      # 一時的なパスワードでログインして、パスワード設定画面にリダイレクト
+      sign_in @user
+      flash[:notice] = "Google認証が完了しました。次に、パスワードを設定してください。*プロフィールから変更は可能です"
+      redirect_to edit_user_registration_path  # パスワード設定ページにリダイレクト
+    else
+      # エラー処理
+      flash[:error] = "ユーザー登録に失敗しました。"
+      redirect_to new_user_registration_path
       end
-   end
+    end
   end
 end

@@ -4,6 +4,7 @@
 <% breadcrumb :whiskeys %>
 <%= render 'shared/search_form' %>
 <% if current_user.whiskeys.present? %>
+<div class="bg-body-secondary">
   <div class="whiskey-list">
     <% @whiskeys.each do |whiskey| %>
       <div class="whiskey-item">
@@ -50,8 +51,9 @@
     <% end %>
   </div>
   <%= paginate @whiskeys %>
+  </div>
 <% else %>
-  <p><%= t('.not_whiskeys') %></p>
+  <h4 class="text-center"><%= t('.not_whiskeys') %></h4>
 <% end %>
 </div>
 </div>

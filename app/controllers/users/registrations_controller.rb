@@ -27,7 +27,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # PUT /resource
    def update
-     super
+      # 設定されたパラメータを取得
+      if resource.update_with_password(account_update_params)
+        # パスワードが正しく更新された場合
+        bypass_sign_in(resource, scope: :user) # ユーザーのサインイン状態を維持
+        redirect_to mypage_path, success: "パスワードを設定しました。"
+      else
+        # パスワードの更新に失敗した場合
+        render :edit
+      end
    end
 
   # DELETE /resource
@@ -45,7 +53,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # protected
+  private
 
+  def account_update_params
+    params.require(:user).permit(:password, :password_confirmation)
+  end
   # If you have extra params to permit, append them to the sanitizer.
    def configure_sign_up_params
      devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
@@ -53,7 +65,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
    def configure_account_update_params
-     devise_parameter_sanitizer.permit(:account_update, keys: [:name])
+     devise_parameter_sanitizer.permit(:account_update, keys: [:password, :password_confirmation])
    end
 
   # The path used after sign up.
@@ -66,7 +78,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
      mypage_path
    end
 
-   def update_resource(resource, params)
-    resource.update_without_password(params)
-  end
+   #def update_resource(resource, params)
+   # resource.update_without_password(params)
+   #end
 end
