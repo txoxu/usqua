@@ -78,6 +78,7 @@ ja:
       select: 次に進むアクションを選択してください
       next_tasting: テイスティングを登録する
       whiskeys: ウイスキー一覧に戻る
+      whiskey_new: 再度ウイスキーを登録する
     new:
       title: ウイスキー登録
     create:

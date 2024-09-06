@@ -1,10 +1,22 @@
-<div class='col-md-2'>
-  <% if @prev_whiskey %>
-    <%= link_to '前のウイスキー', whiskey_path(@prev_whiskey) %>
-  <% end %>
-</div>
-<div class='col-md-2'>
-  <% if @next_whiskey %>
-    <%= link_to '次のウイスキー', whiskey_path(@next_whiskey) %>
-  <% end %>
-</div>
+<nav aria-label="Whiskey navigation">
+  <ul class="pagination d-flex justify-content-between">
+    <li class="page-item">
+      <% if @prev_whiskey %>
+        <%= link_to whiskey_path(@prev_whiskey), class: "page-link", aria: { label: "Previous" } do %>
+          <span aria-hidden="true">&laquo; 前のウイスキー</span>
+        <% end %>
+      <% else %>
+        <span class="page-link disabled" aria-hidden="true">&laquo; 前のウイスキー</span>
+      <% end %>
+    </li>
+    <li class="page-item">
+      <% if @next_whiskey %>
+        <%= link_to whiskey_path(@next_whiskey), class: "page-link", aria: { label: "Next" } do %>
+          <span aria-hidden="true">次のウイスキー &raquo;</span>
+        <% end %>
+      <% else %>
+        <span class="page-link disabled" aria-hidden="true">次のウイスキー &raquo;</span>
+      <% end %>
+    </li>
+  </ul>
+</nav>

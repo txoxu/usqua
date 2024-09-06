@@ -1,10 +1,22 @@
-<div class='col-md-1'>  
-  <% if @prev_cocktail %>
-    <%= link_to '前のカクテル', cocktail_path(@prev_cocktail) %>
-  <% end %>
-</div>
-<div class='col-md-1'>
-  <% if @next_cocktail %>
-    <%= link_to '次のカクテル', cocktail_path(@next_cocktail) %>
-  <% end %>
-</div>
+<nav aria-label="Cocktail navigation">
+  <ul class="pagination d-flex justify-content-between">
+    <li class="page-item">
+      <% if @prev_cocktail %>
+        <%= link_to whiskey_path(@prev_cocktail), class: "page-link", aria: { label: "Previous" } do %>
+          <span aria-hidden="true">&laquo; 前のカクテル</span>
+        <% end %>
+      <% else %>
+        <span class="page-link disabled" aria-hidden="true">&laquo; 前のカクテル</span>
+      <% end %>
+    </li>
+    <li class="page-item">
+      <% if @next_cocktail %>
+        <%= link_to whiskey_path(@next_cocktail), class: "page-link", aria: { label: "Next" } do %>
+          <span aria-hidden="true">次のカクテル &raquo;</span>
+        <% end %>
+      <% else %>
+        <span class="page-link disabled" aria-hidden="true">次のカクテル &raquo;</span>
+      <% end %>
+    </li>
+  </ul>
+</nav>
