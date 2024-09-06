@@ -11,6 +11,7 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
     <script type="module" src="https://unpkg.com/@googlemaps/extended-component-library@0.6"></script>
     <script src="https://kit.fontawesome.com/33a37d63de.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@400;600&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
   </head>
 
@@ -112,14 +113,14 @@
     var loader = $('.loader-wrap');
 
     //ページの読み込みが完了したらアニメーションを非表示
-    $(window).on('load',function(){
+    $(window).on('turbo:load',function(){
       loader.fadeOut();
     });
 
     //ページの読み込みが完了してなくても2秒後にアニメーションを非表示にする
     setTimeout(function(){
       loader.fadeOut();
-    },2000);
+    },1000);
   });
 });
 
