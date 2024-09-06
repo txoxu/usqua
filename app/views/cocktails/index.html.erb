@@ -1,7 +1,7 @@
 <% breadcrumb :cocktails %>
 <h1><%= t('.title') %></h1>
 <%= render 'shared/cocktail_search_form' %>
-<div class="cocktail-list text-center bg-body-secondary">
+<div class="cocktail-list text-center bg-body-secondary shadow-lg">
   <% @cocktails.each do |c| %>
     <div class="cocktail-item mb-3">
       <div class="index-frame">

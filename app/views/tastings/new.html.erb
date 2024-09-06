@@ -3,7 +3,7 @@
 <% end %>
 <div class="container">
   <div class="row">
-    <div class="col-md-8 offset-md-2 tasting-edit-frame">
+    <div class="col-md-8 offset-md-2 tasting-edit-frame shadow-lg bg-body-secondary">
       <h1 class="text-center"><%= t('.title') %></h1>
       <%= form_with model: @tasting, url: whiskey_tastings_path(@whiskey), local: true do |f| %>
         <div class="form-group row tasting-type">

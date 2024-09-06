@@ -1,32 +1,26 @@
 <% breadcrumb :cocktail_tasting, @cocktail %>
 <div class="container">
-  <div class="row">
-    <div class="col-md-8 offset-md-2 tasting-edit-frame">
+  <div class="row justify-content-center">
+    <div class="col-md-6 offset-md-2 tasting-edit-frame bg-body-secondary shadow-lg">
       <h1 class="text-center"><%= t('.title') %></h1>
       <%= form_with model: @cocktail_tasting, url: cocktail_cocktail_tastings_path(@cocktail), local: true do |f| %>
-        <div class="form-group row whiskey-cocktail">
-          <%= f.label :name, class: "col-md-3 col-form-label" %><span class="text-danger">*</span>
-          <div class="col-md-9">
-            <%= f.select :name, @whiskeys.map { |whiskey| [whiskey.name, whiskey.name] }, { prompt: "選択してください" }, class: "form-control" %>
-          </div>
+        <div class="form-group whiskey-cocktail col-md-8 ms-5 mb-3">
+          <%= f.label :name, class: "col-form-label" %><span class="text-danger">*</span>
+          <%= f.select :name, @whiskeys.map { |whiskey| [whiskey.name, whiskey.name] }, { prompt: "選択してください" }, class: "form-control" %>
         </div>
 
-        <div class="form-group row cocktail-flavor">
-          <%= f.label :cocktail_flavor, class: "col-md-3 col-form-label" %>
-          <div class="col-md-9">
-            <%= f.text_field :cocktail_flavor, class: "form-control" %>
-          </div>
+        <div class="form-group cocktail-flavor col-md-8 ms-5 mb-3">
+          <%= f.label :cocktail_flavor, class: "col-form-label" %>
+          <%= f.text_field :cocktail_flavor, class: "form-control" %>
         </div>
 
-        <div class="form-group row tasting-recipe">
-          <%= f.label :tasting_recipe, class: "col-md-3 col-form-label" %>
-          <div class="col-md-9">
-            <%= f.text_field :tasting_recipe, class: "form-control" %>
-          </div>
+        <div class="form-group tasting-recipe col-md-8 ms-5 mb-3">
+          <%= f.label :tasting_recipe, class: "col-form-label" %>
+          <%= f.text_field :tasting_recipe, class: "form-control" %>
         </div>
 
-        <div class="actions text-right">
-          <%= f.submit t('helpers.submit.create'), class: "btn btn-primary" %>
+        <div class="actions text-end">
+          <%= f.submit t('helpers.submit.create'), class: "btn btn-outline-primary" %>
         </div>
       <% end %>
     </div>
