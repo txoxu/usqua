@@ -4,9 +4,10 @@
       <h1><%= t('.title') %></h1>
       <p><%= t('.select') %></p>
 
-      <%= link_to t('.next_tasting'), new_whiskey_tasting_path(@whiskey), class: 'btn btn-outline-primary' %>
-      <%= link_to t('.whiskey_new'), new_whiskey_path, class: 'btn btn-outline-info' %>
-      <%= link_to t('.whiskeys'), whiskeys_path, class: 'btn btn-outline-secondary' %>
+
+        <%= link_to t('.next_tasting'), new_whiskey_tasting_path(@whiskey), class: 'btn btn-primary' %>
+        <%= link_to t('.whiskeys'), whiskeys_path, class: 'btn btn-secondary' %>
+        <%= link_to t('.whiskeys'), whiskeys_path, class: 'btn btn-secondary' %>
     </div>
   </div>
 </div>

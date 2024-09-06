@@ -11,6 +11,7 @@
         <div class="index-cocktail_origin">
           <%= c.cocktail_origin %>
         </div>
+      <% if user_signed_in? %>
         <div class="d-md-inline-flex align-items-center">
           <div class="bookmark-button me-3">
             <%= render 'cocktails/bookmark_button', cocktail: c %>
@@ -39,6 +40,7 @@
             <% end %>
           </div>
         </div>
+      <% end %>
       </div>
     </div>
   <% end %>

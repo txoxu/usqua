@@ -1,10 +1,3 @@
 class DistilleriesController < ApplicationController
-  def index
-    @regions = Region.all
-    @distilleries = Distillery.all
-  end
-
-  def show
-    @distillery = Distillery.find(params[:id])
-  end
+  skip_before_action :require_login
 end

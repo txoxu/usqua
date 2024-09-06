@@ -1,7 +1,7 @@
 <header class="fixed-top">
   <nav class='navbar navbar-expand-lg navbar-light'>
     <%= link_to '#', class: 'navbar-brand' do %>
-      <h4 class="m-2"><%= t('.title') %></h4>
+      <h4 class="main-title"><%= t('.title') %></h4>
     <% end %>
     <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent'
       aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
@@ -13,20 +13,23 @@
         <ul class='navbar-nav ms-auto main-nav align-items-center'>
           <li class='nav-item dropdown dropdown-slide'>
           <%= link_to t('.whiskey'), '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-board-menu' %>
-          <div class='dropdown-menu dropdown-menu-end'>
-              <%= link_to t('.whiskey_new'), new_whiskey_path, class: 'dropdown-item' %>
-              <%= link_to t('.whiskey_index'), whiskeys_path, class: 'dropdown-item' %>
-          </div>
+            <div class='dropdown-menu dropdown-menu-end'>
+                <%= link_to t('.whiskey_new'), new_whiskey_path, class: 'dropdown-item' %>
+                <%= link_to t('.whiskey_index'), whiskeys_path, class: 'dropdown-item' %>
+            </div>
+          </li>
           <li class='nav-item dropdown dropdown-slide'>
-          <%= link_to 'カクテル', '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-board-menu' %>
-          <div class='dropdown-menu dropdown-menu-end'>
-              <%= link_to 'カクテル一覧', cocktails_path, class: 'dropdown-item' %>
-          </div>
+            <%= link_to 'カクテル', '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-board-menu' %>
+            <div class='dropdown-menu dropdown-menu-end'>
+                <%= link_to 'カクテル一覧', cocktails_path, class: 'dropdown-item' %>
+            </div>
+          </li>
           <li class='nav-item dropdown dropdown-slide'>
-          <%= link_to '蒸留所', '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-board-menu' %>
-          <div class='dropdown-menu dropdown-menu-end'>
-              <%= link_to '蒸留所一覧', distilleries_path, class: 'dropdown-item', data: {"turbolinks" => false} %>
-          </div>
+            <%= link_to '蒸留所', '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-board-menu' %>
+            <div class='dropdown-menu dropdown-menu-end'>
+                <%= link_to '蒸留所一覧', distilleries_path, class: 'dropdown-item', data: {"turbolinks" => false} %>
+            </div>
+          </li>
           <li class='nav-item'>
             <%= link_to mypage_path, class: 'nav-link' do %><%= t('.mypage') %><% end %>
           </li>
@@ -44,34 +47,49 @@
       <% else %>
         <ul class='navbar-nav ms-auto main-nav align-items-center'>
           <li class='nav-item dropdown dropdown-slide'>
-          <%= link_to t('.whiskey'), '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-board-menu' %>
-          <div class='dropdown-menu dropdown-menu-end'>
-              <%= link_to t('.whiskey_new'), new_whiskey_path, class: 'dropdown-item' %>
-              <%= link_to t('.whiskey_index'), whiskeys_path, class: 'dropdown-item' %>
-          </div>
-          <li class='nav-item dropdown dropdown-slide'>
-          <%= link_to 'カクテル', '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-board-menu' %>
-          <div class='dropdown-menu dropdown-menu-end'>
-              <%= link_to 'カクテル一覧', cocktails_path, class: 'dropdown-item' %>
-          </div>
-          <li class='nav-item dropdown dropdown-slide'>
-          <%= link_to '蒸留所', '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-board-menu' %>
-          <div class='dropdown-menu dropdown-menu-end'>
-              <%= link_to '蒸留所一覧', distilleries_path, class: 'dropdown-item' %>
-          </div>
-          <li class='nav-item dropdown dropdown-slide'>
-            <%= link_to '#', class: 'nav-link', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-profile' do %>
-              <%= image_tag 'top.jpg', class: 'rounded-circle mr15', style: "border: 1px solid #000;", width: '40', height: '40' %>
-            <% end %>
+            <%= link_to 'カクテル', '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-board-menu' %>
             <div class='dropdown-menu dropdown-menu-end'>
-              <div class='dropdown-item'>未登録ユーザー</div>
-              <div class='dropdown-divider'></div>
-              <%= link_to "新規登録", new_user_registration_path, class: 'dropdown-item' %>
-              <%= link_to "ログイン", new_user_session_path, class: 'dropdown-item' %>
+                <%= link_to 'カクテル一覧', cocktails_path, class: 'dropdown-item' %>
             </div>
+          </li>
+          <li class='nav-item dropdown dropdown-slide'>
+            <%= link_to '蒸留所', '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-board-menu' %>
+            <div class='dropdown-menu dropdown-menu-end'>
+                <%= link_to '蒸留所一覧', distilleries_path, class: 'dropdown-item' %>
+            </div>
+          </li>
+          <li class='nav-item dropdown dropdown-slide'>
+            <%= link_to "ログイン", new_user_session_path, class: 'dropdown-item ms-1' %>
+          </li>
+          <li class='nav-item dropdown dropdown-slide ms-3 me-3'>
+            <%= link_to "新規登録", new_user_registration_path, class: 'dropdown-item' %>
           </li>
         </ul>
       <% end %>
     </div>
   </nav>
 </header>
+<style>
+  .main-title {
+    color: #DAA520; /* リッチなゴールド */
+    font-family: 'Playfair Display', serif; /* エレガントなセリフ体フォント */
+    font-size: 48px; /* 最大フォントサイズ */
+    font-weight: 800;
+
+    text-shadow: 
+        1px 1px 2px #000,  /* 外側の影 */
+        -1px -1px 2px #fff,  /* 内側の光 */
+        0px 0px 10px rgba(255, 255, 255, 0.5);
+  }
+
+  header {
+    font-family: 'Playfair Display', serif;
+    background-image: url(<%= asset_path '背景.jpg' %>);
+    opacity: 0.8;
+  }
+
+  .nav-item, .nav-link {
+    color: white;
+  }
+  
+</style>

@@ -1,4 +1,5 @@
 class CocktailsController < ApplicationController
+  skip_before_action :require_login
 
   def index
     @cocktail_search_form = SearchCocktailsForm.new(search_params)

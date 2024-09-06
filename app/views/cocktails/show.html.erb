@@ -15,11 +15,15 @@
         <div class="mb-5">
           <%= @cocktail.cocktail_create %>
         </div>
+      <% if user_signed_in? %>
         <%= render 'cocktails/bookmark_button', cocktail: @cocktail %>
+      <% end %>
       </div>
-      <div class="cocktail-tasting mb-3">
-          <%= link_to t('cocktails.show.link'), new_cocktail_cocktail_tasting_path(@cocktail) %>
-      </div>
+      <% if user_signed_in? %>
+        <div class="cocktail-tasting mb-3">
+            <%= link_to t('cocktails.show.link'), new_cocktail_cocktail_tasting_path(@cocktail) %>
+        </div>
+      <% end %>
     </div>
     <div class="col-md-6">
         <% if @cocktail.cocktail_url.present? %>
