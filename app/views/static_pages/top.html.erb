@@ -1,11 +1,11 @@
 <div class="top">
-  <p class="title"><%= t('.title') %></p>
-  <p class="main-phrase">ウイスキーの世界へようこそ~初心者からの旅路をサポートします~</p>
-  <p class="sub-phrase">自分だけのウイスキー&カクテルマップを作成し、新しい風味に挑戦。</p>
+  <p class="title anim-box fadein is-animated"><%= t('.title') %></p>
+  <p class="main-phrase anim-box zoomin is-animated">ウイスキーの世界へようこそ~初心者からの旅路をサポートします~</p>
+  <p class="sub-phrase anim-box zoomin is-animated">自分だけのウイスキー&カクテルマップを作成し、新しい風味に挑戦。</p>
 </div>
 
 <div class="explanation">
-  <div class="card mb-3 ms-3 mt-3" style="max-width: 1400px;">
+  <div class="card mb-3 ms-3 mt-3 fs-3" style="max-width: 1400px; box-shadow: 3px 3px 5px #000000;">
     <div class="row g-0">
       <div class="col-md-6">
         <%= image_tag "スクリーンショット 2024-09-06 162825.png", class: "image img-fluid rounded-start" %>
@@ -13,13 +13,13 @@
       <div class="col-md-6">
         <div class="card-body">
           <h5 class="card-title">マイページ</h5>
-          <p class="card-text">ユーザーが登録したウイスキーの本数、</p>
+          <p class="card-text">ユーザーが登録したウイスキーの総本数、種類ごとの本数をグラフで確認できます。また、カクテル一覧、カクテル詳細ページで（<i class="fa-solid fa-heart"></i>）お気に入り登録したカクテルをこのページで確認できます。</p>
           <p class="card-text"><small class="text-body-secondary">新規登録、ログインして利用可能です</small></p>
         </div>
       </div>
     </div>
   </div>
-  <div class="card mb-3 ms-3 mt-3" style="max-width: 1400px;">
+  <div class="card mb-3 ms-3 mt-3 fs-3" style="max-width: 1400px; box-shadow: 3px 3px 5px #000000;">
     <div class="row g-0">
       <div class="col-md-6">
         <%= image_tag "スクリーンショット 2024-09-06 162848.png", class: "image img-fluid rounded-start" %>
@@ -33,7 +33,7 @@
       </div>
     </div>
   </div>
-  <div class="card mb-3 ms-3 mt-3" style="max-width: 1400px;">
+  <div class="card mb-3 ms-3 mt-3 fs-3" style="max-width: 1400px; box-shadow: 3px 3px 5px #000000;">
     <div class="row g-0">
       <div class="col-md-6">
         <%= image_tag "スクリーンショット 2024-09-06 162912.png", class: "image img-fluid rounded-start" %>
@@ -41,13 +41,13 @@
       <div class="col-md-6">
         <div class="card-body">
           <h5 class="card-title">カクテル一覧</h5>
-          <p class="card-text">ウイスキーベースのカクテルリストが表示され、カクテル名や簡単な説明、アイコンが並びます。気になるカクテルをクリックすると、レシピや作成手順をYouTube動画で確認できます。お気に入り登録機能もあり、作成したいカクテルをマイページに保存できます。</p>
+          <p class="card-text">ウイスキーベースのカクテルリストが表示され、カクテル名や簡単な説明、アイコンが並びます。気になるカクテルをクリックすると、レシピや作成手順をYouTube動画で確認できます。お気に入り登録機能（<i class="fa-solid fa-heart"></i>）もあり、作成したいカクテルをマイページに保存できます。</p>
           <p class="card-text"><small class="text-body-secondary">新規登録、ログインしないと一部の機能をご利用いただけません</small></p>
         </div>
       </div>
     </div>
   </div>
-  <div class="card mb-3 ms-3 mt-3" style="max-width: 1400px;">
+  <div class="card mb-3 ms-3 mt-3 fs-3" style="max-width: 1400px; box-shadow: 3px 3px 5px #000000;">
     <div class="row g-0">
       <div class="col-md-6">
         <%= image_tag "スクリーンショット 2024-09-06 163013.png", class: "image img-fluid rounded-start" %>
@@ -61,8 +61,46 @@
       </div>
     </div>
   </div>
+  <div class="new">
+    <div class="new-button">
+      <h3>今すぐ登録して、ウイスキーを探求しよう！</h3>
+      <%= link_to "新規登録", new_user_registration_path, class: 'btn btn-primary ms-3' %>
+      <%= link_to "ログイン", new_user_session_path, class: 'btn btn-success ms-3' %>
+    </div>
+  </div>
 </div>
 <style>
+
+
+  .anim-box.fadein.is-animated {
+    animation: fadeIn 10s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+.anim-box.zoomin.is-animated {
+  animation: zoomIn 15s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
   .title {
     color: #DAA520; /* リッチなゴールド */
     font-family: 'Playfair Display', serif; /* エレガントなセリフ体フォント */
@@ -114,8 +152,21 @@
   }
 
   .explanation {
-      background-color: #CD7F32;
       margin-top: 300px;
       flex-wrap: wrap;
+  }
+  
+  .new {
+    background-color: #CD7F32;
+  }
+
+  .new-button {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    display: flex;
+    justify-content: center;
+  }
+  .new-button h3 {
+    font-family: 'Playfair Display', serif;
   }
 </style>
