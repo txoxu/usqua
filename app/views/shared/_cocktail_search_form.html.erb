@@ -1,12 +1,51 @@
 <div class="container">
-  <div class="row" style="margin-left: 500px;">
+  <div class="row justify-content-center">
     <%= form_with model: @cocktail_search_form, url: cocktails_path, method: :get, class: 'search-form' do |f| %>
-      <div class="col-md-4 mb-3">
+      <div class="col-12 col-sm-8 col-md-6 col-lg-4 mb-3">
         <%= f.text_field :keyword, class: 'form-control', placeholder: 'キーワードを入力' %>
       </div>
-      <div class="col-md-4 mb-3">
+      <div class="col-12 col-sm-8 col-md-6 col-lg-4 mb-3">
         <%= f.submit t('helpers.submit.search'), class: 'btn btn-success' %>
       </div>
     <% end %>
   </div>
 </div>
+
+
+<style>
+
+/* custom.css */
+
+/* フォームのコンテナをフレックスに設定 */
+.search-form .row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem; /* フォーム要素間の間隔を設定 */
+}
+
+.search-form .col-md-2 {
+  flex: 1; /* 要素を均等に配置 */
+  min-width: 150px; /* 最小幅を設定してレスポンシブ対応 */
+}
+
+.search-form .col-md-2.d-flex.align-items-end {
+  align-items: flex-end; /* 検索ボタンを他のフィールドと同じ高さに配置 */
+}
+
+/* フォームフィールドの中央揃え */
+.search-form .form-label,
+.search-form .form-select,
+.search-form .form-control {
+  display: block;
+  width: 100%;
+}
+
+/* 中程度以上の画面サイズでのみマージンを適用 */
+@media (min-width: 768px) { /* Bootstrapのcol-md-6のブレークポイント */
+  .search-form {
+    margin-left: 800px;
+  }
+}
+
+
+</style>
