@@ -128,7 +128,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_25_124630) do
     t.datetime "remember_created_at"
     t.string "name", default: "", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   create_table "whiskey_categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
