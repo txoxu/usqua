@@ -6,37 +6,24 @@ class Users::RegistrationsController < Devise::RegistrationsController
   skip_before_action :require_login
 
   # GET /resource/sign_up
-   def new
-     super
-   end
+   #def new
+   #  super
+   #end
 
   # POST /resource
   def create
-   if params[:user_provider_auth] == 'true'
-     pass = Devise.friendly_token    # PWの自動生成
-     params[:user][:password] = pass
-     params[:user][:password_confirmation] = pass
-   end
     super
   end
 
   # GET /resource/edit
-   def edit
-     super
-   end
+   #def edit
+   #  super
+   #end
 
   # PUT /resource
-   def update
-      # 設定されたパラメータを取得
-      if resource.update_with_password(account_update_params)
-        # パスワードが正しく更新された場合
-        bypass_sign_in(resource, scope: :user) # ユーザーのサインイン状態を維持
-        redirect_to mypage_path, success: "パスワードを設定しました。"
-      else
-        # パスワードの更新に失敗した場合
-        render :edit
-      end
-   end
+   #def update
+   #   super
+   #end
 
   # DELETE /resource
   # def destroy
@@ -56,7 +43,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   private
 
   def account_update_params
-    params.require(:user).permit(:password, :password_confirmation)
+    params.require(:user).permit(:password, :password_confirmation, :current_password)
   end
   # If you have extra params to permit, append them to the sanitizer.
    def configure_sign_up_params
@@ -76,6 +63,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # The path used after sign up for inactive accounts.
    def after_inactive_sign_up_path_for(resource)
      mypage_path
+   end
+
+   def after_update_path_for
+    mypage_path
    end
 
    #def update_resource(resource, params)

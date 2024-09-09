@@ -108,21 +108,26 @@
 </style>
 
 <script>
-    $(document).on('turbo:load', function() {
-  $(function(){
-    var loader = $('.loader-wrap');
+  $(document).on('turbo:load', function() {
+  var loader = $('.loader-wrap');
 
-    //ページの読み込みが完了したらアニメーションを非表示
-    $(window).on('turbo:load',function(){
-      loader.fadeOut();
-    });
+  // アニメーションを停止してから非表示にする
+  loader.stop(true).fadeOut();
 
-    //ページの読み込みが完了してなくても2秒後にアニメーションを非表示にする
-    setTimeout(function(){
-      loader.fadeOut();
-    },1000);
-  });
+  // ページの読み込みが完了してなくても2秒後にアニメーションを非表示にする
+  setTimeout(function(){
+    loader.stop(true).fadeOut();
+  }, 1000);
+
+  $(document).on('turbo:render', function() {
+  console.log('turbo:render event triggered');
+  var loader = $('.loader-wrap');
+
+  loader.stop(true).fadeOut();
 });
+});
+
+
 
 </script>
   </body>

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   sessions: 'users/sessions',
   passwords: 'users/passwords'
   }
+  
 
   get 'home', to: 'pages#home'
   get 'mypage', to: 'pages#mypage'
