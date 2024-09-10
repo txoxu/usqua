@@ -9,7 +9,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # def twitter
   # end
   def google_oauth2
-    authorization   # コールバック
+    authorization # コールバック
   end
   # More info at:
   # https://github.com/heartcombo/devise#omniauth
@@ -20,9 +20,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # end
 
   # GET|POST /users/auth/twitter/callback
-   def failure
-     redirect_to root_path
-   end
+  def failure
+    redirect_to root_path
+  end
 
   # protected
 
@@ -31,24 +31,25 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   #   super(scope)
   # end
   private
+
   # コールバックのメソッド定義
-  def authorization   # APIから取得したユーザー情報はrequest.env["omniauth.auth"]に格納されてる
-    user_provider_info = User.from_omniauth(request.env["omniauth.auth"])     # User.from_omniauth は、モデルで定義（次項）
-    @user = user_provider_info[:user]    # deviseのヘルパーを使うため、＠user に代入(ハッシュ(モデルの返り値)から値を取得)
+  def authorization # APIから取得したユーザー情報はrequest.env["omniauth.auth"]に格納されてる
+    user_provider_info = User.from_omniauth(request.env['omniauth.auth']) # User.from_omniauth は、モデルで定義（次項）
+    @user = user_provider_info[:user] # deviseのヘルパーを使うため、＠user に代入(ハッシュ(モデルの返り値)から値を取得)
 
     if @user.persisted? # ユーザー登録済み(ログイン処理)
       provider = request.env['omniauth.auth'].provider
       provider_name = case provider
-      when 'google_oauth2'
-        'Google'
-      else
-        provider.capitalize
-      end
-      sign_in_and_redirect @user, event: :authentication   # authenticationのcallbackメソッドを呼んで、@user でログイン
+                      when 'google_oauth2'
+                        'Google'
+                      else
+                        provider.capitalize
+                      end
+      sign_in_and_redirect @user, event: :authentication # authenticationのcallbackメソッドを呼んで、@user でログイン
       set_flash_message(:notice, :success, kind: provider_name) if is_navigational_format?
     else
       @user_provider_id = user_provider_info[:user_provider].id
-      session[:user_provider_id] = @user_provider_id  # ここでセッションに保存
+      session[:user_provider_id] = @user_provider_id # ここでセッションに保存
       render 'devise/registrations/new'
     end
   end

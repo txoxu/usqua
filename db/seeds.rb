@@ -8,162 +8,176 @@
 #   end
 
 # Create categories by name
-=begin
-category_names = [
-  'american_whiskey',
-  'scotch_whiskey',
-  'canadian_whiskey',
-  'japanese_whiskey',
-  'irish_whiskey'
-]
-
+# category_names = [
+#   'american_whiskey',
+#   'scotch_whiskey',
+#   'canadian_whiskey',
+#   'japanese_whiskey',
+#   'irish_whiskey'
+# ]
+#
 # Create categories by category_type
-category_types = [
-  'single_malt',
-  'single_grain',
-  'blended',
-  'blended_malt',
-  'blended_grain'
-]
-
-category_names.each do |category_name|
-  category_types.each do |category_type|
-    Category.create(category_name: category_name, category_type: category_type)
-  end
-end
-
-puts "Categories seeded successfully."
-quantities = [
-  '0ml',
-  '100ml',
-  '200ml',
-  '300ml',
-  '400ml',
-  '500ml',
-  '600ml',
-  '700ml'
-]
-
-quantities.each do |quantity|
-  RemmainingQuantity.create(quantity: quantity)
-end
-
-puts "Remaining quantities seeded successfully."
-
-quantity_images = [
-  '0ml-a254db60c9aa72434814e9358220986148a6ba02431d065b9a7229d07cc2576b.jpg',
-  '100ml-85bf600123d794fc90e916d3275bf36f3930c5a624b83f6d6323a6956965311d.jpg',
-  '200ml-60b110b7cc6a0164de1821f3905805f5f52725a119106913b914dd503db87032.jpg',
-  '300ml-1265037e13926b3cd989e6e3ce0fd56be40910c9abcd34c6e87ab05f751bbf15.jpg',
-  '400ml-ab63d5693ed76f651e2905d2e6ccc13c59db195c968f5f60a10bb0dd1dfc74ce.jpg',
-  '500ml-aa6f227f709c891ffa0726ee076254e372ba279cf51b599f5b2ccdb932027d75.jpg',
-  '600ml-6d879b7114d8638dc7cf6b7cdd73b8cd074dde37503a60456c2502b38a20809d.jpg',
-  '700ml-5c61fc17665d8183cb6360d6a357bf880eb03c27b8a5e520e101a2aa02931df2.jpg'
-]
-
-
-  quantity_images.each do |image|
-  # 正規表現で数量部分を抽出
-    quantity_match = image.match(/(\d+ml)/)
-    if quantity_match
-      quantity = quantity_match[1] # キャプチャグループから数量を取得
-      remaining_quantity = RemmainingQuantity.find_by(quantity: quantity)
-
-      if remaining_quantity
-        # 画像の名前だけを保存
-        remaining_quantity.quantity_image = image
-
-        if remaining_quantity.save
-          puts "Image #{image} attached to quantity #{quantity} successfully."
-        else
-          puts "Failed to attach image #{image} to quantity #{quantity}."
-        end
-      else
-        puts "No record found for quantity #{quantity}"
-      end
-    else
-      puts "No quantity found in image filename #{image}"
-    end
-  end
-
+# category_types = [
+#   'single_malt',
+#   'single_grain',
+#   'blended',
+#   'blended_malt',
+#   'blended_grain'
+# ]
+#
+# category_names.each do |category_name|
+#   category_types.each do |category_type|
+#     Category.create(category_name: category_name, category_type: category_type)
+#   end
+# end
+#
+# puts "Categories seeded successfully."
+# quantities = [
+#   '0ml',
+#   '100ml',
+#   '200ml',
+#   '300ml',
+#   '400ml',
+#   '500ml',
+#   '600ml',
+#   '700ml'
+# ]
+#
+# quantities.each do |quantity|
+#   RemmainingQuantity.create(quantity: quantity)
+# end
+#
+# puts "Remaining quantities seeded successfully."
+#
+# quantity_images = [
+#   '0ml-a254db60c9aa72434814e9358220986148a6ba02431d065b9a7229d07cc2576b.jpg',
+#   '100ml-85bf600123d794fc90e916d3275bf36f3930c5a624b83f6d6323a6956965311d.jpg',
+#   '200ml-60b110b7cc6a0164de1821f3905805f5f52725a119106913b914dd503db87032.jpg',
+#   '300ml-1265037e13926b3cd989e6e3ce0fd56be40910c9abcd34c6e87ab05f751bbf15.jpg',
+#   '400ml-ab63d5693ed76f651e2905d2e6ccc13c59db195c968f5f60a10bb0dd1dfc74ce.jpg',
+#   '500ml-aa6f227f709c891ffa0726ee076254e372ba279cf51b599f5b2ccdb932027d75.jpg',
+#   '600ml-6d879b7114d8638dc7cf6b7cdd73b8cd074dde37503a60456c2502b38a20809d.jpg',
+#   '700ml-5c61fc17665d8183cb6360d6a357bf880eb03c27b8a5e520e101a2aa02931df2.jpg'
+# ]
+#
+#
+#   quantity_images.each do |image|
+#   # 正規表現で数量部分を抽出
+#     quantity_match = image.match(/(\d+ml)/)
+#     if quantity_match
+#       quantity = quantity_match[1] # キャプチャグループから数量を取得
+#       remaining_quantity = RemmainingQuantity.find_by(quantity: quantity)
+#
+#       if remaining_quantity
+#         # 画像の名前だけを保存
+#         remaining_quantity.quantity_image = image
+#
+#         if remaining_quantity.save
+#           puts "Image #{image} attached to quantity #{quantity} successfully."
+#         else
+#           puts "Failed to attach image #{image} to quantity #{quantity}."
+#         end
+#       else
+#         puts "No record found for quantity #{quantity}"
+#       end
+#     else
+#       puts "No quantity found in image filename #{image}"
+#     end
+#   end
 
 cocktails = [
-  {id: 1, cocktail_name: 'アバディーン・アンガス', cocktail_create: 'ドランブイ以外の材料をグラスに注ぐ。ドランブイは温めて火をつけ、発火している状態で注ぐ。', cocktail_origin: 'スコットランド原産の黒毛の牛の正式名称', cocktail_recipe: 'スコッチウイスキー:60ml, 蜂蜜:15ml, ライムジュース:30ml, ドランブイ:30ml', cocktail_url: ''},
-  {id: 2, cocktail_name: 'アフィニティー', cocktail_create: 'すべての材料を混ぜる。ステアして、カクテルグラスに注ぐ。', cocktail_origin: '「新和性」、「相性」の意味で、ベースとなる材料の原産国の関係を表しているとされる', cocktail_recipe: 'スコッチウイスキー:1/3, ドライベルモット:1/3, スイートベルモット:1/3, アンゴラスチュラビターズ:2ダッシュ', cocktail_url: 'qZOv9nYS78A?si=LsJU9O6Iyfa3H0Wx'},
-  {id: 3, cocktail_name: 'アソール・ブロス', cocktail_create: '十分に温めたロックグラスに材料を注ぎ、混ぜる。', cocktail_origin: 'スコッチウイスキーをベースに香草類を配合したリキュールが同名で存在する。', cocktail_recipe: 'スコッチウイスキー:30ml, 蜂蜜:30ml, 生クリーム:30ml', cocktail_url: ''},
-  {id: 4, cocktail_name: 'ボニー・スコット', cocktail_create: 'シェイクして、カクテルグラスに注ぐ', cocktail_origin: '「ボニー」はスコットランド語で「可愛らしい」という意味。', cocktail_recipe: 'スコッチウイスキー:1/2, ドランブイ:1/4, レモンジュース:1/4', cocktail_url: ''},
-  {id: 5, cocktail_name: 'フライング・スコッチマン', cocktail_create: 'シェイクして、カクテルグラスに注ぐ', cocktail_origin: 'ロンドンとエジンバラ間で運行されている特急列車の名称', cocktail_recipe: 'スコッチウイスキー:2/3, スイートベルモット:1/3, ビターズ:1ダッシュ, シュガーシロップ:1ダッシュ', cocktail_url: ''},
-  {id: 6, cocktail_name: 'チャーチル', cocktail_create: 'シェイクしてカクテルグラスに注ぐ', cocktail_origin: 'イギリス首相サー・ウィンストン・チャーチルにちなんだと思われるカクテル', cocktail_recipe: 'スコッチウイスキー:3/6, コアントロー:1/6, スイートベルモット:1/6, ライムジュース:1/6', cocktail_url: 'youtu.be/bIJJtaan7K0?si=wHM2zGtb8vB2zfJL'},
-  {id: 7, cocktail_name: 'エリカ', cocktail_create: 'シェイクしてカクテルグラスに注ぐ。ミントチェリーとカスミソウを飾る', cocktail_origin: '銀座のバー「絵里香」の中村健二氏オリジナルカクテル', cocktail_recipe: 'スコッチウイスキー:3/6, クレームドカシス:2/6, グレープフルーツジュース:1/6, グレデンシロップ:1ティースプーン, レモンジュース:1ディースプーン', cocktail_url: 'l3dJIzdHFTg?si=HPvMTu-J4sUMPnsl'},
-  {id: 8, cocktail_name: 'ハイランドクリーム', cocktail_create: 'シェイカーに2/3氷を入れ、材料を入れてシェイクしてカクテルグラスに注ぐ。チョコレートパウダー少々を飾る', cocktail_origin: 'ホテル・リッツ・パリのバーテンダー、コリー・ピーター・フィールド氏の考案カクテル', cocktail_recipe: 'グランツ（スコッチウイスキー）:1/10, コーヒーリキュール:2/10, クレーム・ド・カカオ・ブリュン（ダーク）:2/10, エスプレッソ（ブラック）:1/10, 生クリーム:4/10', cocktail_url: ''},
-  {id: 9, cocktail_name: 'オールド・アライアンス', cocktail_create: 'シェイクして、グラス注ぐ。レモネードを浮かべるとなおよい', cocktail_origin: 'カクテル名は「昔の仲間」「同盟関係」', cocktail_recipe: 'スコッチウイスキー:25ml, レモンジュース:1/2個, コアントロー:15ml, シュガーシロップ:適量, レモネード:適量', cocktail_url: ''},
-  {id: 10, cocktail_name: 'ゲーリック・コーヒー', cocktail_create: 'コーヒーカップに適量のコーヒーシュガーとコーヒーを７分目注ぐ。ウイスキーを加え混ぜ、生クリームをフローとする', cocktail_origin: 'ゲーリックとは「ゲール人の」という意味で、アイルランド人やスコットランド人の祖先にあたる。アイリッシュウィスキーを用いれば「アイリッシュ・コーヒー」', cocktail_recipe: 'スコッチウイスキー:30ml, コーヒー:適量, コーヒーシュガー:適量, 生クリーム:適量', cocktail_url: '41qWY4PE3vk?si=cTE0_eOPqkIuQeaH'},
-  {id: 11, cocktail_name: 'ロブ・ロイ', cocktail_create: 'すべての材料をステアし、カクテルグラスに注ぐ。カクテルピンを刺したマラスキーのチェリーを添え、レモンピールを絞る', cocktail_origin: '実在した義賊ロバート・マクレガーの愛称', cocktail_recipe: 'スコッチウイスキー:3/4, スイートベルモット:1/4, アンゴラスチュラビターズ:1ダッシュ', cocktail_url: 'IWfEarKCDhQ?si=R-RE01LINeKmv5iR'},
-  {id: 12, cocktail_name: 'スコッチ・コリンズ', cocktail_create: 'シェイクして、氷を入れたグラスに炭酸水を注ぐ', cocktail_origin: '１９世紀のロンドンで、リマーズクラブのヘッドウエイターであったジョン・コリンズに由来する', cocktail_recipe: 'スコッチウイスキー: 60ml, レモンジュース: 20ml, 砂糖: 2ティースプーン, 炭酸水: 適量', cocktail_url: 'watch?v=Z6nsGVnbj5g?si=wkOH1KTh0aZacRm3'},
-  {id: 13, cocktail_name: 'ラスティ・ネイル', cocktail_create: '氷を入れたグラスに注ぎ、ステアする', cocktail_origin: 'ラスティ・ネイルとは「錆びた釘」という意味', cocktail_recipe: 'スコッチウイスキー: 30ml, ドランブイ: 30ml', cocktail_url: 'watch?v=5YnaJxkbTns?si=cEZHVliQWmIn_8D9'},
-  {id: 14, cocktail_name: 'スポーラン', cocktail_create: 'シェイクして、カクテルグラスに注ぐ。ミントチェリーを飾る', cocktail_origin: 'スポーランはキルト着用時に、身に着ける小型のバッグのこと', cocktail_recipe: 'スコッチウイスキー: 1/4, アリーゼ: 1/4, クレームドピーチ: 1/4, ミントリキュール: 1/4, レモンジュース: 1ティースプーン', cocktail_url: ''},
-  {id: 15, cocktail_name: 'スコッチ・キルト', cocktail_create: 'すべての材料をステアして、カクテルグラスに注ぐ。レモンピールを絞りかける。', cocktail_origin: 'キルトとは、スコットランドのタータン・チェックのプリーツスカート風民族衣装のこと', cocktail_recipe: 'スコッチウイスキー: 2/3, ドランブイ: 1/3, オレンジビターズ: 2ダッシュ', cocktail_url: '6jrx_ZJGfOo?si=24HGepzuWQEc6ClY'},
-  {id: 16, cocktail_name: 'セント・アンドリュース', cocktail_create: 'シェイクして、カクテルグラスに注ぐ。', cocktail_origin: 'セント・アンドリュースはスコットランドの守護聖人。ゴルフの発祥地の名前でもある', cocktail_recipe: 'スコッチウイスキー: 1/3, ドランブイ: 1/3, オレンジジュース:1/3', cocktail_url: 'Ru-CjyZStcI?si=i-RAfyF3i2uf7W05'},
-  {id: 17, cocktail_name: 'ローヤル・アンバサダー', cocktail_create: 'すべての材料をステアして、カクテルグラスに注ぐ。ミントチェリー、マラスキーのチェリーを添える', cocktail_origin: '中村健二氏オリジナルカクテル', cocktail_recipe: 'スコッチウイスキー: 4/6, ドランブイ: 2/6, レモンジュース: 1ティースプーン', cocktail_url: ''},
-  {id: 18, cocktail_name: 'ロッホ・ローモンド', cocktail_create: 'シェイクして、カクテルグラスに注ぐ。', cocktail_origin: 'スコットランド最大の湖の名前。同名でウイスキーとしても存在する', cocktail_recipe: 'スコッチウイスキー: 90ml, アンゴラスチュラビターズ: 3~5ダッシュ, シュガーシロップ: 15ml', cocktail_url: 'LSPUK09-WEM?si=RkjMFjd8U_Md2m8d'}
+  { id: 1, base_cocktail_id: 1, cocktail_name: 'アフィニティー', cocktail_origin: '「新和性」、「相性」の意味で、ベースとなる材料の原産国の関係を表しているとされる',
+    cocktail_recipe: 'スコッチウイスキー:1/3, ドライベルモット:1/3, スイートベルモット:1/3, アンゴラスチュラビターズ:2ダッシュ', cocktail_url: 'qZOv9nYS78A?si=LsJU9O6Iyfa3H0Wx' },
+  { id: 2, base_cocktail_id: 1, cocktail_name: 'チャーチル', cocktail_origin: 'イギリス首相サー・ウィンストン・チャーチルにちなんだと思われるカクテル',
+    cocktail_recipe: 'スコッチウイスキー:3/6, コアントロー:1/6, スイートベルモット:1/6, ライムジュース:1/6', cocktail_url: 'ZOUax8VJCz4?si=cwjzGoNZEcyxM8jZ' },
+  { id: 3, base_cocktail_id: 1, cocktail_name: 'エリカ', cocktail_origin: '銀座のバー「絵里香」の中村健二氏オリジナルカクテル',
+    cocktail_recipe: 'スコッチウイスキー:3/6, クレームドカシス:2/6, グレープフルーツジュース:1/6, グレデンシロップ:1ティースプーン, レモンジュース:1ディースプーン', cocktail_url: 'l3dJIzdHFTg?si=HPvMTu-J4sUMPnsl' },
+  { id: 4, base_cocktail_id: 1, cocktail_name: 'ゲーリック・コーヒー',
+    cocktail_origin: 'ゲーリックとは「ゲール人の」という意味で、アイルランド人やスコットランド人の祖先にあたる。アイリッシュウィスキーを用いれば「アイリッシュ・コーヒー」', cocktail_recipe: 'スコッチウイスキー:30ml, コーヒー:適量, コーヒーシュガー:適量, 生クリーム:適量', cocktail_url: '41qWY4PE3vk?si=cTE0_eOPqkIuQeaH' },
+  { id: 5, base_cocktail_id: 1, cocktail_name: 'ロブ・ロイ', cocktail_origin: '実在した義賊ロバート・マクレガーの愛称',
+    cocktail_recipe: 'スコッチウイスキー:3/4, スイートベルモット:1/4, アンゴラスチュラビターズ:1ダッシュ', cocktail_url: 'IWfEarKCDhQ?si=R-RE01LINeKmv5iR' },
+  { id: 6, base_cocktail_id: 1, cocktail_name: 'スコッチ・コリンズ',
+    cocktail_origin: '１９世紀のロンドンで、リマーズクラブのヘッドウエイターであったジョン・コリンズに由来する', cocktail_recipe: 'スコッチウイスキー: 60ml, レモンジュース: 20ml, 砂糖: 2ティースプーン, 炭酸水: 適量', cocktail_url: 'Z6nsGVnbj5g?si=35V6Z_XGi7S0dfb5' },
+  { id: 7, base_cocktail_id: 1, cocktail_name: 'ラスティ・ネイル', cocktail_origin: 'ラスティ・ネイルとは「錆びた釘」という意味',
+    cocktail_recipe: 'スコッチウイスキー: 30ml, ドランブイ: 30ml', cocktail_url: '5YnaJxkbTns?si=GL_oWWmE7NPO2ykz' },
+  { id: 8, base_cocktail_id: 1, cocktail_name: 'スコッチ・キルト', cocktail_origin: 'キルトとは、スコットランドのタータン・チェックのプリーツスカート風民族衣装のこと',
+    cocktail_recipe: 'スコッチウイスキー: 2/3, ドランブイ: 1/3, オレンジビターズ: 2ダッシュ', cocktail_url: '6jrx_ZJGfOo?si=24HGepzuWQEc6ClY' },
+  { id: 9, base_cocktail_id: 1, cocktail_name: 'セント・アンドリュース',
+    cocktail_origin: 'セント・アンドリュースはスコットランドの守護聖人。ゴルフの発祥地の名前でもある', cocktail_recipe: 'スコッチウイスキー: 1/3, ドランブイ: 1/3, オレンジジュース:1/3', cocktail_url: 'Ru-CjyZStcI?si=i-RAfyF3i2uf7W05' },
+  { id: 10, base_cocktail_id: 1, cocktail_name: 'ロッホ・ローモンド', cocktail_origin: 'スコットランド最大の湖の名前。同名でウイスキーとしても存在する',
+    cocktail_recipe: 'スコッチウイスキー: 90ml, アンゴラスチュラビターズ: 3~5ダッシュ, シュガーシロップ: 15ml', cocktail_url: 'LSPUK09-WEM?si=RkjMFjd8U_Md2m8d' },
+  { id: 11, base_cocktail_id: 2, cocktail_name: 'バーボネラ', cocktail_origin: 'イギリスのバーテンダー、w.ホイットフィールド氏が考案した',
+    cocktail_recipe: 'バーボンウイスキー: 30ml, ドライベルモット: 15ml, オレンジキュラソー: 15ml, グレナデンシロップ: 1ダッシュ, 砂糖: 1ティースプーン, 炭酸水: 適量', cocktail_url: '3cLcoWL0fXQ?si=5FZVvupB24Pl1b-H' },
+  { id: 12, base_cocktail_id: 2, cocktail_name: 'カリフォルニア・レモネード',
+    cocktail_recipe: 'バーボンウイスキー: 45ml, レモンジュース: 20ml, ライムジュース: 10ml, グレナデンシロップ: 1ティースプーン, 砂糖: 1ティースプーン, 炭酸水: 適量', cocktail_url: 'raq4eC0ZNe8?si=A-lhryhZZOKwheau' },
+  { id: 13, base_cocktail_id: 2, cocktail_name: 'カウボーイ', cocktail_create: 'シェイクで作成しても大丈夫',
+    cocktail_recipe: 'バーボンウイスキー: 2/3, 生クリーム: 1/3', cocktail_url: 'J3qXTanOOrw?si=oK_MqQuV-OThukw4' },
+  { id: 14, base_cocktail_id: 2, cocktail_name: 'ミント・ジュレップ', cocktail_origin: 'アメリカ南部生まれの古典的なカクテル',
+    cocktail_recipe: 'バーボンウイスキー: 50ml, 砂糖: 2ティースプーン, 水または炭酸水: 30ml, ミントの葉: 4枚', cocktail_url: '20wcXR1HFyg?si=EMnbNHeGCXQj8Pjg' },
+  { id: 15, base_cocktail_id: 3, cocktail_name: 'ブルックリン', cocktail_origin: 'ブルックリンはマンハッタン島の南東、イーストリバーを挟んだ対岸の地域名',
+    cocktail_recipe: 'ライウイスキー: 2/3, ドライベルモット: 1/3, アメール・ピコン: 1ダッシュ, マラスキーノ: 1ダッシュ', cocktail_url: 'CPb5yqo_e3s?si=lk1j3qwKaDZmX698' },
+  { id: 16, base_cocktail_id: 3, cocktail_name: 'ハンター', cocktail_recipe: 'ライウイスキー: 3/4, チェリーブランデー: 1/4',
+    cocktail_url: 'OTWVeMwQNzs?si=sLAQwaO8ge92zqrR' },
+  { id: 17, base_cocktail_id: 3, cocktail_name: 'インク・ストリート',
+    cocktail_recipe: 'ライウイスキー: 2/4, オレンジジュース: 1/4, レモンジュース: 1/4', cocktail_url: 'n0JgbzQPjgY?si=zWGmycRRAvS9SK9w' },
+  { id: 18, base_cocktail_id: 3, cocktail_name: 'マンハッタン',
+    cocktail_origin: '「カクテルの女王」と言われ、ニューヨークのマンハッタンクラブで作られたと伝えられている。ドライベルモットを使用すると「ドライ・マンハッタン」、スイートベルモットとドライベルモット両方を使用すると「パーフェクト・マンハッタン」と複数のレシピがある', cocktail_recipe: 'ライウイスキー: 3/4, スイートベルモット: 1/4, アンゴラスチュラビターズ: 1ダッシュ', cocktail_url: 'DfTKOU1BzZ0?si=LDB0RFs9pcqfvjMB' },
+  { id: 19, base_cocktail_id: 3, cocktail_name: 'オールドファッションド',
+    cocktail_recipe: 'ライウイスキー(又はバーボンウイスキー): 45ml, アンゴラスチュラビターズ: 2ダッシュ, 角砂糖: 1個', cocktail_url: 'vAgZqMssKnE?si=Eqq64-nO968B78dV' },
+  { id: 20, base_cocktail_id: 3, cocktail_name: 'オールド・パル', cocktail_recipe: 'ライウイスキー: 1/3, ドライベルモット: 1/3, カンパリ: 1/3',
+    cocktail_url: 'wRK7tGQs-w4?si=yNqacn6z3Nn6KX6v' },
+  { id: 21, base_cocktail_id: 3, cocktail_name: 'ワード・エイト', cocktail_origin: 'アメリカ合衆国の都市ボストンを8つの区に分けた時に作られたとされている',
+    cocktail_recipe: 'ライウイスキー: 2/4, レモンジュース: 1/4, オレンジジュース: 1/4, グレナデンシロップ: 2ダッシュ', cocktail_url: 'Y-Jw28jasJs?si=ZNHGayte7bQTIzgk' },
+  { id: 22, base_cocktail_id: 4, cocktail_name: 'ブラックソーン', cocktail_origin: 'バラ科の常緑樹',
+    cocktail_recipe: 'アイリッシュウィスキー: 1/2, ドライベルモット: 1/2, ペルノー: 3ダッシュ, アンゴラスチュラビターズ: 3ダッシュ', cocktail_url: 'sR90FHpvnMg?si=2d1gXk8P9U8F9C-w' },
+  { id: 23, base_cocktail_id: 4, cocktail_name: 'アイリッシュ・コーヒー',
+    cocktail_origin: 'スコッチを使用すれば「ゲーリック・コーヒー」、ブランデーを使用すれば「カフェ・ロワイヤル」', cocktail_recipe: 'アイリッシュウィスキー: 30ml, 砂糖(又はコーヒーシュガー): 1ティースプーン, コーヒー: 適量, 生クリーム: 適量', cocktail_url: '9sz5L1WKhvE?si=kEh01fO57-sBJogv' },
+  { id: 24, base_cocktail_id: 5, cocktail_name: 'ブラッド＆サンド',
+    cocktail_recipe: 'ウイスキー: 1/4, チェリーブランデー: 1/4, スイートベルモット: 1/4, オレンジジュース: 1/4', cocktail_url: 'b3hdT_AmZ-w?si=la8EPd0fLPbGBXES' },
+  { id: 25, base_cocktail_id: 5, cocktail_name: 'ゴッドファーザー', cocktail_recipe: 'ウイスキー: 45ml, アマレット: 15ml',
+    cocktail_url: 'vIMjIJ3uZ9Y?si=Q5YXUY1AUk1ENnb9' },
+  { id: 26, base_cocktail_id: 5, cocktail_name: 'ホール・イン・ワン',
+    cocktail_recipe: 'ウイスキー: 2/3, ドライベルモット: 1/3, レモンジュース: 1ダッシュ, オレンジジュース: 1ダッシュ', cocktail_url: 'jPax-7GTYj0?si=_Q-SCXgENJLotNS5' },
+  { id: 27, base_cocktail_id: 5, cocktail_name: 'ハリケーン',
+    cocktail_recipe: 'ウイスキー: 1/4, ドライジン: 1/4, ペパーミント: 1/4, レモンジュース: 1/4', cocktail_url: '0aIm43WX-8Q?si=RM_aoT2bkhMQDYR_' },
+  { id: 28, base_cocktail_id: 5, cocktail_name: 'インペリアル・フィズ',
+    cocktail_recipe: 'ウイスキー: 45ml, ラム: 15ml, レモンジュース: 20ml, 砂糖: 2ティースプーン, 炭酸水: 適量', cocktail_url: 'ClMrIGN3cvE?si=btbD2bB4JjSyPod3' },
+  { id: 29, base_cocktail_id: 5, cocktail_name: 'ジョン・コリンズ',
+    cocktail_recipe: 'ウイスキー: 60ml, レモンジュース: 20ml, 砂糖: 2ティースプーン, 炭酸水: 適量', cocktail_url: 'vUwiKcDnI70?si=2GabT2Y4jBrTYV1S' },
+  { id: 30, base_cocktail_id: 5, cocktail_name: 'クロンダイク・クーラー',
+    cocktail_recipe: 'ウイスキー: 45ml, オレンジジュース: 20ml, ジンジャエール: 適量', cocktail_url: 'VXweWkfPYFw?si=sE4lqbHl27meCvOI' },
+  { id: 31, base_cocktail_id: 5, cocktail_name: 'ミント・クーラー', cocktail_recipe: 'ウイスキー: 45ml, クレームドミント: 3ダッシュ, 炭酸水: 適量',
+    cocktail_url: 'GPXImAjKzJ0?si=NKU2Cx0ZweFzblXc' }
 ]
 
-
-cocktails.each do |cocktail|
-  begin
-    Cocktail.create!(cocktail)
-    Rails.logger.info "Created cocktail: #{cocktail[:cocktail_name]}"
-  rescue StandardError => e
-    Rails.logger.error "Failed to create cocktail: #{cocktail[:cocktail_name]}, Error: #{e.message}"
+cocktails.each do |cocktail_data|
+  cocktail = Cocktail.find_by(id: cocktail_data[:id])
+  if cocktail
+    cocktail.update(cocktail_data)
+  else
+    Cocktail.create(cocktail_data)
   end
 end
 
-
-
-
-  regions = [
-    {id: 1, region_name: '九州-沖縄'},
-    {id: 2, region_name: '四国'},
-    {id: 3, region_name: '中国'},
-    {id: 4, region_name: '近畿'},
-    {id: 5, region_name: '中部'},
-    {id: 6, region_name: '関東'},
-    {id: 7, region_name: '東北'},
-    {id: 8, region_name: '北海道'}
-  ]
-
-  regions.each do |region|
-    begin
-      Region.find_or_create_by(id: region[:id]) do |r|
-        r.region_name = region[:region_name]
-      end
-      Rails.logger.info "Create or find region: #{region[:region_name]}"
-    rescue StandardError => e
-      Rails.logger.error "Failed to create region: #{region[:region_name]}, Error: #{e.message}"
-    end
-  end
-=end
-  distilleries = [
-  {id: 1, distillery_name: '嘉之助蒸留所', distillery_url: 'https://kanosuke.com/', prefectures: '鹿児島県', region_id: 1},
-  {id: 2, distillery_name: 'マルス津貫蒸留所', distillery_url: 'https://kanosuke.com/', prefectures: '鹿児島県', region_id: 1},
-  {id: 3, distillery_name: '山鹿蒸留所', distillery_url: 'https://yamagadistillery.co.jp/', prefectures: '熊本県', region_id: 1},
-  {id: 4, distillery_name: '久住蒸留所', distillery_url: 'https://kujudistillery.jp/', prefectures: '大分県', region_id: 1},
-  {id: 5, distillery_name: '尾鈴山蒸留所', distillery_url: 'https://osuzuyama.co.jp/', prefectures: '宮崎県', region_id: 1},
-  {id: 6, distillery_name: '御岳蒸留所', distillery_url: 'https://www.nishi-shuzo.co.jp/ontake/', prefectures: '鹿児島県', region_id: 1},
-  {id: 7, distillery_name: '新道蒸留所', distillery_url: 'https://shindo-lab.jp/', prefectures: '福岡県', region_id: 1}
-  
-  ]
-
-  distilleries.each do |distillery|
-    begin
-      Distillery.find_or_create_by(id: distillery[:id]) do |d|
-        d.distillery_name = distillery[:distillery_name]
-        d.distillery_url = distillery[:distillery_url]
-        d.prefectures = distillery[:prefectures]
-        d.region_id = distillery[:region_id]
-      end
-      Rails.logger.info "Create or find distillery: #{distillery[:distillery_name]}"
-    rescue StandardError => e
-      Rails.logger.error "Failed to create distillery: #{distillery[:distillery_name]}, Error: #{e.message}"
-    end
-  end
+cocktails.each do |cocktail|
+  Cocktail.create!(cocktail)
+  Rails.logger.info "Created cocktail: #{cocktail[:cocktail_name]}"
+rescue StandardError => e
+  Rails.logger.error "Failed to create cocktail: #{cocktail[:cocktail_name]}, Error: #{e.message}"
+end
+# base_cocktails = [
+#   {id: 1, base_name: 'スコッチウイスキーベース'},
+#   {id: 2, base_name: 'バーボンウイスキーベース'},
+#   {id: 3, base_name: 'ライウイスキーベース'},
+#   {id: 4, base_name: 'アイリッシュウィスキーベース'},
+#   {id: 5, base_name: 'ブレンデットウイスキーベース'}
+# ]
+#
+# base_cocktails.each do |b|
+#   begin
+#     BaseCocktail.create!(b)
+#     Rails.logger.info "Created base_cocktail: #{b[:base_name]}"
+#   rescue StandardError => e
+#     Rails.logger.error "Failed to create base_cocktail: #{b[:base_name]}, Error: #{e.message}"
+#   end
+# end

@@ -5,7 +5,7 @@ class WhiskeysController < ApplicationController
     @category_types = Category.select(:category_type).distinct
     @quantities = RemmainingQuantity.all
   end
-  
+
   def create
     @whiskey = current_user.whiskeys.build(whiskey_params)
     categories = find_existing_categories
@@ -15,7 +15,7 @@ class WhiskeysController < ApplicationController
       if params[:whiskey][:image].present?
         @whiskey.update(image: params[:whiskey][:image])
       else
-        @whiskey.update(image: File.open(Rails.root.join('app','assets','images','image.png')))
+        @whiskey.update(image: File.open(Rails.root.join('app', 'assets', 'images', 'image.png')))
       end
       @whiskey.categories << categories
       @whiskey.remmaining_quantity = remmaining_quantity
@@ -60,12 +60,12 @@ class WhiskeysController < ApplicationController
     @whiskey = current_user.whiskeys.find(params[:id])
     categories = find_existing_categories
     remmaining_quantity = RemmainingQuantity.find_by(id: params[:whiskey][:remmaining_quantity_id])
-    
+
     if @whiskey.update(whiskey_params)
       if params[:whiskey][:image].present?
         @whiskey.update(image: params[:whiskey][:image])
       else
-        @whiskey.update(image: File.open(Rails.root.join('app','assets','images','image.png')))
+        @whiskey.update(image: File.open(Rails.root.join('app', 'assets', 'images', 'image.png')))
       end
       @whiskey.categories = categories
       @whiskey.remmaining_quantity = remmaining_quantity
@@ -82,16 +82,15 @@ class WhiskeysController < ApplicationController
     redirect_to whiskeys_path, danger: t('whiskeys.destroy.danger'), status: :see_other
   end
 
-
   def choose_next_step
     @whiskey = current_user.whiskeys.find(params[:id])
   end
 
-
   private
 
   def whiskey_params
-    params.require(:whiskey).permit(:name, :text, :image, :remmaining_quantity_id, category_names: [], category_types: [])
+    params.require(:whiskey).permit(:name, :text, :image, :remmaining_quantity_id, category_names: [],
+                                                                                   category_types: [])
   end
 
   def find_existing_categories

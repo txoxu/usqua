@@ -1,5 +1,4 @@
 class SearchCocktailsForm
-
   include ActiveModel::Model
   include ActiveModel::Attributes
 
@@ -7,6 +6,7 @@ class SearchCocktailsForm
 
   def search
     return Cocktail.all if keyword.blank?
+
     Cocktail.keyword(keyword)
   end
 end

@@ -7,20 +7,18 @@ class UpdateUsersForDevise < ActiveRecord::Migration[7.1]
     remove_column :users, :last_name if column_exists?(:users, :last_name)
 
     # カラムが存在しなければ追加
-    add_column :users, :name, :string, null: false, default: "" unless column_exists?(:users, :name)
-    add_column :users, :encrypted_password, :string, default: "" unless column_exists?(:users, :encrypted_password)
+    add_column :users, :name, :string, null: false, default: '' unless column_exists?(:users, :name)
+    add_column :users, :encrypted_password, :string, default: '' unless column_exists?(:users, :encrypted_password)
     add_column :users, :reset_password_token, :string unless column_exists?(:users, :reset_password_token)
     add_column :users, :reset_password_sent_at, :datetime unless column_exists?(:users, :reset_password_sent_at)
     add_column :users, :remember_created_at, :datetime unless column_exists?(:users, :remember_created_at)
 
     # インデックスの存在を確認し、必要であれば追加
-    unless index_exists?(:users, :email, unique: true)
-      add_index :users, :email, unique: true
-    end
+    add_index :users, :email, unique: true unless index_exists?(:users, :email, unique: true)
 
-    unless index_exists?(:users, :reset_password_token, unique: true)
-      add_index :users, :reset_password_token, unique: true
-    end
+    return if index_exists?(:users, :reset_password_token, unique: true)
+
+    add_index :users, :reset_password_token, unique: true
   end
 
   def down
@@ -36,12 +34,10 @@ class UpdateUsersForDevise < ActiveRecord::Migration[7.1]
     add_column :users, :first_name, :string unless column_exists?(:users, :first_name)
     add_column :users, :last_name, :string unless column_exists?(:users, :last_name)
 
-    if index_exists?(:users, :email, unique: true)
-      remove_index :users, :email
-    end
+    remove_index :users, :email if index_exists?(:users, :email, unique: true)
 
-    if index_exists?(:users, :reset_password_token, unique: true)
-      remove_index :users, :reset_password_token
-    end
+    return unless index_exists?(:users, :reset_password_token, unique: true)
+
+    remove_index :users, :reset_password_token
   end
 end

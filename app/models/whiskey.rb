@@ -7,13 +7,13 @@ class Whiskey < ApplicationRecord
   belongs_to :remmaining_quantity
 
   mount_uploader :image, ImageUploader, ignore_integrity_errors: true
-  
+
   validates :name, presence: true
   validate :validate_image
 
-  scope :by_category_ids, -> (ids) { joins(:categories).where(categories: { id: ids }) }
-  scope :name_contain, -> (word) { where('name LIKE ?', "%#{word}%") }
-  scope :text_contain, -> (word) { where('text LIKE ?', "%#{word}%") }
+  scope :by_category_ids, ->(ids) { joins(:categories).where(categories: { id: ids }) }
+  scope :name_contain, ->(word) { where('name LIKE ?', "%#{word}%") }
+  scope :text_contain, ->(word) { where('text LIKE ?', "%#{word}%") }
 
   private
 

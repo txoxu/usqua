@@ -2,7 +2,7 @@
   <ul class="pagination d-flex justify-content-between">
     <li class="page-item">
       <% if @prev_cocktail %>
-        <%= link_to whiskey_path(@prev_cocktail), class: "page-link", aria: { label: "Previous" } do %>
+        <%= link_to cocktail_path(@prev_cocktail), class: "page-link", aria: { label: "Previous" } do %>
           <span aria-hidden="true">&laquo; 前のカクテル</span>
         <% end %>
       <% else %>
@@ -11,7 +11,7 @@
     </li>
     <li class="page-item">
       <% if @next_cocktail %>
-        <%= link_to whiskey_path(@next_cocktail), class: "page-link", aria: { label: "Next" } do %>
+        <%= link_to cocktail_path(@next_cocktail), class: "page-link", aria: { label: "Next" } do %>
           <span aria-hidden="true">次のカクテル &raquo;</span>
         <% end %>
       <% else %>

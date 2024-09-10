@@ -1,37 +1,33 @@
 Rails.application.routes.draw do
-
   devise_for :users, controllers: {
-  omniauth_callbacks: 'users/omniauth_callbacks',
-  registrations: 'users/registrations',
-  sessions: 'users/sessions',
-  passwords: 'users/passwords'
+    omniauth_callbacks: 'users/omniauth_callbacks',
+    registrations: 'users/registrations',
+    sessions: 'users/sessions',
+    passwords: 'users/passwords'
   }
-  
 
   get 'home', to: 'pages#home'
   get 'mypage', to: 'pages#mypage'
-  root "static_pages#top"
-  
+  root 'static_pages#top'
 
+  # get 'login', to: 'user_sessions#new'
+  # post 'login', to: 'user_sessions#create'
+  # delete 'logout', to: 'user_sessions#destroy'
 
-  #get 'login', to: 'user_sessions#new'
-  #post 'login', to: 'user_sessions#create'
-  #delete 'logout', to: 'user_sessions#destroy'
+  # get "password/reset", to: "password_resets#new"
+  # post "password/reset", to: "password_resets#create"
+  # get "password/reset/edit", to: "password_resets#edit"
+  # patch "password/reset/edit", to: "password_resets#update"
+  # mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 
-  #get "password/reset", to: "password_resets#new"
-  #post "password/reset", to: "password_resets#create"
-  #get "password/reset/edit", to: "password_resets#edit"
-  #patch "password/reset/edit", to: "password_resets#update"
-  #mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
-  
   resources :users, only: %i[show edit update destroy]
-    resources :cocktails do
-      resources :cocktail_tastings, only: %i[create new edit update destroy]
-      collection do
-        get :bookmarks
-      end
+  resources :cocktails do
+    resources :cocktail_tastings, only: %i[create new edit update destroy]
+    collection do
+      get :bookmarks
     end
-    resources :bookmarks, only: %i[create destroy]
+  end
+  resources :bookmarks, only: %i[create destroy]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   resources :whiskeys do
     member do
