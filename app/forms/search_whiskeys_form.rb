@@ -14,14 +14,12 @@ class SearchWhiskeysForm
     if category_names.present? && category_types.present?
       category_ids = Category.where(category_name: category_names, category_type: category_types).pluck(:id)
       relation = relation.by_category_ids(category_ids)
-    else
-      if category_names.present?
-        category_ids = Category.where(category_name: category_names).pluck(:id)
-        relation = relation.by_category_ids(category_ids)
-      elsif category_types.present?
-        category_ids = Category.where(category_type: category_types).pluck(:id)
-        relation = relation.by_category_ids(category_ids)
-      end
+    elsif category_names.present?
+      category_ids = Category.where(category_name: category_names).pluck(:id)
+      relation = relation.by_category_ids(category_ids)
+    elsif category_types.present?
+      category_ids = Category.where(category_type: category_types).pluck(:id)
+      relation = relation.by_category_ids(category_ids)
     end
 
     name_words.each do |word|
@@ -43,5 +41,4 @@ class SearchWhiskeysForm
   def text_words
     text.present? ? text.split(nil) : []
   end
-
 end

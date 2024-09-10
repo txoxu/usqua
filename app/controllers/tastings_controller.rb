@@ -1,6 +1,6 @@
 class TastingsController < ApplicationController
   before_action :set_whiskey
-  before_action :set_tasting, only: [:edit, :update, :show, :destroy] 
+  before_action :set_tasting, only: %i[edit update show destroy]
 
   def new
     @tasting = @whiskey.tastings.build
@@ -60,5 +60,4 @@ class TastingsController < ApplicationController
   def tasting_params
     params.require(:tasting).permit(:tasting_type, :flavor, :aroma, :tasting_text, :whiskey_id, tag_ids: [])
   end
-
 end

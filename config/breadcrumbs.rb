@@ -1,8 +1,8 @@
 crumb :mypage do
-  link "マイページ", mypage_path
+  link 'マイページ', mypage_path
 end
 
-crumb :new_whiskey do 
+crumb :new_whiskey do
   link 'ウイスキー登録', new_whiskey_path
   parent :mypage
 end

@@ -5,7 +5,7 @@ class CreateBookmarks < ActiveRecord::Migration[7.1]
       t.references :cocktail, null: false, foreign_key: true
 
       t.timestamps
-      t.index [:user_id, :cocktail_id], unique: true
+      t.index %i[user_id cocktail_id], unique: true
     end
   end
 end

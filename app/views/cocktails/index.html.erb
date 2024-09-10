@@ -2,11 +2,13 @@
 <h1><%= t('.title') %></h1>
 <%= render 'shared/cocktail_search_form' %>
 <div class="cocktail-list text-center bg-body-secondary shadow-lg">
-  <% @cocktails.each do |c| %>
+<% @base_cocktails.each do |b| %>
+  <%= b.base_names.each do |bn| %>
+  <% b.cocktails.each do |c| %>
     <div class="cocktail-item mb-3">
       <div class="index-frame">
         <div class="index-name">
-          <%= link_to c.cocktail_name, cocktail_path(c) %>
+          <%= link_to b.c.cocktail_name, cocktail_path(c) %>
         </div>
         <div class="index-cocktail_origin">
           <%= c.cocktail_origin %>
@@ -44,6 +46,8 @@
       </div>
     </div>
   <% end %>
+  <% end %>
+<% end %>
 </div>
 
 
