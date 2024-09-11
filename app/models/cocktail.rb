@@ -1,5 +1,4 @@
 class Cocktail < ApplicationRecord
-  belongs_to :user
   belongs_to :base_cocktail
   has_many :cocktail_tastings
 
