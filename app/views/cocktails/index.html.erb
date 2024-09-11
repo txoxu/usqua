@@ -2,13 +2,14 @@
 <h1><%= t('.title') %></h1>
 <%= render 'shared/cocktail_search_form' %>
 <div class="cocktail-list text-center bg-body-secondary shadow-lg">
-<% @base_cocktails.each do |b| %>
-  <%= b.base_names.each do |bn| %>
-  <% b.cocktails.each do |c| %>
+  <% @base_cocktails.each do |bc| %>
+    <h3>~<%= bc.base_name %>~</h3>
+  <% @cocktails.each do |c| %>
+    <% if bc.id == c.base_cocktail_id %>
     <div class="cocktail-item mb-3">
       <div class="index-frame">
         <div class="index-name">
-          <%= link_to b.c.cocktail_name, cocktail_path(c) %>
+          <%= link_to c.cocktail_name, cocktail_path(c), class: 'underline-animation' %>
         </div>
         <div class="index-cocktail_origin">
           <%= c.cocktail_origin %>
@@ -47,12 +48,35 @@
     </div>
   <% end %>
   <% end %>
-<% end %>
+  <% end %>
 </div>
 
+<style>
+  .underline-animation {
+  position: relative;
+  color: blue; /* 任意の文字色 */
+  text-decoration: none; /* デフォルトの下線を非表示 */
+}
+
+.underline-animation::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px; /* 下線の太さ */
+  bottom: 0;
+  left: 50%;
+  background-color: blue; /* 下線の色 */
+  transition: width 0.3s ease, left 0.3s ease; /* アニメーションの速さとタイプ */
+}
+
+.underline-animation:hover::after {
+  width: 100%; /* hover時に下線を全体に表示 */
+  left: 0;
+}
+
+</style>
 
 <script>
-
 document.addEventListener('turbo:load', function() {
     var showFormButtons = document.querySelectorAll('.showFormButton');
     var forms = document.querySelectorAll('.myForm');

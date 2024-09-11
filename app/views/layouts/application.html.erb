@@ -19,7 +19,7 @@
     <%= render 'shared/header' %>
     <main class="main-content">
       <%= render 'shared/flash_message' %>
-      <%= breadcrumbs separator:  ' / ' %>
+      <%= breadcrumbs separator:  ' / ', class: 'breadcrumb' %>
       <div class="loader-wrap">
         <div class="loader">
         </div>
@@ -29,6 +29,10 @@
     <%= render 'shared/footer' %>
 
 <style>
+
+      .breadcrumb {
+        color: white;
+      }
 
       .main-content {
         background-image: url(<%= asset_path '背景.jpg' %>);
