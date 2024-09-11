@@ -165,19 +165,19 @@ cocktails.each do |cocktail|
 rescue StandardError => e
   Rails.logger.error "Failed to create cocktail: #{cocktail[:cocktail_name]}, Error: #{e.message}"
 end
-# base_cocktails = [
-#   {id: 1, base_name: 'スコッチウイスキーベース'},
-#   {id: 2, base_name: 'バーボンウイスキーベース'},
-#   {id: 3, base_name: 'ライウイスキーベース'},
-#   {id: 4, base_name: 'アイリッシュウィスキーベース'},
-#   {id: 5, base_name: 'ブレンデットウイスキーベース'}
-# ]
-#
-# base_cocktails.each do |b|
-#   begin
-#     BaseCocktail.create!(b)
-#     Rails.logger.info "Created base_cocktail: #{b[:base_name]}"
-#   rescue StandardError => e
-#     Rails.logger.error "Failed to create base_cocktail: #{b[:base_name]}, Error: #{e.message}"
-#   end
-# end
+ base_cocktails = [
+   {id: 1, base_name: 'スコッチウイスキーベース'},
+   {id: 2, base_name: 'バーボンウイスキーベース'},
+   {id: 3, base_name: 'ライウイスキーベース'},
+   {id: 4, base_name: 'アイリッシュウィスキーベース'},
+   {id: 5, base_name: 'ブレンデットウイスキーベース'}
+ ]
+
+ base_cocktails.each do |b|
+   begin
+     BaseCocktail.create!(b)
+     Rails.logger.info "Created base_cocktail: #{b[:base_name]}"
+   rescue StandardError => e
+     Rails.logger.error "Failed to create base_cocktail: #{b[:base_name]}, Error: #{e.message}"
+   end
+ end
