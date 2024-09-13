@@ -1,8 +1,6 @@
 class Category < ApplicationRecord
   has_many :whiskey_categories
   has_many :whiskeys, through: :whiskey_categories
-  has_many :category_tags
-  has_many :tags, through: :category_tags
   has_many :cocktails
 
 

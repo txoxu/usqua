@@ -17,25 +17,16 @@ crumb :new_tasting do |whiskey|
   parent :whiskeys
 end
 
-crumb :whiskey do |whiskey|
-  link 'ウイスキー詳細', whiskey_path(whiskey)
+crumb :edit_whiskey do |whiskey|
+  link 'ウイスキー編集', edit_whiskey_path(whiskey)
   parent :whiskeys
 end
 
-crumb :edit_whiskey do |whiskey|
-  link 'ウイスキー編集', edit_whiskey_path(whiskey)
-  parent :whiskey, whiskey
-end
 
-crumb :whiskey_tasting do |tasting|
-  link 'テイスティング詳細', whiskey_tasting_path(tasting)
-  parent :whiskey, tasting
-end
-
-crumb :edit_whiskey_tasting do |tasting|
-  link 'テイスティング編集', edit_whiskey_tasting_path(tasting)
-  parent :whiskey_tasting, tasting
-end
+#crumb :edit_whiskey_tasting do |tasting|
+#  link 'テイスティング編集', edit_whiskey_tasting_path(tasting)
+#  parent :whiskey_tasting, tasting
+#end
 
 crumb :cocktails do
   link 'カクテル一覧', cocktails_path
