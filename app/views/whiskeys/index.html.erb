@@ -1,13 +1,13 @@
-<div class="container ">
+<div class="container">
   <div class="row">
 
 <% breadcrumb :whiskeys %>
 <%= render 'shared/search_form' %>
 <% if current_user.whiskeys.present? %>
-<div class="bg-body-secondary shadow-lg">
+<div class="shadow-lg rounded pt-5">
   <div class="whiskey-list">
     <% @whiskeys.each do |whiskey| %>
-      <div class="whiskey-item">
+      <div class="whiskey-item bg-body-secondary">
         <% if whiskey.image.present? %>
           <div class="image-frame">
             <%= image_tag whiskey.image.url, class: 'whiskey-image' %>
@@ -19,9 +19,11 @@
           <div class="icon-link">
             <%= link_to whiskey.name, whiskey_path(whiskey) %>
           </div>
-            <div class="index-quantity">
-              <%= whiskey.remmaining_quantity.quantity %>
-            </div>
+         <% if whiskey.remmaining_quantity.present? && whiskey.remmaining_quantity.quantity.present? %>
+          <div class="index-quantity">
+            <%= whiskey.remmaining_quantity.quantity %>
+          </div>
+        <% end %>
           <% whiskey.categories.each do |c| %>
             <div class="index-categoryname">
               <%= c.category_name %>

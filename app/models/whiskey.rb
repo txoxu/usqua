@@ -4,7 +4,7 @@ class Whiskey < ApplicationRecord
   has_many :tastings, dependent: :destroy
   has_many :cocktail_tastings, dependent: :destroy
   belongs_to :user
-  belongs_to :remmaining_quantity
+  belongs_to :remmaining_quantity, optional: true
 
   mount_uploader :image, ImageUploader, ignore_integrity_errors: true
 

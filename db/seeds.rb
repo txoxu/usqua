@@ -32,59 +32,26 @@
 # end
 #
 # puts "Categories seeded successfully."
-# quantities = [
-#   '0ml',
-#   '100ml',
-#   '200ml',
-#   '300ml',
-#   '400ml',
-#   '500ml',
-#   '600ml',
-#   '700ml'
-# ]
-#
-# quantities.each do |quantity|
-#   RemmainingQuantity.create(quantity: quantity)
-# end
-#
-# puts "Remaining quantities seeded successfully."
-#
-# quantity_images = [
-#   '0ml-a254db60c9aa72434814e9358220986148a6ba02431d065b9a7229d07cc2576b.jpg',
-#   '100ml-85bf600123d794fc90e916d3275bf36f3930c5a624b83f6d6323a6956965311d.jpg',
-#   '200ml-60b110b7cc6a0164de1821f3905805f5f52725a119106913b914dd503db87032.jpg',
-#   '300ml-1265037e13926b3cd989e6e3ce0fd56be40910c9abcd34c6e87ab05f751bbf15.jpg',
-#   '400ml-ab63d5693ed76f651e2905d2e6ccc13c59db195c968f5f60a10bb0dd1dfc74ce.jpg',
-#   '500ml-aa6f227f709c891ffa0726ee076254e372ba279cf51b599f5b2ccdb932027d75.jpg',
-#   '600ml-6d879b7114d8638dc7cf6b7cdd73b8cd074dde37503a60456c2502b38a20809d.jpg',
-#   '700ml-5c61fc17665d8183cb6360d6a357bf880eb03c27b8a5e520e101a2aa02931df2.jpg'
-# ]
-#
-#
-#   quantity_images.each do |image|
-#   # 正規表現で数量部分を抽出
-#     quantity_match = image.match(/(\d+ml)/)
-#     if quantity_match
-#       quantity = quantity_match[1] # キャプチャグループから数量を取得
-#       remaining_quantity = RemmainingQuantity.find_by(quantity: quantity)
-#
-#       if remaining_quantity
-#         # 画像の名前だけを保存
-#         remaining_quantity.quantity_image = image
-#
-#         if remaining_quantity.save
-#           puts "Image #{image} attached to quantity #{quantity} successfully."
-#         else
-#           puts "Failed to attach image #{image} to quantity #{quantity}."
-#         end
-#       else
-#         puts "No record found for quantity #{quantity}"
-#       end
-#     else
-#       puts "No quantity found in image filename #{image}"
-#     end
-#   end
+remmaining_quantities = [
+  {id: 1, quantity: '0ml', quantity_image: '0ml.jpg'},
+  {id: 2, quantity: '100ml', quantity_image: '100ml.jpg'},
+  {id: 3, quantity: '200ml', quantity_image: '200ml.jpg'},
+  {id: 4, quantity: '300ml', quantity_image: '300ml.jpg'},
+  {id: 5, quantity: '400ml', quantity_image: '400ml.jpg'},
+  {id: 6, quantity: '500ml', quantity_image: '500ml.jpg'},
+  {id: 7, quantity: '600ml', quantity_image: '600ml.jpg'},
+  {id: 8, quantity: '700ml', quantity_image: '700ml.jpg'}
+]
 
+remmaining_quantities.each do |data|
+  remmaining_quantity = RemmainingQuantity.find_by(id: data[:id])
+  if remmaining_quantity
+    remmaining_quantity.update(data)
+  else
+    RemmainingQuantity.create(data)
+  end
+end
+=begin
 cocktails = [
   { id: 1, base_cocktail_id: 1, cocktail_name: 'アフィニティー', cocktail_origin: '「新和性」、「相性」の意味で、ベースとなる材料の原産国の関係を表しているとされる',
     cocktail_recipe: 'スコッチウイスキー:1/3, ドライベルモット:1/3, スイートベルモット:1/3, アンゴラスチュラビターズ:2ダッシュ', cocktail_url: 'qZOv9nYS78A?si=LsJU9O6Iyfa3H0Wx' },
@@ -181,3 +148,4 @@ end
      Rails.logger.error "Failed to create base_cocktail: #{b[:base_name]}, Error: #{e.message}"
    end
  end
+=end

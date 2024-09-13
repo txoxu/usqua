@@ -1,7 +1,7 @@
 <% breadcrumb :mypage %>
-<div class="container mypage-container bg-body-secondary ">
+<div class="container mypage-container bg-body-secondary rounded">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
       <div class="total-container">
         <div class="total-frame">
           <div class="row">
@@ -35,7 +35,7 @@
       </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-4">
       <div class="chart-container">
         <%= pie_chart @whiskey_count_by_category, library: {
           animation: {
@@ -47,7 +47,7 @@
       </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-4">
       <div class="chart-container">
         <%= bar_chart @whiskey_count_by_category, library: {
             hAxis: {
