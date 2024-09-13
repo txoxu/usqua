@@ -7,7 +7,7 @@
 <div class="shadow-lg rounded pt-5">
   <div class="whiskey-list">
     <% @whiskeys.each do |whiskey| %>
-      <div class="whiskey-item bg-body-secondary">
+      <div class="whiskey-item bg-body-secondary shadow-lg">
         <% if whiskey.image.present? %>
           <div class="image-frame">
             <%= image_tag whiskey.image.url, class: 'whiskey-image' %>
@@ -32,17 +32,6 @@
               <%= c.category_type %>
             </div>
           <% end %>
-          <div class="index-tags">
-            <% if whiskey.tastings.present? %>
-              <% whiskey.tastings.each do |tasting| %>
-                <% tasting.tags.each do |tag| %>
-                  <span class="tag"><%= tag.tag_name %></span>
-                <% end %>
-              <% end %>
-            <% else %>
-              <p><%= t('.not_tastings') %></p>
-            <% end %>
-          </div>
           <div class="index-actions">
             <%= link_to t('.add_tasting'), new_whiskey_tasting_path(whiskey), class: 'btn btn-outline-primary btn-sm' %>
             <%= link_to t('helpers.btn.edit'), edit_whiskey_path(whiskey), class: 'btn btn-outline-secondary btn-sm' %>

@@ -1,7 +1,5 @@
 class Tasting < ApplicationRecord
   belongs_to :whiskey
-  has_many :tasting_tags, dependent: :destroy
-  has_many :tags, through: :tasting_tags
 
   validates :tasting_type, presence: true
   validates :aroma, presence: true

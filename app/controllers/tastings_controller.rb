@@ -8,10 +8,8 @@ class TastingsController < ApplicationController
 
   def create
     @tasting = @whiskey.tastings.build(tasting_params)
-    tag_list = params[:tasting][:tag_names].split(',')
 
     if @tasting.save
-      @tasting.save_tags(tag_list)
       redirect_to choose_next_step_whiskey_path(@whiskey), success: t('tastings.create.success')
     else
       flash.now[:danger] = t('tastings.create.danger')
@@ -21,19 +19,15 @@ class TastingsController < ApplicationController
 
   def show
     @tasting = @whiskey.tastings.find(params[:id])
-    tags = @tasting.tags
   end
 
   def edit
     @tasting = @whiskey.tastings.find(params[:id])
-    @tag_names = @tasting.tags.pluck(:tag_name)
   end
 
   def update
-    tag_list = params[:tasting][:tag_names].split(',')
 
     if @tasting.update(tasting_params)
-      @tasting.save_tags(tag_list)
       redirect_to whiskey_path(@whiskey), success: t('tastings.update.success')
     else
       flash.now[:danger] = t('tastings.update.danger')
@@ -58,6 +52,6 @@ class TastingsController < ApplicationController
   end
 
   def tasting_params
-    params.require(:tasting).permit(:tasting_type, :flavor, :aroma, :tasting_text, :whiskey_id, tag_ids: [])
+    params.require(:tasting).permit(:tasting_type, :tasting_text, :flavor, :aroma, :whiskey_id, :body, :finish, :balance)
   end
 end

@@ -2,7 +2,6 @@
 
 /* フォームのコンテナをフレックスに設定 */
 .search-form .row {
-  display: flex;
   flex-wrap: wrap;
   gap: 1rem; /* フォーム要素間の間隔を設定 */
 }

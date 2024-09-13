@@ -9,42 +9,66 @@
         <div class="form-group row tasting-type">
           <%= f.label :tasting_type, class: "col-md-3 col-form-label" %><span class="text-danger">*</span>
           <div class="col-md-9">
-            <%= f.text_field :tasting_type, class: "form-control", required: true %>
+            <%= f.select :tasting_type, options_for_select(['ストレート', 'ロック', 'フロート（水割り）', 'ハイボール' ], @tasting.tasting_type), { include_blank: '選択してください' }, class: "form-control", required: true %>
           </div>
         </div>
 
-        <div class="form-group row tasting-flavor">
-          <%= f.label :flavor, class: "col-md-3 col-form-label" %><span class="text-danger">*</span>
-          <div class="col-md-9">
-            <%= f.text_field :flavor, class: "form-control", required: true %>
+        <% [{ key: 'aroma', label: '香り' },
+            { key: 'flavor', label: '味' },
+            { key: 'balance', label: 'バランス' },
+            { key: 'body', label: '濃さ' },
+            { key: 'finish', label: '余韻' }].each do |item| %>
+          <div class="form-group">
+            <%= f.label item[:key], item[:label] %>
+            <div class="star-rating ms-5 ps-5" data-category="<%= item[:key] %>"></div>
+            <%= f.hidden_field item[:key], id: "#{item[:key]}-value" %>
           </div>
-        </div>
+        <% end %>
 
-        <div class="form-group row tasting-aroma">
-          <%= f.label :aroma, class: "col-md-3 col-form-label" %><span class="text-danger">*</span>
-          <div class="col-md-9">
-            <%= f.text_field :aroma, class: "form-control", required: true %>
-          </div>
-        </div>
-
-        <div class="form-group row tag">
-          <%= f.label :tag_names, class: "col-md-3 col-form-label" %>
-          <div class="col-md-9">
-            <%= f.text_field :tag_names, class: "form-control", placeholder: "','で区切ってください" %>
-          </div>
-        </div>
-
-        <div class="form-group row tasting-explanation">
+        <div class="form-group">
           <%= f.label :tasting_text, class: "col-md-3 col-form-label" %>
           <div class="col-md-9">
             <%= f.text_area :tasting_text, class: "form-control" %>
           </div>
         </div>
 
-        <div class="actions text-right">
+        <div class="action mt-3">
           <%= f.submit t('helpers.submit.create'), class: "btn btn-outline-primary" %>
         </div>
       <% end %>
     </div>
   </div>
 </div>
+
+
+<script>
+  $(document).ready(function() {
+  // 評価項目に共通のRaty設定を適用
+  $('.star-rating').each(function() {
+    var category = $(this).data('category'); // data-category属性からカテゴリ名を取得
+
+    $(this).raty({
+      scoreName: category,
+      hints:{
+              'aroma': ['良くない', '少し悪い', '普通', '良い', 'とても良い'],
+              'flavor': ['薄い', 'やや薄い', '普通', '良い', 'とても良い'],
+              'balance': ['バランスが悪い', '少しバランスが悪い', 'バランスが取れている', '良いバランス', '完璧なバランス'],
+              'body': ['薄い', '軽い', '中程度', '濃い', '非常に濃い'],
+              'finish': ['短い', 'やや短い', '普通', '長い', '非常に長い']
+            }[category], // 各カテゴリに対して異なるヒントを指定
+      cancelHint: 'リセット',
+      cancelButton: true,
+      half: true,
+      halfShow: true,
+      cancelOn: 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/cancel-on.png',
+      cancelOff: 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/cancel-off.png',
+      starOn: 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png',
+      starHalf: 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-half.png',
+      starOff: 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-off.png',
+      click: function(score) {
+        $('#' + category + '-value').val(score);  // 選択した値をhidden_fieldに設定
+      }
+    });
+  });
+});
+</script>
