@@ -11,7 +11,7 @@ class WhiskeysController < ApplicationController
     categories = find_existing_categories
     remmaining_quantity = RemmainingQuantity.find_by(id: params[:whiskey][:remmaining_quantity_id])
 
-    if categories.any? && remmaining_quantity && @whiskey.save
+    if categories.any? && @whiskey.save
       if params[:whiskey][:image].present?
         @whiskey.update(image: params[:whiskey][:image])
       else
