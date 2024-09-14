@@ -30,7 +30,7 @@ class CocktailTastingsController < ApplicationController
     @cocktail_tasting.whiskey_id = whiskey.id
     @cocktail_tasting.user_id = current_user.id
     if @cocktail_tasting.update(cocktail_tasting_params)
-      redirect_to cocktails_path, success: t('cocktail_tasting.update.success')
+      redirect_to cocktails_path, success: t('cocktail_tastings.update.success')
     else
       flash.now[:danger] = t('cocktail_tastings.update.danger')
       render :new
@@ -54,6 +54,6 @@ class CocktailTastingsController < ApplicationController
   end
 
   def cocktail_tasting_params
-    params.require(:cocktail_tasting).permit(:cocktail_flavor, :tasting_recipe, :whiskey_id)
+    params.require(:cocktail_tasting).permit(:aroma, :flavor, :appearance, :finish, :mouthfeel, :others, :whiskey_id, :whiskey_name)
   end
 end

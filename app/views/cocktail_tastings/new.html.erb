@@ -1,22 +1,29 @@
 <% breadcrumb :cocktail_tasting, @cocktail %>
-<div class="container">
-  <div class="row justify-content-center">
+<div class="container ms-2">
+  <div class="row justify-content-center ">
     <div class="col-md-6 offset-md-2 tasting-edit-frame bg-body-secondary shadow-lg">
       <h1 class="text-center"><%= t('.title') %></h1>
       <%= form_with model: @cocktail_tasting, url: cocktail_cocktail_tastings_path(@cocktail), local: true do |f| %>
-        <div class="form-group whiskey-cocktail col-md-8 ms-5 mb-3">
+        <div class="form-group col-md-8 ms-5 mb-3">
           <%= f.label :name, class: "col-form-label" %><span class="text-danger">*</span>
           <%= f.select :name, @whiskeys.map { |whiskey| [whiskey.name, whiskey.name] }, { prompt: "選択してください" }, class: "form-control" %>
         </div>
 
-        <div class="form-group cocktail-flavor col-md-8 ms-5 mb-3">
-          <%= f.label :cocktail_flavor, class: "col-form-label" %>
-          <%= f.text_field :cocktail_flavor, class: "form-control" %>
-        </div>
+        <% [{ key: 'aroma', label: '香り' },
+            { key: 'flavor', label: '味' },
+            { key: 'appearance', label: '見た目、色合い' },
+            { key: 'mouthfeel', label: '口当たり' },
+            { key: 'finish', label: '後味' }].each do |item| %>
+          <div class="form-group col-md-8 ms-5 mb-3">
+            <%= f.label item[:key], item[:label] %>
+            <div class="star-rating ms-5 ps-5" data-category="<%= item[:key] %>"></div>
+            <%= f.hidden_field item[:key], id: "#{item[:key]}-value" %>
+          </div>
+        <% end %>
 
-        <div class="form-group tasting-recipe col-md-8 ms-5 mb-3">
-          <%= f.label :tasting_recipe, class: "col-form-label" %>
-          <%= f.text_field :tasting_recipe, class: "form-control" %>
+        <div class="form-group col-md-8 ms-5 mb-3">
+          <%= f.label :others, 'その他' %>
+          <%= f.text_field :others, class: "form-control" %>
         </div>
 
         <div class="actions text-end">
@@ -26,3 +33,36 @@
     </div>
   </div>
 </div>
+
+
+<script>
+   $(document).ready(function() {
+  // 評価項目に共通のRaty設定を適用
+  $('.star-rating').each(function() {
+    var category = $(this).data('category'); // data-category属性からカテゴリ名を取得
+
+    $(this).raty({
+      scoreName: category,
+      hints:{
+              'aroma': ['良くない', '少し悪い', '普通', '良い', 'とても良い'],
+              'flavor': ['薄い', 'やや薄い', '普通', '良い', 'とても良い'],
+              'appearance': ['悪い', '少し悪い', '普通', 'キレイ', '非常にキレイ'],
+              'mouthfeel': ['悪い', '微妙', '普通', '良い', '最高'],
+              'finish': ['良くない', '微妙', '普通', '良い', '最高']
+            }[category], // 各カテゴリに対して異なるヒントを指定
+      cancelHint: 'リセット',
+      cancelButton: true,
+      half: true,
+      halfShow: true,
+      cancelOn: 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/cancel-on.png',
+      cancelOff: 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/cancel-off.png',
+      starOn: 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png',
+      starHalf: 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-half.png',
+      starOff: 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-off.png',
+      click: function(score) {
+        $('#' + category + '-value').val(score);  // 選択した値をhidden_fieldに設定
+      }
+    });
+  });
+});
+</script>
