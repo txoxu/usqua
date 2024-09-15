@@ -11,15 +11,6 @@ Rails.application.routes.draw do
   root 'static_pages#top'
   get 'demo', to: 'pages#demo'
 
-  # get 'login', to: 'user_sessions#new'
-  # post 'login', to: 'user_sessions#create'
-  # delete 'logout', to: 'user_sessions#destroy'
-
-  # get "password/reset", to: "password_resets#new"
-  # post "password/reset", to: "password_resets#create"
-  # get "password/reset/edit", to: "password_resets#edit"
-  # patch "password/reset/edit", to: "password_resets#update"
-  # mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 
   resources :users, only: %i[show edit update destroy]
   resources :cocktails do
@@ -34,9 +25,9 @@ Rails.application.routes.draw do
     member do
       get 'choose_next_step'
     end
-    resources :tastings, only: %i[new create edit update show destroy]
+    resources :tastings, only: %i[new create edit update destroy]
   end
-  resources :distilleries, only: %i[index show]
+  resources :distilleries, only: %i[index]
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
 

@@ -40,5 +40,3 @@
 /node_modules
 
 /public/uploads
-
-/config/master.key

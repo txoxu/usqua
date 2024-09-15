@@ -1,50 +1,86 @@
-<div class="container">
-  <div class="row">
-
 <% breadcrumb :whiskeys %>
 <%= render 'shared/search_form' %>
-<% if current_user.whiskeys.present? %>
-<div class="shadow-lg rounded pt-5">
-  <div class="whiskey-list">
-    <% @whiskeys.each do |whiskey| %>
-      <div class="whiskey-item bg-body-secondary shadow-lg">
-        <% if whiskey.image.present? %>
-          <div class="image-frame">
-            <%= image_tag whiskey.image.url, class: 'whiskey-image' %>
-          </div>
-        <% else %>
-          <%= image_tag 'image.png', alt: 'Example Image', size: '200x298' %>
-        <% end %>
-        <div class="index-frame">
-          <div class="icon-link">
-            <%= link_to whiskey.name, whiskey_path(whiskey) %>
-          </div>
-         <% if whiskey.remmaining_quantity.present? && whiskey.remmaining_quantity.quantity.present? %>
-          <div class="index-quantity">
-            <%= whiskey.remmaining_quantity.quantity %>
-          </div>
-        <% end %>
-          <% whiskey.categories.each do |c| %>
-            <div class="index-categoryname">
-              <%= c.category_name %>
+  <div class="accordion row justify-content-center" id="accordionExample">
+    <% if current_user.whiskeys.present? %>
+      <% @whiskeys.each do |whiskey| %>
+          <div class="card mb-5 shadow-lg" style="max-width: 850px;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <% if whiskey.image.present? %>
+                  <%= image_tag whiskey.image.url, class: "img-fluid rounded-start", size: '150x200' %>
+                <% else %>
+                  <%= image_tag "default.jpg", class: "img-fluid rounded-start", size: '150x200' %>
+                <% end %>
+              </div>
+              <div class="col-md-4">
+                <% if whiskey.remmaining_quantity.present? && whiskey.remmaining_quantity.quantity_image.present? %>
+                  <%= image_tag whiskey.remmaining_quantity.quantity_image, size: '150x200' %>
+                <% else %>
+                  <p class="pt-5 mt-5">量は設定されていません</p>
+                <% end %>
+              </div>
+              <div class="col-md-4">
+                <div class="card-body">
+                  <h5 class="card-title"><%= link_to whiskey.name, whiskey_path(whiskey) %></h5>
+                    <% if whiskey.remmaining_quantity.present? && whiskey.remmaining_quantity.quantity.present? %>
+                      <p class="card-text"><%= whiskey.remmaining_quantity.quantity %></p>
+                    <% end %>
+                    <% whiskey.categories.each do |c| %>
+                      <p class="card-text"><small class="text-body-secondary"><%= c.category_name %></small></p>
+                      <p class="card-text"><small class="text-body-secondary"><%= c.category_type %></small></p>
+                    <% end %>
+                      <p class="card-text">
+                        <%= link_to t('.add_tasting'), new_whiskey_tasting_path(whiskey), class: 'btn btn-outline-primary btn-sm' %>
+                        <%= link_to t('helpers.btn.edit'), edit_whiskey_path(whiskey), class: 'btn btn-outline-secondary btn-sm' %>
+                        <%= link_to t('helpers.btn.destroy'), whiskey_path(whiskey), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-outline-danger btn-sm' %>
+                      </p>
+                </div>
+              </div>
             </div>
-            <div class="index-categorytype">
-              <%= c.category_type %>
-            </div>
-          <% end %>
-          <div class="index-actions">
-            <%= link_to t('.add_tasting'), new_whiskey_tasting_path(whiskey), class: 'btn btn-outline-primary btn-sm' %>
-            <%= link_to t('helpers.btn.edit'), edit_whiskey_path(whiskey), class: 'btn btn-outline-secondary btn-sm' %>
-            <%= link_to t('helpers.btn.destroy'), whiskey_path(whiskey), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-outline-danger btn-sm' %>
           </div>
-        </div>
-      </div>
+  
+
+
+        <% if @tastings.where(whiskey_id: whiskey.id).present? %>
+            <h2 class="accordion-header mb-3" style="max-width: 850px;">
+              <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                テイスティング一覧
+              </button>
+            </h2>
+            <% @tastings.where(whiskey_id: whiskey.id).each do |f| %>
+              <div id="collapseTwo" class="accordion-collapse collapse row justify-content-center" data-bs-parent="#accordionExample">
+                <div class="card text-center mb-5 shadow-lg" style="max-width: 850px;">
+                  <div class="card-header">
+                    <%= f.tasting_type %>
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">
+                      総合評価
+                      <%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %>
+                      <%= (f.aroma + f.flavor + f.balance + f.body + f.finish) / 5 %>
+                    </h5>
+                    <p class="card-text">
+                      香り<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= f.aroma %></span>
+                      味<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= f.flavor %></span>
+                      バランス<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= f.balance %></span>
+                      濃さ<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= f.body %></span>
+                      余韻<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= f.finish %></span>
+                    </p>
+                    <div class= "actons">
+                      <%= link_to t('helpers.btn.edit'), edit_whiskey_tasting_path(whiskey, f), class: 'btn btn-outline-primary' %>
+                      <%= link_to t('helpers.btn.destroy'), whiskey_tasting_path(whiskey, f), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-outline-danger' %>
+                    </div>
+                  </div>
+                  <div class="card-footer text-body-secondary">
+                    <%= f.tasting_text %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+        <% end %>
+      <% end %>
+      <%= paginate @whiskeys %>
+    <% else %>
+      <h4 class="text-center"><%= t('.not_whiskeys') %></h4>
     <% end %>
   </div>
-  <%= paginate @whiskeys %>
-  </div>
-<% else %>
-  <h4 class="text-center"><%= t('.not_whiskeys') %></h4>
-<% end %>
-</div>
-</div>
