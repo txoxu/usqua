@@ -142,7 +142,7 @@ const selectedQuantityId = document.querySelector('input[name="whiskey[remmainin
         
         if (selectedQuantity && selectedQuantity.quantity_image) {
           const imagePath = '/assets/' + selectedQuantity.quantity_image;
-          preview.innerHTML = `<img src="${imagePath}" class="preview-image" style="width: 500px; height: 600px;">`;
+          preview.innerHTML = `<img src="${imagePath}" class="preview-image" style="width: 450px; height: 450px;">`;
           preview.style.display = 'block';
         } else {
           preview.innerHTML = '';

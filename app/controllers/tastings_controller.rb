@@ -10,7 +10,7 @@ class TastingsController < ApplicationController
     @tasting = @whiskey.tastings.build(tasting_params)
 
     if @tasting.save
-      redirect_to choose_next_step_whiskey_path(@whiskey), success: t('tastings.create.success')
+      redirect_to whiskeys_path, success: t('tastings.create.success')
     else
       flash.now[:danger] = t('tastings.create.danger')
       render :new
@@ -28,7 +28,7 @@ class TastingsController < ApplicationController
   def update
 
     if @tasting.update(tasting_params)
-      redirect_to whiskey_path(@whiskey), success: t('tastings.update.success')
+      redirect_to whiskeys_path, success: t('tastings.update.success')
     else
       flash.now[:danger] = t('tastings.update.danger')
       render :edit

@@ -15,7 +15,7 @@ class WhiskeysController < ApplicationController
       if params[:whiskey][:image].present?
         @whiskey.update(image: params[:whiskey][:image])
       else
-        @whiskey.update(image: File.open(Rails.root.join('app', 'assets', 'images', 'image.png')))
+        @whiskey.update(image: File.open(Rails.root.join('app', 'assets', 'images', 'default.jpg')))
       end
       @whiskey.categories << categories
       @whiskey.remmaining_quantity = remmaining_quantity
@@ -32,11 +32,15 @@ class WhiskeysController < ApplicationController
   def index
     @search_form = SearchWhiskeysForm.new(search_params)
     @whiskeys = @search_form.search.where(user_id: current_user.id)
+
     @whiskeys = @whiskeys.page(params[:page])
 
     @category_names = Category.select(:category_name).distinct
     @category_types = Category.select(:category_type).distinct
+
     @quantity = RemmainingQuantity.select(:quantity)
+
+    @tastings = Tasting.where(whiskey_id: @whiskeys.pluck(:id))
   end
 
   def show

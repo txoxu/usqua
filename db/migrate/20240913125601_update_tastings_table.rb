@@ -5,10 +5,10 @@ class UpdateTastingsTable < ActiveRecord::Migration[7.1]
     remove_column :tastings, :flavor, :string
     
 
-    add_column :tastings, :aroma, :decimal
-    add_column :tastings, :flavor, :decimal
-    add_column :tastings, :body, :decimal
-    add_column :tastings, :finish, :decimal
-    add_column :tastings, :balance, :decimal
+    add_column :tastings, :aroma, :decimal, precision: 4, scale: 2
+    add_column :tastings, :flavor, :decimal, precision: 4, scale: 2
+    add_column :tastings, :body, :decimal, precision: 4, scale: 2
+    add_column :tastings, :finish, :decimal, precision: 4, scale: 2
+    add_column :tastings, :balance, :decimal, precision: 4, scale: 2
   end
 end

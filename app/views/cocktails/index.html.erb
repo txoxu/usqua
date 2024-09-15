@@ -1,48 +1,60 @@
 <% breadcrumb :cocktails %>
-<h1><%= t('.title') %></h1>
 <%= render 'shared/cocktail_search_form' %>
-<div class="cocktail-list text-center bg-body-secondary shadow-lg">
+<div class="container">
   <% @base_cocktails.each do |bc| %>
-    <h3>~<%= bc.base_name %>~</h3>
-  <% @cocktails.each do |c| %>
-    <% if bc.id == c.base_cocktail_id %>
-    <div class="cocktail-item mb-3">
-      <div class="index-frame">
-        <div class="index-name">
-          <%= link_to c.cocktail_name, cocktail_path(c), class: 'underline-animation' %>
-        </div>
-        <div class="index-cocktail_origin">
-          <%= c.cocktail_origin %>
-        </div>
-      <% if user_signed_in? %>
-        <div class="d-md-inline-flex align-items-center">
-          <div class="bookmark-button me-3">
-            <%= render 'cocktails/bookmark_button', cocktail: c %>
-          </div>
-          <div class="cocktail-tasting-presence">
-            <% if current_user && c.cocktail_tastings.where(user_id: current_user.id).present? %>
-              <div class='showFormButton'>
-                <i class="fa-solid fa-martini-glass-citrus" title="クリックしてカクテルテイスティングを確認できます"></i>
+    <h3 class="title mt-5 bg-body-secondary rounded">~<%= bc.base_name %>~</h3>
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+      <% bc.cocktails.each do |c| %>
+          <div class="card pt-3 pb-3 mt-5">
+            <div class="row">
+              <div class="col-md-2 ps-5">
+                  <%= link_to c.cocktail_name, cocktail_path(c), class: 'underline-animation' %>
               </div>
-              <div class='myForm' style="display: none;">
-                <% c.cocktail_tastings.where(user_id: current_user.id).each do |f| %>
-                  <div class="cocktail-tasting col-md-6 d-md-inline">
-                    <strong>ウイスキー:</strong> <%= f.whiskey.name %>
-                  </div>
-                  <div class="actions text-right">
-                    <%= link_to t('helpers.btn.edit'), edit_cocktail_cocktail_tasting_path(c, f), class: 'btn btn-outline-primary' %>
-                    <%= link_to t('helpers.btn.destroy'), cocktail_cocktail_tasting_path(c, f), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-outline-danger' %>
+              <div class="col-md-6">
+                <%= c.cocktail_origin %>
+              </div>
+              <div class="col-md-3 ps-5">
+                <%= link_to 'テイスティング登録', new_cocktail_cocktail_tasting_path(c) %>
+              </div>
+              <div class="col-md-1">
+                <% if user_signed_in? %>
+                  <div class="bookmark-container">
+                    <%= render 'cocktails/bookmark_button', cocktail: c %>
                   </div>
                 <% end %>
               </div>
-            <% end %>
+            </div>
           </div>
-        </div>
+          <% if current_user && c.cocktail_tastings.where(user_id: current_user.id).present? %>
+            <div class="accordion-item mb-3 rounded">
+              <h2 class="accordion-header" id="heading-<%= c.id %>">
+                <button class="accordion-button collapsed rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<%= c.id %>" aria-expanded="false" aria-controls="collapse-<%= c.id %>">
+                  <span class="text-center">テイスティング一覧</span>
+                </button>
+              </h2>
+              <% c.cocktail_tastings.where(user_id: current_user.id).each do |f| %>
+                <div id="collapse-<%= c.id %>" class="accordion-collapse collapse" aria-labelledby="heading-<%= c.id %>" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body row col-md-12">
+                    <span class="col-md-2">ウイスキー:<%= f.whiskey.name %></span>
+                    <span class="col-md-8">
+                      香り<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= f.aroma %></span>
+                      味<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= f.flavor %></span>
+                      見た目、色合い<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= f.appearance %></span>
+                      口当たり<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= f.mouthfeel %></span>
+                      後味<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= f.finish %></span>
+                      総合評価<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= (f.aroma + f.flavor + f.appearance + f.mouthfeel + f.finish) / 5 %></span>
+                    </span>
+                    <span class="col-md-2">
+                    <%= link_to t('helpers.btn.edit'), edit_cocktail_cocktail_tasting_path(c, f), class: 'btn btn-outline-primary' %>
+                    <%= link_to t('helpers.btn.destroy'), cocktail_cocktail_tasting_path(c, f), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-outline-danger' %>
+                    </span>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
       <% end %>
-      </div>
     </div>
-  <% end %>
-  <% end %>
   <% end %>
 </div>
 
@@ -69,27 +81,24 @@
   left: 0;
 }
 
+
+.accordion-container {
+    display: flex;
+    flex-direction: column; /* 縦に並べる */
+  }
+
+  .bookmark-container {
+    display: flex;
+    justify-content: flex-end; /* 右に寄せる */ /* 上に余白を追加 */
+    margin-right: 20px;
+  }
+
+  .null {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .title {
+    text-align: center;
+  }
 </style>
-
-<script>
-document.addEventListener('turbo:load', function() {
-    var showFormButtons = document.querySelectorAll('.showFormButton');
-    var forms = document.querySelectorAll('.myForm');
-
-    showFormButtons.forEach(function(button, index) {
-        // リスナーを登録する前に、既存のリスナーを削除
-        var newButton = button.cloneNode(true);
-        button.replaceWith(newButton);
-        newButton.addEventListener('click', function() {
-            var form = forms[index];
-            if (form.style.display === 'none' || form.style.display === '') {
-                form.style.display = 'block';
-            } else {
-                form.style.display = 'none';
-            }
-        });
-    });
-});
-
-
-</script>

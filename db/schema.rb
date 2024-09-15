@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_13_230555) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_15_211634) do
   create_table "base_cocktails", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "base_name", null: false
     t.datetime "created_at", null: false
@@ -41,11 +41,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_13_230555) do
     t.bigint "whiskey_id", null: false
     t.bigint "user_id"
     t.string "others"
-    t.decimal "aroma", precision: 10
-    t.decimal "flavor", precision: 10
-    t.decimal "appearance", precision: 10
-    t.decimal "finish", precision: 10
-    t.decimal "mouthfeel", precision: 10
+    t.decimal "aroma", precision: 4, scale: 2
+    t.decimal "flavor", precision: 4, scale: 2
+    t.decimal "appearance", precision: 4, scale: 2
+    t.decimal "finish", precision: 4, scale: 2
+    t.decimal "mouthfeel", precision: 4, scale: 2
     t.index ["cocktail_id"], name: "index_cocktail_tastings_on_cocktail_id"
     t.index ["user_id"], name: "index_cocktail_tastings_on_user_id"
     t.index ["whiskey_id"], name: "index_cocktail_tastings_on_whiskey_id"
@@ -92,11 +92,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_13_230555) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "whiskey_id", null: false
-    t.decimal "aroma", precision: 10
-    t.decimal "flavor", precision: 10
-    t.decimal "body", precision: 10
-    t.decimal "finish", precision: 10
-    t.decimal "balance", precision: 10
+    t.decimal "aroma", precision: 4, scale: 2
+    t.decimal "flavor", precision: 4, scale: 2
+    t.decimal "body", precision: 4, scale: 2
+    t.decimal "finish", precision: 4, scale: 2
+    t.decimal "balance", precision: 4, scale: 2
     t.index ["whiskey_id"], name: "index_tastings_on_whiskey_id"
   end
 
