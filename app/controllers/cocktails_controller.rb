@@ -5,6 +5,8 @@ class CocktailsController < ApplicationController
     @base_cocktails = BaseCocktail.all
     @cocktail_search_form = SearchCocktailsForm.new(search_params)
     @cocktails = @cocktail_search_form.search
+
+    @cocktails = Cocktail.includes(:base_cocktails, :cocktail_tastgings).page(params[:page])
   end
 
   def show

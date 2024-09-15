@@ -43,12 +43,12 @@
 
         <% if @tastings.where(whiskey_id: whiskey.id).present? %>
             <h2 class="accordion-header mb-3" style="max-width: 850px;">
-              <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<%= whiskey.id %>" aria-expanded="false" aria-controls="collapse-<%= whiskey.id %>">
                 テイスティング一覧
               </button>
             </h2>
             <% @tastings.where(whiskey_id: whiskey.id).each do |f| %>
-              <div id="collapseTwo" class="accordion-collapse collapse row justify-content-center" data-bs-parent="#accordionExample">
+              <div id="collapse-<%= whiskey.id %>" class="accordion-collapse collapse row justify-content-center" data-bs-parent="#accordionExample">
                 <div class="card text-center mb-5 shadow-lg" style="max-width: 850px;">
                   <div class="card-header">
                     <%= f.tasting_type %>

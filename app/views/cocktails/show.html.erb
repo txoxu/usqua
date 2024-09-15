@@ -1,7 +1,7 @@
 <% breadcrumb :cocktail, @cocktail %>
 <div class="container">
   <div class="row">
-    <div class="col-md-6 bg-body-secondary shadow-lg">
+    <div class="col-md-6 bg-body-secondary shadow-lg rounded">
       <div class="show-frame mb-3">
         <div class="mb-5">
           <h1><%= @cocktail.cocktail_name %></h1>
@@ -10,7 +10,7 @@
           <%= @cocktail.cocktail_origin %>
         </div>
         <div class="mb-5">
-          <%= @cocktail.cocktail_recipe %>
+          <%= @cocktail.cocktail_recipe.gsub(/,/, '<br>').html_safe %>
         </div>
         <div class="mb-5">
           <%= @cocktail.cocktail_create %>
