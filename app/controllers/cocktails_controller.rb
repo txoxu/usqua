@@ -23,3 +23,4 @@ class CocktailsController < ApplicationController
     params.fetch(:search_cocktails_form, {}).permit(:keyword)
   end
 end
+#

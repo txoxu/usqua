@@ -1,31 +1,21 @@
-<%= form_with model: @search_form, url: whiskeys_path, method: :get, local: true, class: 'search-form' do |f| %>
-    <div class="col-md-2">
-      <select class="form-select form-select-md" aria-label=".form-select-lg example">
-        <option value="" disabled selected>生産国別</option>
-        <% @category_names.each do |category| %>
-          <option value="<%= category.id %>"><%= category.category_name %></option>
-        <% end %>
-      </select>
-    </div>
-
-    <div class="col-md-2">
-      <select class="form-select form-select-md" aria-label=".form-select-lg example">
-        <option value="" disabled selected>原産国別</option>
-        <% @category_types.each do |category_type| %>
-          <option value="<%= category_type.id %>"><%= category_type.category_type %></option>
-        <% end %>
-      </select>
-    </div>
-
-    <div class="col-md-3">
-      <%= f.text_field :name, class: 'form-control g-3 align-items-center', placeholder: 'ウイスキーの名前' %>
-    </div>
-    
-    <div class="col-md-3">
-      <%= f.text_field :text, class: 'form-control g-3 align-items-center', placeholder: 'キーワード' %>
-    </div>
-    
-    <div class="col-md-2 d-flex align-items-end">
-      <%= f.submit t('helpers.submit.search'), class: 'btn btn-outline-success' %>
-    </div>
-<% end %>
+<div class="container">
+  <div class="row">
+    <%= form_with model: @search_form, url: whiskeys_path, method: :get, local: true, class: 'search-form d-flex flex-wrap' do |f| %>
+      <div class="col-md-3 mb-3">
+        <%= f.select :category_id, options_for_select(@category_names.map { |category| [category.category_name, category.id] }), { include_blank: '生産国別' }, class: 'form-select form-select-md' %>
+      </div>
+      <div class="col-md-3 mb-3">
+        <%= f.select :category_type_id, options_for_select(@category_types.map { |category_type| [category_type.category_type, category_type.id] }), { include_blank: '原産国別' }, class: 'form-select form-select-md' %>
+      </div>
+      <div class="col-md-3 mb-3">
+        <%= f.text_field :name, class: 'form-control', placeholder: 'ウイスキーの名前' %>
+      </div>
+      <div class="col-md-3 mb-3">
+        <%= f.text_field :text, class: 'form-control', placeholder: 'キーワード' %>
+      </div>
+      <div class="col-md-12 mb-3">
+        <%= f.submit t('helpers.submit.search'), class: 'btn btn-outline-success w-100' %>
+      </div>
+    <% end %>
+  </div>
+</div>

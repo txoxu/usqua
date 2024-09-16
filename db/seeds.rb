@@ -32,25 +32,25 @@
 # end
 #
 # puts "Categories seeded successfully."
-remmaining_quantities = [
-  {id: 1, quantity: '0ml', quantity_image: '0ml.jpg'},
-  {id: 2, quantity: '100ml', quantity_image: '100ml.jpg'},
-  {id: 3, quantity: '200ml', quantity_image: '200ml.jpg'},
-  {id: 4, quantity: '300ml', quantity_image: '300ml.jpg'},
-  {id: 5, quantity: '400ml', quantity_image: '400ml.jpg'},
-  {id: 6, quantity: '500ml', quantity_image: '500ml.jpg'},
-  {id: 7, quantity: '600ml', quantity_image: '600ml.jpg'},
-  {id: 8, quantity: '700ml', quantity_image: '700ml.jpg'}
-]
-
-remmaining_quantities.each do |data|
-  remmaining_quantity = RemmainingQuantity.find_by(id: data[:id])
-  if remmaining_quantity
-    remmaining_quantity.update(data)
-  else
-    RemmainingQuantity.create(data)
-  end
-end
+#remmaining_quantities = [
+#  {id: 1, quantity: '0ml', quantity_image: '0ml.jpg'},
+#  {id: 2, quantity: '100ml', quantity_image: '100ml.jpg'},
+#  {id: 3, quantity: '200ml', quantity_image: '200ml.jpg'},
+#  {id: 4, quantity: '300ml', quantity_image: '300ml.jpg'},
+#  {id: 5, quantity: '400ml', quantity_image: '400ml.jpg'},
+#  {id: 6, quantity: '500ml', quantity_image: '500ml.jpg'},
+#  {id: 7, quantity: '600ml', quantity_image: '600ml.jpg'},
+#  {id: 8, quantity: '700ml', quantity_image: '700ml.jpg'}
+#]
+#
+#remmaining_quantities.each do |data|
+#  remmaining_quantity = RemmainingQuantity.find_by(id: data[:id])
+#  if remmaining_quantity
+#    remmaining_quantity.update(data)
+#  else
+#    RemmainingQuantity.create(data)
+#  end
+#end
 =begin
 cocktails = [
   { id: 1, base_cocktail_id: 1, cocktail_name: 'アフィニティー', cocktail_origin: '「新和性」、「相性」の意味で、ベースとなる材料の原産国の関係を表しているとされる',
@@ -149,3 +149,7 @@ end
    end
  end
 =end
+
+ distilleries = [
+  {id: 1, distillery_name: , distillery_url: , prefectures: }
+ ]

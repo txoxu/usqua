@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get 'demo', to: 'pages#demo'
 
 
-  resources :users, only: %i[show edit update destroy]
+resources :users, only: %i[show edit update destroy]
   resources :cocktails do
     resources :cocktail_tastings, only: %i[create new edit update destroy]
     collection do
