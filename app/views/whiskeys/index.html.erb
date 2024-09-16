@@ -21,7 +21,7 @@
               </div>
               <div class="col-md-4">
                 <div class="card-body">
-                  <h5 class="card-title"><%= link_to whiskey.name, whiskey_path(whiskey) %></h5>
+                  <h3 class="card-title"><%= whiskey.name %></h3>
                     <% if whiskey.remmaining_quantity.present? && whiskey.remmaining_quantity.quantity.present? %>
                       <p class="card-text"><%= whiskey.remmaining_quantity.quantity %></p>
                     <% end %>

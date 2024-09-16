@@ -73,7 +73,8 @@
     <h1>お気に入りカクテル</h1>
       <% if @bookmark_cocktails.present? %>
           <% @bookmark_cocktails.each do |b| %>
-            <div class="card" style="width: 18rem; margin-left: 2rem; margin-top: 2rem;">
+          <div class="row">
+            <div class="card col-md-12 mb-1">
                 <div class="card-body">
                   <h5 class="card-title"><%= b.cocktail_name %></h5>
                   <p class="card-text"><%= b.cocktail_origin %></p>
@@ -81,6 +82,7 @@
                   <%= link_to "詳細ページ", cocktail_path(b), class: "link-success link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" %>
                 </div>
             </div>
+          </div>
           <% end %>
       <% else %>
         <div class='mb-3'>

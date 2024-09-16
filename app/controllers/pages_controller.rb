@@ -1,11 +1,5 @@
 class PagesController < ApplicationController
 
-  def demo
-    @whiskey = Whiskey.new
-    @category_names = Category.select(:category_name).distinct
-    @category_types = Category.select(:category_type).distinct
-    @quantities = RemmainingQuantity.all
-  end
   def home; end
 
   def mypage
