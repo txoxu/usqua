@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="row">
+    <div class="card col-md-7 offset-md-2">
+      <div class="card-body">
+        <h5 class="card-title pb-3">
+          <span class="title">お名前</span>
+          <%= @contact.name %>
+        </h5>
+        <h6 class="card-subtitle mb-2 text-body-secondary pb-3">
+          <span class="title">メールアドレス</span>
+          <%= @contact.email %>
+        </h6>
+        <h6 class="card-subject pb-3">
+          <span class="title">件名</span>
+          <%= @contact.subject %>
+        </h6>
+        <p class="card-message pb-3">
+          <span class="title">メッセージ</span>
+          <%= @contact.message %>
+        </p>
+          <div class="card-link">
+            <%= form_with model: @contact, url: contacts_path, local: true, data: { turbo: false } do |f| %>
+            <%= f.hidden_field :name %>
+            <%= f.hidden_field :email %>
+            <%= f.hidden_field :subject %>
+            <%= f.hidden_field :message %>
+            <div><%= f.submit '送信', class: "btn btn-success w-100" %></div>
+          <% end %>
+            <%= form_with model: @contact, url: back_contacts_path, local: true, data: { turbo: false } do |f| %>
+            <%= f.hidden_field :name %>
+            <%= f.hidden_field :email %>
+            <%= f.hidden_field :subject %>
+            <%= f.hidden_field :message %>
+            <div><%= f.submit '入力画面に戻る', class: "btn btn-info w-100" %></div>
+            <% end %>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
