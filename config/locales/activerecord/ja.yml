@@ -28,6 +28,11 @@ ja:
         name: ウイスキー
         cocktail_flavor: カクテルの味
         tasting_recipe: カクテルの材料、量
+      contact:
+        name: お名前
+        email: メールアドレス
+        subject: 件名
+        message: メッセージ
     errors:
       models:
         user:
