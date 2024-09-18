@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get 'home', to: 'pages#home'
   get 'mypage', to: 'pages#mypage'
   root 'static_pages#top'
-  get 'demo', to: 'pages#demo'
+  get 'explanation', to: 'static_pages#explanation'
 
 
 resources :users, only: %i[show edit update destroy]
