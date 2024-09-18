@@ -15,6 +15,9 @@
 <% end %>
 
 <% if devise_mapping.omniauthable? %>
+  <div class="jsutify-content-center d-flex">
+        <span>又は</span>
+
   <div>
     <% resource_class.omniauth_providers.each do |provider| %>
       <% if provider == :google_oauth2 %>
@@ -26,14 +29,15 @@
             <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path>
             <path fill="none" d="M0 0h48v48H0z"></path>
           </svg>
-          Sign in with Google
+          googleでログイン
         </a>
       <% else %>
         <a href="<%= omniauth_authorize_path(resource_name, provider) %>" style="display: inline-block; padding: 10px 20px; margin: 5px; border-radius: 4px; background-color: #131314; color: #E3E3E3; text-decoration: none; font-family: 'Roboto', sans-serif; font-weight: 500; font-size: 14px; line-height: 20px; text-align: center; border: 1px solid #8E918F;">
-          Sign in with <%= OmniAuth::Utils.camelize(provider) %>
+          <%= OmniAuth::Utils.camelize(provider) %>でログイン
         </a>
       <% end %>
     <% end %>
   </div>
+        </div>
 <% end %>
 
