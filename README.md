@@ -79,4 +79,5 @@
 https://www.figma.com/file/HVdmhaA0lOg1dRpmfNnEVA/%E3%82%A6%E3%82%A4%E3%82%B9%E3%82%AD%E3%83%BC%E7%AE%A1%E7%90%86%E3%82%A2%E3%83%97%E3%83%AA%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?type=design&node-id=31%3A240&mode=design&t=302tnJpZ2UlXOmkz-1
 
 ■　ER図
-![alt text](<../OneDrive/画像/スクリーンショット/スクリーンショット 2024-05-02 132245.png>)
+![卒業制作 drawio](https://github.com/user-attachments/assets/df1f0936-a09c-4c05-92cb-bfa2a577e7ae)
+
