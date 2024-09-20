@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get 'mypage', to: 'pages#mypage'
   root 'static_pages#top'
   get 'explanation', to: 'static_pages#explanation'
-
+  post 'update_badge_seen', to: 'whiskeys#update_badge_seen'
 
 resources :users, only: %i[show edit update destroy]
   resources :cocktails do

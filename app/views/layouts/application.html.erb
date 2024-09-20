@@ -27,6 +27,15 @@
         <div class="loader">
         </div>
       </div>
+      <!-- ポップアップモーダルのHTML -->
+      <div id="badgePopup" class="modal" style="display:none;">
+        <div class="modal-content">
+          <span class="close-btn">&times;</span>
+          <h2 class="badge-name"></h2>
+          <p class="badge-description"></p>
+          <p>新しいバッジが付与されました！</p>
+        </div>
+      </div>
         <%= yield %>
     </main>
     <%= render 'shared/footer' %>
@@ -114,6 +123,40 @@
         }
       }
 
+
+      .modal {
+    display: none; /* 初期状態では表示しない */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 背景を半透明に */
+  }
+  
+  .modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 300px;
+    text-align: center;
+  }
+  
+  .close-btn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close-btn:hover, .close-btn:focus {
+    color: #000;
+    cursor: pointer;
+  }
+
 </style>
 
 <script>
@@ -137,6 +180,36 @@
 });
 
 
+
+  document.addEventListener('turbo:load', function() {
+  // Railsからのフラグ (例: 新しいバッジが付与されたかどうか)
+    window.badgeAssigned = "<%= @badge_assigned ? 'true' : 'false' %>";
+    window.badgeName = "<%= @badge_name %>";
+    window.badgeDescription = "<%= @badge_description %>";
+  
+  // ポップアップ要素を取得
+  const modal = document.getElementById('badgePopup');
+  const closeBtn = document.querySelector('.close-btn');
+  
+  // バッジが付与された場合にポップアップを表示
+  if (window.badgeAssigned === 'true') {
+      modal.querySelector('.badge-name').textContent = window.badgeName;
+      modal.querySelector('.badge-description').textContent = window.badgeDescription;
+      modal.style.display = 'block';
+    }
+  
+  // 閉じるボタンがクリックされた時にポップアップを閉じる処理
+  closeBtn.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  // モーダル外がクリックされた場合にも閉じる
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+});
 
 </script>
   </body>
