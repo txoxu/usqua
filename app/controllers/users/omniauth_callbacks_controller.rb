@@ -49,6 +49,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       set_flash_message(:notice, :success, kind: provider_name) if is_navigational_format?
     else
       @user_provider_id = user_provider_info[:user_provider].id
+      session[:user_provider_id] = @user_provider_id # ここでセッションに保存
       render 'devise/registrations/new'
     end
   end

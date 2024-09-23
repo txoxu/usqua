@@ -1,2 +1,0 @@
-class CocktailBadgesController < ApplicationController
-end
