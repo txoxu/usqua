@@ -1,0 +1,4 @@
+class WhiskeyBadgesController < ApplicationController
+
+  
+end

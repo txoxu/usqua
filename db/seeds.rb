@@ -150,6 +150,19 @@ end
  end
 =end
 
- distilleries = [
-  {id: 1, distillery_name: , distillery_url: , prefectures: }
+ whiskey_badges = [
+  {id: 1, name: '初登録', description: '初めてウイスキーを登録しました。', conditions: {"type" => "new_whiskey_count", "count" => 1 }}
  ]
+
+ whiskey_badges.each do |b|
+  begin
+    WhiskeyBadge.find_or_create_by!(id: b[:id]) do |badge|
+      badge.name = b[:name]
+      badge.description = b[:description]
+      badge.conditions = b[:conditions]
+    end
+    Rails.logger.info "ウイスキーバッジを作成しました。: #{b[:name]}"
+  rescue StandardError => e
+    Rails.logger.error "ウイスキーバッジの作成に失敗しました。: #{b[:name]}, Error: #{e.message}"
+  end
+end

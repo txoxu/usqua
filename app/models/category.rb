@@ -2,6 +2,8 @@ class Category < ApplicationRecord
   has_many :whiskey_categories
   has_many :whiskeys, through: :whiskey_categories
   has_many :cocktails
+  belongs_to :whiskey_badge
+  belongs_to :cocktail_badge
 
 
   validates :category_name, presence: true, uniqueness: { scope: :category_type }
