@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UpdateCocktailTastingsTable < ActiveRecord::Migration[7.1]
   def change
     remove_column :cocktail_tastings, :tasting_recipe

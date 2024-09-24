@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CocktailTastingsController < ApplicationController
   before_action :set_cocktail_tasting
   before_action :set_whiskeys, only: %i[new edit update]

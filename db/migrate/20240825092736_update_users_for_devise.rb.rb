@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UpdateUsersForDevise < ActiveRecord::Migration[7.1]
   def up
     # カラムが存在すれば削除

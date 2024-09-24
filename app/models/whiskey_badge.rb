@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class WhiskeyBadge < ApplicationRecord
   has_many :user_whiskey_badges
   has_many :users, through: :user_whiskey_badges

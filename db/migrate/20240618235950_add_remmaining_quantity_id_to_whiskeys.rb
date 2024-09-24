@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddRemmainingQuantityIdToWhiskeys < ActiveRecord::Migration[7.1]
   def change
     add_reference :whiskeys, :remmaining_quantity, foreign_key: true

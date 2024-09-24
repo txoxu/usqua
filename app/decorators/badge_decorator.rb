@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BadgeDecorator < Draper::Decorator
   delegate_all
 

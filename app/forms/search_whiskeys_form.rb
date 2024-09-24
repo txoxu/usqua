@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SearchWhiskeysForm
   # app/forms/search_whiskeys_form.rb
   include ActiveModel::Model

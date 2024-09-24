@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Tasting < ApplicationRecord
   belongs_to :whiskey
 

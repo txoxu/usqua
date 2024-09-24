@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -17,7 +19,8 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true
 
-  def self.from_omniauth(auth) # snsから取得した、providerとuidを使って、既存ユーザーを検索
+  # snsから取得した、providerとuidを使って、既存ユーザーを検索
+  def self.from_omniauth(auth)
     user_provider = UserProvider.where(provider: auth.provider, uid: auth.uid).first_or_create
 
     # snsのuser or usersテーブルに対し、SNS認証で取得したメールアドレスが登録済みの場合は、取得 or なければビルド(保存はしない)

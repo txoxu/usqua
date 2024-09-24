@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 crumb :mypage do
   link 'マイページ', mypage_path
 end

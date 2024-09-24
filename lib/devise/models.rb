@@ -65,7 +65,7 @@ module Devise
 
       return unless failed_attributes.any?
 
-      raise Devise::Models::MissingAttribute.new(failed_attributes)
+      raise Devise::Models::MissingAttribute, failed_attributes
     end
 
     # Include the chosen devise modules in your model:

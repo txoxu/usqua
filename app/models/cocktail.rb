@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Cocktail < ApplicationRecord
   belongs_to :base_cocktail
   belongs_to :user

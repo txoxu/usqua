@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddCocktailIdToCocktailTastings < ActiveRecord::Migration[7.1]
   def change
     # Add the cocktail_id column

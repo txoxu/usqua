@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PasswordResetsController < ApplicationController
   before_action :require_login, except: %i[new create edit update]
   def new; end

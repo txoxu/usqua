@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class WhiskeysController < ApplicationController
   def new
     @whiskey = Whiskey.new

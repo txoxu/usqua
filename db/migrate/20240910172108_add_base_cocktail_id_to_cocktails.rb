@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddBaseCocktailIdToCocktails < ActiveRecord::Migration[7.1]
   def change
     return if column_exists?(:cocktails, :base_cocktail_id)

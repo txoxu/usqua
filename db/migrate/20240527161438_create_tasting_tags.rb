@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateTastingTags < ActiveRecord::Migration[7.1]
   def change
     create_table :tasting_tags do |t|

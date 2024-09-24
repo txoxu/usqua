@@ -142,7 +142,7 @@ module Devise
           id, token, generated_at = *args
 
           record = to_adapter.get(id)
-          record if record && record.remember_me?(token, generated_at)
+          record if record&.remember_me?(token, generated_at)
         end
 
         # Generate a token checking if one does not already exist in the database.

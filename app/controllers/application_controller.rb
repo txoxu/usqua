@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   before_action :require_login
   add_flash_types :success, :danger
@@ -14,7 +16,8 @@ class ApplicationController < ActionController::Base
     mypage_path # カスタムリダイレクト先
   end
 
-  def configure_permitted_parameters # メールアドレス以外の自分で追加したカラムを許可
+  # メールアドレス以外の自分で追加したカラムを許可
+  def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end
 end
