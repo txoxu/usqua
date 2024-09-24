@@ -69,6 +69,8 @@ gem 'omniauth-rails_csrf_protection'
 gem 'dotenv-rails', groups: %i[development test]
 
 gem 'pry-byebug'
+
+gem 'meta-tags'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
