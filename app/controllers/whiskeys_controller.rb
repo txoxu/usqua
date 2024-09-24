@@ -10,12 +10,12 @@ class WhiskeysController < ApplicationController
     @whiskey = current_user.whiskeys.build(whiskey_params)
     categories = find_existing_categories
     remmaining_quantity = RemmainingQuantity.find_by(id: params[:whiskey][:remmaining_quantity_id])
-  
+
     if categories.any? && @whiskey.save
       @whiskey.assign_image(params[:whiskey][:image])
       @whiskey.categories << categories
       @whiskey.assign_remmaining_quantity(remmaining_quantity)
-  
+
       WhiskeyBadgesJob.perform_later(current_user.id, @whiskey.id)
       redirect_to choose_next_step_whiskey_path(@whiskey), success: t('whiskeys.create.success')
     else

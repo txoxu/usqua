@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get 'explanation', to: 'static_pages#explanation'
   post 'update_badge_seen', to: 'whiskeys#update_badge_seen'
 
-resources :users, only: %i[show edit update destroy]
+  resources :users, only: %i[show edit update destroy]
   resources :cocktails do
     resources :cocktail_tastings, only: %i[create new edit update destroy]
     collection do
@@ -29,19 +29,18 @@ resources :users, only: %i[show edit update destroy]
   end
   resources :distilleries, only: %i[index]
 
-    resources :contacts, only: %i[new create] do
-      collection do
-        post 'confirm'
-        get 'confirm', to: redirect('/contacts/new')
-        post 'back'
-        get 'done'
-      end
+  resources :contacts, only: %i[new create] do
+    collection do
+      post 'confirm'
+      get 'confirm', to: redirect('/contacts/new')
+      post 'back'
+      get 'done'
     end
-  
+  end
+
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
 
   # Defines the root path route ("/")
   # root "posts#index"
-
 end

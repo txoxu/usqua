@@ -54,6 +54,7 @@ class CocktailTastingsController < ApplicationController
   end
 
   def cocktail_tasting_params
-    params.require(:cocktail_tasting).permit(:aroma, :flavor, :appearance, :finish, :mouthfeel, :others, :whiskey_id, :whiskey_name)
+    params.require(:cocktail_tasting).permit(:aroma, :flavor, :appearance, :finish, :mouthfeel, :others, :whiskey_id,
+                                             :whiskey_name)
   end
 end

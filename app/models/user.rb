@@ -15,7 +15,6 @@ class User < ApplicationRecord
   has_many :user_cocktail_badges, dependent: :destroy
   has_many :cocktail_badges, through: :user_cocktail_badges
 
-
   validates :email, presence: true, uniqueness: true
 
   def self.from_omniauth(auth) # snsから取得した、providerとuidを使って、既存ユーザーを検索
@@ -31,7 +30,7 @@ class User < ApplicationRecord
       user_provider.user = user
       user_provider.save!
     end
-    { user: user, user_provider: user_provider } # user、snsをハッシュで返す(コントローラーがこれを受け取る)
+    { user:, user_provider: } # user、snsをハッシュで返す(コントローラーがこれを受け取る)
   end
 
   def bookmark(cocktail)

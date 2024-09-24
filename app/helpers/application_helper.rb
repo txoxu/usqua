@@ -9,7 +9,7 @@ module ApplicationHelper
       keywords: 'お酒,ウイスキー,ウヰスキー,カクテル,蒸留所',
       canonical: 'https://usqua-b00a6d1e8961.herokuapp.com/',
       separator: '|',
-      og:{
+      og: {
         site_name: :site,
         title: :title,
         description: :description,

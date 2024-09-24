@@ -7,6 +7,6 @@ class CreateUserWhiskeyBadges < ActiveRecord::Migration[7.1]
 
       t.timestamps
     end
-    add_index :user_whiskey_badges, [:user_id, :whiskey_badge_id], unique: true
+    add_index :user_whiskey_badges, %i[user_id whiskey_badge_id], unique: true
   end
 end

@@ -22,11 +22,10 @@ crumb :edit_whiskey do |whiskey|
   parent :whiskeys
 end
 
-
-#crumb :edit_whiskey_tasting do |tasting|
+# crumb :edit_whiskey_tasting do |tasting|
 #  link 'テイスティング編集', edit_whiskey_tasting_path(tasting)
 #  parent :whiskey_tasting, tasting
-#end
+# end
 
 crumb :cocktails do
   link 'カクテル一覧', cocktails_path
