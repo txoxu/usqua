@@ -94,6 +94,8 @@ group :development, :test do
   gem 'debug', platforms: %i[mri windows]
 
   gem 'letter_opener_web', '~> 3.0'
+
+  gem 'rspec-rails', '~> 7.0', '>= 7.0.1'
 end
 
 group :development do
