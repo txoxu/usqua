@@ -107,6 +107,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000; 
 }
 
 .popup-content {
@@ -116,6 +117,7 @@
   text-align: center;
   max-width: 500px;
   width: 100%;
+  
 }
 
 .popup .close {
@@ -128,7 +130,7 @@
 }
 </style>
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
+  document.addEventListener("turbo:load", function() {
   var popup = document.getElementById("badge-popup");
   var badgeList = document.getElementById("badge-list");
   var closeBtn = document.querySelector(".popup .close");

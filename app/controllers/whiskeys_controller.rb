@@ -18,7 +18,8 @@ class WhiskeysController < ApplicationController
       @whiskey.categories << categories
       @whiskey.assign_remmaining_quantity(remmaining_quantity)
 
-      WhiskeyBadgesJob.perform_later(current_user.id, @whiskey.id)
+      badge_service = WhiskeyBadgeService.new(current_user, @whiskey)
+      badge_service.assign_badges
       redirect_to choose_next_step_whiskey_path(@whiskey), success: t('whiskeys.create.success')
     else
       prepare_form_data
@@ -69,7 +70,7 @@ class WhiskeysController < ApplicationController
       if params[:whiskey][:image].present?
         @whiskey.update(image: params[:whiskey][:image])
       else
-        @whiskey.update(image: File.open(Rails.root.join('app', 'assets', 'images', 'image.png')))
+        @whiskey.update(image: File.open(Rails.root.join('app/assets/images/image.png')))
       end
       @whiskey.categories = categories
       @whiskey.remmaining_quantity = remmaining_quantity

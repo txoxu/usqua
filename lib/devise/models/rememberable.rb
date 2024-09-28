@@ -113,7 +113,7 @@ module Devise
         # 5. the token matches
         generated_at.is_a?(Time) &&
           (self.class.remember_for.ago < generated_at) &&
-          (generated_at > (remember_created_at || Time.now).utc) &&
+          (generated_at > (remember_created_at || Time.zone.now).utc) &&
           Devise.secure_compare(rememberable_value, token)
       end
 
@@ -121,10 +121,10 @@ module Devise
 
       def time_from_json(value)
         if value =~ /\A\d+\.\d+\Z/
-          Time.at(value.to_f)
+          Time.zone.at(value.to_f)
         else
           begin
-            Time.parse(value)
+            Time.zone.parse(value)
           rescue StandardError
             nil
           end

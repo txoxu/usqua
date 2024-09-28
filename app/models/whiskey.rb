@@ -22,7 +22,7 @@ class Whiskey < ApplicationRecord
   end
 
   def assign_image(image)
-    self.image = image.presence || File.open(Rails.root.join('app', 'assets', 'images', 'default.jpg'))
+    self.image = image.presence || File.open(Rails.root.join('app/assets/images/default.jpg'))
   end
 
   private
