@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+
+
 # カクテルテイスティングのコントローラ
 
 class CocktailTastingsController < ApplicationController

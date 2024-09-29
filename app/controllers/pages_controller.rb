@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+
+
 # マイページのコントローラ
 class PagesController < ApplicationController
   def home; end

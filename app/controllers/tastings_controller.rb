@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+
+
 # ウイスキーのテイスティングのコントローラ
 class TastingsController < ApplicationController
   before_action :set_whiskey

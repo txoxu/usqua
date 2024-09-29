@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+
+
 # お気に入り登録のbookmarkのコントローラ
 
 class BookmarksController < ApplicationController

@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+
+
 # ウイスキーのコントローラ
 class WhiskeysController < ApplicationController
   before_action :set_whiskey, only: %i[edit update destroy choose_next_step]
