@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+#sorceryの設定
 class SorceryCore < ActiveRecord::Migration[7.1]
   def change
     create_table :users do |t|

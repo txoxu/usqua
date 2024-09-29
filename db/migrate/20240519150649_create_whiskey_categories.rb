@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+#whiskeyとcategoryの中間テーブル
 class CreateWhiskeyCategories < ActiveRecord::Migration[7.1]
   def change
     create_table :whiskey_categories do |t|

@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+# ウイスキーのテイスティングモデル
 class Tasting < ApplicationRecord
   belongs_to :whiskey
 

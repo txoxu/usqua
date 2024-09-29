@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+# userとcocktailbadgeを関連付け
 class CreateUserCocktailBadges < ActiveRecord::Migration[7.1]
   def change
     create_table :user_cocktail_badges do |t|

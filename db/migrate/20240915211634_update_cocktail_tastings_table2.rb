@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+# カクテルテイスティングテーブルの文字数を変更
 class UpdateCocktailTastingsTable2 < ActiveRecord::Migration[7.1]
   def change
     change_column :cocktail_tastings, :aroma, :decimal, precision: 4, scale: 2

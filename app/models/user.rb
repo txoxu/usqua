@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+# userに関するモデル
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -9,7 +9,7 @@ class User < ApplicationRecord
 
   has_many :user_providers, dependent: :destroy
   has_many :whiskeys, dependent: :destroy
-  has_many :cocktail_tastings
+  has_many :cocktail_tastings, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
   has_many :bookmark_cocktails, through: :bookmarks, source: :cocktail
   has_many :user_whiskey_badges, dependent: :destroy

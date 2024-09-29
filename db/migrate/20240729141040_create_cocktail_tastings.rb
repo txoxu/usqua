@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+# カクテルテイスティングテーブル
 class CreateCocktailTastings < ActiveRecord::Migration[7.1]
   def change
     create_table :cocktail_tastings do |t|

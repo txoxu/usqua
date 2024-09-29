@@ -1,4 +1,5 @@
-# app/services/whiskey_badge_service.rb
+# frozen_string_literal: true
+# ウイスキーの称号条件ロジック
 class WhiskeyBadgeService
   def initialize(user, whiskey)
     @user = user

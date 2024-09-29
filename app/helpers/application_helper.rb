@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+# 静的OGPの設定
 module ApplicationHelper
   def default_meta_tags
     {

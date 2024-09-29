@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+# ウイスキーに関するモデル
 class Whiskey < ApplicationRecord
   has_many :whiskey_categories, dependent: :destroy
   has_many :categories, through: :whiskey_categories

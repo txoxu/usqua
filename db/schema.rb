@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_23_172937) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_29_090519) do
   create_table "base_cocktails", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "base_name", null: false
     t.datetime "created_at", null: false
@@ -32,6 +32,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_23_172937) do
     t.string "category_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["category_name", "category_type"], name: "index_categories_on_category_name_and_category_type", unique: true
   end
 
   create_table "cocktail_badges", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -71,7 +72,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_23_172937) do
     t.text "cocktail_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "base_cocktail_id"
+    t.bigint "base_cocktail_id", null: false
     t.index ["base_cocktail_id"], name: "index_cocktails_on_base_cocktail_id"
   end
 
@@ -80,21 +81,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_23_172937) do
     t.string "email", null: false
     t.string "subject", null: false
     t.text "message", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "distilleries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "distillery_name"
-    t.string "distillery_url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "region_id", null: false
-    t.index ["region_id"], name: "index_distilleries_on_region_id"
-  end
-
-  create_table "regions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "region_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -152,13 +138,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_23_172937) do
   end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "email", null: false
-    t.string "salt"
-    t.string "first_name", null: false
-    t.string "last_name", null: false
+    t.string "email", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "encrypted_password"
+    t.string "name", default: "", null: false
+    t.string "encrypted_password", default: ""
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -206,8 +190,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_23_172937) do
   add_foreign_key "cocktail_tastings", "cocktails"
   add_foreign_key "cocktail_tastings", "users"
   add_foreign_key "cocktail_tastings", "whiskeys"
-  add_foreign_key "cocktails", "base_cocktails"
-  add_foreign_key "distilleries", "regions"
   add_foreign_key "tastings", "whiskeys"
   add_foreign_key "user_cocktail_badges", "cocktail_badges"
   add_foreign_key "user_cocktail_badges", "users"
