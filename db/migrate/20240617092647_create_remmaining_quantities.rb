@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # ウイスキーの残量テーブル
 class CreateRemmainingQuantities < ActiveRecord::Migration[7.1]
   def change

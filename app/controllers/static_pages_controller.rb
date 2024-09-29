@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 # トップページとこのアプリについてのコントローラ
 
 class StaticPagesController < ApplicationController

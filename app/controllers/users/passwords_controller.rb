@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# ユーザーのパスワード管理コントローラ
 module Users
   class PasswordsController < Devise::PasswordsController
     skip_before_action :require_login

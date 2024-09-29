@@ -13,19 +13,19 @@ Rails.application.routes.draw do
   post 'update_badge_seen', to: 'whiskeys#update_badge_seen'
 
   resources :users, only: %i[show edit update destroy]
-  
+
   resources :cocktails do
     resources :cocktail_tastings, except: %i[index show]
     collection { get :bookmarks }
   end
-  
+
   resources :bookmarks, only: %i[create destroy]
-  
+
   resources :whiskeys do
     member { get 'choose_next_step' }
     resources :tastings, except: %i[index show]
   end
-  
+
   resources :distilleries, only: :index
 
   resources :contacts, only: %i[new create] do

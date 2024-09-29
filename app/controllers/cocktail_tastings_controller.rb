@@ -1,21 +1,19 @@
 # frozen_string_literal: true
 
-
 # カクテルテイスティングのコントローラ
 
 class CocktailTastingsController < ApplicationController
-  before_action :set_cocktail_tasting
+  before_action :set_cocktail
+  before_action :set_cocktail_tasting, only: %i[update destroy edit]
   before_action :set_whiskeys, only: %i[new edit update]
+
   def new
     @cocktail_tasting = @cocktail.cocktail_tastings.build
   end
 
   def create
     @cocktail_tasting = @cocktail.cocktail_tastings.build(cocktail_tasting_params)
-    whiskey_name = params[:cocktail_tasting][:name]
-    whiskey = current_user.whiskeys.find_by(name: whiskey_name)
-    @cocktail_tasting.whiskey_id = whiskey.id
-    @cocktail_tasting.user_id = current_user.id
+    assign_whiskey_and_user
     if @cocktail_tasting.save
       redirect_to cocktails_path, success: t('cocktail_tastings.create.success')
     else
@@ -24,16 +22,10 @@ class CocktailTastingsController < ApplicationController
     end
   end
 
-  def edit
-    @cocktail_tasting = @cocktail.cocktail_tastings.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @cocktail_tasting = @cocktail.cocktail_tastings.find(params[:id])
-    whiskey_name = params[:cocktail_tasting][:name]
-    whiskey = current_user.whiskeys.find_by(name: whiskey_name)
-    @cocktail_tasting.whiskey_id = whiskey.id
-    @cocktail_tasting.user_id = current_user.id
+    assign_whiskey_and_user
     if @cocktail_tasting.update(cocktail_tasting_params)
       redirect_to cocktails_path, success: t('cocktail_tastings.update.success')
     else
@@ -43,19 +35,28 @@ class CocktailTastingsController < ApplicationController
   end
 
   def destroy
-    @cocktail_tasting = @cocktail.cocktail_tastings.find(params[:id])
     @cocktail_tasting.destroy!
     redirect_to cocktails_path, danger: t('cocktail_tastings.destroy.danger')
   end
 
   private
 
-  def set_cocktail_tasting
+  def set_cocktail
     @cocktail = Cocktail.find(params[:cocktail_id])
   end
 
   def set_whiskeys
     @whiskeys = current_user.whiskeys
+  end
+
+  def set_cocktail_tasting
+    @cocktail_tasting = @cocktail.cocktail_tastings.find(params[:id])
+  end
+
+  def assign_whiskey_and_user
+    whiskey_name = params[:cocktail_tasting][:name]
+    @cocktail_tasting.whiskey = current_user.whiskeys.find_by(name: whiskey_name)
+    @cocktail_tasting.user = current_user
   end
 
   def cocktail_tasting_params

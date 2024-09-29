@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # お気に入り登録のモデル
 class Bookmark < ApplicationRecord
   belongs_to :user

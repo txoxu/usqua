@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # userとwhiskeyを関連付け
 class AddUserIdToWhiskeys < ActiveRecord::Migration[7.1]
   def change

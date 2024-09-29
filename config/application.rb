@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # このクラスは、Myappのメインアプリケーションクラスであり、Railsフレームワークの初期化および構成を行います。
 # config/application.rbは、アプリケーション全体の設定を定義し、環境設定やミドルウェア、エンジンの設定などを
 # 含んでいます。このクラスはRails::Applicationを継承しており、Railsアプリケーションが起動される際に

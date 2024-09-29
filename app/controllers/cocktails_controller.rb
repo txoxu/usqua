@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 # カクテルのコントローラ
 class CocktailsController < ApplicationController
   skip_before_action :require_login

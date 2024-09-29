@@ -1,11 +1,8 @@
 # frozen_string_literal: true
 
+# お気に入り登録のbookmarkのコントローラ
 
-# お気に入り登録のBookmarkのコントローラ
-# このコントローラはユーザーのお気に入りカクテルの登録・解除を管理します。
 class BookmarksController < ApplicationController
-
-
   def create
     cocktail = Cocktail.find(params[:cocktail_id])
     current_user.bookmark(cocktail)

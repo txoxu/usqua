@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # ウイスキーの称号条件ロジック
 class WhiskeyBadgeService
   def initialize(user, whiskey)

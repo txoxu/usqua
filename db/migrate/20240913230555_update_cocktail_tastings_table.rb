@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # カクテルテイスティングテーブルを変更
 class UpdateCocktailTastingsTable < ActiveRecord::Migration[7.1]
   def change

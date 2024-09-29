@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # userをsorcery設定からdevise設定へ移行ファイル
 class UpdateUsersForDevise < ActiveRecord::Migration[7.1]
   def up

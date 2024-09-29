@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # ウイスキー一覧の検索フォーム
 class SearchWhiskeysForm
   # app/forms/search_whiskeys_form.rb

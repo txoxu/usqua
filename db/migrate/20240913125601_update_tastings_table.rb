@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # テイスティングテーブルを変更
 class UpdateTastingsTable < ActiveRecord::Migration[7.1]
   def change

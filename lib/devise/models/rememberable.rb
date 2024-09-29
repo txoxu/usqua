@@ -91,7 +91,11 @@ module Devise
         if value =~ /\A\d+\.\d+\Z/
           Time.zone.at(value.to_f)
         else
-          Time.zone.parse(value) rescue nil
+          begin
+            Time.zone.parse(value)
+          rescue StandardError
+            nil
+          end
         end
       end
 

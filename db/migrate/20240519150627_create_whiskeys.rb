@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # ウイスキーテーブル
 class CreateWhiskeys < ActiveRecord::Migration[7.1]
   def change

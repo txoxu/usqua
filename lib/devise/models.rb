@@ -109,13 +109,13 @@ module Devise
     end
 
     def set_module_configs(class_mod, options)
-      if class_mod.respond_to?(:available_configs)
-        available_configs = class_mod.available_configs
-        available_configs.each do |config|
-          next unless options.key?(config)
+      return unless class_mod.respond_to?(:available_configs)
 
-          send(:"#{config}=", options.delete(config))
-        end
+      available_configs = class_mod.available_configs
+      available_configs.each do |config|
+        next unless options.key?(config)
+
+        send(:"#{config}=", options.delete(config))
       end
     end
   end

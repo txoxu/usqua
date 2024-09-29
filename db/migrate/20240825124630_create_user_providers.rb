@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # ユーザプロバイダ―テーブル
 class CreateUserProviders < ActiveRecord::Migration[7.1]
   def change

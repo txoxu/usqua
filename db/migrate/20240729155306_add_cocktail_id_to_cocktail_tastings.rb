@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # cocktailとcocktailtastingを関連付け
 class AddCocktailIdToCocktailTastings < ActiveRecord::Migration[7.1]
   def change

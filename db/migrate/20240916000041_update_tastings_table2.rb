@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # テイスティングテーブルの文字数を変更
 class UpdateTastingsTable2 < ActiveRecord::Migration[7.1]
   def change

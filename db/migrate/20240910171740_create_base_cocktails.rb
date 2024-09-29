@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # ベースカクテルテーブル
 class CreateBaseCocktails < ActiveRecord::Migration[7.1]
   def change

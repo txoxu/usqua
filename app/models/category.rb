@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # ウイスキーの種類や原産国別のカテゴリモデル
 class Category < ApplicationRecord
   has_many :whiskey_categories, dependent: :destroy

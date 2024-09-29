@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # カクテル一覧の検索フォーム
 class SearchCocktailsForm
   include ActiveModel::Model

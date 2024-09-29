@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# ユーザーセッションの管理コントローラ
 module Users
   class SessionsController < Devise::SessionsController
     before_action :configure_sign_in_params, only: [:create]
@@ -7,6 +8,9 @@ module Users
     # GET /resource/sign_in
 
     # POST /resource/sign_in
+    def create
+      super
+    end
 
     # DELETE /resource/sign_out
 

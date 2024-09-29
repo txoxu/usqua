@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 # ウイスキーのコントローラ
 class WhiskeysController < ApplicationController
   before_action :set_whiskey, only: %i[edit update destroy choose_next_step]
@@ -16,9 +15,7 @@ class WhiskeysController < ApplicationController
     remmaining_quantity = RemmainingQuantity.find_by(id: params[:whiskey][:remmaining_quantity_id])
 
     if categories.any? && @whiskey.save
-      @whiskey.assign_image(params[:whiskey][:image])
-      @whiskey.categories << categories
-      @whiskey.assign_remmaining_quantity(remmaining_quantity)
+      assign_save(categories, remaining_quantity)
       assign_badges_to_user
       redirect_to choose_next_step_whiskey_path(@whiskey), success: t('whiskeys.create.success')
     else
@@ -32,9 +29,9 @@ class WhiskeysController < ApplicationController
     @whiskeys = @search_form.search.where(user_id: current_user.id).page(params[:page])
     @tastings = Tasting.where(whiskey_id: @whiskeys.pluck(:id))
     @new_badges = current_user.user_whiskey_badges.where(seen: false)
-                        .includes(:whiskey_badge)
-                        .map(&:whiskey_badge)
-                        .as_json
+                              .includes(:whiskey_badge)
+                              .map(&:whiskey_badge)
+                              .as_json
   end
 
   def edit; end
@@ -44,9 +41,7 @@ class WhiskeysController < ApplicationController
     remmaining_quantity = RemmainingQuantity.find_by(id: params[:whiskey][:remmaining_quantity_id])
 
     if @whiskey.update(whiskey_params)
-      @whiskey.assign_image(params[:whiskey][:image])
-      @whiskey.categories = categories
-      @whiskey.assign_remmaining_quantity(remmaining_quantity)
+      assign_save(categories, remaining_quantity)
       redirect_to whiskeys_path, success: t('whiskeys.update.success')
     else
       flash.now[:danger] = t('whiskeys.update.danger')
@@ -63,7 +58,7 @@ class WhiskeysController < ApplicationController
 
   def update_badge_seen
     current_user.user_whiskey_badges.where(whiskey_badge_id: params[:badge_ids])
-               .update_all(seen: true)
+                .update_all(seen: true)
     head :ok
   end
 
@@ -73,8 +68,15 @@ class WhiskeysController < ApplicationController
     @whiskey = current_user.whiskeys.find(params[:id])
   end
 
+  def assign_save(categories, _remaining_quantity)
+    @whiskey.assign_image(params[:whiskey][:image])
+    @whiskey.categories << categories
+    @whiskey.assign_remmaining_quantity(remmaining_quantity)
+  end
+
   def whiskey_params
-    params.require(:whiskey).permit(:name, :text, :image, :remmaining_quantity_id, category_names: [], category_types: [])
+    params.require(:whiskey).permit(:name, :text, :image, :remmaining_quantity_id, category_names: [],
+                                                                                   category_types: [])
   end
 
   def find_existing_categories

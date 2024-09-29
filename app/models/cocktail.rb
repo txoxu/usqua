@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # カクテルモデル
 class Cocktail < ApplicationRecord
   belongs_to :base_cocktail
