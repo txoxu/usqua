@@ -8,9 +8,6 @@ module Users
     # GET /resource/sign_in
 
     # POST /resource/sign_in
-    def create
-      super
-    end
 
     # DELETE /resource/sign_out
 

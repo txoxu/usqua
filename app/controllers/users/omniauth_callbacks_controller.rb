@@ -41,7 +41,7 @@ module Users
       @user = user_provider_info[:user] # deviseのヘルパーを使うため、＠user に代入(ハッシュ(モデルの返り値)から値を取得)
 
       if @user.persisted? # ユーザー登録済み(ログイン処理)
-       sign_in_user
+        sign_in_user
       else
         @user_provider_id = user_provider_info[:user_provider].id
         render 'devise/registrations/new'

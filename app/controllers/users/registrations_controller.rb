@@ -28,9 +28,6 @@ module Users
     # end
 
     # PUT /resource
-    def update
-      super
-    end
 
     # DELETE /resource
     # def destroy

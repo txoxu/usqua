@@ -36,7 +36,7 @@ class WhiskeysController < ApplicationController
 
   def update
     categories = find_existing_categories
-    remmaining_quantity = RemmainingQuantity.find_by(id: params[:whiskey][:remmaining_quantity_id])
+    RemmainingQuantity.find_by(id: params[:whiskey][:remmaining_quantity_id])
 
     if @whiskey.update(whiskey_params)
       assign_save(categories, remaining_quantity)

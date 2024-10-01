@@ -8,6 +8,7 @@ class BookmarksController < ApplicationController
     current_user.bookmark(cocktail)
     redirect_to request.referer, success: 'マイページに登録しました'
   end
+
   # マイページへの登録を解除するアクション
   def destroy
     cocktail = current_user.bookmarks.find(params[:id]).cocktail
