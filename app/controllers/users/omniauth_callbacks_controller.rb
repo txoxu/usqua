@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# ユーザーのOAuthコールバックのコントローラ
 module Users
+  # ユーザーのOAuthコールバックのコントローラ
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     # You should configure your model like this:
     # devise :omniauthable, omniauth_providers: [:twitter]
@@ -41,19 +41,23 @@ module Users
       @user = user_provider_info[:user] # deviseのヘルパーを使うため、＠user に代入(ハッシュ(モデルの返り値)から値を取得)
 
       if @user.persisted? # ユーザー登録済み(ログイン処理)
-        provider = request.env['omniauth.auth'].provider
-        provider_name = case provider
-                        when 'google_oauth2'
-                          'Google'
-                        else
-                          provider.capitalize
-                        end
-        sign_in_and_redirect @user, event: :authentication # authenticationのcallbackメソッドを呼んで、@user でログイン
-        set_flash_message(:notice, :success, kind: provider_name) if is_navigational_format?
+       sign_in_user
       else
         @user_provider_id = user_provider_info[:user_provider].id
         render 'devise/registrations/new'
       end
+    end
+
+    def sign_in_user
+      provider = request.env['omniauth.auth'].provider
+      provider_name = case provider
+                      when 'google_oauth2'
+                        'Google'
+                      else
+                        provider.capitalize
+                      end
+      sign_in_and_redirect @user, event: :authentication # authenticationのcallbackメソッドを呼んで、@user でログイン
+      set_flash_message(:notice, :success, kind: provider_name) if is_navigational_format?
     end
   end
 end

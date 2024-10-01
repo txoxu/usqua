@@ -14,10 +14,8 @@ class WhiskeysController < ApplicationController
     categories = find_existing_categories
     remmaining_quantity = RemmainingQuantity.find_by(id: params[:whiskey][:remmaining_quantity_id])
 
-    if categories.any? && @whiskey.save
-      assign_save(categories, remaining_quantity)
-      assign_badges_to_user
-      redirect_to choose_next_step_whiskey_path(@whiskey), success: t('whiskeys.create.success')
+    if categories.any?
+      save_whiskey_with_categories(categories, remmaining_quantity)
     else
       flash.now[:danger] = t('whiskeys.create.danger')
       render :new, status: :unprocessable_entity
@@ -103,5 +101,16 @@ class WhiskeysController < ApplicationController
     next_whiskey = current_user.whiskeys.where('id > ?', @whiskey.id).order(:id).first
     prev_whiskey = current_user.whiskeys.where('id < ?', @whiskey.id).order(:id).last
     [next_whiskey, prev_whiskey]
+  end
+
+  def save_whiskey_with_categories(categories, remmaining_quantity)
+    if @whiskey.save
+      assign_save(categories, remmaining_quantity)
+      assign_badges_to_user
+      redirect_to choose_next_step_whiskey_path(@whiskey), success: t('whiskeys.create.success')
+    else
+      flash.now[:danger] = t('whiskeys.create.danger')
+      render :new, status: :unprocessable_entity
+    end
   end
 end

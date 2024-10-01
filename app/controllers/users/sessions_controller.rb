@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# ユーザーセッションの管理コントローラ
 module Users
+  # ユーザーセッションの管理コントローラ
   class SessionsController < Devise::SessionsController
     before_action :configure_sign_in_params, only: [:create]
     skip_before_action :require_login

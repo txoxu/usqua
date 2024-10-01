@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-# ユーザーのパスワード管理コントローラ
 module Users
+  # ユーザーのパスワード管理コントローラ
   class PasswordsController < Devise::PasswordsController
     skip_before_action :require_login
     # GET /resource/password/new

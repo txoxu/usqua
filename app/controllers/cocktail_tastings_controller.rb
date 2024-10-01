@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 # カクテルテイスティングのコントローラ
-
 class CocktailTastingsController < ApplicationController
   before_action :set_cocktail
   before_action :set_cocktail_tasting, only: %i[update destroy edit]
