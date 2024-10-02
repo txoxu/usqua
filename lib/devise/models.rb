@@ -5,6 +5,7 @@
 # into user models, ensuring required attributes and methods are present.
 module Devise
   module Models
+    # MissingAttribute is raised when an attribute required by Devise is not present.
     class MissingAttribute < StandardError
       def initialize(attributes)
         super(attributes) # Initialize parent class

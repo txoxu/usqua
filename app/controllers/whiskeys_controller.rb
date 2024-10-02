@@ -26,10 +26,7 @@ class WhiskeysController < ApplicationController
     @search_form = SearchWhiskeysForm.new(search_params)
     @whiskeys = @search_form.search.where(user_id: current_user.id).page(params[:page])
     @tastings = Tasting.where(whiskey_id: @whiskeys.pluck(:id))
-    @new_badges = current_user.user_whiskey_badges.where(seen: false)
-                              .includes(:whiskey_badge)
-                              .map(&:whiskey_badge)
-                              .as_json
+    @new_badges = fetch_new_badges
   end
 
   def edit; end
@@ -39,8 +36,7 @@ class WhiskeysController < ApplicationController
     RemmainingQuantity.find_by(id: params[:whiskey][:remmaining_quantity_id])
 
     if @whiskey.update(whiskey_params)
-      assign_save(categories, remaining_quantity)
-      redirect_to whiskeys_path, success: t('whiskeys.update.success')
+      process_successful_update(categories, remmaining_quantity)
     else
       flash.now[:danger] = t('whiskeys.update.danger')
       render :edit, status: :unprocessable_entity
@@ -90,6 +86,18 @@ class WhiskeysController < ApplicationController
 
   def search_params
     params.fetch(:search_whiskeys_form, {}).permit(%i[category_names category_types name text])
+  end
+
+  def fetch_new_badges
+    current_user.user_whiskey_badges.where(seen: false)
+                .includes(:whiskey_badge)
+                .map(&:whiskey_badge)
+                .as_json
+  end
+
+  def process_successful_update(categories, remmaining_quantity)
+    assign_save(categories, remmaining_quantity)
+    redirect_to whiskeys_path, success: t('whiskeys.update.success')
   end
 
   def assign_badges_to_user

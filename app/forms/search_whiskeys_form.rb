@@ -14,15 +14,12 @@ class SearchWhiskeysForm
   def search
     relation = Whiskey.distinct
 
-    if category_names.present? && category_types.present?
-      category_ids = Category.where(category_name: category_names, category_type: category_types).pluck(:id)
-      relation = relation.by_category_ids(category_ids)
-    elsif category_names.present?
-      category_ids = Category.where(category_name: category_names).pluck(:id)
-      relation = relation.by_category_ids(category_ids)
-    elsif category_types.present?
-      category_ids = Category.where(category_type: category_types).pluck(:id)
-      relation = relation.by_category_ids(category_ids)
+    if category_names.present? || category_types.present?
+      category_ids = Category.where(
+        category_name: category_names.presence,
+        category_type: category_types.presence
+      ).pluck(:id).compact
+      relation = relation.by_category_ids(category_ids) if category_ids.any?
     end
 
     name_words.each do |word|

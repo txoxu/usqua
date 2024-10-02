@@ -8,6 +8,7 @@ class Cocktail < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
 
   scope :keyword, lambda { |word|
-                    where('cocktail_name LIKE ? OR cocktail_create LIKE ? OR cocktail_origin LIKE ? OR cocktail_recipe LIKE ?', "%#{word}%", "%#{word}%", "%#{word}%", "%#{word}%")
+                    where('cocktail_name LIKE ? OR cocktail_create LIKE ? OR cocktail_origin LIKE ? OR cocktail_recipe LIKE ?',
+                          "%#{word}%", "%#{word}%", "%#{word}%", "%#{word}%")
                   }
 end

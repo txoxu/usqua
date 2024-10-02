@@ -4,7 +4,6 @@
 class Category < ApplicationRecord
   has_many :whiskey_categories, dependent: :destroy
   has_many :whiskeys, through: :whiskey_categories, dependent: :destroy
-  has_many :cocktails
   belongs_to :whiskey_badge
   belongs_to :cocktail_badge
 

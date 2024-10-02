@@ -12,20 +12,30 @@ module ApplicationHelper
       keywords: 'お酒,ウイスキー,ウヰスキー,カクテル,蒸留所',
       canonical: 'https://usqua-b00a6d1e8961.herokuapp.com/',
       separator: '|',
-      og: {
-        site_name: :site,
-        title: :title,
-        description: :description,
-        type: 'website',
-        url: 'https://usqua-b00a6d1e8961.herokuapp.com/',
-        image: image_url('無題.jpg'),
-        locale: 'ja-JP'
-      },
-      twitter: {
-        card: 'summary_large_image',
-        site: '@obvyamdrss',
-        image: image_url('無題.jpg')
-      }
+      og: default_og_tags,
+      twitter: default_twitter_tags
+    }
+  end
+
+  private
+
+  def default_og_tags
+    {
+      site_name: :site,
+      title: :title,
+      description: :description,
+      type: 'website',
+      url: 'https://usqua-b00a6d1e8961.herokuapp.com/',
+      image: image_url('無題.jpg'),
+      locale: 'ja-JP'
+    }
+  end
+
+  def default_twitter_tags
+    {
+      card: 'summary_large_image',
+      site: '@obvyamdrss',
+      image: image_url('無題.jpg')
     }
   end
 end
