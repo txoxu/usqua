@@ -5,11 +5,8 @@ class CocktailsController < ApplicationController
   skip_before_action :require_login
 
   def index
-    @base_cocktails = BaseCocktail.all
     @cocktail_search_form = SearchCocktailsForm.new(search_params)
-    @cocktails = @cocktail_search_form.search
-
-    @cocktails = Cocktail.includes(:base_cocktails, :cocktail_tastgings).page(params[:page])
+    @cocktails = @cocktail_search_form.search.page(params[:page])
   end
 
   def show

@@ -51,8 +51,12 @@ class WhiskeysController < ApplicationController
   def choose_next_step; end
 
   def update_badge_seen
-    current_user.user_whiskey_badges.where(whiskey_badge_id: params[:badge_ids])
-                .update_all(seen: true)
+    badges = current_user.user_whiskey_badges.where(whiskey_badge_id: params[:badge_ids])
+  
+    badges.each do |badge|
+      badge.update(seen: true)
+    end
+  
     head :ok
   end
 

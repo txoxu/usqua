@@ -3,13 +3,16 @@
 # テイスティングテーブルを変更
 class UpdateTastingsTable < ActiveRecord::Migration[7.1]
   def change
-    remove_column :tastings, :aroma, :string
-    remove_column :tastings, :flavor, :string
+    change_table :tastings, bulk: true do |t|
+      t.remove :aroma, :string
+      t.remove :flavor, :string
 
-    add_column :tastings, :aroma, :decimal, precision: 4, scale: 2
-    add_column :tastings, :flavor, :decimal, precision: 4, scale: 2
-    add_column :tastings, :body, :decimal, precision: 4, scale: 2
-    add_column :tastings, :finish, :decimal, precision: 4, scale: 2
-    add_column :tastings, :balance, :decimal, precision: 4, scale: 2
+      t.decimal :aroma, precision: 4, scale: 2
+      t.decimal :flavor, precision: 4, scale: 2
+      t.decimal :body, precision: 4, scale: 2
+      t.decimal :finish, precision: 4, scale: 2
+      t.decimal :balance, precision: 4, scale: 2
+    end
   end
 end
+
