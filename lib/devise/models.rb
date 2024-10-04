@@ -4,6 +4,7 @@
 # This module handles the configuration and inclusion of various Devise modules
 # into user models, ensuring required attributes and methods are present.
 module Devise
+  # deviseモジュール
   module Models
     # MissingAttribute is raised when an attribute required by Devise is not present.
     class MissingAttribute < StandardError

@@ -10,13 +10,6 @@ class SearchCocktailsForm
   def search
     return Cocktail.all if keyword.blank?
 
-    Cocktail.joins(:base_cocktail).where(
-    "cocktails.cocktail_name LIKE :keyword OR
-     cocktails.cocktail_create LIKE :keyword OR
-     cocktails.cocktail_origin LIKE :keyword OR
-     cocktails.cocktail_recipe LIKE :keyword OR
-     base_cocktails.base_name LIKE :keyword",
-    keyword: "%#{keyword}%"
-  )
+    Cocktail.keyword(keyword)
   end
 end

@@ -7,6 +7,7 @@ require 'devise/strategies/rememberable'
 require 'devise/hooks/rememberable'
 require 'devise/hooks/forgetable'
 
+# deviseモジュール
 module Devise
   module Models
     module Rememberable

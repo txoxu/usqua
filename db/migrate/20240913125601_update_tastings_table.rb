@@ -4,8 +4,8 @@
 class UpdateTastingsTable < ActiveRecord::Migration[7.1]
   def change
     change_table :tastings, bulk: true do |t|
-      t.remove :aroma, :string
-      t.remove :flavor, :string
+      t.remove :aroma
+      t.remove :flavor
 
       t.decimal :aroma, precision: 4, scale: 2
       t.decimal :flavor, precision: 4, scale: 2

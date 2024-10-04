@@ -10,6 +10,6 @@ class Cocktail < ApplicationRecord
   query = %w[cocktail_name cocktail_create cocktail_origin cocktail_recipe]
             .map { |column| "#{column} LIKE :word" }
             .join(' OR ')
-  where(query, word: "%#{word}%")
+            where(query, word: "%#{word}%")
 }
 end
