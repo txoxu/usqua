@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     passwords: 'users/passwords'
   }
-  
+
   # 静的ページのルーティング
   root 'static_pages#top'
   resources :pages, only: [] do

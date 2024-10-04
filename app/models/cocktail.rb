@@ -7,9 +7,9 @@ class Cocktail < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
 
   scope :keyword, lambda { |word|
-  query = %w[cocktail_name cocktail_create cocktail_origin cocktail_recipe]
-            .map { |column| "#{column} LIKE :word" }
-            .join(' OR ')
-            where(query, word: "%#{word}%")
-}
+                    query = %w[cocktail_name cocktail_create cocktail_origin cocktail_recipe]
+                            .map { |column| "#{column} LIKE :word" }
+                            .join(' OR ')
+                    where(query, word: "%#{word}%")
+                  }
 end

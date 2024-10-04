@@ -50,9 +50,9 @@ class UpdateUsersForDevise < ActiveRecord::Migration[7.1]
     # インデックスの存在を確認し、必要であれば追加
     add_index :users, :email, unique: true unless index_exists?(:users, :email, unique: true)
 
-    unless index_exists?(:users, :reset_password_token, unique: true)
-      add_index :users, :reset_password_token, unique: true
-    end
+    return if index_exists?(:users, :reset_password_token, unique: true)
+
+    add_index :users, :reset_password_token, unique: true
   end
 
   def remove_indexes

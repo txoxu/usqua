@@ -15,28 +15,24 @@ class SearchWhiskeysForm
     relation = Whiskey.distinct
     filter_by_category(relation)
     relation = filter_by_name(relation)
-    relation = filter_by_text(relation)
-    relation
+    filter_by_text(relation)
   end
 
   private
-  
-    # カテゴリーで絞り込み
+
+  # カテゴリーで絞り込み
   def filter_by_category(relation)
     return relation unless category_names.present? || category_types.present?
 
     categories = Category.all
     # category_namesが存在する場合にフィルタリング
-    if category_names.present?
-      categories = categories.where(category_name: category_names)
-    end
+    categories = categories.where(category_name: category_names) if category_names.present?
 
     # category_typesが存在する場合にフィルタリング
-    if category_types.present?
-      categories = categories.where(category_type: category_types)
-    end
+    categories = categories.where(category_type: category_types) if category_types.present?
     category_ids = categories.pluck(:id).compact
     return relation unless category_ids.any?
+
     relation.by_category_ids(category_ids)
   end
 
