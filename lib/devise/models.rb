@@ -84,13 +84,7 @@ module Devise
     def self.create_getter(mod, accessor)
       mod.class_eval <<-GETTER, __FILE__, __LINE__ + 1
         def #{accessor}
-          if defined?(@#{accessor})
-            @#{accessor}
-          elsif superclass.respond_to?(:#{accessor})
-            superclass.#{accessor}
-          else
-            Devise.#{accessor}
-          end
+          defined?(@#{accessor}) ? @#{accessor} : (superclass.respond_to?(:#{accessor}) ? superclass.#{accessor} : Devise.#{accessor})
         end
       GETTER
     end
