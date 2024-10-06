@@ -1,15 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-
   draw :static_pages_routes
-  # Deviseルーティング
-  devise_for :users, controllers: {
-    omniauth_callbacks: 'users/omniauth_callbacks',
-    registrations: 'users/registrations',
-    sessions: 'users/sessions',
-    passwords: 'users/passwords'
-  }
+  draw :devise_routes
 
   # バッジの更新
   post 'update_badge_seen', to: 'whiskeys#update_badge_seen'

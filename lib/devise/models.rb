@@ -50,24 +50,36 @@ module Devise
       selected_modules = sort_modules(modules)
 
       devise_modules_hook! do
-        include Devise::Orm
-        include Devise::Models::Authenticatable
-
-        selected_modules.each do |m|
-          include_module(m, options)
-        end
-
-        self.devise_modules |= selected_modules
-        options.each { |key, value| send(:"#{key}=", value) }
+        include_default_modules
+        include_selected_modules(selected_modules, options)
+        set_devise_modules(selected_modules)
+        set_options(options)
       end
+    end
+
+    def include_default_modules
+      include Devise::Orm
+      include Devise::Models::Authenticatable
+    end
+
+    def include_selected_modules(selected_modules, options)
+      selected_modules.each do |m|
+        include_module(m, options)
+      end
+    end
+
+    def set_devise_modules(selected_modules)
+      self.devise_modules |= selected_modules
+    end
+
+    def set_options(options)
+      options.each { |key, value| send(:"#{key}=", value) }
     end
 
     # Yields a block for extending ORM compatibility.
     def devise_modules_hook!
       yield
     end
-
-    private
 
     def self.create_accessors(mod, accessor)
       mod.class_eval <<-METHOD, __FILE__, __LINE__ + 1

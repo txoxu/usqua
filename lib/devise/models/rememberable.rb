@@ -9,7 +9,9 @@ require 'devise/hooks/forgetable'
 
 # deviseモジュール
 module Devise
+  # models
   module Models
+    # rememberable
     module Rememberable
       extend ActiveSupport::Concern
 

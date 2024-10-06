@@ -12,7 +12,7 @@ module ApplicationHelper
       canonical: meta_canonical_url,
       separator: '|',
       og: default_og_tags,
-      twitter: default_twitter_tags}
+      twitter: default_twitter_tags }
   end
 
   private
