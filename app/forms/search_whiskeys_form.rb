@@ -13,28 +13,46 @@ class SearchWhiskeysForm
 
   def search
     relation = Whiskey.distinct
-    filter_by_category(relation)
+    relation = filter_by_category(relation)
     relation = filter_by_name(relation)
-    filter_by_text(relation)
+    relation = filter_by_text(relation)
+    relation
   end
 
-  private
+    private
+  
+    # カテゴリーで絞り込み
+    def filter_by_category(relation)
+      return relation unless filtering_conditions_present?
+    
+      category_ids = fetch_category_ids
+      return relation unless category_ids.any?
+    
+      relation.by_category_ids(category_ids)
+    end
 
-  # カテゴリーで絞り込み
-  def filter_by_category(relation)
-    return relation unless category_names.present? || category_types.present?
-
-    categories = Category.all
-    # category_namesが存在する場合にフィルタリング
-    categories = categories.where(category_name: category_names) if category_names.present?
-
-    # category_typesが存在する場合にフィルタリング
-    categories = categories.where(category_type: category_types) if category_types.present?
-    category_ids = categories.pluck(:id).compact
-    return relation unless category_ids.any?
-
-    relation.by_category_ids(category_ids)
-  end
+    def filtering_conditions_present?
+      category_names.present? || category_types.present?
+    end
+    
+    def fetch_category_ids
+      categories = Category.all
+      categories = filter_by_category_names(categories)
+      categories = filter_by_category_types(categories)
+      categories.pluck(:id).compact
+    end
+    
+    def filter_by_category_names(categories)
+      return categories unless category_names.present?
+    
+      categories.where(category_name: category_names)
+    end
+    
+    def filter_by_category_types(categories)
+      return categories unless category_types.present?
+    
+      categories.where(category_type: category_types)
+    end
 
   # 名前で絞り込み
   def filter_by_name(relation)
@@ -59,4 +77,4 @@ class SearchWhiskeysForm
   def text_words
     text.present? ? text.split(nil) : []
   end
-end
+  end

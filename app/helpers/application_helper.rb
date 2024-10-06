@@ -3,8 +3,7 @@
 # 静的OGPの設定
 module ApplicationHelper
   def default_meta_tags
-    {
-      site: meta_site,
+    { site: meta_site,
       title: meta_title,
       reverse: true,
       charset: 'utf-8',
@@ -13,8 +12,7 @@ module ApplicationHelper
       canonical: meta_canonical_url,
       separator: '|',
       og: default_og_tags,
-      twitter: default_twitter_tags
-    }
+      twitter: default_twitter_tags}
   end
 
   private
