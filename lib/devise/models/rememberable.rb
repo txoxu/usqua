@@ -3,11 +3,17 @@
 # Devise::Models::Rememberable
 # This module provides methods for remembering a user through cookies,
 # including token management and serialization.
+# The Rememberable module handles the process of generating, updating, and
+# managing tokens that allow a user to remain logged in for a specified
+# duration even after closing their browser.
+# It works by adding and managing a `remember_created_at` timestamp field,
+# which is used to determine the validity of the remember token.
+
 require 'devise/strategies/rememberable'
 require 'devise/hooks/rememberable'
 require 'devise/hooks/forgetable'
 
-# deviseモジュール
+# devise
 module Devise
   # models
   module Models

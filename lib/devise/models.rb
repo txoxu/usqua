@@ -52,8 +52,8 @@ module Devise
       devise_modules_hook! do
         include_default_modules
         include_selected_modules(selected_modules, options)
-        set_devise_modules(selected_modules)
-        set_options(options)
+        devise_modules(selected_modules)
+        options(options)
       end
     end
 
@@ -68,11 +68,11 @@ module Devise
       end
     end
 
-    def set_devise_modules(selected_modules)
+    def devise_modules(selected_modules)
       self.devise_modules |= selected_modules
     end
 
-    def set_options(options)
+    def options(options)
       options.each { |key, value| send(:"#{key}=", value) }
     end
 
@@ -82,7 +82,7 @@ module Devise
     end
 
     def self.create_accessors(mod, accessor)
-      mod.class_eval <<-METHOD, __FILE__, __LINE__ + 1
+      mod.class_eval <<-GETTER, __FILE__, __LINE__ + 1
         def #{accessor}
           if defined?(@#{accessor})
             @#{accessor}
@@ -92,11 +92,13 @@ module Devise
             Devise.#{accessor}
           end
         end
+      GETTER
 
+      mod.class_eval <<-SETTER, __FILE__, __LINE__ + 1
         def #{accessor}=(value)
           @#{accessor} = value
         end
-      METHOD
+      SETTER
     end
 
     def self.raise_devise_error(failed_attributes)
