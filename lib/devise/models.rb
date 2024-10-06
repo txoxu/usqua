@@ -81,7 +81,7 @@ module Devise
       yield
     end
 
-    def self.create_accessors(mod, accessor)
+    def self.create_getter(mod, accessor)
       mod.class_eval <<-GETTER, __FILE__, __LINE__ + 1
         def #{accessor}
           if defined?(@#{accessor})
@@ -93,12 +93,19 @@ module Devise
           end
         end
       GETTER
+    end
 
+    def self.create_setter(mod, accessor)
       mod.class_eval <<-SETTER, __FILE__, __LINE__ + 1
         def #{accessor}=(value)
           @#{accessor} = value
         end
       SETTER
+    end
+
+    def self.create_accessors(mod, accessor)
+      create_getter(mod, accessor)
+      create_setter(mod, accessor)
     end
 
     def self.raise_devise_error(failed_attributes)

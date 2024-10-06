@@ -13,7 +13,7 @@ class UpdateCocktailTastingsTable2 < ActiveRecord::Migration[7.1]
   end
 
   def down
-    change_table :cocktail_tastings do |t|
+    change_table :cocktail_tastings, bulk: true do |t|
       t.change :aroma, :decimal
       t.change :flavor, :decimal
       t.change :appearance, :decimal

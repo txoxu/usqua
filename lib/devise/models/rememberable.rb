@@ -108,6 +108,7 @@ module Devise
         end
       end
 
+      # classmethods
       module ClassMethods
         def serialize_into_cookie(record)
           [record.to_key, record.rememberable_value, Time.now.utc.to_f.to_s]
