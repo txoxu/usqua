@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# ウイスキーのテイスティングのコントローラ
 class TastingsController < ApplicationController
   before_action :set_whiskey
   before_action :set_tasting, only: %i[edit update show destroy]
@@ -26,7 +29,6 @@ class TastingsController < ApplicationController
   end
 
   def update
-
     if @tasting.update(tasting_params)
       redirect_to whiskeys_path, success: t('tastings.update.success')
     else
@@ -52,6 +54,7 @@ class TastingsController < ApplicationController
   end
 
   def tasting_params
-    params.require(:tasting).permit(:tasting_type, :tasting_text, :flavor, :aroma, :whiskey_id, :body, :finish, :balance)
+    params.require(:tasting).permit(:tasting_type, :tasting_text, :flavor, :aroma, :whiskey_id, :body, :finish,
+                                    :balance)
   end
 end

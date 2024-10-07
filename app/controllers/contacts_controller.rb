@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# お問い合わせ機能のコントローラ
 class ContactsController < ApplicationController
   skip_before_action :require_login
   def new
@@ -31,8 +34,7 @@ class ContactsController < ApplicationController
     end
   end
 
-  def done
-  end
+  def done; end
 
   private
 

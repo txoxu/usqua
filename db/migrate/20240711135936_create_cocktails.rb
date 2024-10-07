@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# カクテルテーブル
 class CreateCocktails < ActiveRecord::Migration[7.1]
   def change
     create_table :cocktails do |t|
@@ -6,7 +9,6 @@ class CreateCocktails < ActiveRecord::Migration[7.1]
       t.text :cocktail_origin
       t.text :cocktail_recipe
       t.text :cocktail_url
-
 
       t.timestamps
     end

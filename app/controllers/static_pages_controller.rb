@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# トップページとこのアプリについてのコントローラ
 class StaticPagesController < ApplicationController
   skip_before_action :require_login, only: %i[top explanation]
 

@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
+# ウイスキーの種類や原産国別のカテゴリモデル
 class Category < ApplicationRecord
-  has_many :whiskey_categories
-  has_many :whiskeys, through: :whiskey_categories
-  has_many :cocktails
+  has_many :whiskey_categories, dependent: :destroy
+  has_many :whiskeys, through: :whiskey_categories, dependent: :destroy
   belongs_to :whiskey_badge
   belongs_to :cocktail_badge
 
-
-  validates :category_name, presence: true, uniqueness: { scope: :category_type }
+  validates :category_name, presence: true
   validates :category_type, presence: true
 
   enum category_name: {

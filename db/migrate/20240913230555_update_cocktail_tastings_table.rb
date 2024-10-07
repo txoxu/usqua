@@ -1,14 +1,26 @@
+# frozen_string_literal: true
+
+# カクテルテイスティングテーブルを変更
 class UpdateCocktailTastingsTable < ActiveRecord::Migration[7.1]
-  def change
+  def up
+    change_table :cocktail_tastings, bulk: true do |t|
+      t.remove :tasting_recipe
+      t.remove :cocktail_flavor
 
-    remove_column :cocktail_tastings, :tasting_recipe
-    remove_column :cocktail_tastings, :cocktail_flavor
+      t.string :others
+      t.decimal :aroma
+      t.decimal :flavor
+      t.decimal :appearance
+      t.decimal :finish
+      t.decimal :mouthfeel
+    end
+  end
 
-    add_column :cocktail_tastings, :others, :string
-    add_column :cocktail_tastings, :aroma, :decimal
-    add_column :cocktail_tastings, :flavor, :decimal
-    add_column :cocktail_tastings, :appearance, :decimal
-    add_column :cocktail_tastings, :finish, :decimal
-    add_column :cocktail_tastings, :mouthfeel, :decimal
+  def down
+    change_table :cocktail_tastings, bulk: true do |t|
+      t.remove :others, :aroma, :flavor, :appearance, :finish, :mouthfeel
+      t.string :tasting_recipe
+      t.string :cocktail_flavor
+    end
   end
 end

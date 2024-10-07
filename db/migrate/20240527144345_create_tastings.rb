@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# テイスティングテーブル
 class CreateTastings < ActiveRecord::Migration[7.1]
   def change
     create_table :tastings do |t|
@@ -5,7 +8,6 @@ class CreateTastings < ActiveRecord::Migration[7.1]
       t.string :flavor
       t.string :tasting_text
       t.string :tasting_type
-
 
       t.timestamps
     end

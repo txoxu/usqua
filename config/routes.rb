@@ -1,47 +1,33 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  devise_for :users, controllers: {
-    omniauth_callbacks: 'users/omniauth_callbacks',
-    registrations: 'users/registrations',
-    sessions: 'users/sessions',
-    passwords: 'users/passwords'
-  }
+  draw :static_pages_routes
+  draw :devise_routes
 
-  get 'home', to: 'pages#home'
-  get 'mypage', to: 'pages#mypage'
-  root 'static_pages#top'
-  get 'explanation', to: 'static_pages#explanation'
+  # バッジの更新
   post 'update_badge_seen', to: 'whiskeys#update_badge_seen'
-
-resources :users, only: %i[show edit update destroy]
+  # ユーザー関連のルーティング
+  resources :users, only: %i[show edit update destroy]
+  # カクテル関連のルーティング
   resources :cocktails do
-    resources :cocktail_tastings, only: %i[create new edit update destroy]
-    collection do
-      get :bookmarks
-    end
+    resources :cocktail_tastings, except: %i[index show]
+    collection { get :bookmarks }
   end
+  # ブックマークのルーティング
   resources :bookmarks, only: %i[create destroy]
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # ウイスキー関連のルーティング
   resources :whiskeys do
-    member do
-      get 'choose_next_step'
-    end
-    resources :tastings, only: %i[new create edit update destroy]
+    member { get 'choose_next_step' }
+    resources :tastings, except: %i[index show]
   end
-  resources :distilleries, only: %i[index]
-
-    resources :contacts, only: %i[new create] do
-      collection do
-        post 'confirm'
-        get 'confirm', to: redirect('/contacts/new')
-        post 'back'
-        get 'done'
-      end
+  # 蒸留所のルーティング
+  resources :distilleries, only: :index
+  # 問い合わせフォームのルーティング
+  resources :contacts, only: %i[new create] do
+    collection do
+      post 'confirm', 'back'
+      get 'confirm', to: redirect('/contacts/new')
+      get 'done'
     end
-  
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-
-  # Defines the root path route ("/")
-  # root "posts#index"
-
+  end
 end

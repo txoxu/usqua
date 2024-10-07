@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 ruby '3.2.3'
@@ -39,6 +41,12 @@ gem 'binding_of_caller', '~> 1.0', '>= 1.0.1'
 gem 'jquery-rails'
 
 gem 'rubocop', '~> 1.63', '>= 1.63.5'
+
+gem 'rubocop-capybara'
+
+gem 'rubocop-rails'
+
+gem 'rubocop-rspec_rails'
 
 gem 'carrierwave', '~> 3.0', '>= 3.0.7'
 
@@ -94,6 +102,8 @@ group :development, :test do
   gem 'debug', platforms: %i[mri windows]
 
   gem 'letter_opener_web', '~> 3.0'
+
+  gem 'rspec-rails', '~> 7.0', '>= 7.0.1'
 end
 
 group :development do

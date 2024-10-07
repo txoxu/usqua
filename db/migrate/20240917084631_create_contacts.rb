@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# お問い合わせテーブル
 class CreateContacts < ActiveRecord::Migration[7.1]
   def change
     create_table :contacts do |t|
