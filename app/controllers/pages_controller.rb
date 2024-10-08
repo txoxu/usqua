@@ -9,7 +9,6 @@ class PagesController < ApplicationController
     @categories = Category.distinct.pluck(:category_name)
     @whiskey_count_by_category = calculate_whiskey_count_by_category
     @bookmark_cocktails = current_user.bookmark_cocktails.order(created_at: :desc)
-
   end
 
   private

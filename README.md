@@ -34,7 +34,7 @@
 # 機能紹介
 | ユーザー登録　/ ログイン |
 | :---: |
-|[![Image from Gyazo](https://i.gyazo.com/ff973080ddcf41fedf8b1e89189764a2.gif)](https://gyazo.com/ff973080ddcf41fedf8b1e89189764a2)|
+||
 | <p align="left">「名前」「メールアドレス」「パスワード」を入力してユーザー登録を行います。また、googleログインを行うこともできます。</p> |
 <br>
 
@@ -85,7 +85,7 @@
 | web API | Google API |
 | データベース | MYSQL |
 | アプリケーションサーバー | Heroku |
-| コンテナ管理 | docker |
+| コンテナ管理 | docker
 | バージョン管理ツール | GitHub |
 <br>
 
@@ -94,4 +94,4 @@ https://www.figma.com/file/HVdmhaA0lOg1dRpmfNnEVA/%E3%82%A6%E3%82%A4%E3%82%B9%E3
 <br>
 
 ## ER図
-<img width="713" alt="image" src="https://github.com/user-attachments/assets/df1f0936-a09c-4c05-92cb-bfa2a577e7ae">
+![alt text](image.png)
