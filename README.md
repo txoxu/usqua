@@ -1,5 +1,5 @@
 # 【USQUA】（ウスカ）
-  <img width="500" src="app/assets/images/無題jpg"><br>
+  <img width="500" src="app/assets/images/無題.jpg"><br>
   <br>
 
 # 目次
@@ -34,7 +34,7 @@
 # 機能紹介
 | ユーザー登録　/ ログイン |
 | :---: |
-||
+|[![Image from Gyazo](https://i.gyazo.com/ea2de71e682e57277d57bb938d0df528.gif)](https://gyazo.com/ea2de71e682e57277d57bb938d0df528)|
 | <p align="left">「名前」「メールアドレス」「パスワード」を入力してユーザー登録を行います。また、googleログインを行うこともできます。</p> |
 <br>
 
@@ -94,4 +94,4 @@ https://www.figma.com/file/HVdmhaA0lOg1dRpmfNnEVA/%E3%82%A6%E3%82%A4%E3%82%B9%E3
 <br>
 
 ## ER図
-![alt text](image.png)
+![alt text](卒業制作.jpg)
