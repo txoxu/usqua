@@ -66,7 +66,7 @@ class WhiskeysController < ApplicationController
     @whiskey = current_user.whiskeys.find(params[:id])
   end
 
-  def assign_save(categories, _remaining_quantity)
+  def assign_save(categories, remmaining_quantity)
     @whiskey.assign_image(params[:whiskey][:image])
     @whiskey.categories << categories
     @whiskey.assign_remmaining_quantity(remmaining_quantity)

@@ -6,7 +6,10 @@
           <div class="card pt-3 pb-3 mt-5">
             <div class="row">
               <div class="col-md-2 ps-5">
-                  <%= link_to c.cocktail_name, cocktail_path(c), class: 'underline-animation' %>
+                <div class="base-title">
+                  <%= c.base_cocktail.base_name %>
+                </div>
+                <%= link_to c.cocktail_name, cocktail_path(c), class: 'underline-animation' %>
               </div>
               <div class="col-md-6">
                 <%= c.cocktail_origin %>
@@ -52,10 +55,17 @@
             </div>
           <% end %>
       <% end %>
+      <%= paginate @cocktails %>
     </div>
 </div>
 
 <style>
+
+  .base-title {
+    font-size: 10px;
+  }
+
+
   .underline-animation {
   position: relative;
   color: blue; /* 任意の文字色 */
