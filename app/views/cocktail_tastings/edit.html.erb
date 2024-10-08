@@ -18,7 +18,6 @@
             <div class="star-rating ms-5 ps-5" data-category="<%= item[:key] %>" data-score="<%= f.object.send(item[:key]) %>"></div>
             <%= f.hidden_field item[:key], id: "#{item[:key]}-value" %>
           </div>
-          <p>Debug: <%= f.object.send(item[:key]) %></p>
         <% end %>
 
         <div class="form-group col-md-8 ms-5 mb-3">

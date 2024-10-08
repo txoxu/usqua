@@ -5,6 +5,7 @@ class Cocktail < ApplicationRecord
   belongs_to :base_cocktail
   has_many :cocktail_tastings, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
+  has_many :bookmark_users, through: :bookmarks, source: :user
 
   scope :keyword, lambda { |word|
                     query = %w[cocktail_name cocktail_create cocktail_origin cocktail_recipe]
