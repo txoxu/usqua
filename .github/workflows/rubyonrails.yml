@@ -51,7 +51,9 @@ jobs:
       - name: Generate binstubs
         run: bundle binstubs brakeman rubocop
       # Add or replace any other lints here
-      - name: Rubocop Lint
-        run: bundle exec rubocop -f github
       - name: Brakeman Lint
-        run: bundle exec brakeman -f github
+        run: bundle exec brakeman -o report.html
+      - name: Rubocop Lint
+        run: bundle exec rubocop
+      - name: SeleniumWebdriver Lint
+        run: bundle exec selenium-webdriver
