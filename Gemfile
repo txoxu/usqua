@@ -80,7 +80,6 @@ gem 'pry-byebug'
 
 gem 'meta-tags'
 
-gem 'bundler-audit'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
@@ -123,4 +122,6 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
   gem 'selenium-webdriver'
+  gem 'bundler-audit'
+  gem 'brakeman'
 end
