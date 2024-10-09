@@ -10,7 +10,7 @@
           <%= @cocktail.cocktail_origin %>
         </div>
         <div class="mb-5">
-          <%= @cocktail.cocktail_recipe.gsub(/,/, '<br>').html_safe %>
+          <%= sanitize(@cocktail.cocktail_recipe.gsub(/,/, '<br>')) %>
         </div>
         <div class="mb-5">
           <%= @cocktail.cocktail_create %>
