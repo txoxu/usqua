@@ -118,5 +118,6 @@ group :test do
   gem 'brakeman'
   gem 'rubocop-capybara'
   gem 'rubocop-rails'
+  gem 'rubocop-rspec'
   gem 'selenium-webdriver'
 end
