@@ -52,4 +52,6 @@ jobs:
         run: bundle binstubs brakeman rubocop
       # Add or replace any other lints here
       - name: Rubocop Lint
-        run: rubocop -f github
+        run: bundle exec rubocop -f github
+      - name: Brakeman Lint
+        run: bundle exec brakeman -f github
