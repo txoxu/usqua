@@ -1,0 +1,57 @@
+# This workflow uses actions that are not certified by GitHub.  They are
+# provided by a third-party and are governed by separate terms of service,
+# privacy policy, and support documentation.
+#
+# This workflow will install a prebuilt Ruby version, install dependencies, and
+# run tests and linters.
+name: "Ruby on Rails CI"
+on: [push]
+  
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        ports:
+          - "3307:3306"
+        env:
+          MYSQL_HOST: d13xat1hwxt21t45.cbetxkdyhwsb.us-east-1.rds.amazonaws.com
+          MYSQL_DB: aw0tba0hfjyqyf21
+          MYSQL_USER: mof3sm8nho7bn5ke
+          MYSQL_PASSWORD: p512b8wu39b35y1t
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: "mysql://mof3sm8nho7bn5ke:p512b8wu39b35y1t@d13xat1hwxt21t45.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/aw0tba0hfjyqyf21"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      # Add or replace dependency steps here
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@78c01b705fd9d5ad960d432d3a0cfa341d50e410 # v1.179.1
+        with:
+          bundler-cache: true
+      # Add or replace database setup steps here
+      - name: Set up database schema
+        run: bin/rails db:schema:load
+      # Add or replace test runners here
+      - name: Run tests
+        run: bin/rake
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@78c01b705fd9d5ad960d432d3a0cfa341d50e410 # v1.179.1
+        with:
+          bundler-cache: true
+      - name: Generate binstubs
+        run: bundle binstubs bundler-audit brakeman rubocop
+      # Add or replace any other lints here
+      - name: Security audit dependencies
+        run: bin/bundler-audit --update
+      - name: Rubocop Lint
+        run: rubocop -f github
