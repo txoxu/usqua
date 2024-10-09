@@ -119,5 +119,6 @@ group :test do
   gem 'rubocop-capybara'
   gem 'rubocop-rails'
   gem 'rubocop-rspec'
+  gem 'rubocop-rspec_rails'
   gem 'selenium-webdriver'
 end
