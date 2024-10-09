@@ -52,7 +52,7 @@ jobs:
         run: bundle binstubs brakeman rubocop
       # Add or replace any other lints here
       - name: Brakeman Lint
-        run: bundle exec brakeman -o report.html
+        run: bundle exec brakeman
       - name: Rubocop Lint
         run: bundle exec rubocop
       - name: SeleniumWebdriver Lint
