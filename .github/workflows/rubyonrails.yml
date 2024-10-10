@@ -34,11 +34,6 @@ jobs:
         uses: ruby/setup-ruby@78c01b705fd9d5ad960d432d3a0cfa341d50e410 # v1.179.1
         with:
           bundler-cache: true
-      - name: Setup database
-        run: |
-              cp config/database.ci.yml config/database.yml
-              bundle exec rails db:create RAILS_ENV=test
-              bundle exec rails db:migrate RAILS_ENV=test
 
   lint:
     runs-on: ubuntu-latest
