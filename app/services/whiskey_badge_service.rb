@@ -10,10 +10,8 @@ class WhiskeyBadgeService
   def assign_badges
     WhiskeyBadge.all.find_each do |badge|
       conditions = badge.conditions
-      Rails.logger.info "Evaluating badge: #{badge.name} with conditions: #{conditions}"
       if meets_conditions?(conditions)
         @user.assign_badge(badge)
-        Rails.logger.info "Badge assigned: #{badge.name} to user: #{@user.id}"
       else
         Rails.logger.info "Badge not assigned: #{badge.name}"
       end

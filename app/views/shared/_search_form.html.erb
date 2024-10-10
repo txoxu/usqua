@@ -1,19 +1,19 @@
 <div class="container">
   <div class="row">
     <%= form_with model: @search_form, url: whiskeys_path, method: :get, local: true, class: 'search-form d-flex flex-wrap' do |f| %>
-      <div class="col-md-2">
+      <div class="col-md-2 me-1">
         <%= f.select :category_names, options_for_select(@category_names.map(&:category_name)), {include_blank: '生産国別'}, class: 'form-select form-select-md' %>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-2 me-1">
         <%= f.select :category_types, options_for_select(@category_types.map(&:category_type)), {include_blank: '原産国別'}, class: 'form-select' %>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-3 me-1">
         <%= f.text_field :name, class: 'form-control', placeholder: 'ウイスキーの名前' %>
       </div>
       <div class="col-md-3">
         <%= f.text_field :text, class: 'form-control', placeholder: 'キーワード' %>
       </div>
-      <div class="col-md-12 mb-3">
+      <div class="col-md-12 mt-1 mb-3">
         <%= f.submit t('helpers.submit.search'), class: 'btn btn-outline-success w-100' %>
       </div>
     <% end %>

@@ -11,14 +11,14 @@
               <!-- 画像と数量の部分をレスポンシブに調整 -->
               <div class="col-md-4 col-sm-6">
                 <% if whiskey.image.present? %>
-                  <%= image_tag whiskey.image.url, class: "img-fluid rounded-start", size: '150x200' %>
+                  <%= image_tag whiskey.image.url, class: "img-fluid rounded-start", size: '250x300' %>
                 <% else %>
-                  <%= image_tag "default.jpg", class: "img-fluid rounded-start", size: '150x200' %>
+                  <%= image_tag "default.jpg", class: "img-fluid rounded-start", size: '250x300' %>
                 <% end %>
               </div>
               <div class="col-md-4 col-sm-6">
                 <% if whiskey.remmaining_quantity.present? && whiskey.remmaining_quantity.quantity_image.present? %>
-                  <%= image_tag whiskey.remmaining_quantity.quantity_image, size: '150x200' %>
+                  <%= image_tag whiskey.remmaining_quantity.quantity_image, size: '250x300' %>
                 <% else %>
                   <p class="pt-5 mt-5">量は設定されていません</p>
                 <% end %>
@@ -33,6 +33,7 @@
                     <p class="card-text"><small class="text-body-secondary"><%= c.category_name %></small></p>
                     <p class="card-text"><small class="text-body-secondary"><%= c.category_type %></small></p>
                   <% end %>
+                  <p class="card-text"><small class="text-body-success"><%= whiskey.text %></small>
                   <p class="card-text">
                     <%= link_to t('.add_tasting'), new_whiskey_tasting_path(whiskey), class: 'btn btn-outline-primary btn-sm' %>
                     <%= link_to t('helpers.btn.edit'), edit_whiskey_path(whiskey), class: 'btn btn-outline-secondary btn-sm' %>

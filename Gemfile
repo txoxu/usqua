@@ -40,14 +40,6 @@ gem 'binding_of_caller', '~> 1.0', '>= 1.0.1'
 
 gem 'jquery-rails'
 
-gem 'rubocop', '~> 1.63', '>= 1.63.5'
-
-gem 'rubocop-capybara'
-
-gem 'rubocop-rails'
-
-gem 'rubocop-rspec_rails'
-
 gem 'carrierwave', '~> 3.0', '>= 3.0.7'
 
 gem 'ransack', '~> 4.1', '>= 4.1.1'
@@ -79,6 +71,7 @@ gem 'dotenv-rails', groups: %i[development test]
 gem 'pry-byebug'
 
 gem 'meta-tags'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
@@ -104,6 +97,8 @@ group :development, :test do
   gem 'letter_opener_web', '~> 3.0'
 
   gem 'rspec-rails', '~> 7.0', '>= 7.0.1'
+
+  gem 'rubocop', '~> 1.63', '>= 1.63.5'
 end
 
 group :development do
@@ -119,6 +114,11 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
+  gem 'brakeman'
   gem 'capybara'
+  gem 'rubocop-capybara'
+  gem 'rubocop-rails'
+  gem 'rubocop-rspec'
+  gem 'rubocop-rspec_rails'
   gem 'selenium-webdriver'
 end

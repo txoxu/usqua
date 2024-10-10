@@ -5,7 +5,7 @@
       <%= form_with model: [@cocktail, @cocktail_tasting], id: 'edit_cocktail_cocktail_tasting', local: true do |f| %>
         <div class="form-group whiskey-cocktail col-md-8 ms-5 mb-3">
           <%= f.label :name, class: "col-form-label" %><span class="text-danger">*</span>
-          <%= f.select :name, @whiskeys.map { |whiskey| [whiskey.name, whiskey.name]}, { selected: @cocktail_tasting.whiskey.name }, class: "form-control" %>
+          <%= f.select :name, @whiskeys.map { |whiskey| [whiskey.name, whiskey.name]}, { selected: @cocktail_tasting.whiskey.name }, required: true, class: "form-control" %>
         </div>
 
         <% [{ key: 'aroma', label: '香り' },
