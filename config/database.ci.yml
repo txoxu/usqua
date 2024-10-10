@@ -1,7 +1,7 @@
 test:
-  adapter: mysql2
-  encoding: utf8
-  username: root
-  password: p512b8wu39b35y1t
-  host: 127.0.0.1
-  database: aw0tba0hfjyqyf21
+    adapter: mysql2
+    encoding: utf8mb4
+    database: test_db_name
+    username: test_user
+    password: test_password
+    host: mysql
