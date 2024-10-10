@@ -15,7 +15,7 @@ class SearchWhiskeysForm
     relation = Whiskey.distinct
     relation = filter_by_category(relation)
     relation = filter_by_name(relation)
-    relation = filter_by_text(relation)
+    filter_by_text(relation)
   end
 
   private

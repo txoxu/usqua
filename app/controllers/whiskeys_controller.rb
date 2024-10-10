@@ -33,7 +33,7 @@ class WhiskeysController < ApplicationController
 
   def update
     categories = find_existing_categories
-    RemmainingQuantity.find_by(id: params[:whiskey][:remmaining_quantity_id])
+    remmaining_quantity = RemmainingQuantity.find_by(id: params[:whiskey][:remmaining_quantity_id])
 
     if @whiskey.update(whiskey_params)
       process_successful_update(categories, remmaining_quantity)
@@ -72,6 +72,12 @@ class WhiskeysController < ApplicationController
     @whiskey.assign_remmaining_quantity(remmaining_quantity)
   end
 
+  def assign_update(categories, remmaining_quantity)
+    @whiskey.assign_image(params[:whiskey][:image])
+    @whiskey.categories = categories
+    @whiskey.assign_remmaining_quantity(remmaining_quantity)
+  end
+
   def whiskey_params
     params.require(:whiskey).permit(:name, :text, :image, :remmaining_quantity_id, category_names: [],
                                                                                    category_types: [])
@@ -100,7 +106,7 @@ class WhiskeysController < ApplicationController
   end
 
   def process_successful_update(categories, remmaining_quantity)
-    assign_save(categories, remmaining_quantity)
+    assign_update(categories, remmaining_quantity)
     redirect_to whiskeys_path, success: t('whiskeys.update.success')
   end
 
