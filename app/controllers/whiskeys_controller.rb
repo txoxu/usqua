@@ -81,10 +81,11 @@ class WhiskeysController < ApplicationController
     @quantities = RemmainingQuantity.all
   end
 
-  #create update
-  def assign_save(remmaining_quantity)
+  # create update
+  def assign_save(categories, remmaining_quantity)
     @whiskey.assign_image(params[:whiskey][:image])
     @whiskey.assign_remmaining_quantity(remmaining_quantity)
+    @whiskey.categories << categories
   end
 
   def find_existing_categories
@@ -94,12 +95,13 @@ class WhiskeysController < ApplicationController
 
   # update
   def process_successful_update(categories, remmaining_quantity)
-    assign_save(remmaining_quantity)
-    update_categories(categories)
+    assign_update(categories, remmaining_quantity)
     redirect_to whiskeys_path, success: t('whiskeys.update.success')
   end
 
-  def update_categories(categories)
+  def assign_update(categories, remmaining_quantity)
+    @whiskey.assign_image(params[:whiskey][:image])
+    @whiskey.assign_remmaining_quantity(remmaining_quantity)
     @whiskey.categories = categories
   end
 
@@ -114,18 +116,13 @@ class WhiskeysController < ApplicationController
   # create
   def save_whiskey_with_categories(categories, remmaining_quantity)
     if @whiskey.save
-      assign_save(remmaining_quantity)
-      create_categories(categories)
+      assign_save(categories, remmaining_quantity)
       assign_badges_to_user
       redirect_to choose_next_step_whiskey_path(@whiskey), success: t('whiskeys.create.success')
     else
       flash.now[:danger] = t('whiskeys.create.danger')
       render :new, status: :unprocessable_entity
     end
-  end
-
-  def create_categories(categories)
-    @whiskey.categories << categories
   end
 
   def assign_badges_to_user
