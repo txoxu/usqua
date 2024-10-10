@@ -62,31 +62,17 @@ class WhiskeysController < ApplicationController
 
   private
 
-  def set_whiskey
-    @whiskey = current_user.whiskeys.find(params[:id])
-  end
-
-  def assign_save(remmaining_quantity)
-    @whiskey.assign_image(params[:whiskey][:image])
-    @whiskey.assign_remmaining_quantity(remmaining_quantity)
-  end
-
-  def update_categories(categories)
-    @whiskey.categories = categories
-  end
-
-  def create_categories(categories)
-    @whiskey.categories << categories
-  end
-
   def whiskey_params
     params.require(:whiskey).permit(:name, :text, :image, :remmaining_quantity_id, category_names: [],
                                                                                    category_types: [])
   end
 
-  def find_existing_categories
-    Category.where(category_name: params[:whiskey][:category_names])
-            .where(category_type: params[:whiskey][:category_types])
+  def search_params
+    params.fetch(:search_whiskeys_form, {}).permit(%i[category_names category_types name text])
+  end
+
+  def set_whiskey
+    @whiskey = current_user.whiskeys.find(params[:id])
   end
 
   def prepare_form_data
@@ -95,10 +81,29 @@ class WhiskeysController < ApplicationController
     @quantities = RemmainingQuantity.all
   end
 
-  def search_params
-    params.fetch(:search_whiskeys_form, {}).permit(%i[category_names category_types name text])
+  #create update
+  def assign_save(remmaining_quantity)
+    @whiskey.assign_image(params[:whiskey][:image])
+    @whiskey.assign_remmaining_quantity(remmaining_quantity)
   end
 
+  def find_existing_categories
+    Category.where(category_name: params[:whiskey][:category_names])
+            .where(category_type: params[:whiskey][:category_types])
+  end
+
+  # update
+  def process_successful_update(categories, remmaining_quantity)
+    assign_save(remmaining_quantity)
+    update_categories(categories)
+    redirect_to whiskeys_path, success: t('whiskeys.update.success')
+  end
+
+  def update_categories(categories)
+    @whiskey.categories = categories
+  end
+
+  # index
   def fetch_new_badges
     current_user.user_whiskey_badges.where(seen: false)
                 .includes(:whiskey_badge)
@@ -106,23 +111,7 @@ class WhiskeysController < ApplicationController
                 .as_json
   end
 
-  def process_successful_update(categories, remmaining_quantity)
-    assign_save(remmaining_quantity)
-    update_categories(categories)
-    redirect_to whiskeys_path, success: t('whiskeys.update.success')
-  end
-
-  def assign_badges_to_user
-    badge_service = WhiskeyBadgeService.new(current_user, @whiskey)
-    badge_service.assign_badges
-  end
-
-  def adjacent_whiskeys
-    next_whiskey = current_user.whiskeys.where('id > ?', @whiskey.id).order(:id).first
-    prev_whiskey = current_user.whiskeys.where('id < ?', @whiskey.id).order(:id).last
-    [next_whiskey, prev_whiskey]
-  end
-
+  # create
   def save_whiskey_with_categories(categories, remmaining_quantity)
     if @whiskey.save
       assign_save(remmaining_quantity)
@@ -133,5 +122,14 @@ class WhiskeysController < ApplicationController
       flash.now[:danger] = t('whiskeys.create.danger')
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def create_categories(categories)
+    @whiskey.categories << categories
+  end
+
+  def assign_badges_to_user
+    badge_service = WhiskeyBadgeService.new(current_user, @whiskey)
+    badge_service.assign_badges
   end
 end

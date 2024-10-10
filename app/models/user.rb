@@ -50,8 +50,7 @@ class User < ApplicationRecord
   end
 
   def assign_badge(badge)
-    if !user_whiskey_badges.exists?(whiskey_badge: badge)
-      user_whiskey_badges.create(whiskey_badge: badge)
-    end
+    return if user_whiskey_badges.exists?(whiskey_badge: badge)
+    user_whiskey_badges.create(whiskey_badge: badge)
   end
 end
