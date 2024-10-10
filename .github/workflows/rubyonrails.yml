@@ -16,15 +16,10 @@ jobs:
         ports:
           - "3307:3306"
         env:
-          adapter: mysql2
-          encoding: utf8mb4
-          database: test_db_name
-          username: test_user
-          password: test_password
-          host: localhost
-    env:
-      RAILS_ENV: test
-      DATABASE_URL: "mysql2://test_user:test_password@localhost:3307/test_db_name"
+          MYSQL_DATABASE: test_db_name
+          MYSQL_USER: test_user
+          MYSQL_PASSWORD: test_password
+          MYSQL_ROOT_PASSWORD: root_password
 
     steps:
       - name: Checkout code
