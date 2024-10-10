@@ -16,10 +16,10 @@ jobs:
         ports:
           - "3307:3306"
         env:
-          database: test_db_name
-          username: test_user
-          password: test_password
-          host: mysql
+          MYSQL_DATABASE: test_db_name
+          MYSQL_USER: test_user
+          MYSQL_PASSWORD: test_password
+          MYSQL_ROOT_PASSWORD: root_password
         options: >-
           --health-cmd="mysqladmin ping -h localhost"
           --health-interval=10s
