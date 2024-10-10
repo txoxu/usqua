@@ -6,7 +6,7 @@
       <%= form_with model: @cocktail_tasting, url: cocktail_cocktail_tastings_path(@cocktail), local: true do |f| %>
         <div class="form-group col-md-8 ms-5 mb-3">
           <%= f.label :name, class: "col-form-label" %><span class="text-danger">*</span>
-          <%= f.select :name, @whiskeys.map { |whiskey| [whiskey.name, whiskey.name] }, { prompt: "選択してください" }, class: "form-control" %>
+          <%= f.select :name, @whiskeys.map { |whiskey| [whiskey.name, whiskey.name] }, { prompt: "選択してください" }, required: true, class: "form-control" %>
         </div>
 
         <% [{ key: 'aroma', label: '香り' },

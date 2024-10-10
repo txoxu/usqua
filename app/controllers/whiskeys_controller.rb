@@ -66,16 +66,17 @@ class WhiskeysController < ApplicationController
     @whiskey = current_user.whiskeys.find(params[:id])
   end
 
-  def assign_save(categories, remmaining_quantity)
+  def assign_save(remmaining_quantity)
     @whiskey.assign_image(params[:whiskey][:image])
-    @whiskey.categories << categories
     @whiskey.assign_remmaining_quantity(remmaining_quantity)
   end
 
-  def assign_update(categories, remmaining_quantity)
-    @whiskey.assign_image(params[:whiskey][:image])
+  def update_categories(categories)
     @whiskey.categories = categories
-    @whiskey.assign_remmaining_quantity(remmaining_quantity)
+  end
+
+  def create_categories(categories)
+    @whiskey.categories << categories
   end
 
   def whiskey_params
@@ -106,7 +107,8 @@ class WhiskeysController < ApplicationController
   end
 
   def process_successful_update(categories, remmaining_quantity)
-    assign_update(categories, remmaining_quantity)
+    assign_save(remmaining_quantity)
+    update_categories(categories)
     redirect_to whiskeys_path, success: t('whiskeys.update.success')
   end
 
@@ -123,7 +125,8 @@ class WhiskeysController < ApplicationController
 
   def save_whiskey_with_categories(categories, remmaining_quantity)
     if @whiskey.save
-      assign_save(categories, remmaining_quantity)
+      assign_save(remmaining_quantity)
+      create_categories(categories)
       assign_badges_to_user
       redirect_to choose_next_step_whiskey_path(@whiskey), success: t('whiskeys.create.success')
     else

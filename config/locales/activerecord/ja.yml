@@ -58,4 +58,8 @@ ja:
         attributes:
           name:
             blank: "を入力してください"
+      cocktail_tasting:
+        attributes:
+          name:
+            blank: "を選択してください"
 
