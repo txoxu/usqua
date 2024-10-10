@@ -27,7 +27,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  adapter: mysql2
+  adapter: mysql
   encoding: utf8mb4
   database: test_db_name
   username: test_user
