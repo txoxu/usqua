@@ -55,5 +55,3 @@ jobs:
         run: bundle exec brakeman
       - name: Rubocop Lint
         run: bundle exec rubocop
-      - name: SeleniumWebdriver Lint
-        run: bundle exec selenium-webdriver
