@@ -24,7 +24,7 @@ jobs:
           host: localhost
     env:
       RAILS_ENV: test
-      DATABASE_URL: "mysql2://test_user:test_password@test-db-host:3307/test_db_name"
+      DATABASE_URL: "mysql2://test_user:test_password@localhost:3307/test_db_name"
 
     steps:
       - name: Checkout code
