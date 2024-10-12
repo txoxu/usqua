@@ -17,7 +17,7 @@
           <div class="form-group col-md-8 ms-5 mb-3">
             <%= f.label item[:key], item[:label] %>
             <div class="star-rating ms-5 ps-5" data-category="<%= item[:key] %>"></div>
-            <%= f.hidden_field item[:key], id: "#{item[:key]}-value" %>
+            <%= f.hidden_field item[:key], id: "#{item[:key]}-value", value: 0 %>
           </div>
         <% end %>
 
@@ -43,6 +43,7 @@
 
     $(this).raty({
       scoreName: category,
+      score: 0,
       hints:{
               'aroma': ['良くない', '少し悪い', '普通', '良い', 'とても良い'],
               'flavor': ['薄い', 'やや薄い', '普通', '良い', 'とても良い'],
@@ -60,7 +61,7 @@
       starHalf: 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-half.png',
       starOff: 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-off.png',
       click: function(score) {
-        $('#' + category + '-value').val(score);  // 選択した値をhidden_fieldに設定
+        $('#' + category + '-value').val(score || 0);  // 選択した値をhidden_fieldに設定
       }
     });
   });
