@@ -117,16 +117,11 @@ class WhiskeysController < ApplicationController
   def save_whiskey_with_categories(categories, remmaining_quantity)
     if @whiskey.save
       assign_save(categories, remmaining_quantity)
-      assign_badges_to_user
+      WhiskeyBadgesJob.perform_later(current_user.id, @whiskey.id)
       redirect_to choose_next_step_whiskey_path(@whiskey), success: t('whiskeys.create.success')
     else
       flash.now[:danger] = t('whiskeys.create.danger')
       render :new, status: :unprocessable_entity
     end
-  end
-
-  def assign_badges_to_user
-    badge_service = WhiskeyBadgeService.new(current_user, @whiskey)
-    badge_service.assign_badges
   end
 end
