@@ -11,28 +11,18 @@ class WhiskeyBadgesJob < ApplicationJob
     user = User.find(user_id)
     whiskey = Whiskey.find(whiskey_id)
 
-    WhiskeyBadge.all.each do |badge|
+    WhiskeyBadge.find_each do |badge|
       conditions = badge.conditions
-      if meets_conditions?(conditions, whiskey, user)
-        user.assign_badge(badge)
-      end
+      user.assign_badge(badge) if meets_conditions?(conditions, whiskey, user)
     end
   end
 
   private
 
   def meets_conditions?(conditions, _whiskey, user)
-    case conditions['type']
+    valid_types = ['new_whiskey_count', 'ten_whiskey_count', 'twenty_whiskey_count', 'fifty_whiskey_count', 'one_hundred_whiskey_count']
 
-    when 'new_whiskey_count'
-      user.whiskeys.count == conditions['count']
-    when 'ten_whiskey_count'
-      user.whiskeys.count == conditions['count']
-    when 'twenty_whiskey_count'
-      user.whiskeys.count == conditions['count']
-    when 'fifty_whiskey_count'
-      user.whiskeys.count == conditions['count']
-    when 'one_hundred_whiskey_count'
+    if valid_types.include?(conditions['type'])
       user.whiskeys.count == conditions['count']
     else
       false
