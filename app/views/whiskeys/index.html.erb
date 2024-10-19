@@ -137,7 +137,7 @@
   var closeBtn = document.querySelector(".popup .close");
 
   // ポップアップ表示の条件
-  var newBadges = <%= @new_badges.to_json.html_safe %>;// ERBで変数を埋め込む
+  var newBadges = <%= @new_badges.to_json.html_safe %> || [];// ERBで変数を埋め込む
 
   if (newBadges.length > 0) {
     // ポップアップにバッジリストを追加

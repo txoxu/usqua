@@ -28,8 +28,18 @@ class WhiskeyBadgesJob < ApplicationJob
     def meets_conditions?(conditions, whiskey, user)
       case conditions["type"]
   
-      when "new_whiskey_count"
+      when "#{whiskey_badge.conditions["type"]}"
         return user.whiskeys.count == conditions["count"]
+      when "ten_whiskey_count"
+        return user.whiskeys.count == conditions["count"]
+      when "twenty_whiskey_count"
+        return user.whiskeys.count == conditions["count"]
+      when "fifty_whiskey_count"
+        return user.whiskeys.count == conditions["count"]
+      when "one_hundred_whiskey_count"
+        return user.whiskeys.count == conditions["count"]
+      else
+        return false
       end
     end
 end

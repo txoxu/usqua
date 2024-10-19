@@ -234,7 +234,11 @@
 #  end
 
 whiskey_badges = [
-  { id: 1, name: '初登録', description: '初めてウイスキーを登録しました。', conditions: { 'type' => 'new_whiskey_count', 'count' => 1 } }
+  { id: 1, name: '初登録', description: '初めてウイスキーを登録しました。', conditions: { 'type' => 'new_whiskey_count', 'count' => 1 } },
+  { id: 2, name: '10本登録', description: '10本ウイスキーを登録しました', conditions: { 'type' => 'ten_whiskey_count', 'count' => 10 } },
+  { id: 3, name: '20本登録', description: '20本ウイスキーを登録しました。', conditions: { 'type' => 'twenty_whiskey_count', 'count' => 20 } },
+  { id: 4, name: '50本登録', description: '50本ウイスキーを登録しました。', conditions: { 'type' => 'fifty_whiskey_count', 'count' => 50 } },
+  { id: 5, name: '100本登録', description: '100本ウイスキーを登録しました。', conditions: { 'type' => 'one_hundred_whiskey_count', 'count' => 100 } }
 ]
 
 whiskey_badges.each do |b|
