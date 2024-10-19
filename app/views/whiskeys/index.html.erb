@@ -5,8 +5,8 @@
     <%= render 'shared/badges' %>
     <% if current_user.whiskeys.present? %>
       <% @whiskeys.each do |whiskey| %>
-        <div class="col-lg-12 mb-4">
-          <div class="card mb-5 shadow-lg">
+        <div class="col-lg-12 mb-5">
+          <div class="card mb-2 shadow-lg">
             <div class="row g-0">
               <!-- 画像と数量の部分をレスポンシブに調整 -->
               <div class="col-md-4 col-sm-6">
@@ -45,7 +45,7 @@
           </div>
 
           <% if @tastings.where(whiskey_id: whiskey.id).present? %>
-            <div class="accordion mb-5" id="accordion-<%= whiskey.id %>">
+            <div class="accordion" id="accordion-<%= whiskey.id %>">
               <div class="accordion-item">
                 <h2 class="accordion-header" id="heading-<%= whiskey.id %>">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<%= whiskey.id %>" aria-expanded="false" aria-controls="collapse-<%= whiskey.id %>">
@@ -137,7 +137,7 @@
   var closeBtn = document.querySelector(".popup .close");
 
   // ポップアップ表示の条件
-  var newBadges = <%= @new_badges.to_json.html_safe %>;// ERBで変数を埋め込む
+  var newBadges = <%= @new_badges.to_json.html_safe %> || [];// ERBで変数を埋め込む
 
   if (newBadges.length > 0) {
     // ポップアップにバッジリストを追加

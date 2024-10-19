@@ -20,7 +20,7 @@
             <%= f.label item[:key], item[:label], class: "col-md-3 col-form-label" %>
             <div class="col-md-9">
               <div class="star-rating ms-5 ps-5" data-category="<%= item[:key] %>" data-score="<%= f.object.send(item[:key]) %>"></div>
-              <%= f.hidden_field item[:key], id: "#{item[:key]}-value" %>
+              <%= f.hidden_field item[:key], id: "#{item[:key]}-value", value: 0 %>
             </div>
           </div>
         <% end %>
@@ -68,7 +68,7 @@
         starHalf: 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-half.png',
         starOff: 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-off.png',
         click: function(score) {
-          $('#' + category + '-value').val(score);  // 選択した値をhidden_fieldに設定
+          $('#' + category + '-value').val(score || 0);  // 選択した値をhidden_fieldに設定
         }
       });
     });
