@@ -20,7 +20,8 @@ class WhiskeyBadgesJob < ApplicationJob
   private
 
   def meets_conditions?(conditions, _whiskey, user)
-    valid_types = ['new_whiskey_count', 'ten_whiskey_count', 'twenty_whiskey_count', 'fifty_whiskey_count', 'one_hundred_whiskey_count']
+    valid_types = %w[new_whiskey_count ten_whiskey_count twenty_whiskey_count fifty_whiskey_count
+                     one_hundred_whiskey_count]
 
     if valid_types.include?(conditions['type'])
       user.whiskeys.count == conditions['count']
