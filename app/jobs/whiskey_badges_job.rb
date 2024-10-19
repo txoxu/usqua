@@ -5,11 +5,10 @@ class WhiskeyBadgesJob < ApplicationJob
     user_id = args[0]
     whiskey_id = args[1]
 
-
     user = User.find(user_id)
     whiskey = Whiskey.find(whiskey_id)
     Rails.logger.info "User found: #{user.id}, Whiskey found: #{whiskey.id}"
-  
+
     WhiskeyBadge.all.each do |badge|
       conditions = badge.conditions
       Rails.logger.info "Evaluating badge: #{badge.name} with conditions: #{conditions}"
@@ -21,25 +20,24 @@ class WhiskeyBadgesJob < ApplicationJob
       end
     end
   end
-  
-  
-    private
-  
-    def meets_conditions?(conditions, whiskey, user)
-      case conditions["type"]
-  
-      when "#{whiskey_badge.conditions["type"]}"
-        return user.whiskeys.count == conditions["count"]
-      when "ten_whiskey_count"
-        return user.whiskeys.count == conditions["count"]
-      when "twenty_whiskey_count"
-        return user.whiskeys.count == conditions["count"]
-      when "fifty_whiskey_count"
-        return user.whiskeys.count == conditions["count"]
-      when "one_hundred_whiskey_count"
-        return user.whiskeys.count == conditions["count"]
-      else
-        return false
-      end
+
+  private
+
+  def meets_conditions?(conditions, _whiskey, user)
+    case conditions['type']
+
+    when "#{whiskey_badge.conditions['type']}"
+      user.whiskeys.count == conditions['count']
+    when 'ten_whiskey_count'
+      user.whiskeys.count == conditions['count']
+    when 'twenty_whiskey_count'
+      user.whiskeys.count == conditions['count']
+    when 'fifty_whiskey_count'
+      user.whiskeys.count == conditions['count']
+    when 'one_hundred_whiskey_count'
+      user.whiskeys.count == conditions['count']
+    else
+      false
     end
+  end
 end
