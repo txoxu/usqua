@@ -132,14 +132,15 @@
 </style>
 <script>
   document.addEventListener("turbo:load", function() {
-  var popup = document.getElementById("badge-popup");
-  var badgeList = document.getElementById("badge-list");
-  var closeBtn = document.querySelector(".popup .close");
-
   // ポップアップ表示の条件
-  var newBadges = <%= @new_badges.to_json.html_safe %> || [];// ERBで変数を埋め込む
+  var newBadges = <%= @new_badges.to_json.html_safe %>;// ERBで変数を埋め込む
 
   if (newBadges.length > 0) {
+
+    var popup = document.getElementById("badge-popup");
+    var badgeList = document.getElementById("badge-list");
+    var closeBtn = document.querySelector(".popup .close");
+
     // ポップアップにバッジリストを追加
     newBadges.forEach(function(badge) {
       var badgeItem = document.createElement("div");
@@ -158,6 +159,8 @@
     
     closeBtn.addEventListener("click", function() {
       popup.style.display = "none";
+    // newBadgesを初期化
+      newBadges = [];
 
       // サーバーにポップアップ表示を通知する
       fetch("/update_badge_seen", {

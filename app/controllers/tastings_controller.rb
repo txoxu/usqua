@@ -13,6 +13,7 @@ class TastingsController < ApplicationController
     @tasting = @whiskey.tastings.build(tasting_params)
 
     if @tasting.save
+      TastingBadgesJob.perform_later(current_user.id, @tasting.id)
       redirect_to whiskeys_path, success: t('tastings.create.success')
     else
       flash.now[:danger] = t('tastings.create.danger')
