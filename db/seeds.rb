@@ -212,17 +212,18 @@ cocktails = [
 cocktails.each do |cocktail_data|
   cocktail = Cocktail.find_by(id: cocktail_data[:id])
   if cocktail
+    # 既存のカクテルを更新
     cocktail.update(cocktail_data)
+    Rails.logger.info "Updated cocktail: #{cocktail[:cocktail_name]}"
   else
-    Cocktail.create(cocktail_data)
+    # 新しいカクテルを作成
+    cocktail = Cocktail.create!(cocktail_data)
+    Rails.logger.info "Created cocktail: #{cocktail[:cocktail_name]}"
   end
-end
-cocktails.each do |cocktail|
-  Cocktail.create!(cocktail)
-  Rails.logger.info "Created cocktail: #{cocktail[:cocktail_name]}"
 rescue StandardError => e
-  Rails.logger.error "Failed to create cocktail: #{cocktail[:cocktail_name]}, Error: #{e.message}"
+  Rails.logger.error "Failed to process cocktail: #{cocktail_data[:cocktail_name]}, Error: #{e.message}"
 end
+
 # base_cocktails = [
 #    {id: 1, base_name: 'スコッチウイスキーベース'},
 #    {id: 2, base_name: 'バーボンウイスキーベース'},
