@@ -3,22 +3,29 @@
 <div class="container">
     <div class="accordion accordion-flush" id="accordionFlushExample">
       <% @cocktails.each do |c| %>
-          <div class="card pt-3 pb-3 mt-5">
+          <div class="card pt-3 pb-3 mt-5 ps-1">
             <div class="row">
-              <div class="col-md-2 ps-5">
+              <div class="col-md-2">
+                <% if c.cocktail_image.present? %>
+                  <%= image_tag "#{c.cocktail_image}", class: "cocktail-image" %>
+                <% else %>
+                  <%= image_tag "bar.jpg", class: "cocktail-image" %>
+                <% end %>
+              </div>
+              <div class="body col-md-2 ps-5">
                 <div class="base-title">
                   <%= c.base_cocktail.base_name %>
                 </div>
                 <%= link_to c.cocktail_name, cocktail_path(c), class: 'underline-animation' %>
               </div>
-              <div class="col-md-6">
+              <div class="body col-md-4">
                 <%= c.cocktail_origin %>
               </div>
               <% if user_signed_in? %>
-              <div class="col-md-3 ps-5">
+              <div class=" body col-md-3 ps-5">
                 <%= link_to 'テイスティング登録', new_cocktail_cocktail_tasting_path(c) %>
               </div>
-              <div class="col-md-1">
+              <div class=" body col-md-1">
                   <div class="bookmark-container">
                     <%= render 'cocktails/bookmark_button', cocktail: c %>
                   </div>
@@ -61,10 +68,95 @@
 
 <style>
 
-  .base-title {
+@media (max-width: 1600px) {
+  .cocktail-image {
+    width: 200px;
+    height: 200px;
+  }
+
+   .body {
+    padding-top: 90px;
+  }
+
+   .base-title {
     font-size: 10px;
   }
 
+
+}
+
+/* タブレットサイズ (幅: 768px 以上) */
+@media (max-width: 768px) {
+  .body {
+    padding-top: 50px;
+    text-align: center; /* 中央にテキストを揃える */
+  }
+
+  .cocktail-image {
+    width: 400px;
+    height: 400px;
+    margin-left: 50px; /* 画像を中央に配置 */
+  }
+
+  .base-title {
+    font-size: 12px; /* 少し大きめに調整 */
+  }
+
+  .bookmark-container {
+    justify-content: center; /* 中央に寄せる */
+    margin-right: 0; /* 右マージンを無効化 */
+  }
+
+  .null {
+    justify-content: center; /* 中央に寄せる */
+  }
+}
+
+/* スマートフォンサイズ (幅: 576px 以上) */
+@media (max-width: 576px) {
+  .body {
+    padding-top: 30px;
+    text-align: center; /* 中央にテキストを揃える */
+  }
+
+  .cocktail-image {
+    margin: 0 auto; /* 画像を中央に配置 */
+  }
+
+  .base-title {
+    font-size: 14px; /* フォントサイズを大きくして見やすく */
+  }
+
+  .bookmark-container {
+    justify-content: center; /* 中央に寄せる */
+    margin-right: 0; /* 右マージンを無効化 */
+  }
+
+  .null {
+    justify-content: center; /* 中央に寄せる */
+  }
+
+  /* 行の並びを縦に変更 */
+  .row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .col-md-2, .col-md-4, .col-md-3, .col-md-1 {
+    width: 100%; /* 幅を100%に */
+    margin-bottom: 10px; /* 各要素にマージンを追加 */
+  }
+
+  .accordion-body span {
+    display: block;
+    width: 100%; /* テキストが小さな画面に収まるように */
+    margin-bottom: 10px;
+  }
+
+  .accordion-body .btn {
+    width: 100%; /* ボタンの幅を100%に */
+  }
+}
 
   .underline-animation {
   position: relative;

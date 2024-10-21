@@ -39,12 +39,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_19_162030) do
     t.string "name"
     t.string "description"
     t.json "conditions"
-    t.bigint "category_id"
-    t.bigint "base_cocktail_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["base_cocktail_id"], name: "index_cocktail_badges_on_base_cocktail_id"
-    t.index ["category_id"], name: "index_cocktail_badges_on_category_id"
   end
 
   create_table "cocktail_tastings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -155,12 +151,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_19_162030) do
     t.string "name"
     t.string "description"
     t.json "conditions"
-    t.bigint "category_id"
-    t.bigint "base_cocktail_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["base_cocktail_id"], name: "index_whiskey_badges_on_base_cocktail_id"
-    t.index ["category_id"], name: "index_whiskey_badges_on_category_id"
   end
 
   create_table "whiskey_categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -186,8 +178,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_19_162030) do
 
   add_foreign_key "bookmarks", "cocktails"
   add_foreign_key "bookmarks", "users"
-  add_foreign_key "cocktail_badges", "base_cocktails"
-  add_foreign_key "cocktail_badges", "categories"
   add_foreign_key "cocktail_tastings", "cocktails"
   add_foreign_key "cocktail_tastings", "users"
   add_foreign_key "cocktail_tastings", "whiskeys"
@@ -197,8 +187,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_19_162030) do
   add_foreign_key "user_providers", "users"
   add_foreign_key "user_whiskey_badges", "users"
   add_foreign_key "user_whiskey_badges", "whiskey_badges"
-  add_foreign_key "whiskey_badges", "base_cocktails"
-  add_foreign_key "whiskey_badges", "categories"
   add_foreign_key "whiskey_categories", "categories"
   add_foreign_key "whiskey_categories", "whiskeys"
   add_foreign_key "whiskeys", "remmaining_quantities"
