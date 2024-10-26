@@ -103,17 +103,20 @@ cocktails = [
     cocktail_name: 'スコッチ・キルト',
     cocktail_origin: 'キルトとは、スコットランドのタータン・チェックのプリーツスカート風民族衣装のこと',
     cocktail_recipe: 'スコッチウイスキー: 2/3, ドランブイ: 1/3, オレンジビターズ: 2ダッシュ',
-    cocktail_url: '6jrx_ZJGfOo?si=24HGepzuWQEc6ClY' },
+    cocktail_url: '6jrx_ZJGfOo?si=24HGepzuWQEc6ClY',
+    cocktail_image: 'スコッチ・キルト.webp'},
   { id: 9, base_cocktail_id: 1,
     cocktail_name: 'セント・アンドリュース',
     cocktail_origin: 'セント・アンドリュースはスコットランドの守護聖人。ゴルフの発祥地の名前でもある',
     cocktail_recipe: 'スコッチウイスキー: 1/3, ドランブイ: 1/3, オレンジジュース:1/3',
-    cocktail_url: 'Ru-CjyZStcI?si=i-RAfyF3i2uf7W05' },
+    cocktail_url: 'Ru-CjyZStcI?si=i-RAfyF3i2uf7W05',
+    cocktail_image: 'セント・アンドリュース.webp'},
   { id: 10, base_cocktail_id: 1,
     cocktail_name: 'ロッホ・ローモンド',
     cocktail_origin: 'スコットランド最大の湖の名前。同名でウイスキーとしても存在する',
     cocktail_recipe: 'スコッチウイスキー: 90ml, アンゴラスチュラビターズ: 3~5ダッシュ, シュガーシロップ: 15ml',
-    cocktail_url: 'LSPUK09-WEM?si=RkjMFjd8U_Md2m8d' },
+    cocktail_url: 'LSPUK09-WEM?si=RkjMFjd8U_Md2m8d',
+    cocktail_image: 'ロッホ・ローモンド.webp'},
   { id: 11, base_cocktail_id: 2,
     cocktail_name: 'バーボネラ',
     cocktail_origin: 'イギリスのバーテンダー、w.ホイットフィールド氏が考案した',
@@ -243,15 +246,20 @@ end
 
 whiskey_badges = [
   { id: 1, name: '初登録', description: '初めてウイスキーを登録しました。',
-    conditions: { 'type' => 'new_whiskey_count', 'count' => 1 } },
+    conditions: { 'type' => 'new_whiskey_count', 'count' => 1 },
+    badge_image: 'badge(w1).jpg'},
   { id: 2, name: '10本登録', description: '10本ウイスキーを登録しました',
-    conditions: { 'type' => 'ten_whiskey_count', 'count' => 10 } },
+    conditions: { 'type' => 'ten_whiskey_count', 'count' => 10 },
+    badge_image: 'badge(w10).jpg'},
   { id: 3, name: '20本登録', description: '20本ウイスキーを登録しました。',
-    conditions: { 'type' => 'twenty_whiskey_count', 'count' => 20 } },
+    conditions: { 'type' => 'twenty_whiskey_count', 'count' => 20 },
+    badge_image: 'badge(w20).jpg'},
   { id: 4, name: '50本登録', description: '50本ウイスキーを登録しました。',
-    conditions: { 'type' => 'fifty_whiskey_count', 'count' => 50 } },
+    conditions: { 'type' => 'fifty_whiskey_count', 'count' => 50 },
+    badge_image: 'badge(w50).jpg'},
   { id: 5, name: '100本登録', description: '100本ウイスキーを登録しました。',
-    conditions: { 'type' => 'one_hundred_whiskey_count', 'count' => 100 } },
+    conditions: { 'type' => 'one_hundred_whiskey_count', 'count' => 100 },
+    badge_image: 'badge(w100).jpg'},
   { id: 6, name: '初登録', description: '初めてテイスティング登録しました。',
     conditions: { 'type' => 'new_tasting_count', 'count' => 1 } },
   { id: 7, name: '10回登録', description: '10回テイスティング登録しました。',
@@ -265,12 +273,13 @@ whiskey_badges = [
 ]
 
 whiskey_badges.each do |b|
-  WhiskeyBadge.find_or_create_by!(id: b[:id]) do |badge|
-    badge.name = b[:name]
-    badge.description = b[:description]
-    badge.conditions = b[:conditions]
+  badge = WhiskeyBadge.find_by(id: b[:id])
+  if badge
+    badge.update(b)
+    Rails.logger.info "バッジをアップデートしました: #{badge[:name]}"
+  else
+    badge = WhiskeyBadge.create!(b)
+    Rails.logger.info "バッジを作成しました: #{badge[:name]}"
   end
-  Rails.logger.info "ウイスキーバッジを作成しました。: #{b[:name]}"
-rescue StandardError => e
-  Rails.logger.error "ウイスキーバッジの作成に失敗しました。: #{b[:name]}, Error: #{e.message}"
 end
+

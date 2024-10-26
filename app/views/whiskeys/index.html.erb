@@ -139,28 +139,31 @@
 
     var popup = document.getElementById("badge-popup");
     var badgeList = document.getElementById("badge-list");
+    var Image = document.getElementById("badge-image");
     var closeBtn = document.querySelector(".popup .close");
 
     // ポップアップにバッジリストを追加
     newBadges.forEach(function(badge) {
       var badgeItem = document.createElement("div");
       var badgeBox = document.createElement("div");
+      var badgeImage = document.createElement("img");
+      badgeImage.src = `<%= asset_path(newBadges[0]['badge_image'])%>`;
+      badgeImage.style.width = '400px';
+      badgeImage.style.height = '150px';
       badgeItem.textContent = badge.name; // バッジ名を表示
       badgeBox.textContent = badge.description;
       badgeList.appendChild(badgeItem);
       badgeList.appendChild(badgeBox);
-      
+      Image.appendChild(badgeImage);
     });
 
     // ポップアップ表示
     popup.style.display = "flex";
 
     // ポップアップ閉じる処理
-    
     closeBtn.addEventListener("click", function() {
       popup.style.display = "none";
-    // newBadgesを初期化
-      newBadges = [];
+
 
       // サーバーにポップアップ表示を通知する
       fetch("/update_badge_seen", {
