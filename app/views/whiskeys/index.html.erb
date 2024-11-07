@@ -132,14 +132,7 @@
 </style>
 <script>
 
-document.addEventListener("turbo:before-cache", function() {
-  // ページ遷移前にポップアップを削除
-  const popup = document.getElementById("badge-popup");
-  if (popup) {
-    popup.remove();
-  }
-  location.reload();
-});
+
   document.addEventListener("turbo:load", function() {
   // ポップアップ表示の条件
   let newBadges = <%= @new_badges.to_json.html_safe %>;// ERBで変数を埋め込む
@@ -172,6 +165,7 @@ document.addEventListener("turbo:before-cache", function() {
     // ポップアップ閉じる処理
     closeBtn.addEventListener("click", function() {
       popup.style.display = "none";
+      location.reload();
 
 
       // サーバーにポップアップ表示を通知する
