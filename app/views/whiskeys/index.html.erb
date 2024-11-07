@@ -131,36 +131,42 @@
 }
 </style>
 <script>
+
+
   document.addEventListener("turbo:load", function() {
   // ポップアップ表示の条件
-  var newBadges = <%= @new_badges.to_json.html_safe %>;// ERBで変数を埋め込む
+  let newBadges = <%= @new_badges.to_json.html_safe %>;// ERBで変数を埋め込む
 
   if (newBadges.length > 0) {
 
-    var popup = document.getElementById("badge-popup");
-    var badgeList = document.getElementById("badge-list");
-    var closeBtn = document.querySelector(".popup .close");
+    let popup = document.getElementById("badge-popup");
+    let badgeList = document.getElementById("badge-list");
+    let Image = document.getElementById("badge-image");
+    let closeBtn = document.querySelector(".popup .close");
 
     // ポップアップにバッジリストを追加
     newBadges.forEach(function(badge) {
-      var badgeItem = document.createElement("div");
-      var badgeBox = document.createElement("div");
+      let badgeItem = document.createElement("div");
+      let badgeBox = document.createElement("div");
+      let badgeImage = document.createElement("img");
+      badgeImage.src = `<%= @new_badges.present? ? asset_path(@new_badges[0]["badge_image"]) : '' %>`;
+      badgeImage.style.width = '400px';
+      badgeImage.style.height = '150px';
       badgeItem.textContent = badge.name; // バッジ名を表示
       badgeBox.textContent = badge.description;
       badgeList.appendChild(badgeItem);
       badgeList.appendChild(badgeBox);
-      
+      Image.appendChild(badgeImage);
     });
 
     // ポップアップ表示
     popup.style.display = "flex";
 
     // ポップアップ閉じる処理
-    
     closeBtn.addEventListener("click", function() {
       popup.style.display = "none";
-    // newBadgesを初期化
-      newBadges = [];
+      location.reload();
+
 
       // サーバーにポップアップ表示を通知する
       fetch("/update_badge_seen", {
