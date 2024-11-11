@@ -1,6 +1,10 @@
 // Entry point for the build script in your package.json
+import "./preview"
+import "./quantity_change"
+import "./whiskey_star"
+import "./cocktail_star"
+import "./distillery"
 import "@hotwired/turbo-rails"
 import "./controllers"
 import * as bootstrap from "bootstrap"
 import "chartkick/chart.js"
-
