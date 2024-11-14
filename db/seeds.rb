@@ -304,10 +304,10 @@ cocktail_badges = [
   { id: 3, name: 'バーテンダー？？', description: '20回カクテルを作成しました。',
     conditions: { 'type' => 'twenty_cocktail_count', 'count' => 20 },
     badge_image: 'badge(t20).jpg' },
-  { id: 4, name: '宅飲みで酒作成係', description: '50本ウイスキーを登録しました。',
+  { id: 4, name: '宅飲みで酒作成係', description: '50回カクテルを作成しました。',
     conditions: { 'type' => 'fifty_cocktail_count', 'count' => 50 },
     badge_image: 'badge(t50).jpg' },
-  { id: 5, name: 'バーテンダー', description: '100本ウイスキーを登録しました。',
+  { id: 5, name: 'バーテンダー', description: '100回カクテルを作成しました。',
     conditions: { 'type' => 'one_hundred_cocktail_count', 'count' => 100 },
     badge_image: 'badge(t100).jpg' }
 ]
