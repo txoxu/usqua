@@ -251,36 +251,36 @@ end
 #  end
 
 whiskey_badges = [
-  { id: 1, name: '初登録', description: '初めてウイスキーを登録しました。',
+  { id: 1, name: 'ウイスキー初心者', description: '初めてウイスキーを登録しました。',
     conditions: { 'type' => 'new_whiskey_count', 'count' => 1 },
     badge_image: 'badge(w1).jpg' },
-  { id: 2, name: '10本登録', description: '10本ウイスキーを登録しました',
+  { id: 2, name: 'ウイスキーにこだわり始めました', description: '10本ウイスキーを登録しました',
     conditions: { 'type' => 'ten_whiskey_count', 'count' => 10 },
     badge_image: 'badge(w10).jpg' },
-  { id: 3, name: '20本登録', description: '20本ウイスキーを登録しました。',
+  { id: 3, name: 'ウイスキーはそこそこ知ってる', description: '20本ウイスキーを登録しました。',
     conditions: { 'type' => 'twenty_whiskey_count', 'count' => 20 },
     badge_image: 'badge(w20).jpg' },
-  { id: 4, name: '50本登録', description: '50本ウイスキーを登録しました。',
+  { id: 4, name: '現在ウイスキーにとりつかれ中', description: '50本ウイスキーを登録しました。',
     conditions: { 'type' => 'fifty_whiskey_count', 'count' => 50 },
     badge_image: 'badge(w50).jpg' },
-  { id: 5, name: '100本登録', description: '100本ウイスキーを登録しました。',
+  { id: 5, name: 'もう何も言うことはございません', description: '100本ウイスキーを登録しました。',
     conditions: { 'type' => 'one_hundred_whiskey_count', 'count' => 100 },
     badge_image: 'badge(w100).jpg' },
-  { id: 6, name: '初登録', description: '初めてテイスティング登録しました。',
+  { id: 6, name: 'まだ、味に違いが分かりません', description: '初めてテイスティング登録しました。',
     conditions: { 'type' => 'new_tasting_count', 'count' => 1 },
-    badge_image: 'badge(t1).jpg' },
-  { id: 7, name: '10回登録', description: '10回テイスティング登録しました。',
+    badge_image: 'badge(tt1).jpg' },
+  { id: 7, name: 'まぁまぁの種類飲んでる', description: '10回テイスティング登録しました。',
     conditions: { 'type' => 'ten_tasting_count', 'count' => 10 },
-    badge_image: 'badge(t10).jpg' },
-  { id: 8, name: '20回登録', description: '20回テイスティング登録しました。',
+    badge_image: 'badge(tt10).jpg' },
+  { id: 8, name: '味の違いに気づいてきちゃった', description: '20回テイスティング登録しました。',
     conditions: { 'type' => 'twenty_tasting_count', 'count' => 20 },
-    badge_image: 'badge(t20).jpg' },
-  { id: 9, name: '50回登録', description: '50回テイスティング登録しました。',
+    badge_image: 'badge(tt20).jpg' },
+  { id: 9, name: 'テイスティング専用のグラス買っちゃいなよぉ～', description: '50回テイスティング登録しました。',
     conditions: { 'type' => 'fifty_tasting_count', 'count' => 50 },
-    badge_image: 'badge(t50).jpg' },
-  { id: 10, name: '100回登録', description: '100回テイスティング登録しました。',
+    badge_image: 'badge(tt50).jpg' },
+  { id: 10, name: 'ウイスキーのためにカレー食べるのやめました？', description: '100回テイスティング登録しました。',
     conditions: { 'type' => 'one_hundred_tasting_count', 'count' => 100 },
-    badge_image: 'badge(t100).jpg' }
+    badge_image: 'badge(tt100).jpg' }
 ]
 
 whiskey_badges.each do |b|
@@ -290,6 +290,35 @@ whiskey_badges.each do |b|
     Rails.logger.info "バッジをアップデートしました: #{badge[:name]}"
   else
     badge = WhiskeyBadge.create!(b)
+    Rails.logger.info "バッジを作成しました: #{badge[:name]}"
+  end
+end
+
+cocktail_badges = [
+  { id: 1, name: '初心者', description: '初めてカクテルを作成しました。',
+    conditions: { 'type' => 'new_cocktail_count', 'count' => 1 },
+    badge_image: 'badge(t1).jpg' },
+  { id: 2, name: '駆け出しバーテンダー（自宅）', description: '10回カクテルを作成しました',
+    conditions: { 'type' => 'ten_cocktail_count', 'count' => 10 },
+    badge_image: 'badge(t10).jpg' },
+  { id: 3, name: 'バーテンダー？？', description: '20回カクテルを作成しました。',
+    conditions: { 'type' => 'twenty_cocktail_count', 'count' => 20 },
+    badge_image: 'badge(t20).jpg' },
+  { id: 4, name: '宅飲みで酒作成係', description: '50回カクテルを作成しました。',
+    conditions: { 'type' => 'fifty_cocktail_count', 'count' => 50 },
+    badge_image: 'badge(t50).jpg' },
+  { id: 5, name: 'バーテンダー', description: '100回カクテルを作成しました。',
+    conditions: { 'type' => 'one_hundred_cocktail_count', 'count' => 100 },
+    badge_image: 'badge(t100).jpg' }
+]
+
+cocktail_badges.each do |c|
+  badge = CocktailBadge.find_by(id: c[:id])
+  if badge
+    badge.update(c)
+    Rails.logger.info "バッジをアップデートしました: #{badge[:name]}"
+  else
+    badge = CocktailBadge.create!(c)
     Rails.logger.info "バッジを作成しました: #{badge[:name]}"
   end
 end
