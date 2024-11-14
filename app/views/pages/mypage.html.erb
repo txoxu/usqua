@@ -1,7 +1,7 @@
 <% breadcrumb :mypage %>
 <div class="container mypage-container bg-body-secondary rounded">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
       <div class="total-container">
         <div class="total-frame">
           <div class="row">
@@ -35,7 +35,7 @@
       </div>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-6">
       <div class="chart-container">
         <%= pie_chart @whiskey_count_by_category, library: {
           animation: {
@@ -47,38 +47,17 @@
       </div>
     </div>
 
-    <div class="col-md-4">
-      <div class="chart-container">
-        <%= bar_chart @whiskey_count_by_category, library: {
-            hAxis: {
-              title: 'ウィスキーの種類',
-              titleTextStyle: { color: '#333' }
-            },
-            vAxis: {
-              title: '本数',
-              minValue: 0,
-              format: 'decimal',
-              titleTextStyle: { color: '#333' }
-            },
-             animation: {
-              startup: true,
-              duration: 1000,
-              easing: 'out',
-            }
-          } %>
-      </div>
-    </div>
-
   
     <h1>お気に入りカクテル</h1>
       <% if @bookmark_cocktails.present? %>
           <% @bookmark_cocktails.each do |b| %>
-          <div class="row">
-            <div class="card col-md-12 mb-1">
+            <div class="card mb-1">
                 <div class="card-body">
-                  <h5 class="card-title"><%= b.cocktail_name %></h5>
-                  <p class="card-text"><%= b.cocktail_origin %></p>
-                  <div><%= render 'cocktails/unbookmark', { cocktail: b } %></div>
+                  <div class="row">
+                  <p class="card-image col-md-1"><%= image_tag b.cocktail_image, class: "image-size" %></p>
+                  <h5 class="card-title col-md-2"><%= b.cocktail_name %></h5>
+                  <p class="card-text col-md-6"><%= b.cocktail_origin %></p>
+                  <div class="col-md-2"><%= render 'cocktails/unbookmark', { cocktail: b } %></div>
                   <%= link_to "詳細ページ", cocktail_path(b), class: "link-success link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" %>
                 </div>
             </div>
@@ -89,6 +68,22 @@
           <p>登録されているカクテルはありません</p>
         </div>
       <% end %>
+    <h1>獲得した称号</h1>
+    <% if @user_whiskey_badges.present? %>
+      <div class="row">
+      <% @whiskey_badges.each do |badge| %>
+        <div class="card col-md-4 mb-1">
+          <div class="badge-card-body">
+              <p class="card-image"><%= image_tag badge.badge_image, class: "badge-image-size" %></p>
+              <h5 class="card-title"><%= badge.name %></h5>
+              <p class="card-text"><%= badge.description %></p>
+          </div>
+        </div>
+      <% end %>
+      </div>
+    <% else %>
+      <h2>獲得した称号はまだありません。</h2>
+    <% end %>
   </div>
 </div>
 
@@ -122,5 +117,30 @@
 
 .chart-container .chartkick {
   max-width: 100%;
+}
+
+.image-size {
+  width: 5rem;
+  height: 5rem;
+}
+
+.badge-image-size {
+  width: 20rem;
+  height: 5rem;
+}
+
+.card {
+  height: 10rem;
+  text-align: center;
+}
+
+@media (max-width: 992px) {
+  .card {
+    height: 18rem;
+  }
+
+  .badge-card-body {
+    margin-top: 3rem;
+  }
 }
 </style>
