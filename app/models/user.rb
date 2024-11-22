@@ -50,8 +50,17 @@ class User < ApplicationRecord
   end
 
   def assign_badge(badge)
+    # もし、ユーザーが獲得したバッジ(中間テーブル)に今回取得した称号がないのであれば
     return if user_whiskey_badges.exists?(whiskey_badge: badge)
 
+    # ユーザーの獲得したバッジを作成する
     user_whiskey_badges.create(whiskey_badge: badge)
+  end
+
+  # 上のウイスキーのカクテル版
+  def assign_cocktail_badge(badge)
+    return if user_cocktail_badges.exists?(cocktail_badge: badge)
+
+    user_cocktail_badges.create(cocktail_badge: badge)
   end
 end

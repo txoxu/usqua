@@ -1,6 +1,7 @@
 <% breadcrumb :cocktails %>
 <%= render 'shared/cocktail_search_form' %>
 <div class="container">
+  <%= render 'shared/badges' %>
     <div class="accordion accordion-flush" id="accordionFlushExample">
       <% @cocktails.each do |c| %>
           <div class="card pt-3 pb-3 mt-5 ps-1">
@@ -200,4 +201,90 @@
   .title {
     text-align: center;
   }
+
+    .popup {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; 
+}
+
+.popup-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+  
+}
+
+.popup .close {
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  font-size: 50px;
+  color: white;
+  cursor: pointer;
+}
 </style>
+
+<script>
+
+
+  document.addEventListener("turbo:load", function() {
+  // ポップアップ表示の条件
+  let newBadges = <%= @new_badges.to_json.html_safe %>;// ERBで変数を埋め込む
+
+  if (newBadges.length > 0) {
+
+    let popup = document.getElementById("badge-popup");
+    let badgeList = document.getElementById("badge-list");
+    let Image = document.getElementById("badge-image");
+    let closeBtn = document.querySelector(".popup .close");
+
+    // ポップアップにバッジリストを追加
+    newBadges.forEach(function(badge) {
+      let badgeItem = document.createElement("div");
+      let badgeBox = document.createElement("div");
+      let badgeImage = document.createElement("img");
+      badgeImage.src = `<%= @new_badges.present? ? asset_path(@new_badges[0]["badge_image"]) : '' %>`;
+      badgeImage.style.width = '400px';
+      badgeImage.style.height = '150px';
+      badgeItem.textContent = badge.name; // バッジ名を表示
+      badgeBox.textContent = badge.description;
+      badgeList.appendChild(badgeItem);
+      badgeList.appendChild(badgeBox);
+      Image.appendChild(badgeImage);
+    });
+
+    // ポップアップ表示
+    popup.style.display = "flex";
+
+    // ポップアップ閉じる処理
+    closeBtn.addEventListener("click", function() {
+      popup.style.display = "none";
+
+
+
+      // サーバーにポップアップ表示を通知する
+      fetch("/update_cocktail_badge_seen", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").getAttribute("content")
+        },
+        body: JSON.stringify({ badge_ids: newBadges.map(badge => badge.id) }) /*idsとすることで、同時に獲得したバッジを複数、seenをtrueにして表示させないようにしている*/
+      });
+           location.reload();
+    });
+  }
+});
+</script>
+
