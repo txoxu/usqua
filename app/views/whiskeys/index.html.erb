@@ -165,7 +165,7 @@
     // ポップアップ閉じる処理
     closeBtn.addEventListener("click", function() {
       popup.style.display = "none";
-      location.reload();
+
 
 
       // サーバーにポップアップ表示を通知する
@@ -177,6 +177,7 @@
         },
         body: JSON.stringify({ badge_ids: newBadges.map(badge => badge.id) })
       });
+            location.reload();
     });
   }
 });

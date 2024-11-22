@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   # バッジの更新
   post 'update_badge_seen', to: 'whiskeys#update_badge_seen'
+  post 'update_cocktail_badge_seen', to: 'cocktails#update_cocktail_badge_seen'
   # ユーザー関連のルーティング
   resources :users, only: %i[show edit update destroy]
   # カクテル関連のルーティング
