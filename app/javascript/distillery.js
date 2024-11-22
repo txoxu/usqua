@@ -96,6 +96,6 @@ document.addEventListener('turbo:load', async () => {
         {"title":"まさひろ酒造 首里蔵","address1":"日本、〒903-0804 沖縄県那覇市首里石嶺町４丁目","coords":{"lat":26.231663223231312,"lng":127.72964302883607},"placeId":"ChIJ9WqQpAxs5TQRrPGleUQiyrE"}
       ],
       "mapOptions": {"center":{"lat":38.0,"lng":-100.0},"fullscreenControl":true,"mapTypeControl":false,"streetViewControl":false,"zoom":4,"zoomControl":true,"maxZoom":17,"mapId":""},
-      "mapsApiKey": "AIzaSyCuqaZ0cxoX5OtcvfKPP6vjfDBA89d6IJM",
+      "mapsApiKey": "",
       "capabilities": {"input":true,"autocomplete":true,"directions":true,"distanceMatrix":true,"details":true,"actions":false}
     };
