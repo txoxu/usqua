@@ -5,6 +5,7 @@ class DistilleriesController < ApplicationController
   skip_before_action :require_login
 
   def index
-    @api_key = ENV['GOOGLE_MAPS_API_KEY']
+    @regions = Region.includes(:distilleries)
+    @distillery_name = Distillery.find_by(id: params[:id])
   end
 end

@@ -1,29 +1,162 @@
 <% breadcrumb :distilleries %>
 <div class="bg-body-secondary shadow-lg pt-5 pb-5 rounded">
-<div class="container">
-  <div class="row">
-    <div class="card mb-3" style="width: 100%;">
+  <div class="container">
+    <div class="row">
+      <div class="card mb-3" style="width: 100%;">
       <h5 class="card-header">蒸留所一覧</h5>
-      <div class="card-body">
-        <h5 class="card-title">このページについて</h5>
-        <p class="card-text">このページでは、国内のウイスキー蒸留所の場所をgoogleマップで見ることができます。<br>
-                             公式サイトのURLもgoogleマップ内ありますので、活用ください。<br>
-                             **国内蒸留所がすべてマップ内にない場合がありますので予めご了承ください。</p>
-        <h2>現在、メンテナンス中です。大変ご迷惑をおかけ致します。ほかの機能は使用できますので、今しばらくお待ちください。</h2>
+        <div class="card-body">
+          <h5 class="card-title">このページについて</h5>
+          <p class="card-text">このページでは、国内のウイスキー蒸留所の場所をgoogleマップで見ることができます。</p>
+          <p class="card-alert" style="color: red;">**国内蒸留所がすべてマップ内にない場合がありますので予めご了承ください。</p>
+        </div>
       </div>
-    </div>
-
-      <div style="width: 100%; height: 600px;">
-        <gmpx-api-loader key="" solution-channel="GMP_QB_locatorplus_v10_cABCDE"></gmpx-api-loader>
-        <gmpx-store-locator map-id="DEMO_MAP_ID" ></gmpx-store-locator>
+      <div class="col-md-12 mb-1">
+        <% @regions.each do |r| %>
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+              <%= r.region_name %>
+            </button>
+            <ul class="dropdown-menu" style="width: 25rem; text-align: center;">
+              <% r.distilleries.each do |d| %>
+              <li>
+                <a class="whiskey" data-distillery-name="<%= d.distillery_name %>">
+                  <%= d.distillery_name %>
+                </a>
+              </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        </div>
+      <div id="map" style="width: 100%; height: 600px; border-radius: 5px;">
       </div>
   </div>
 </div>
 </div>
 
-<style>
-h2 {
-font-color: red;
+<script>
+let map;
+let marker;
+let geocoder;
+let responseDiv;
+let response;
+
+document.addEventListener("turbo:load", () => {
+  initMap();
+});
+function initMap() {
+  map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 1,
+    center: { lat: -34.397, lng: 150.644 },
+    mapTypeControl: false,
+  });
+  geocoder = new google.maps.Geocoder();
+
+  const inputText = document.createElement("input");
+  /*入力欄を生成*/
+  inputText.type = "text";
+  inputText.placeholder = "場所を入力してください";
+  inputText.style.padding = '0.5rem';
+  inputText.style.margin = '0.5rem';
+  inputText.style.width = '20rem';
+  inputText.style.borderRadius = '0.5rem';
+
+  const submitButton = document.createElement("input");
+  /*検索ボタンを生成*/
+  submitButton.type = "button";
+  submitButton.value = "検索";
+  submitButton.classList.add("button", "button-primary");
+  submitButton.style.padding = '0.4rem';
+  submitButton.style.margin = '0.5rem';
+  submitButton.style.borderRadius = '0.5rem';
+  submitButton.style.backgroundColor = 'green';
+
+  const clearButton = document.createElement("input");
+  /*クリアボダンを生成*/
+  clearButton.type = "button";
+  clearButton.value = "クリア";
+  clearButton.classList.add("button", "button-secondary");
+  clearButton.style.padding = '0.4rem';
+  clearButton.style.margin = '0.5rem';
+  clearButton.style.borderRadius = '0.5rem';
+  
+  response = document.createElement("pre");
+  response.id = "response";
+  response.innerText = "";
+  responseDiv = document.createElement("div");
+  responseDiv.id = "response-container";
+  responseDiv.appendChild(response);
+
+  const instructionsElement = document.createElement("p");
+
+  /*入力欄、検索、クリアボタン*/
+  instructionsElement.id = "instructions";
+  instructionsElement.innerHTML =
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(inputText);
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(submitButton);
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(clearButton);
+  map.controls[google.maps.ControlPosition.LEFT_TOP].push(instructionsElement);
+  map.controls[google.maps.ControlPosition.LEFT_TOP].push(responseDiv);
+  marker = new google.maps.Marker({
+    map,
+  });
+  map.addListener("click", (e) => {
+    geocode({ location: e.latLng });
+  });
+  submitButton.addEventListener("click", () => {
+    map.setZoom(5); /*ズームをリセット*/
+    geocode({ address: inputText.value });
+});
+  clearButton.addEventListener("click", () => {
+    clear();
+  });
+  clear();
 }
 
-</style>
+function clear() {
+  marker.setMap(null);
+  responseDiv.style.display = "none";
+}
+
+function gradualZoom(targetZoom) {
+  let currentZoom = map.getZoom();
+
+  if (currentZoom < targetZoom) {
+    currentZoom++;
+    map.setZoom(currentZoom);
+    setTimeout(() => gradualZoom(targetZoom), 100);
+  }
+}
+
+ 
+
+function geocode(request) {
+  clear(); /*リセットするための関数*/
+  geocoder
+    .geocode(request) /*requestは入力した場所*/
+    .then((result) => { /*geocoding apiを使用して住所を座標に変換*/
+      const { results } = result;
+
+      map.setCenter(results[0].geometry.location); /*マップの中心設定*/
+      marker.setPosition(results[0].geometry.location); /*マーカーの位置*/
+      marker.setMap(map); /*マーカーを地図に表示*/
+      gradualZoom(10);
+
+      const placeId = results[0].place_id;
+      
+
+      return results;
+    })
+    .catch((e) => {
+      alert("検索した場所が存在しません " + e);
+    });
+}
+
+document.querySelectorAll('.whiskey').forEach((button) => {
+  button.addEventListener('click', () => {
+    const whiskey = button.getAttribute('data-distillery-name');  // ボタンから蒸留所名を取得
+    map.setZoom(5);
+    geocode({ address: whiskey });  // geocode 関数に蒸留所名を渡して検索
+  });
+});
+</script>
