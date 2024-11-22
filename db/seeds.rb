@@ -294,34 +294,34 @@
 #   end
 # end
 #
-# cocktail_badges = [
-#   { id: 1, name: '初心者', description: '初めてカクテルを作成しました。',
-#     conditions: { 'type' => 'new_cocktail_count', 'count' => 1 },
-#     badge_image: 'badge(t1).jpg' },
-#   { id: 2, name: '駆け出しバーテンダー（自宅）', description: '10回カクテルを作成しました',
-#     conditions: { 'type' => 'ten_cocktail_count', 'count' => 10 },
-#     badge_image: 'badge(t10).jpg' },
-#   { id: 3, name: 'バーテンダー？？', description: '20回カクテルを作成しました。',
-#     conditions: { 'type' => 'twenty_cocktail_count', 'count' => 20 },
-#     badge_image: 'badge(t20).jpg' },
-#   { id: 4, name: '宅飲みで酒作成係', description: '50回カクテルを作成しました。',
-#     conditions: { 'type' => 'fifty_cocktail_count', 'count' => 50 },
-#     badge_image: 'badge(t50).jpg' },
-#   { id: 5, name: 'バーテンダー', description: '100回カクテルを作成しました。',
-#     conditions: { 'type' => 'one_hundred_cocktail_count', 'count' => 100 },
-#     badge_image: 'badge(t100).jpg' }
-# ]
-#
-# cocktail_badges.each do |c|
-#   badge = CocktailBadge.find_by(id: c[:id])
-#   if badge
-#     badge.update(c)
-#     Rails.logger.info "バッジをアップデートしました: #{badge[:name]}"
-#   else
-#     badge = CocktailBadge.create!(c)
-#     Rails.logger.info "バッジを作成しました: #{badge[:name]}"
-#   end
-# end
+cocktail_badges = [
+  { id: 1, name: '初心者', description: '初めてカクテルを作成しました。',
+    conditions: { 'type' => 'new_cocktail_count', 'count' => 1 },
+    badge_image: 'badge(t1).jpg' },
+  { id: 2, name: '駆け出しバーテンダー（自宅）', description: '10回カクテルを作成しました',
+    conditions: { 'type' => 'ten_cocktail_count', 'count' => 10 },
+    badge_image: 'badge(t10).jpg' },
+  { id: 3, name: 'バーテンダー？？', description: '20回カクテルを作成しました。',
+    conditions: { 'type' => 'twenty_cocktail_count', 'count' => 20 },
+    badge_image: 'badge(t20).jpg' },
+  { id: 4, name: '宅飲みで酒作成係', description: '50回カクテルを作成しました。',
+    conditions: { 'type' => 'fifty_cocktail_count', 'count' => 50 },
+    badge_image: 'badge(t50).jpg' },
+  { id: 5, name: 'バーテンダー', description: '100回カクテルを作成しました。',
+    conditions: { 'type' => 'one_hundred_cocktail_count', 'count' => 100 },
+    badge_image: 'badge(t100).jpg' }
+]
+
+cocktail_badges.each do |c|
+  badge = CocktailBadge.find_by(id: c[:id])
+  if badge
+    badge.update(c)
+    Rails.logger.info "バッジをアップデートしました: #{badge[:name]}"
+  else
+    badge = CocktailBadge.create!(c)
+    Rails.logger.info "バッジを作成しました: #{badge[:name]}"
+  end
+end
 
 regions = [
   { id: 1, region_name: '北海道地方' },
