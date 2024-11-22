@@ -4,6 +4,7 @@
 class AddRegionToDistilleries < ActiveRecord::Migration[7.1]
   def change
     return if column_exists?(:distilleries, :region_id)
-      add_column :distilleries, :region_id, :integer
+
+    add_column :distilleries, :region_id, :integer
   end
 end
