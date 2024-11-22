@@ -59,7 +59,7 @@ class CocktailTastingsController < ApplicationController
     @cocktail_tasting.user = current_user
   end
 
-  def cocktail_job(current_user, @cocktail_tasting)
+  def cocktail_job(user, cocktail_tasting)
     CocktailBadgesJob.perform_later(current_user.id, @cocktail_tasting.id)
   end
 
