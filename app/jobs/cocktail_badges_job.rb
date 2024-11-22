@@ -11,7 +11,6 @@ class CocktailBadgesJob < ApplicationJob
     # データベースからそれぞれを取得
     user = User.find(user_id)
 
-
     # データベースに格納してあるバッジのconditionsカラムを取得
     CocktailBadge.find_each do |badge|
       conditions = badge.conditions
