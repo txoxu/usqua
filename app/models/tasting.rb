@@ -7,5 +7,4 @@ class Tasting < ApplicationRecord
   validates :tasting_type, presence: true
   validates :aroma, presence: true
   validates :flavor, presence: true
-
 end

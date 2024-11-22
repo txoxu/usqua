@@ -23,9 +23,9 @@ class CocktailBadgesJob < ApplicationJob
 
   private
 
-  def meets_conditions?(conditions, cocktail_tasting, user)
+  def meets_conditions?(conditions, _cocktail_tasting, user)
     # valid_typesという変数に配列として格納 (%W とすることでスペースだけで配列として格納できる)
-    valid_types = %W[new_cocktail_count ten_cocktail_count twenty_cocktail_count fifty_cocktail_count
+    valid_types = %w[new_cocktail_count ten_cocktail_count twenty_cocktail_count fifty_cocktail_count
                      one_hundred_cocktail_count ]
     # もし、conditionsカラムのjson形式でtypeとcountのなかのtypeと一致する条件するなら
     if valid_types.include?(conditions['type'])
