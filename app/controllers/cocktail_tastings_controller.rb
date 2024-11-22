@@ -14,7 +14,7 @@ class CocktailTastingsController < ApplicationController
     @cocktail_tasting = @cocktail.cocktail_tastings.build(cocktail_tasting_params)
     assign_whiskey_and_user
     if @cocktail_tasting.save
-      CocktailBadgesJob.perform_later(current_user.id, @cocktail_tasting.id)
+      cocktail_job(current_user, @cocktail_tasting)
       redirect_to cocktails_path, success: t('cocktail_tastings.create.success')
     else
       flash.now[:danger] = t('cocktail_tastings.create.danger')
@@ -57,6 +57,10 @@ class CocktailTastingsController < ApplicationController
     whiskey_name = params[:cocktail_tasting][:name]
     @cocktail_tasting.whiskey = current_user.whiskeys.find_by(name: whiskey_name)
     @cocktail_tasting.user = current_user
+  end
+
+  def cocktail_job(current_user, @cocktail_tasting)
+    CocktailBadgesJob.perform_later(current_user.id, @cocktail_tasting.id)
   end
 
   def cocktail_tasting_params
