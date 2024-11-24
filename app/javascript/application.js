@@ -1,4 +1,7 @@
 // Entry point for the build script in your package.json
+import "./intersection_observer"
+import "./dark_mode"
+import "./loading"
 import "./preview"
 import "./quantity_change"
 import "./whiskey_star"

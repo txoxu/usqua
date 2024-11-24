@@ -8,13 +8,13 @@
   <div class="card mb-3 ms-3 mt-3 fs-3" style="max-width: 1400px; box-shadow: 3px 3px 5px #000000;">
     <div class="row g-0">
       <div class="col-md-6">
-        <%= image_tag "スクリーンショット 2024-09-06 162825.png", class: "image img-fluid rounded-start" %>
+        <%= image_tag "スクリーンショット 2024-09-06 162825.png", class: "image img-fluid rounded-start", id: "mypage" %>
       </div>
       <div class="col-md-6">
         <div class="card-body">
           <h5 class="card-title">マイページ</h5>
           <p class="card-text">ユーザーが登録したウイスキーの総本数、種類ごとの本数をグラフで確認できます。また、カクテル一覧、カクテル詳細ページで（<i class="fa-solid fa-heart"></i>）お気に入り登録したカクテルをこのページで確認できます。</p>
-          <p class="card-text"><small class="text-body-secondary">新規登録、ログインして利用可能です</small></p>
+          <p class="card-text"><small class="alert">新規登録、ログインして利用可能です</small></p>
         </div>
       </div>
     </div>
@@ -22,13 +22,13 @@
   <div class="card mb-3 ms-3 mt-3 fs-3" style="max-width: 1400px; box-shadow: 3px 3px 5px #000000;">
     <div class="row g-0">
       <div class="col-md-6">
-        <%= image_tag "スクリーンショット 2024-09-06 162848.png", class: "image img-fluid rounded-start" %>
+        <%= image_tag "スクリーンショット 2024-09-06 162848.png", class: "image img-fluid rounded-start", id: "new-whiskey" %>
       </div>
       <div class="col-md-6">
         <div class="card-body">
           <h5 class="card-title">ウイスキー登録</h5>
           <p class="card-text">このページでは、ウイスキーの名前、説明、容量、生産国、原料などを入力して新しいウイスキーを登録できます。画像の追加も可能で、保有するウイスキーの残量や複数のテイスティング記録も管理できます。</p>
-          <p class="card-text"><small class="text-body-secondary">新規登録、ログインして利用可能です</small></p>
+          <p class="card-text"><small class="alert">新規登録、ログインして利用可能です</small></p>
         </div>
       </div>
     </div>
@@ -36,13 +36,13 @@
   <div class="card mb-3 ms-3 mt-3 fs-3" style="max-width: 1400px; box-shadow: 3px 3px 5px #000000;">
     <div class="row g-0">
       <div class="col-md-6">
-        <%= image_tag "スクリーンショット 2024-09-16 183309.png", class: "image img-fluid rounded-start" %>
+        <%= image_tag "スクリーンショット 2024-09-16 183309.png", class: "image img-fluid rounded-start", id: "index-cocktail" %>
       </div>
       <div class="col-md-6">
         <div class="card-body">
           <h5 class="card-title">カクテル一覧</h5>
           <p class="card-text">ウイスキーベースのカクテルリストが表示され、カクテル名や簡単な説明、アイコンが並びます。気になるカクテルをクリックすると、レシピや作成手順をYouTube動画で確認できます。お気に入り登録機能（<i class="fa-solid fa-heart"></i>）もあり、作成したいカクテルをマイページに保存できます。</p>
-          <p class="card-text"><small class="text-body-secondary">新規登録、ログインしないと一部の機能をご利用いただけません</small></p>
+          <p class="card-text"><small class="alert">新規登録、ログインしないと一部の機能をご利用いただけません</small></p>
         </div>
       </div>
     </div>
@@ -50,13 +50,13 @@
   <div class="card mb-3 ms-3 mt-3 fs-3" style="max-width: 1400px; box-shadow: 3px 3px 5px #000000;">
     <div class="row g-0">
       <div class="col-md-6">
-        <%= image_tag "スクリーンショット 2024-09-06 163013.png", class: "image img-fluid rounded-start" %>
+        <%= image_tag "スクリーンショット 2024-09-06 163013.png", class: "image img-fluid rounded-start", id: "distillery" %>
       </div>
       <div class="col-md-6">
         <div class="card-body">
           <h5 class="card-title">蒸留所一覧</h5>
           <p class="card-text">日本各地の蒸留所を地図上で確認できるページです。各蒸留所の詳細情報や所在地が表示されており、地図上でその位置も確認できます。</p>
-          <p class="card-text"><small class="text-body-secondary">新規登録、ログインしなくても利用可能です</small></p>
+          <p class="card-text"><small class="alert">新規登録、ログインしなくても利用可能です</small></p>
         </div>
       </div>
     </div>
@@ -177,7 +177,8 @@
     font-family: 'Playfair Display', serif;
   }
 
-  .card {
-    opacity: 0.8;
+  .alert {
+    color: red;
   }
+
 </style>

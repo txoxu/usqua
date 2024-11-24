@@ -3,6 +3,8 @@
     <%= link_to root_path, class: 'navbar-brand' do %>
       <h4 class="main-title"><%= t('.title') %></h4>
     <% end %>
+    <button id="btn">ダークモード</button>
+
     <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent'
       aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
       <span class='navbar-toggler-icon'></span>
@@ -113,5 +115,13 @@
     display: flex;
     justify-content: space-between; /* アイテムを左右に分ける */
     align-items: center;
+  }
+
+  #btn {
+    background: #0bd;
+    color: #fff;
+    border-radius: 0.8rem;
+    border: 0;
+    cursor: pointer;
   }
 </style>
