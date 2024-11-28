@@ -2,7 +2,7 @@
 const showMypage = (entries) => {
   const keyframes = {
     opacity: [0, 1],
-    translate: ['200px 0', 0],
+    translate: ['600px 0', 0],
   };
   entries.forEach(entry => {
     if (entry.isIntersecting) {
