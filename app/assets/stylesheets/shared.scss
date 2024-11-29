@@ -1,0 +1,54 @@
+.main-title {
+  color: #DAA520; /* リッチなゴールド */
+  font-family: 'Playfair Display', serif; /* エレガントなセリフ体フォント */
+  font-size: 48px; /* 最大フォントサイズ */
+  font-weight: 800;
+  text-shadow: 
+      1px 1px 2px #000,  /* 外側の影 */
+      -1px -1px 2px #fff,  /* 内側の光 */
+      0px 0px 10px rgba(255, 255, 255, 0.5);
+}
+
+header {
+  font-family: 'Playfair Display', serif;
+  background-image: url('背景.jpg');
+  opacity: 0.8;
+  height: 80px;
+  z-index: 1000;
+}
+
+footer {
+  font-family: 'Playfair Display', serif;
+  background-image: url('背景.jpg');
+  height: 20%;
+  color: white;
+}
+
+
+.nav-item, .nav-link {
+  color: white;
+}
+
+@media (max-width: 800px) {
+  .nav-item, .nav-link {
+    color: black;
+  }
+}
+
+.navbar-toggler {
+  right: 15px; /* 右端からの距離 */
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between; /* アイテムを左右に分ける */
+  align-items: center;
+}
+
+#btn {
+  background: #0bd;
+  color: #fff;
+  border-radius: 0.8rem;
+  border: 0;
+  cursor: pointer;
+}

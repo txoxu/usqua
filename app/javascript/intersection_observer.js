@@ -1,3 +1,4 @@
+document.addEventListener('turbo:load', function() {
 //監視対象が範囲に入ったら動作
 const showMypage = (entries) => {
   const keyframes = {
@@ -25,4 +26,4 @@ mypageObserver.observe(document.querySelector('#mypage'));
 mypageObserver.observe(document.querySelector('#new-whiskey'));
 mypageObserver.observe(document.querySelector('#index-cocktail'));
 mypageObserver.observe(document.querySelector('#distillery'));
-
+});
