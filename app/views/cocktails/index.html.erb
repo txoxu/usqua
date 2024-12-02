@@ -4,6 +4,7 @@
   <%= render 'shared/badges' %>
     <div class="accordion accordion-flush" id="accordionFlushExample">
       <% @cocktails.each do |c| %>
+        <div class="cocktail-data">
           <div class="card pt-3 pb-3 mt-5 ps-1">
             <div class="row">
               <div class="col-md-2">
@@ -62,12 +63,12 @@
               <% end %>
             </div>
           <% end %>
+        </div>
       <% end %>
       <%= paginate @cocktails %>
     </div>
 </div>
 <script>
-
 
   document.addEventListener("turbo:load", function() {
   // ポップアップ表示の条件
