@@ -100,6 +100,7 @@
 
   document.addEventListener("turbo:load", function() {
   // ポップアップ表示の条件
+
   let newBadges = <%= @new_badges.to_json.html_safe %>;// ERBで変数を埋め込む
 
   if (newBadges.length > 0) {
@@ -111,6 +112,14 @@
 
     // ポップアップにバッジリストを追加
     newBadges.forEach(function(badge) {
+
+      confetti({
+	        particleCount: 500,
+	        spread: 90,
+	        origin: { x: 0.5, y: 0.5 },
+          zIndex: 9999,
+	        });
+
       let badgeItem = document.createElement("div");
       let badgeBox = document.createElement("div");
       let badgeImage = document.createElement("img");

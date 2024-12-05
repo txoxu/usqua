@@ -83,6 +83,14 @@
 
     // ポップアップにバッジリストを追加
     newBadges.forEach(function(badge) {
+
+      confetti({
+	        particleCount: 500,
+	        spread: 90,
+	        origin: { x: 0.5, y: 0.5 },
+          zIndex: 9999,
+	        });
+          
       let badgeItem = document.createElement("div");
       let badgeBox = document.createElement("div");
       let badgeImage = document.createElement("img");
