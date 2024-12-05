@@ -3,6 +3,8 @@
     <%= link_to root_path, class: 'navbar-brand' do %>
       <h4 class="main-title"><%= t('.title') %></h4>
     <% end %>
+    <button id="btn">ダークモード</button>
+
     <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbarSupportedContent'
       aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
       <span class='navbar-toggler-icon'></span>
@@ -74,44 +76,3 @@
     </div>
   </nav>
 </header>
-
-<style>
-  .main-title {
-    color: #DAA520; /* リッチなゴールド */
-    font-family: 'Playfair Display', serif; /* エレガントなセリフ体フォント */
-    font-size: 48px; /* 最大フォントサイズ */
-    font-weight: 800;
-    text-shadow: 
-        1px 1px 2px #000,  /* 外側の影 */
-        -1px -1px 2px #fff,  /* 内側の光 */
-        0px 0px 10px rgba(255, 255, 255, 0.5);
-  }
-
-  header {
-    font-family: 'Playfair Display', serif;
-    background-image: url(<%= asset_path '背景.jpg' %>);
-    opacity: 0.8;
-    height: 80px;
-    z-index: 1000;
-  }
-
-  .nav-item, .nav-link {
-    color: white;
-  }
-
-  @media (max-width: 800px) {
-    .nav-item, .nav-link {
-      color: black;
-    }
-  }
-
-  .navbar-toggler {
-    right: 15px; /* 右端からの距離 */
-  }
-
-  .navbar {
-    display: flex;
-    justify-content: space-between; /* アイテムを左右に分ける */
-    align-items: center;
-  }
-</style>

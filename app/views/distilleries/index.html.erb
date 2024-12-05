@@ -19,7 +19,7 @@
             <ul class="dropdown-menu" style="width: 25rem; text-align: center;">
               <% r.distilleries.each do |d| %>
               <li>
-                <a class="whiskey" data-distillery-name="<%= d.distillery_name %>">
+                <a class="distillery" data-distillery-name="<%= d.distillery_name %>">
                   <%= d.distillery_name %>
                 </a>
               </li>
@@ -42,9 +42,9 @@ let responseDiv;
 let response;
 
 document.addEventListener("turbo:load", () => {
-  initMap();
+  window.initMap = initMap();
 });
-function initMap() {
+ function initMap() {
   map = new google.maps.Map(document.getElementById("map"), {
     zoom: 1,
     center: { lat: -34.397, lng: 150.644 },
@@ -152,7 +152,7 @@ function geocode(request) {
     });
 }
 
-document.querySelectorAll('.whiskey').forEach((button) => {
+document.querySelectorAll('.distillery').forEach((button) => {
   button.addEventListener('click', () => {
     const whiskey = button.getAttribute('data-distillery-name');  // ボタンから蒸留所名を取得
     map.setZoom(5);

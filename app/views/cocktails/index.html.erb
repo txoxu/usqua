@@ -4,6 +4,7 @@
   <%= render 'shared/badges' %>
     <div class="accordion accordion-flush" id="accordionFlushExample">
       <% @cocktails.each do |c| %>
+        <div class="cocktail-data">
           <div class="card pt-3 pb-3 mt-5 ps-1">
             <div class="row">
               <div class="col-md-2">
@@ -62,181 +63,12 @@
               <% end %>
             </div>
           <% end %>
+        </div>
       <% end %>
       <%= paginate @cocktails %>
     </div>
 </div>
-
-<style>
-
-@media (max-width: 1600px) {
-  .cocktail-image {
-    width: 200px;
-    height: 200px;
-  }
-
-   .body {
-    padding-top: 90px;
-  }
-
-   .base-title {
-    font-size: 10px;
-  }
-
-
-}
-
-/* タブレットサイズ (幅: 768px 以上) */
-@media (max-width: 768px) {
-  .body {
-    padding-top: 50px;
-    text-align: center; /* 中央にテキストを揃える */
-  }
-
-  .cocktail-image {
-    width: 400px;
-    height: 400px;
-    margin-left: 50px; /* 画像を中央に配置 */
-  }
-
-  .base-title {
-    font-size: 12px; /* 少し大きめに調整 */
-  }
-
-  .bookmark-container {
-    justify-content: center; /* 中央に寄せる */
-    margin-right: 0; /* 右マージンを無効化 */
-  }
-
-  .null {
-    justify-content: center; /* 中央に寄せる */
-  }
-}
-
-/* スマートフォンサイズ (幅: 576px 以上) */
-@media (max-width: 576px) {
-  .body {
-    padding-top: 30px;
-    text-align: center; /* 中央にテキストを揃える */
-  }
-
-  .cocktail-image {
-    margin: 0 auto; /* 画像を中央に配置 */
-  }
-
-  .base-title {
-    font-size: 14px; /* フォントサイズを大きくして見やすく */
-  }
-
-  .bookmark-container {
-    justify-content: center; /* 中央に寄せる */
-    margin-right: 0; /* 右マージンを無効化 */
-  }
-
-  .null {
-    justify-content: center; /* 中央に寄せる */
-  }
-
-  /* 行の並びを縦に変更 */
-  .row {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .col-md-2, .col-md-4, .col-md-3, .col-md-1 {
-    width: 100%; /* 幅を100%に */
-    margin-bottom: 10px; /* 各要素にマージンを追加 */
-  }
-
-  .accordion-body span {
-    display: block;
-    width: 100%; /* テキストが小さな画面に収まるように */
-    margin-bottom: 10px;
-  }
-
-  .accordion-body .btn {
-    width: 100%; /* ボタンの幅を100%に */
-  }
-}
-
-  .underline-animation {
-  position: relative;
-  color: blue; /* 任意の文字色 */
-  text-decoration: none; /* デフォルトの下線を非表示 */
-}
-
-.underline-animation::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px; /* 下線の太さ */
-  bottom: 0;
-  left: 50%;
-  background-color: blue; /* 下線の色 */
-  transition: width 0.3s ease, left 0.3s ease; /* アニメーションの速さとタイプ */
-}
-
-.underline-animation:hover::after {
-  width: 100%; /* hover時に下線を全体に表示 */
-  left: 0;
-}
-
-
-.accordion-container {
-    display: flex;
-    flex-direction: column; /* 縦に並べる */
-  }
-
-  .bookmark-container {
-    display: flex;
-    justify-content: flex-end; /* 右に寄せる */ /* 上に余白を追加 */
-    margin-right: 20px;
-  }
-
-  .null {
-    display: flex;
-    justify-content: flex-end;
-  }
-
-  .title {
-    text-align: center;
-  }
-
-    .popup {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000; 
-}
-
-.popup-content {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 5px;
-  text-align: center;
-  max-width: 500px;
-  width: 100%;
-  
-}
-
-.popup .close {
-  position: absolute;
-  top: 50px;
-  right: 10px;
-  font-size: 50px;
-  color: white;
-  cursor: pointer;
-}
-</style>
-
 <script>
-
 
   document.addEventListener("turbo:load", function() {
   // ポップアップ表示の条件
