@@ -40,4 +40,3 @@
 /node_modules
 
 /public/uploads
-/app/views/pages/demo.html.erb
