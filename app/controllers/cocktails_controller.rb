@@ -7,7 +7,7 @@ class CocktailsController < ApplicationController
   def index
     @cocktail_search_form = SearchCocktailsForm.new(search_params)
     @cocktails = @cocktail_search_form.search.page(params[:page])
-    @new_badges = fetch_new_badges
+    @new_badges = fetch_new_badges if current_user.present?
   end
 
   def show
