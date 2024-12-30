@@ -18,7 +18,10 @@ class User < ApplicationRecord
   has_many :user_cocktail_badges, dependent: :destroy
   has_many :cocktail_badges, through: :user_cocktail_badges
 
-  validates :email, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true, length: { maximum: 255 },
+                  format: {with: /\A[^@\s]+@[^@\s]+\.com\z/, message: "必ず@sample.comの形式で入力してください"}
+  validates :name, presence: true, uniqueness: true, length: { maximum: 255 }
+  validates :password, presence: true, uniqueness: true, length: { minimum: 6 }
 
   # snsから取得した、providerとuidを使って、既存ユーザーを検索
   def self.from_omniauth(auth)

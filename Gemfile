@@ -98,6 +98,8 @@ group :development, :test do
 
   gem 'factory_bot_rails'
 
+  gem 'faker'
+
   gem 'letter_opener_web', '~> 3.0'
 
   gem 'rspec-rails', '~> 7.0', '>= 7.0.1'
