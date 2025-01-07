@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  draw :static_pages_routes
   draw :devise_routes
+  draw :static_pages_routes
 
   # バッジの更新
   post 'update_badge_seen', to: 'whiskeys#update_badge_seen'

@@ -62,6 +62,8 @@ gem 'googleauth', '~> 1.11'
 
 gem 'devise'
 
+gem 'omniauth'
+
 gem 'omniauth-google-oauth2'
 
 gem 'omniauth-rails_csrf_protection'
@@ -122,9 +124,6 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'brakeman'
   gem 'capybara'
-  gem 'rubocop-capybara'
-  gem 'rubocop-rails'
-  gem 'rubocop-rspec'
-  gem 'rubocop-rspec_rails'
   gem 'selenium-webdriver'
+  gem 'webdrivers'
 end

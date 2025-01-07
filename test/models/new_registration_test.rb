@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class UserTest < ActiveSupport::TestCase
+class NewRegistrationTest < ActiveSupport::TestCase
   # 正常系テスト
   test 'すべての必須項目が正しく入力された場合に登録できること' do
     user = FactoryBot.build(:user)
