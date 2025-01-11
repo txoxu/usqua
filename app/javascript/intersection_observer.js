@@ -14,7 +14,7 @@ const showMypage = (entries) => {
 
 //オプション設定
 const options = {
-  threshold: 0.1
+  threshold: 0
 };
 
 //監視ロボットの設定

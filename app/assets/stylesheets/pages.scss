@@ -1,12 +1,12 @@
-
-@media (max-width: 600px) {
+//画面サイズが９９２以下の時にexplanationを非表示
+@media (max-width: 992px) {
   .explanation {
     display: none;
   }
 }
 
 
-
+// タイトルのアニメーション
 .anim-box.fadein.is-animated {
   animation: fadeIn 10s cubic-bezier(0.33, 1, 0.68, 1) forwards;
 }
