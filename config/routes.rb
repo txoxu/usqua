@@ -20,6 +20,10 @@ Rails.application.routes.draw do
   resources :whiskeys do
     member { get 'choose_next_step' }
     resources :tastings, except: %i[index show]
+    collection do
+      get :select
+      get :random
+    end
   end
   # 蒸留所のルーティング
   resources :distilleries, only: :index
