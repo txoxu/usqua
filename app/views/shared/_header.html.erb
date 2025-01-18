@@ -13,7 +13,7 @@
       <% if user_signed_in? %>
       <ul class='navbar-nav ms-auto align-items-center me-4'>
         <li class='nav-item dropdown'>
-          <%= link_to t('.whiskey'), '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-board-menu' %>
+          <%= link_to t('.whiskey'), '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown'}, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-whiskey-new' %>
           <div class='dropdown-menu dropdown-menu-end'>
             <%= link_to t('.whiskey_new'), new_whiskey_path, class: 'dropdown-item' %>
             <%= link_to t('.whiskey_index'), whiskeys_path, class: 'dropdown-item' %>
@@ -21,7 +21,7 @@
           </div>
         </li>
         <li class='nav-item dropdown'>
-          <%= link_to 'カクテル', '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-board-menu' %>
+          <%= link_to 'カクテル', '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown'}, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-board-menu' %>
           <div class='dropdown-menu dropdown-menu-end'>
             <%= link_to 'カクテル一覧', cocktails_path, class: 'dropdown-item' %>
           </div>
@@ -33,7 +33,7 @@
           </div>
         </li>
         <li class='nav-item'>
-          <%= link_to mypage_path, class: 'nav-link' do %><%= t('.mypage') %><% end %>
+          <%= link_to mypage_path, class: 'nav-link', id: "header-mypage" do %><%= t('.mypage') %><% end %>
         </li>
         <li class='nav-item dropdown'>
           <%= link_to '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-profile' do %>
@@ -51,13 +51,13 @@
       <% else %>
       <ul class='navbar-nav ms-auto align-items-center me-4'>
         <li class='nav-item dropdown'>
-          <%= link_to 'カクテル', '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-board-menu' %>
+          <%= link_to 'カクテル', '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-cocktail-index' %>
           <div class='dropdown-menu dropdown-menu-end'>
             <%= link_to 'カクテル一覧', cocktails_path, class: 'dropdown-item' %>
           </div>
         </li>
         <li class='nav-item dropdown'>
-          <%= link_to '蒸留所', '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-board-menu' %>
+          <%= link_to '蒸留所', '#', class: 'nav-link dropdown-toggle', data: { bs_toggle: 'dropdown' }, aria: { haspopup: 'true', expanded: 'false' }, id: 'header-distillery-index' %>
           <div class='dropdown-menu dropdown-menu-end'>
             <%= link_to '蒸留所一覧', distilleries_path, class: 'dropdown-item' %>
           </div>
@@ -76,3 +76,6 @@
     </div>
   </nav>
 </header>
+<script>
+
+</script>

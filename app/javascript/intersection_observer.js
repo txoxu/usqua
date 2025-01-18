@@ -8,6 +8,7 @@ const showMypage = (entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
     entry.target.animate(keyframes, 600); // 監視対象ごとにアニメーションを適用
+    mypageObserver.unobserve(entry.target);
     }
   });
 };

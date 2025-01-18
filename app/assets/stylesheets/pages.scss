@@ -1,9 +1,4 @@
-//画面サイズが９９２以下の時にexplanationを非表示
-@media (max-width: 992px) {
-  .explanation {
-    display: none;
-  }
-}
+
 
 
 // タイトルのアニメーション
@@ -79,8 +74,6 @@ animation: zoomIn 15s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
 .image {
-  height: 400px;
-  width: 600px;
   margin-bottom: 30px;
   margin-top:30px;
   margin-left: 30px;

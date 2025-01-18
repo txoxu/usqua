@@ -19,22 +19,21 @@
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/jquery.raty.css" integrity="sha512-eAw/PBoRwV3poi1Cgw4W6dZ/7XyetSWjhSqnCevCghOJ6J+TCcJgt8qcEml8It83K6GQVZbXeFA8d3z8pgo82w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Merriweather:wght@400;600&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
-
   <%= display_meta_tags(default_meta_tags) %>
 </head>
 
 <body>
-  <%= render 'shared/header' %>
+  <%=render 'shared/header' %>
   <main class="main-content">
-    <%= render 'shared/flash_message' %>
-    <%= breadcrumbs separator:  ' / ', class: 'breadcrumb' %>
-    <%= yield %>
+    <%=render 'shared/flash_message' %>
+    <%=breadcrumbs separator: '/' , class: 'breadcrumb' %>
+    <%=yield %>
   </main>
-  <%= render 'shared/footer' %>
+  <%=render 'shared/footer' %>
 
   <style>
     .main-content {
-      background-image: url(<%= asset_path '背景.jpg' %>);
+      background-image: url(<%= asset_path '背景.jpg' %> );
       font-family: 'Playfair Display', serif;
       padding-top: 80px;
       min-height: 100vh;
