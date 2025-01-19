@@ -80,7 +80,6 @@ gem 'httparty'
 
 gem 'bootstrap', '~> 5.3.3'
 
-
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
@@ -117,7 +116,7 @@ group :development, :test do
 
   gem 'rubocop-rails'
 
-   gem 'rubocop-rspec_rails'
+  gem 'rubocop-rspec_rails'
 end
 
 group :development do
