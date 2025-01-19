@@ -116,6 +116,8 @@ group :development, :test do
   gem 'rubocop-capybara'
 
   gem 'rubocop-rails'
+
+   gem 'rubocop-rspec_rails'
 end
 
 group :development do
