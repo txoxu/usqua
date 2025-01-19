@@ -18,10 +18,10 @@ module Devise
     # at runtime.
     module Validatable
       # All validations used by this module.
-      VALIDATIONS = [:validates_presence_of, :validates_uniqueness_of, :validates_format_of,
-                     :validates_confirmation_of, :validates_length_of].freeze
+      VALIDATIONS = %i[validates_presence_of validates_uniqueness_of validates_format_of
+                       validates_confirmation_of validates_length_of].freeze
 
-      def self.required_fields(klass)
+      def self.required_fields(_klass)
         []
       end
 
@@ -31,25 +31,28 @@ module Devise
 
         base.class_eval do
           validates_presence_of   :email, if: :email_required?
-          validates_uniqueness_of :email, allow_blank: true, case_sensitive: true, if: :devise_will_save_change_to_email?
+          validates_uniqueness_of :email, allow_blank: true, case_sensitive: true,
+                                          if: :devise_will_save_change_to_email?
           validates_format_of     :email, with: email_regexp, allow_blank: true, if: :devise_will_save_change_to_email?
 
           validates_presence_of     :password, if: :password_required?
           validates_confirmation_of :password, if: :password_required?
-          validates_length_of       :password, minimum: proc { password_length.min }, maximum: proc { password_length.max }, allow_blank: true
+          validates_length_of       :password, minimum: proc { password_length.min }, maximum: proc {
+                                                                                                 password_length.max
+                                                                                               }, allow_blank: true
         end
       end
 
-      def self.assert_validations_api!(base) #:nodoc:
-        unavailable_validations = VALIDATIONS.select { |v| !base.respond_to?(v) }
+      def self.assert_validations_api!(base) # :nodoc:
+        unavailable_validations = VALIDATIONS.reject { |v| base.respond_to?(v) }
 
-        unless unavailable_validations.empty?
-          raise "Could not use :validatable module since #{base} does not respond " \
-                "to the following methods: #{unavailable_validations.to_sentence}."
-        end
+        return if unavailable_validations.empty?
+
+        raise "Could not use :validatable module since #{base} does not respond " \
+              "to the following methods: #{unavailable_validations.to_sentence}."
       end
 
-    protected
+      protected
 
       # Checks whether a password is needed or not. For validations only.
       # Passwords are always required if it's a new record, or if the password

@@ -18,7 +18,7 @@ class User < ApplicationRecord
   has_many :user_cocktail_badges, dependent: :destroy
   has_many :cocktail_badges, through: :user_cocktail_badges
 
-  validates :name, uniqueness: true, presence: true, length: {maximum: 255}
+  validates :name, uniqueness: true, presence: true, length: { maximum: 255 }
 
   # snsから取得した、providerとuidを使って、既存ユーザーを検索
   def self.from_omniauth(auth)

@@ -50,12 +50,11 @@ class WhiskeysController < ApplicationController
 
   def choose_next_step; end
 
-  def select
-  end
+  def select; end
 
   def random
     id = current_user.whiskeys.pluck(:id).sample(1)
-    @whiskey = Whiskey.where(id: id).first
+    @whiskey = Whiskey.where(id:).first
     render 'shared/_random_whiskey'
   end
 

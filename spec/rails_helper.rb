@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 # Uncomment the line below in case you have `--require rails_helper` in the `.rspec` file
 # that will avoid rails generators crashing because migrations haven't been run yet
 # return unless Rails.env.test?
 require 'rspec/rails'
 require 'devise'
-require File.expand_path("spec/support/controller_macros.rb")
+require File.expand_path('spec/support/controller_macros.rb')
 require_relative 'support/controller_macros'
 # Add additional requires below this line. Rails is not loaded until this point!
 
@@ -27,7 +29,7 @@ require_relative 'support/controller_macros'
 # require only the support files necessary.
 #
 # Rails.root.glob('spec/support/**/*.rb').sort_by(&:to_s).each { |f| require f }
-Dir[Rails.root.join('spec', 'support', '**', '*.rb')].sort.each { |f| require f }
+Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
 begin
@@ -82,5 +84,5 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :view
   config.include Devise::Test::ControllerHelpers, type: :system
   config.include Devise::Test::IntegrationHelpers, type: :request
-  config.extend ControllerMacros, :type => :controller
+  config.extend ControllerMacros, type: :controller
 end

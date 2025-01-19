@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
@@ -9,8 +11,8 @@ RSpec.describe User, type: :model do
     end
 
     it '異なるnameであれば登録できること' do
-      create(:user, name: "aaa")
-      user.name = "bbb"
+      create(:user, name: 'aaa')
+      user.name = 'bbb'
       expect(user.save).to be true
     end
 
@@ -35,13 +37,13 @@ RSpec.describe User, type: :model do
   describe '異常系' do
     context 'nameに関するテスト' do
       it 'nameが空の場合は登録できないこと' do
-        user.name = ""
+        user.name = ''
         expect(user.save).to be false
       end
 
       it 'nameがデータベース上で一意でない場合は登録できないこと' do
-        create(:user, name: "aaa")
-        user.name = "aaa"
+        create(:user, name: 'aaa')
+        user.name = 'aaa'
         expect(user.save).to be false
       end
 
@@ -53,13 +55,13 @@ RSpec.describe User, type: :model do
 
     context 'emailに関するテスト' do
       it 'emailが空の場合は登録できないこと' do
-        user.email = ""
+        user.email = ''
         expect(user.save).to be false
       end
 
       it 'emailがデータベース上に一意でない場合は登録できないこと' do
-        create(:user, email: "aaa@example.com")
-        user.email = "aaa@example.com"
+        create(:user, email: 'aaa@example.com')
+        user.email = 'aaa@example.com'
         expect(user.save).to be false
       end
 
@@ -71,7 +73,7 @@ RSpec.describe User, type: :model do
 
     context 'passwordに関するテスト' do
       it 'passwordが空の場合に登録できないこと' do
-        user.password = ""
+        user.password = ''
         expect(user.save).to be false
       end
 

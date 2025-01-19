@@ -10,8 +10,8 @@ class NewRegistrationTest < ActiveSupport::TestCase
   end
 
   test '異なるnameであれば登録できること' do
-    user1 = FactoryBot.create(:user, name: "aaa")
-    user2 = FactoryBot.build(:user, name: "bbb")
+    user1 = FactoryBot.create(:user, name: 'aaa')
+    user2 = FactoryBot.build(:user, name: 'bbb')
 
     assert user1.persisted?, 'ユーザー1が作成できませんでした'
     assert user2.save, 'ユーザー2が異なるnameで登録できませんでした'
@@ -37,13 +37,13 @@ class NewRegistrationTest < ActiveSupport::TestCase
 
   # 異常系テスト　name
   test 'nameが空の場合は登録できないこと' do
-    user = FactoryBot.build(:user, name: "")
+    user = FactoryBot.build(:user, name: '')
     assert_not user.save, 'nameが空でも登録できました'
   end
 
   test 'nameがデータベース上で一意でない場合は登録できないこと' do
-    user1 = FactoryBot.create(:user, name: "aaa")
-    user2 = FactoryBot.build(:user, name: "aaa")
+    user1 = FactoryBot.create(:user, name: 'aaa')
+    user2 = FactoryBot.build(:user, name: 'aaa')
     assert user1.persisted?, 'ユーザー1が作成できませんでした'
     assert_not user2.save, 'ユーザー2が登録出来ました'
   end
@@ -54,15 +54,15 @@ class NewRegistrationTest < ActiveSupport::TestCase
     assert_not user.save, 'nameが255文字以上でも登録出来ました'
   end
 
-  #email
+  # email
   test 'emailが空の場合は登録できないこと' do
-    user = FactoryBot.build(:user, email: "")
+    user = FactoryBot.build(:user, email: '')
     assert_not user.save, 'emailが空でも登録出来ました'
   end
 
   test 'emailがデータベース上に一意でない場合は登録できないこと' do
-    user1 = FactoryBot.create(:user, email: "aaa@example.com")
-    user2 = FactoryBot.build(:user, email: "aaa@example.com")
+    user1 = FactoryBot.create(:user, email: 'aaa@example.com')
+    user2 = FactoryBot.build(:user, email: 'aaa@example.com')
     assert user1.persisted?, 'ユーザー1が作成できませんでした'
     assert_not user2.save, 'ユーザー2が同じemailでも登録出来ました'
   end
@@ -73,9 +73,9 @@ class NewRegistrationTest < ActiveSupport::TestCase
     assert_not user.save, 'emailが@sample.comの形式ではなくても登録出来ました'
   end
 
-  #password
+  # password
   test 'passwordが空の場合に登録できないこと' do
-    user = FactoryBot.build(:user, password: "")
+    user = FactoryBot.build(:user, password: '')
     assert_not user.save, 'passwordが空でも登録出来ました'
   end
 

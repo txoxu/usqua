@@ -23,7 +23,7 @@ module ActiveSupport
       options.add_argument('--no-sandbox') # セキュリティ制限の無効化
       options.add_argument('--disable-dev-shm-usage') # Docker環境でのメモリ制限回避
 
-      Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+      Capybara::Selenium::Driver.new(app, browser: :chrome, options:)
     end
 
     setup do

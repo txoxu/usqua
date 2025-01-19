@@ -1,4 +1,6 @@
-require "application_system_test_case"
+# frozen_string_literal: true
+
+require 'application_system_test_case'
 
 class NewRegistrationTest < ApplicationSystemTestCase
   test '1つのエラーの場合にバリデーションが表示されること' do
@@ -10,7 +12,7 @@ class NewRegistrationTest < ApplicationSystemTestCase
     fill_in 'パスワード確認', with: user.password_confirmation
     click_on '登録'
 
-    assert_text "名前を入力してください"
+    assert_text '名前を入力してください'
   end
 
   test '2つのエラーの場合にバリデーションが表示されること' do
@@ -21,9 +23,7 @@ class NewRegistrationTest < ApplicationSystemTestCase
     fill_in 'パスワード確認', with: user.password_confirmation
     click_on '登録'
 
-    assert_text "名前を入力してください"
-    assert_text "メールアドレスを入力してください"
+    assert_text '名前を入力してください'
+    assert_text 'メールアドレスを入力してください'
   end
-
-  
 end

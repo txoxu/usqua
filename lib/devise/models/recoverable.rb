@@ -2,7 +2,6 @@
 
 module Devise
   module Models
-
     # Recoverable takes care of resetting the user password and send reset instructions.
     #
     # ==Options
@@ -24,8 +23,8 @@ module Devise
     module Recoverable
       extend ActiveSupport::Concern
 
-      def self.required_fields(klass)
-        [:reset_password_sent_at, :reset_password_token]
+      def self.required_fields(_klass)
+        %i[reset_password_sent_at reset_password_token]
       end
 
       included do
@@ -80,40 +79,40 @@ module Devise
 
       protected
 
-        # Removes reset_password token
-        def clear_reset_password_token
-          self.reset_password_token = nil
-          self.reset_password_sent_at = nil
+      # Removes reset_password token
+      def clear_reset_password_token
+        self.reset_password_token = nil
+        self.reset_password_sent_at = nil
+      end
+
+      def set_reset_password_token
+        raw, enc = Devise.token_generator.generate(self.class, :reset_password_token)
+
+        self.reset_password_token   = enc
+        self.reset_password_sent_at = Time.now.utc
+        save(validate: false)
+        raw
+      end
+
+      def send_reset_password_instructions_notification(token)
+        send_devise_notification(:reset_password_instructions, token, {})
+      end
+
+      def clear_reset_password_token?
+        encrypted_password_changed = devise_respond_to_and_will_save_change_to_attribute?(:encrypted_password)
+        authentication_keys_changed = self.class.authentication_keys.any? do |attribute|
+          devise_respond_to_and_will_save_change_to_attribute?(attribute)
         end
 
-        def set_reset_password_token
-          raw, enc = Devise.token_generator.generate(self.class, :reset_password_token)
-
-          self.reset_password_token   = enc
-          self.reset_password_sent_at = Time.now.utc
-          save(validate: false)
-          raw
-        end
-
-        def send_reset_password_instructions_notification(token)
-          send_devise_notification(:reset_password_instructions, token, {})
-        end
-
-        def clear_reset_password_token?
-          encrypted_password_changed = devise_respond_to_and_will_save_change_to_attribute?(:encrypted_password)
-          authentication_keys_changed = self.class.authentication_keys.any? do |attribute|
-            devise_respond_to_and_will_save_change_to_attribute?(attribute)
-          end
-
-          authentication_keys_changed || encrypted_password_changed
-        end
+        authentication_keys_changed || encrypted_password_changed
+      end
 
       module ClassMethods
         # Attempt to find a user by password reset token. If a user is found, return it
         # If a user is not found, return nil
         def with_reset_password_token(token)
           reset_password_token = Devise.token_generator.digest(self, :reset_password_token, token)
-          to_adapter.find_first(reset_password_token: reset_password_token)
+          to_adapter.find_first(reset_password_token:)
         end
 
         # Attempt to find a user by its email. If a record is found, send new
