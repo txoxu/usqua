@@ -420,6 +420,8 @@ GEM
       unicode-display_width (>= 2.4.0, < 3.0)
     rubocop-ast (1.31.3)
       parser (>= 3.3.1.0)
+    rubocop-capybara (2.21.0)
+      rubocop (~> 1.41)
     ruby-progressbar (1.13.0)
     ruby-vips (2.2.1)
       ffi (~> 1.12)
@@ -540,6 +542,7 @@ DEPENDENCIES
   ransack (~> 4.1, >= 4.1.1)
   rspec-rails (~> 7.0, >= 7.0.1)
   rubocop (~> 1.63, >= 1.63.5)
+  rubocop-capybara
   sassc-rails
   selenium-webdriver
   sorcery (~> 0.17.0)

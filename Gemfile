@@ -112,6 +112,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 7.0', '>= 7.0.1'
 
   gem 'rubocop', '~> 1.63', '>= 1.63.5'
+
+  gem 'rubocop-capybara'
 end
 
 group :development do
