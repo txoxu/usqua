@@ -114,6 +114,8 @@ group :development, :test do
   gem 'rubocop', '~> 1.63', '>= 1.63.5'
 
   gem 'rubocop-capybara'
+
+  gem 'rubocop-rails'
 end
 
 group :development do
