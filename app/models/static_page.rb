@@ -1,8 +1,10 @@
-class SelectWhiskeyJob < ApplicationJob
-  queue_as :default
+# frozen_string_literal: true
 
-  def perform(*args)
-    whiskey_names = [
+# topぺージのモデル
+class StaticPage < ApplicationRecord
+
+  def self.whiskey_names
+    [
       "サントリー角瓶",
       "スーパーニッカ",
       "サントリーオールド",
@@ -23,6 +25,5 @@ class SelectWhiskeyJob < ApplicationJob
       "サントリー 知多",
       "シーバスリーガル 12年"
     ]
-    whiskey = whiskey_names.sample
   end
 end

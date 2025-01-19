@@ -71,7 +71,7 @@
 |蒸留所一覧|
 | :---: |
 |[![Image from Gyazo](https://i.gyazo.com/4c58f9dc9c22ecdd7aa7b1f1f4773fae.gif)](https://gyazo.com/4c58f9dc9c22ecdd7aa7b1f1f4773fae)|
-| <p aligin="left">googleマップで蒸留所の場所と公式サイトのページに移動することが可能です</p>|
+| <p aligin="left">googleマップで蒸留所の場所を確認できます。</p>|
 <br>
 
 # 技術構成
@@ -85,7 +85,7 @@
 | web API | Google API |
 | データベース | MYSQL |
 | アプリケーションサーバー | Heroku |
-| コンテナ管理 | docker
+| コンテナ管理 | docker |
 | バージョン管理ツール | GitHub |
 <br>
 
