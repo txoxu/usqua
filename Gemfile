@@ -62,6 +62,8 @@ gem 'googleauth', '~> 1.11'
 
 gem 'devise'
 
+gem 'omniauth'
+
 gem 'omniauth-google-oauth2'
 
 gem 'omniauth-rails_csrf_protection'
@@ -73,6 +75,10 @@ gem 'pry-byebug'
 gem 'meta-tags'
 
 gem 'sassc-rails'
+
+gem 'httparty'
+
+gem 'bootstrap', '~> 5.3.3'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
@@ -98,11 +104,19 @@ group :development, :test do
 
   gem 'factory_bot_rails'
 
+  gem 'faker'
+
   gem 'letter_opener_web', '~> 3.0'
 
   gem 'rspec-rails', '~> 7.0', '>= 7.0.1'
 
   gem 'rubocop', '~> 1.63', '>= 1.63.5'
+
+  gem 'rubocop-capybara'
+
+  gem 'rubocop-rails'
+
+  gem 'rubocop-rspec_rails'
 end
 
 group :development do
@@ -120,9 +134,6 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'brakeman'
   gem 'capybara'
-  gem 'rubocop-capybara'
-  gem 'rubocop-rails'
-  gem 'rubocop-rspec'
-  gem 'rubocop-rspec_rails'
   gem 'selenium-webdriver'
+  gem 'webdrivers'
 end

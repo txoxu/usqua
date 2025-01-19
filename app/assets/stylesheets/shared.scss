@@ -1,3 +1,4 @@
+//topページのタイトル
 .main-title {
   color: #DAA520; /* リッチなゴールド */
   font-family: 'Playfair Display', serif; /* エレガントなセリフ体フォント */
@@ -27,6 +28,18 @@ footer {
 
 .nav-item, .nav-link {
   color: white;
+}
+// トグルボタンの背景を白にする
+.collapse.show {
+  background-color: white; /* メニュー展開時の背景色 */
+  transition: background-color 0.3s ease; /* アニメーション効果（任意） */
+}
+
+//画面サイズが992pxを超えた際に背景を透明に戻す
+@media (min-width: 992px) {
+  .collapse.show {
+    background-color: transparent; /* 背景を透明に戻す */
+  }
 }
 
 @media (max-width: 800px) {

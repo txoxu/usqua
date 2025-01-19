@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  draw :static_pages_routes
   draw :devise_routes
+  draw :static_pages_routes
 
   # バッジの更新
   post 'update_badge_seen', to: 'whiskeys#update_badge_seen'
@@ -20,6 +20,10 @@ Rails.application.routes.draw do
   resources :whiskeys do
     member { get 'choose_next_step' }
     resources :tastings, except: %i[index show]
+    collection do
+      get :select
+      get :random
+    end
   end
   # 蒸留所のルーティング
   resources :distilleries, only: :index

@@ -50,6 +50,14 @@ class WhiskeysController < ApplicationController
 
   def choose_next_step; end
 
+  def select; end
+
+  def random
+    id = current_user.whiskeys.pluck(:id).sample(1)
+    @whiskey = Whiskey.where(id:).first
+    render 'shared/_random_whiskey'
+  end
+
   def update_badge_seen
     badges = current_user.user_whiskey_badges.where(whiskey_badge_id: params[:badge_ids])
 

@@ -4,155 +4,158 @@
   <div class="row">
     <%= render 'shared/badges' %>
     <% if current_user.whiskeys.present? %>
-      <% @whiskeys.each do |whiskey| %>
-        <div class="whiskey-data col-lg-12 mb-5">
-          <div class="card mb-2 shadow-lg">
-            <div class="row g-0">
-              <!-- 画像と数量の部分をレスポンシブに調整 -->
-              <div class="col-md-4 col-sm-6">
-                <% if whiskey.image.present? %>
-                  <%= image_tag whiskey.image.url, class: "img-fluid rounded-start", size: '250x300' %>
-                <% else %>
-                  <%= image_tag "default.jpg", class: "img-fluid rounded-start", size: '250x300' %>
-                <% end %>
-              </div>
-              <div class="col-md-4 col-sm-6">
-                <% if whiskey.remmaining_quantity.present? && whiskey.remmaining_quantity.quantity_image.present? %>
-                  <%= image_tag whiskey.remmaining_quantity.quantity_image, size: '250x300' %>
-                <% else %>
-                  <p class="pt-5 mt-5">量は設定されていません</p>
-                <% end %>
-              </div>
-              <div class="col-md-4">
-                <div class="card-body">
-                  <h3 class="card-title"><%= whiskey.name %></h3>
-                  <% if whiskey.remmaining_quantity.present? && whiskey.remmaining_quantity.quantity.present? %>
-                    <p class="card-text"><%= whiskey.remmaining_quantity.quantity %></p>
-                  <% end %>
-                  <% whiskey.categories.each do |c| %>
-                    <p class="card-text"><small class="text-body-secondary"><%= c.category_name %></small></p>
-                    <p class="card-text"><small class="text-body-secondary"><%= c.category_type %></small></p>
-                  <% end %>
-                  <p class="card-text"><small class="text-body-success"><%= whiskey.text %></small>
-                  <p class="card-text">
-                    <%= link_to t('.add_tasting'), new_whiskey_tasting_path(whiskey), class: 'btn btn-outline-primary btn-sm' %>
-                    <%= link_to t('helpers.btn.edit'), edit_whiskey_path(whiskey), class: 'btn btn-outline-secondary btn-sm' %>
-                    <%= link_to t('helpers.btn.destroy'), whiskey_path(whiskey), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-outline-danger btn-sm' %>
-                  </p>
-                </div>
-              </div>
+    <% @whiskeys.each do |whiskey| %>
+    <div class="whiskey-data col-lg-12 mb-5">
+      <div class="card mb-2 shadow-lg">
+        <div class="row g-0">
+          <!-- 画像と数量の部分をレスポンシブに調整 -->
+          <div class="col-md-4 col-sm-6">
+            <% if whiskey.image.present? %>
+            <%= image_tag whiskey.image.url, class: "img-fluid rounded-start", size: '250x300' %>
+            <% else %>
+            <%= image_tag "default.jpg", class: "img-fluid rounded-start", size: '250x300' %>
+            <% end %>
+          </div>
+          <div class="col-md-4 col-sm-6">
+            <% if whiskey.remmaining_quantity.present? && whiskey.remmaining_quantity.quantity_image.present? %>
+            <%= image_tag whiskey.remmaining_quantity.quantity_image, size: '250x300' %>
+            <% else %>
+            <p class="pt-5 mt-5">量は設定されていません</p>
+            <% end %>
+          </div>
+          <div class="col-md-4">
+            <div class="card-body">
+              <h3 class="card-title"><%= whiskey.name %></h3>
+              <% if whiskey.remmaining_quantity.present? && whiskey.remmaining_quantity.quantity.present? %>
+              <p class="card-text"><%= whiskey.remmaining_quantity.quantity %></p>
+              <% end %>
+              <% whiskey.categories.each do |c| %>
+              <p class="card-text"><small class="text-body-secondary"><%= c.category_name %></small></p>
+              <p class="card-text"><small class="text-body-secondary"><%= c.category_type %></small></p>
+              <% end %>
+              <p class="card-text"><small class="text-body-success"><%= whiskey.text %></small>
+              <p class="card-text">
+                <%= link_to t('.add_tasting'), new_whiskey_tasting_path(whiskey), class: 'btn btn-outline-primary btn-sm' %>
+                <%= link_to t('helpers.btn.edit'), edit_whiskey_path(whiskey), class: 'btn btn-outline-secondary btn-sm' %>
+                <%= link_to t('helpers.btn.destroy'), whiskey_path(whiskey), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-outline-danger btn-sm' %>
+              </p>
             </div>
           </div>
+        </div>
+      </div>
 
-          <% if @tastings.where(whiskey_id: whiskey.id).present? %>
-            <div class="accordion" id="accordion-<%= whiskey.id %>">
-              <div class="accordion-item">
-                <h2 class="accordion-header" id="heading-<%= whiskey.id %>">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<%= whiskey.id %>" aria-expanded="false" aria-controls="collapse-<%= whiskey.id %>">
-                    テイスティング一覧
-                  </button>
-                </h2>
-                <div id="collapse-<%= whiskey.id %>" class="accordion-collapse collapse" aria-labelledby="heading-<%= whiskey.id %>" data-bs-parent="#accordion-<%= whiskey.id %>">
-                  <div class="accordion-body">
-                    <% @tastings.where(whiskey_id: whiskey.id).each do |f| %>
-                      <div class="card text-center mb-3 shadow-lg">
-                        <div class="card-header">
-                          <%= f.tasting_type %>
-                        </div>
-                        <div class="card-body">
-                          <h5 class="card-title">
-                            総合評価
-                            <%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %>
-                            <%= (f.aroma + f.flavor + f.balance + f.body + f.finish) / 5 %>
-                          </h5>
-                          <p class="card-text">
-                            香り<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= f.aroma %></span>
-                            味<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= f.flavor %></span>
-                            バランス<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= f.balance %></span>
-                            濃さ<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= f.body %></span>
-                            余韻<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= f.finish %></span>
-                          </p>
-                          <div class="actions">
-                            <%= link_to t('helpers.btn.edit'), edit_whiskey_tasting_path(whiskey, f), class: 'btn btn-outline-primary' %>
-                            <%= link_to t('helpers.btn.destroy'), whiskey_tasting_path(whiskey, f), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-outline-danger' %>
-                          </div>
-                        </div>
-                        <div class="card-footer text-body-secondary">
-                          <%= f.tasting_text %>
-                        </div>
-                      </div>
-                    <% end %>
+      <% if @tastings.where(whiskey_id: whiskey.id).present? %>
+      <div class="accordion" id="accordion-<%= whiskey.id %>">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="heading-<%= whiskey.id %>">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<%= whiskey.id %>" aria-expanded="false" aria-controls="collapse-<%= whiskey.id %>">
+              テイスティング一覧
+            </button>
+          </h2>
+          <div id="collapse-<%= whiskey.id %>" class="accordion-collapse collapse" aria-labelledby="heading-<%= whiskey.id %>" data-bs-parent="#accordion-<%= whiskey.id %>">
+            <div class="accordion-body">
+              <% @tastings.where(whiskey_id: whiskey.id).each do |f| %>
+              <div class="card text-center mb-3 shadow-lg">
+                <div class="card-header">
+                  <%= f.tasting_type %>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">
+                    総合評価
+                    <%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %>
+                    <%= (f.aroma + f.flavor + f.balance + f.body + f.finish) / 5 %>
+                  </h5>
+                  <p class="card-text">
+                    香り<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= f.aroma %></span>
+                    味<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= f.flavor %></span>
+                    バランス<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= f.balance %></span>
+                    濃さ<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= f.body %></span>
+                    余韻<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= f.finish %></span>
+                  </p>
+                  <div class="actions">
+                    <%= link_to t('helpers.btn.edit'), edit_whiskey_tasting_path(whiskey, f), class: 'btn btn-outline-primary' %>
+                    <%= link_to t('helpers.btn.destroy'), whiskey_tasting_path(whiskey, f), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-outline-danger' %>
                   </div>
                 </div>
+                <div class="card-footer text-body-secondary">
+                  <%= f.tasting_text %>
+                </div>
               </div>
+              <% end %>
             </div>
-          <% end %>
+          </div>
         </div>
+      </div>
       <% end %>
-      <%= paginate @whiskeys, class: 'pagination justify-content-center' %>
+    </div>
+    <% end %>
+    <%= paginate @whiskeys, class: 'pagination justify-content-center' %>
     <% else %>
-      <h4 class="text-center"><%= t('.not_whiskeys') %></h4>
+    <h4 class="text-center mt-5"><%= t('.not_whiskeys') %></h4>
     <% end %>
   </div>
 </div>
 <script>
-
-
   document.addEventListener("turbo:load", function() {
-  // ポップアップ表示の条件
+    // ポップアップ表示の条件
 
-  let newBadges = <%= @new_badges.to_json.html_safe %>;// ERBで変数を埋め込む
+    let newBadges = < %= @new_badges.to_json.html_safe % > ; // ERBで変数を埋め込む
 
-  if (newBadges.length > 0) {
+    if (newBadges.length > 0) {
 
-    let popup = document.getElementById("badge-popup");
-    let badgeList = document.getElementById("badge-list");
-    let Image = document.getElementById("badge-image");
-    let closeBtn = document.querySelector(".popup .close");
+      let popup = document.getElementById("badge-popup");
+      let badgeList = document.getElementById("badge-list");
+      let Image = document.getElementById("badge-image");
+      let closeBtn = document.querySelector(".popup .close");
 
-    // ポップアップにバッジリストを追加
-    newBadges.forEach(function(badge) {
+      // ポップアップにバッジリストを追加
+      newBadges.forEach(function(badge) {
 
-      confetti({
-	        particleCount: 500,
-	        spread: 90,
-	        origin: { x: 0.5, y: 0.5 },
+        confetti({
+          particleCount: 500,
+          spread: 90,
+          origin: {
+            x: 0.5,
+            y: 0.5
+          },
           zIndex: 9999,
-	        });
+        });
 
-      let badgeItem = document.createElement("div");
-      let badgeBox = document.createElement("div");
-      let badgeImage = document.createElement("img");
-      badgeImage.src = `<%= @new_badges.present? ? asset_path(@new_badges[0]["badge_image"]) : '' %>`;
-      badgeImage.style.width = '400px';
-      badgeImage.style.height = '150px';
-      badgeItem.textContent = badge.name; // バッジ名を表示
-      badgeBox.textContent = badge.description;
-      badgeList.appendChild(badgeItem);
-      badgeList.appendChild(badgeBox);
-      Image.appendChild(badgeImage);
-    });
-
-    // ポップアップ表示
-    popup.style.display = "flex";
-
-    // ポップアップ閉じる処理
-    closeBtn.addEventListener("click", function() {
-      popup.style.display = "none";
-
-
-
-      // サーバーにポップアップ表示を通知する
-      fetch("/update_badge_seen", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").getAttribute("content")
-        },
-        body: JSON.stringify({ badge_ids: newBadges.map(badge => badge.id) })
+        let badgeItem = document.createElement("div");
+        let badgeBox = document.createElement("div");
+        let badgeImage = document.createElement("img");
+        badgeImage.src = `<%= @new_badges.present? ? asset_path(@new_badges[0]["badge_image"]) : '' %>`;
+        badgeImage.style.width = '400px';
+        badgeImage.style.height = '150px';
+        badgeItem.textContent = badge.name; // バッジ名を表示
+        badgeBox.textContent = badge.description;
+        badgeList.appendChild(badgeItem);
+        badgeList.appendChild(badgeBox);
+        Image.appendChild(badgeImage);
       });
-            location.reload();
-    });
-  }
-});
+
+      // ポップアップ表示
+      popup.style.display = "flex";
+
+      // ポップアップ閉じる処理
+      closeBtn.addEventListener("click", function() {
+        popup.style.display = "none";
+
+
+
+        // サーバーにポップアップ表示を通知する
+        fetch("/update_badge_seen", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").getAttribute("content")
+          },
+          body: JSON.stringify({
+            badge_ids: newBadges.map(badge => badge.id)
+          })
+        });
+        location.reload();
+      });
+    }
+  });
 </script>
