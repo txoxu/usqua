@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     member { get 'choose_next_step' }
     resources :tastings, except: %i[index show]
     collection do
-      get :select
+      get :my_select
       get :random
     end
   end

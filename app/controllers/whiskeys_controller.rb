@@ -50,12 +50,12 @@ class WhiskeysController < ApplicationController
 
   def choose_next_step; end
 
-  def select; end
+  def my_select; end
 
   def random
-    id = current_user.whiskeys.pluck(:id).sample(1)
-    @whiskey = Whiskey.where(id:).first
-    render 'shared/_random_whiskey'
+    @whiskeys = current_user.whiskeys.all
+    @whiskey = @whiskeys.sample
+    render json: { name: @whiskey.name }
   end
 
   def update_badge_seen
