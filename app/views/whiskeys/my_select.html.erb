@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="row">
+    <div class="select-whiskey">
+      <div class="select-card card ">
+        <div class="card-title pt-5">
+          <h2>今日の一杯！！</h2>
+        </div>
+        <div id="my-selecter" data-name="">
+        </div>
+        <div class=" card-button pt-3 pb-3">
+          <%= link_to "今日の一杯を選ぶ", random_whiskeys_path, class: "btn btn-primary", id: "my-select" %>
+        </div>
+        <div class="card-text mb-5 pt-2">
+          <h5>ボタンを押して、今日の一杯を決めてください！</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+  <style>
+    .select-card {
+      width: 60%;
+      align-items: center;
+    }
+
+    .select-whiskey {
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+  <script>
+    // ページ全体を初回ページ読み込み時にイベントを発生させる
+    document.addEventListener('turbo:load', function() {
+
+      //idがselectの要素を取り出し定数selectへ代入、selecterも同様
+      const mySelect = document.getElementById('my-select');
+      const mySelecter = document.getElementById('my-selecter');
+
+      //selectがクリックされたときにイベントを発生
+      mySelect.addEventListener('click', function(event) {
+        event.preventDefault(); // デフォルトのリンク動作を無効化
+
+        // 非同期リクエストを送信
+        fetch('/whiskeys/random.json')
+          .then(response => response.json()) // JSON形式でレスポンスを解析
+          .then(data => {
+            mySelecter.innerHTML = data.name + "で一杯";
+          })
+          .catch(error => {
+            mySelecter.innerHTML = `<span class="alert">ウイスキーが登録されていません。</span><a href="/whiskeys/new" style="color: blue; text-decoration: underline;">
+            ウイスキーを登録する
+          </a>`
+          });
+      });
+    });
+  </script>
