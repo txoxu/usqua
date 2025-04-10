@@ -1,17 +1,21 @@
 <div class="container d-flex justify-content-center">
   <div class="row">
-  <div class="col-sm-12 col-md-12">
-    <div class="card shadow-lg">
-      <div class="card-body">
-        <h3 class="card-title mb-4">プロフィール</h3>
-        <h5 class="card-name mb-4"><span style="margin-right: 100px;">名前：</span><%= current_user.name %></h5>
-        <h5 class="card-email mb-4"><span style="margin-right: 30px;">メールアドレス：</span><%= current_user.email %></h5>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-          <%= link_to 'パスワードを変更する又アカウントを解約する', edit_registration_path(current_user), class: 'btn btn-outline-secondary' %>
+    <div class="col-sm-12 col-md-12">
+      <div class="card shadow-lg">
+        <div class="card-body">
+          <h3 class="card-title mb-4">プロフィール</h3>
+          <h5 class="card-name mb-4"><span style="margin-right: 100px;">名前：</span><%= current_user.name %></h5>
+          <h5 class="card-email mb-4"><span style="margin-right: 30px;">メールアドレス：</span><%= current_user.email %></h5>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <%= link_to 'パスワードを変更する又アカウントを解約する', edit_registration_path(current_user), class: 'btn btn-outline-secondary' %>
+          </div>
         </div>
       </div>
     </div>
-    </div>
   </div>
 </div>
-
+<style>
+  .card {
+    margin-bottom: 300px;
+  }
+</style>

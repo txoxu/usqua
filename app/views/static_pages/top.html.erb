@@ -1,16 +1,16 @@
 <div class="top">
   <p class="title anim-box fadein is-animated"><%= t('.title') %></p>
-  <p class="main-phrase anim-box zoomin is-animated">ウイスキーの世界へようこそ~初心者からの旅路をサポートします~</p>
+  <p class="main-phrase anim-box zoomin is-animated">ウイスキーの世界へようこそ<br>~初心者からの旅路をサポートします~</p>
   <p class="sub-phrase anim-box zoomin is-animated">購入したウイスキーを管理してみませんか？</p>
 </div>
 <div class="slide-indicator">
   下にスライドしてね
 </div>
-<div class="explanation">
+<div class="explanation anim-box fadein is-animated">
   <div class="select-whiskey mb-5">
-    <div class="select-card card ">
+    <div class="select-card card ms-5 me-5">
       <div class="card-title pt-5">
-        <h2>今日の一杯はこのウイスキーで！！</h2>
+        <h2 class="media-size">今日の一杯はこのウイスキーで！！</h2>
       </div>
       <div id="selecter" data-name="">
       </div>
@@ -18,16 +18,34 @@
         <%= link_to "今日の一杯を選んでみる", select_path, class: "btn btn-primary", id: "select" %>
       </div>
       <div class="card-text mb-5 pt-2">
-        <h5>ボタンを押して、今日の一杯を決めてください！</h5>
+        <h5 class="media-size">ボタンを押して、<br>今日の一杯を決めてください！</h5>
       </div>
     </div>
   </div>
   <div class="new pb-2">
     <div class="new-button">
-      <h3>早速、管理をする。</h3>
       <%= link_to "新規登録", new_user_registration_path, class: 'btn btn-primary ms-3' %>
       <%= link_to "ログイン", new_user_session_path, class: 'btn btn-success ms-3' %>
     </div>
-    <h5 class="text-bottom">このアプリの機能などは「このアプリについて」をご覧ください。</h5>
+    <h5 class="text-bottom">アプリの機能などは「このアプリについて」をご覧ください。</h5>
   </div>
 </div>
+<style>
+  .media-size,
+  .text-bottom {
+    @media (max-width: 768px) {
+      font-size: 13px;
+    }
+  }
+
+  .main-phrase,
+  .sub-phrase {
+    @media (max-width: 768px) {
+      font-size: 18px;
+    }
+  }
+
+  .explanation {
+    margin-top: 200px;
+  }
+</style>

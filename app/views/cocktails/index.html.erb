@@ -2,129 +2,170 @@
 <%= render 'shared/cocktail_search_form' %>
 <div class="container">
   <%= render 'shared/badges' %>
-    <div class="accordion accordion-flush" id="accordionFlushExample">
-      <% @cocktails.each do |c| %>
-        <div class="cocktail-data">
-          <div class="card pt-3 pb-3 mt-5 ps-1">
-            <div class="row">
-              <div class="col-md-2">
-                <% if c.cocktail_image.present? %>
-                  <%= image_tag "#{c.cocktail_image}", class: "cocktail-image" %>
-                <% else %>
-                  <%= image_tag "bar.jpg", class: "cocktail-image" %>
-                <% end %>
-              </div>
-              <div class="body col-md-2 ps-5">
-                <div class="base-title">
-                  <%= c.base_cocktail.base_name %>
-                </div>
-                <%= link_to c.cocktail_name, cocktail_path(c), class: 'underline-animation' %>
-              </div>
-              <div class="body col-md-4">
-                <%= c.cocktail_origin %>
-              </div>
-              <% if user_signed_in? %>
-              <div class=" body col-md-3 ps-5">
-                <%= link_to 'テイスティング登録', new_cocktail_cocktail_tasting_path(c) %>
-              </div>
-              <div class=" body col-md-1">
-                  <div class="bookmark-container">
-                    <%= render 'cocktails/bookmark_button', cocktail: c %>
-                  </div>
-              </div>
-              <% end %>
+  <div class="accordion accordion-flush pb-5" id="accordionFlushExample">
+    <% @cocktails.each do |c| %>
+    <div class="cocktail-data">
+      <div class="card pt-3 pb-3 mt-5 ps-1">
+        <div class="row">
+          <div class="col-md-2">
+            <% if c.cocktail_image.present? %>
+            <%= image_tag "#{c.cocktail_image}", class: "cocktail-image" %>
+            <% else %>
+            <%= image_tag "bar.jpg", class: "cocktail-image" %>
+            <% end %>
+          </div>
+          <div class="body col-md-2 ps-5">
+            <div class="base-title">
+              <%= c.base_cocktail.base_name %>
+            </div>
+            <%= link_to c.cocktail_name, cocktail_path(c), class: 'underline-animation' %>
+          </div>
+          <div class="cocktail-body col-md-4 d-flex align-items-center">
+            <%= c.cocktail_origin %>
+          </div>
+          <% if user_signed_in? %>
+          <div class="body col-md-3 ps-5">
+            <%= link_to 'テイスティング登録', new_cocktail_cocktail_tasting_path(c) %>
+          </div>
+          <div class="body col-md-1">
+            <div class="bookmark-container">
+              <%= render 'cocktails/bookmark_button', cocktail: c %>
             </div>
           </div>
-          <% if current_user && c.cocktail_tastings.where(user_id: current_user.id).present? %>
-            <div class="accordion-item mb-3 rounded">
-              <h2 class="accordion-header" id="heading-<%= c.id %>">
-                <button class="accordion-button collapsed rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<%= c.id %>" aria-expanded="false" aria-controls="collapse-<%= c.id %>">
-                  <span class="text-center">テイスティング一覧</span>
-                </button>
-              </h2>
-              <% c.cocktail_tastings.where(user_id: current_user.id).each do |f| %>
-                <div id="collapse-<%= c.id %>" class="accordion-collapse collapse" aria-labelledby="heading-<%= c.id %>" data-bs-parent="#accordionFlushExample">
-                  <div class="accordion-body row col-md-12">
-                    <span class="col-md-2">ウイスキー:<%= f.whiskey.name %></span>
-                    <span class="col-md-8">
-                      香り<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= f.aroma %></span>
-                      味<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= f.flavor %></span>
-                      見た目、色合い<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= f.appearance %></span>
-                      口当たり<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= f.mouthfeel %></span>
-                      後味<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= f.finish %></span>
-                      総合評価<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= (f.aroma + f.flavor + f.appearance + f.mouthfeel + f.finish) / 5 %></span>
-                    </span>
-                    <span class="col-md-2">
-                    <%= link_to t('helpers.btn.edit'), edit_cocktail_cocktail_tasting_path(c, f), class: 'btn btn-outline-primary' %>
-                    <%= link_to t('helpers.btn.destroy'), cocktail_cocktail_tasting_path(c, f), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-outline-danger' %>
-                    </span>
-                  </div>
-                </div>
-              <% end %>
-            </div>
           <% end %>
         </div>
+      </div>
+      <% if current_user && c.cocktail_tastings.where(user_id: current_user.id).present? %>
+      <div class="accordion-item mb-3 rounded">
+        <h2 class="accordion-header" id="heading-<%= c.id %>">
+          <button class="accordion-button collapsed rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<%= c.id %>" aria-expanded="false" aria-controls="collapse-<%= c.id %>">
+            <span class="text-center">テイスティング一覧</span>
+          </button>
+        </h2>
+        <% c.cocktail_tastings.where(user_id: current_user.id).each do |f| %>
+        <div id="collapse-<%= c.id %>" class="accordion-collapse collapse" aria-labelledby="heading-<%= c.id %>" data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body row col-md-12">
+            <span class="col-md-2">ウイスキー:<%= f.whiskey.name %></span>
+            <span class="col-md-8">
+              香り<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= f.aroma %></span>
+              味<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= f.flavor %></span>
+              見た目、色合い<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= f.appearance %></span>
+              口当たり<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= f.mouthfeel %></span>
+              後味<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= f.finish %></span>
+              総合評価<%= image_tag 'https://cdnjs.cloudflare.com/ajax/libs/raty/3.1.1/images/star-on.png' %><span class="me-3"><%= (f.aroma + f.flavor + f.appearance + f.mouthfeel + f.finish) / 5 %></span>
+            </span>
+            <span class="col-md-2">
+              <%= link_to t('helpers.btn.edit'), edit_cocktail_cocktail_tasting_path(c, f), class: 'btn btn-outline-primary' %>
+              <%= link_to t('helpers.btn.destroy'), cocktail_cocktail_tasting_path(c, f), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-outline-danger' %>
+            </span>
+          </div>
+        </div>
+        <% end %>
+      </div>
       <% end %>
-      <%= paginate @cocktails %>
     </div>
-</div>
-<script>
+    <% end %>
+    <div class="mt-5"> <%= paginate @cocktails %> </div>
+  </div>
+  <style>
+    .cocktail-image {
+      @media (max-width:992px) {
+        width: 90%;
+        height: 80%;
+      }
+    }
 
-  document.addEventListener("turbo:load", function() {
-  // ポップアップ表示の条件
-  let newBadges = <%= @new_badges.to_json.html_safe %>;// ERBで変数を埋め込む
+    .cocktail-body {
 
-  if (newBadges.length > 0) {
+      @media (max-width: 1500px; ) {
+        padding-top: 100px;
+      }
 
-    let popup = document.getElementById("badge-popup");
-    let badgeList = document.getElementById("badge-list");
-    let Image = document.getElementById("badge-image");
-    let closeBtn = document.querySelector(".popup .close");
+      @media (max-width: 992px) {
+        font-size: 13px;
+        text-align: center;
+      }
+    }
+  </style>
+  <script>
+    document.addEventListener("turbo:load", function() {
+        // ポップアップ表示の条件
+        let newBadges = < %= @new_badges.to_json.html_safe % > ; // ERBで変数を埋め込む
 
-    // ポップアップにバッジリストを追加
-    newBadges.forEach(function(badge) {
+        if (newBadges.length > 0) {
 
-      confetti({
-	        particleCount: 500,
-	        spread: 90,
-	        origin: { x: 0.5, y: 0.5 },
-          zIndex: 9999,
-	        });
-          
-      let badgeItem = document.createElement("div");
-      let badgeBox = document.createElement("div");
-      let badgeImage = document.createElement("img");
-      badgeImage.src = `<%= @new_badges.present? ? asset_path(@new_badges[0]["badge_image"]) : '' %>`;
-      badgeImage.style.width = '400px';
-      badgeImage.style.height = '150px';
-      badgeItem.textContent = badge.name; // バッジ名を表示
-      badgeBox.textContent = badge.description;
-      badgeList.appendChild(badgeItem);
-      badgeList.appendChild(badgeBox);
-      Image.appendChild(badgeImage);
-    });
+          let popup = document.getElementById("badge-popup");
+          let badgeList = document.getElementById("badge-list");
+          let Image = document.getElementById("badge-image");
+          let closeBtn = document.querySelector(".popup .close");
 
-    // ポップアップ表示
-    popup.style.display = "flex";
+          // ポップアップにバッジリストを追加
+          newBadges.forEach(function(badge) {
 
-    // ポップアップ閉じる処理
-    closeBtn.addEventListener("click", function() {
-      popup.style.display = "none";
+              confetti({
+
+                  particleCount: 500,
+                  spread: 90,
+                  origin: {
+                    x: 0.5,
+                    y: 0.5
+                  }
+
+                  ,
+                  zIndex: 9999,
+                }
+
+              );
+
+              let badgeItem = document.createElement("div");
+              let badgeBox = document.createElement("div");
+              let badgeImage = document.createElement("img");
+              badgeImage.src = `<%=@new_badges.present? ? asset_path(@new_badges[0]["badge_image"]) : ''%>`;
+              badgeImage.style.width = '400px';
+              badgeImage.style.height = '150px';
+              badgeItem.textContent = badge.name; // バッジ名を表示
+              badgeBox.textContent = badge.description;
+              badgeList.appendChild(badgeItem);
+              badgeList.appendChild(badgeBox);
+              Image.appendChild(badgeImage);
+            }
+
+          );
+
+          // ポップアップ表示
+          popup.style.display = "flex";
+
+          // ポップアップ閉じる処理
+          closeBtn.addEventListener("click", function() {
+              popup.style.display = "none";
 
 
 
-      // サーバーにポップアップ表示を通知する
-      fetch("/update_cocktail_badge_seen", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").getAttribute("content")
-        },
-        body: JSON.stringify({ badge_ids: newBadges.map(badge => badge.id) }) /*idsとすることで、同時に獲得したバッジを複数、seenをtrueにして表示させないようにしている*/
-      });
-           location.reload();
-    });
-  }
-});
-</script>
+              // サーバーにポップアップ表示を通知する
+              fetch("/update_cocktail_badge_seen", {
 
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").getAttribute("content")
+                  }
+
+                  ,
+                  body: JSON.stringify({
+                      badge_ids: newBadges.map(badge => badge.id)
+                    }
+
+                  )
+                  /*idsとすることで、同時に獲得したバッジを複数、seenをtrueにして表示させないようにしている*/
+                }
+
+              );
+              location.reload();
+            }
+
+          );
+        }
+      }
+
+    );
+  </script>
