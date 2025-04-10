@@ -1,41 +1,53 @@
 <% content_for :breadcrumbs do %>
-  <%= breadcrumb :new_tasting, @whiskey %>
+<%= breadcrumb :new_tasting, @whiskey %>
 <% end %>
-<div class="container">
+<div class="container" style="width: 90%;">
   <div class="row">
-    <div class="col-md-8 offset-md-2 tasting-edit-frame shadow-lg bg-body-secondary">
+    <div class="col-md-8 offset-md-2 tasting-edit-frame shadow-lg bg-body-secondary rounded">
       <h1 class="text-center"><%= t('.title') %></h1>
       <%= form_with model: @tasting, url: whiskey_tastings_path(@whiskey), local: true do |f| %>
-        <div class="form-group row tasting-type">
-          <%= f.label :tasting_type, class: "col-md-3 col-form-label" %><span class="text-danger">*</span>
-          <div class="col-md-9">
-            <%= f.select :tasting_type, options_for_select(['ストレート', 'ロック', 'フロート（水割り）', 'ハイボール' ], @tasting.tasting_type), { include_blank: '選択してください' }, class: "form-control", required: true %>
-          </div>
+      <div class="row">
+        <div class="form-group tasting-type col-md-4">
+          <%= f.label :tasting_type, class: "col-form-label" %><span class="text-danger">*</span>
         </div>
+        <div class="col-md-8">
+          <%= f.select :tasting_type, options_for_select(['ストレート', 'ロック', 'フロート（水割り）', 'ハイボール' ], @tasting.tasting_type), { include_blank: '選択してください' }, class: "form-control", required: true %>
+        </div>
+      </div>
 
-        <% [{ key: 'aroma', label: '香り' },
+
+
+      <% [{ key: 'aroma', label: '香り' },
             { key: 'flavor', label: '味' },
             { key: 'balance', label: 'バランス' },
             { key: 'body', label: '濃さ' },
             { key: 'finish', label: '余韻' }].each do |item| %>
-          <div class="form-group">
-            <%= f.label item[:key], item[:label] %>
-            <div class="whiskey-star-rating ms-5 ps-5" data-category="<%= item[:key] %>"></div>
-            <%= f.hidden_field item[:key], id: "#{item[:key]}-value", value: 0 %>
-          </div>
-        <% end %>
-
-        <div class="form-group">
-          <%= f.label :tasting_text, class: "col-md-3 col-form-label" %>
-          <div class="col-md-9">
-            <%= f.text_area :tasting_text, class: "form-control" %>
-          </div>
+      <div class="form-group row">
+        <%= f.label item[:key], item[:label], class: "col-md-3 col-form-label" %>
+        <div class="col-md-9">
+          <div class="whiskey-star-rating ms-5 ps-5" data-category="<%= item[:key] %>"></div>
+          <%= f.hidden_field item[:key], id: "#{item[:key]}-value", value: 0 %>
         </div>
+      </div>
+      <% end %>
 
-        <div class="action mt-3">
-          <%= f.submit t('helpers.submit.create'), class: "btn btn-outline-primary" %>
+      <div class="form-group row">
+        <%= f.label :tasting_text, class: "col-md-3 col-form-label" %>
+        <div class="col-md-9">
+          <%= f.text_area :tasting_text, class: "form-control" %>
         </div>
+      </div>
+
+      <div class="action mt-3">
+        <%= f.submit t('helpers.submit.create'), class: "btn btn-outline-primary" %>
+      </div>
       <% end %>
     </div>
   </div>
 </div>
+<style>
+  .action {
+    display: flex;
+    justify-content: center;
+  }
+</style>

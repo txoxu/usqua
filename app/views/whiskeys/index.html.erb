@@ -9,7 +9,7 @@
       <div class="card mb-2 shadow-lg">
         <div class="row g-0">
           <!-- 画像と数量の部分をレスポンシブに調整 -->
-          <div class="col-md-4 col-sm-6">
+          <div class="image-space col-md-4 col-sm-6">
             <% if whiskey.image.present? %>
             <%= image_tag whiskey.image.url, class: "img-fluid rounded-start", size: '250x300' %>
             <% else %>
@@ -20,7 +20,7 @@
             <% if whiskey.remmaining_quantity.present? && whiskey.remmaining_quantity.quantity_image.present? %>
             <%= image_tag whiskey.remmaining_quantity.quantity_image, size: '250x300' %>
             <% else %>
-            <p class="pt-5 mt-5">量は設定されていません</p>
+            <p class="pt-5">量は設定されていません</p>
             <% end %>
           </div>
           <div class="col-md-4">
@@ -95,67 +95,95 @@
     <% end %>
   </div>
 </div>
+<style>
+  .img-fluid {
+    @media (max-width: 992px) {
+      width: 100%;
+    }
+  }
+</style>
+
+
+
 <script>
   document.addEventListener("turbo:load", function() {
-    // ポップアップ表示の条件
+      // ポップアップ表示の条件
 
-    let newBadges = < %= @new_badges.to_json.html_safe % > ; // ERBで変数を埋め込む
+      let newBadges = < %= @new_badges.to_json.html_safe % > ; // ERBで変数を埋め込む
 
-    if (newBadges.length > 0) {
+      if (newBadges.length > 0) {
 
-      let popup = document.getElementById("badge-popup");
-      let badgeList = document.getElementById("badge-list");
-      let Image = document.getElementById("badge-image");
-      let closeBtn = document.querySelector(".popup .close");
+        let popup = document.getElementById("badge-popup");
+        let badgeList = document.getElementById("badge-list");
+        let Image = document.getElementById("badge-image");
+        let closeBtn = document.querySelector(".popup .close");
 
-      // ポップアップにバッジリストを追加
-      newBadges.forEach(function(badge) {
+        // ポップアップにバッジリストを追加
+        newBadges.forEach(function(badge) {
 
-        confetti({
-          particleCount: 500,
-          spread: 90,
-          origin: {
-            x: 0.5,
-            y: 0.5
-          },
-          zIndex: 9999,
-        });
+            confetti({
 
-        let badgeItem = document.createElement("div");
-        let badgeBox = document.createElement("div");
-        let badgeImage = document.createElement("img");
-        badgeImage.src = `<%= @new_badges.present? ? asset_path(@new_badges[0]["badge_image"]) : '' %>`;
-        badgeImage.style.width = '400px';
-        badgeImage.style.height = '150px';
-        badgeItem.textContent = badge.name; // バッジ名を表示
-        badgeBox.textContent = badge.description;
-        badgeList.appendChild(badgeItem);
-        badgeList.appendChild(badgeBox);
-        Image.appendChild(badgeImage);
-      });
+                particleCount: 500,
+                spread: 90,
+                origin: {
+                  x: 0.5,
+                  y: 0.5
+                }
 
-      // ポップアップ表示
-      popup.style.display = "flex";
+                ,
+                zIndex: 9999,
+              }
 
-      // ポップアップ閉じる処理
-      closeBtn.addEventListener("click", function() {
-        popup.style.display = "none";
+            );
+
+            let badgeItem = document.createElement("div");
+            let badgeBox = document.createElement("div");
+            let badgeImage = document.createElement("img");
+            badgeImage.src = `<%=@new_badges.present? ? asset_path(@new_badges[0]["badge_image"]) : ''%>`;
+            badgeImage.style.width = '400px';
+            badgeImage.style.height = '150px';
+            badgeItem.textContent = badge.name; // バッジ名を表示
+            badgeBox.textContent = badge.description;
+            badgeList.appendChild(badgeItem);
+            badgeList.appendChild(badgeBox);
+            Image.appendChild(badgeImage);
+          }
+
+        );
+
+        // ポップアップ表示
+        popup.style.display = "flex";
+
+        // ポップアップ閉じる処理
+        closeBtn.addEventListener("click", function() {
+            popup.style.display = "none";
 
 
 
-        // サーバーにポップアップ表示を通知する
-        fetch("/update_badge_seen", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").getAttribute("content")
-          },
-          body: JSON.stringify({
-            badge_ids: newBadges.map(badge => badge.id)
-          })
-        });
-        location.reload();
-      });
+            // サーバーにポップアップ表示を通知する
+            fetch("/update_badge_seen", {
+
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").getAttribute("content")
+                }
+
+                ,
+                body: JSON.stringify({
+                    badge_ids: newBadges.map(badge => badge.id)
+                  }
+
+                )
+              }
+
+            );
+            location.reload();
+          }
+
+        );
+      }
     }
-  });
+
+  );
 </script>

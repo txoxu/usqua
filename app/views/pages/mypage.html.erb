@@ -6,28 +6,32 @@
         <div class="total-frame">
           <div class="row">
             <div class="col total-text">
-              <h3><%= t('.sum_create') %></h3>
+              <h3 class="whiskey-table"><%= t('.sum_create') %></h3>
             </div>
             <div class="col total-number">
-              <h3><%= current_user.whiskeys.count %>本</h3>
+              <h3 class="whiskey-table"><%= current_user.whiskeys.count %>本</h3>
             </div>
           </div>
         </div>
-        
+
         <div class="whiskey-container">
-          <table class="table table-hover">
+          <table class="table table-hover whiskey-table">
             <thead>
-              <tr> 
+              <tr>
                 <th>ウィスキーの種類</th>
                 <th>本数</th>
               </tr>
             </thead>
             <tbody>
-             <% @whiskey_count_by_category.each do |category, count| %>
-                <tr>
-                  <td><h3><%= category %></h3></td>
-                  <td><h3><%= count %>本</h3></td>
-                </tr>
+              <% @whiskey_count_by_category.each do |category, count| %>
+              <tr>
+                <td>
+                  <h3 class="whiskey-table"><%= category %></h3>
+                </td>
+                <td>
+                  <h3 class="whiskey-table"><%= count %>本</h3>
+                </td>
+              </tr>
               <% end %>
             </tbody>
           </table>
@@ -47,42 +51,42 @@
       </div>
     </div>
 
-  
+
     <h1>お気に入りカクテル</h1>
-      <% if @bookmark_cocktails.present? %>
-          <% @bookmark_cocktails.each do |b| %>
-            <div class="card mb-1">
-                <div class="card-body">
-                  <div class="row">
-                  <p class="card-image col-md-1"><%= image_tag b.cocktail_image, class: "image-size" %></p>
-                  <h5 class="card-title col-md-2"><%= b.cocktail_name %></h5>
-                  <p class="card-text col-md-6"><%= b.cocktail_origin %></p>
-                  <div class="col-md-2"><%= render 'cocktails/unbookmark', { cocktail: b } %></div>
-                  <%= link_to "詳細ページ", cocktail_path(b), class: "link-success link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" %>
-                </div>
-            </div>
-          </div>
-          <% end %>
-      <% else %>
-        <div class='mb-3'>
-          <p>登録されているカクテルはありません</p>
+    <% if @bookmark_cocktails.present? %>
+    <% @bookmark_cocktails.each do |b| %>
+    <div class="card cocktail-card mb-1">
+      <div class="card-body">
+        <div class="row">
+          <p class="card-image col-md-1"><%= image_tag b.cocktail_image, class: "image-size" %></p>
+          <h5 class="card-title col-md-2"><%= b.cocktail_name %></h5>
+          <p class="card-text col-md-6"><%= b.cocktail_origin %></p>
+          <div class="col-md-2"><%= render 'cocktails/unbookmark', { cocktail: b } %></div>
+          <%= link_to "詳細ページ", cocktail_path(b), class: "link-success link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" %>
         </div>
-      <% end %>
+      </div>
+    </div>
+    <% end %>
+    <% else %>
+    <div class='mb-3'>
+      <p>登録されているカクテルはありません</p>
+    </div>
+    <% end %>
     <h1>獲得した称号</h1>
     <% if @user_whiskey_badges.present? %>
-      <div class="row">
+    <div class="row">
       <% @whiskey_badges.each do |badge| %>
-        <div class="card col-md-4 mb-1">
-          <div class="badge-card-body">
-              <p class="card-image"><%= image_tag badge.badge_image, class: "badge-image-size" %></p>
-              <h5 class="card-title"><%= badge.name %></h5>
-              <p class="card-text"><%= badge.description %></p>
-          </div>
+      <div class="card badge-card col-md-4 mb-1">
+        <div class="badge-card-body">
+          <p class="card-image"><%= image_tag badge.badge_image, class: "badge-image-size" %></p>
+          <h5 class="card-title"><%= badge.name %></h5>
+          <p class="card-text"><%= badge.description %></p>
         </div>
-      <% end %>
       </div>
+      <% end %>
+    </div>
     <% else %>
-      <h2>獲得した称号はまだありません。</h2>
+    <h2>獲得した称号はまだありません。</h2>
     <% end %>
   </div>
 </div>
@@ -91,56 +95,79 @@
 
 
 <style>
+  .whiskey-table {
+    @media (max-width:992px) {
+      width: 100%;
+      height: 100%;
+      font-size: 13px;
+      text-align: center;
+    }
+
+  }
+
   .mypage-container {
-  padding: 20px;
-}
+    padding: 10px;
+    width: 90%;
+  }
 
-.total-container {
-  padding: 20px;
-}
+  .total-container {
+    padding: 10px;
+  }
 
-.total-frame {
-  margin-bottom: 20px;
-}
+  .total-frame {
+    margin-bottom: 20px;
+  }
 
-.total-text p, .total-number {
-  margin: 0;
-  padding: 0;
-}
+  .total-text p,
+  .total-number {
+    margin: 0;
+    padding: 0;
+  }
 
-.chart-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
+  .chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
 
-.chart-container .chartkick {
-  max-width: 100%;
-}
+  .chart-container .chartkick {
+    max-width: 100%;
+  }
 
-.image-size {
-  width: 5rem;
-  height: 5rem;
-}
+  .image-size {
+    width: 5rem;
+    height: 5rem;
+  }
 
-.badge-image-size {
-  width: 20rem;
-  height: 5rem;
-}
+  .badge-image-size {
+    width: 90%;
+    height: 5rem;
+  }
 
-.card {
-  height: 10rem;
-  text-align: center;
-}
+  .cocktail-card {
+    height: 10rem;
+    text-align: center;
+    width: 90%;
 
-@media (max-width: 992px) {
-  .card {
-    height: 18rem;
+    margin-left: 10px;
+
+    @media (max-width: 992px) {
+      height: 18rem;
+      width: 90%;
+    }
+  }
+
+  .badge-card {
+    margin-left: 10px;
+
+    @media (max-width: 992px) {
+      width: 90%;
+    }
   }
 
   .badge-card-body {
-    margin-top: 3rem;
+    margin-top: 1rem;
+    text-align: center;
   }
-}
 </style>

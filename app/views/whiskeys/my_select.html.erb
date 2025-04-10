@@ -1,9 +1,9 @@
-<div class="container">
+<div class="container ">
   <div class="row">
     <div class="select-whiskey">
       <div class="select-card card ">
         <div class="card-title pt-5">
-          <h2>今日の一杯！！</h2>
+          <h2 class="select-size">今日の一杯！！</h2>
         </div>
         <div id="my-selecter" data-name="">
         </div>
@@ -11,7 +11,7 @@
           <%= link_to "今日の一杯を選ぶ", random_whiskeys_path, class: "btn btn-primary", id: "my-select" %>
         </div>
         <div class="card-text mb-5 pt-2">
-          <h5>ボタンを押して、今日の一杯を決めてください！</h5>
+          <h5 class="select-size">ボタンを押して、<br>今日の一杯を決めてください！</h5>
         </div>
       </div>
     </div>
@@ -25,6 +25,13 @@
     .select-whiskey {
       display: flex;
       justify-content: center;
+      margin-bottom: 300px;
+    }
+
+    .select-size {
+      @media (max-width: 992px) {
+        font-size: 13px;
+      }
     }
   </style>
   <script>

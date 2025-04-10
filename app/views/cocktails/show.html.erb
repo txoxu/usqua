@@ -1,37 +1,51 @@
 <% breadcrumb :cocktail, @cocktail %>
 <div class="container">
   <div class="row">
-    <div class="col-md-6 bg-body-secondary shadow-lg rounded mb-2">
+    <div class=" show-card col-md-6 bg-body-secondary shadow-lg rounded mb-2">
       <div class="show-frame mb-3">
-        <div class="mb-5">
+        <div class="mb-4">
           <h1><%= @cocktail.cocktail_name %></h1>
         </div>
-        <div class="mb-5">
-          <%= @cocktail.cocktail_origin %>
+        <div class="mb-4">
+          <h5>・カクテルの由来</h5><%= @cocktail.cocktail_origin %>
         </div>
-        <div class="mb-5">
-          <%= sanitize(@cocktail.cocktail_recipe.gsub(/,/, '<br>')) %>
+        <div class="mb-4">
+          <h5>・材料</h5><%= sanitize(@cocktail.cocktail_recipe.gsub(/,/, '<br>')) %>
         </div>
-        <div class="mb-5">
-          <%= @cocktail.cocktail_create %>
+        <div class="mb-4">
+          <h5>・簡単な作り方</h5><%= @cocktail.cocktail_create %>
         </div>
-      <% if user_signed_in? %>
+        <% if user_signed_in? %>
         <%= render 'cocktails/bookmark_button', cocktail: @cocktail %>
-      <% end %>
+        <% end %>
       </div>
       <% if user_signed_in? %>
-        <div class="cocktail-tasting mb-3">
-            <%= link_to t('cocktails.show.link'), new_cocktail_cocktail_tasting_path(@cocktail) %>
-        </div>
+      <div class="cocktail-tasting mb-3">
+        <%= link_to t('cocktails.show.link'), new_cocktail_cocktail_tasting_path(@cocktail) %>
+      </div>
       <% end %>
     </div>
     <div class="col-md-6">
-        <% if @cocktail.cocktail_url.present? %>
-          <iframe width="600" height="500" src="https://www.youtube.com/embed/<%= @cocktail.cocktail_url %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        <% else %>
-          <p class='text-center mt-md-5'><%= t('cocktails.show.nul') %></p>
-        <% end %>
+      <% if @cocktail.cocktail_url.present? %>
+      <iframe width="500" height="400" src="https://www.youtube.com/embed/<%= @cocktail.cocktail_url %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <% else %>
+      <p class='text-center mt-md-5'><%= t('cocktails.show.nul') %></p>
+      <% end %>
     </div>
-      <%= render 'shared/cocktail_pagenate' %>
+    <%= render 'shared/cocktail_pagenate' %>
   </div>
 </div>
+<style>
+  iframe {
+    @media (max-width: 992px) {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .show-card {
+    @media (max-width: 992px) {
+      width: 80%;
+    }
+  }
+</style>

@@ -1,6 +1,6 @@
 <% breadcrumb :edit_whiskey, @whiskey %>
-<div class="bg-body-secondary shadow-lg rounded pt-3 pb-3">
-<div class="container">
+
+<div class="container edit bg-body-secondary shadow-lg rounded pt-3 pb-3">
   <div class="row">
     <div class="col-md-6">
       <div class="edit-frame">
@@ -8,60 +8,60 @@
           <h1><%= t('.title') %></h1>
         </div>
         <%= form_with model: @whiskey, id: 'edit_whiskey', local: true do |f| %>
-          <div class="mb-3">
-            <%= f.label :name %><span class="text-danger">*</span>
-            <%= f.text_field :name, class: "form-control", required: true %>
-          </div>
-          <div class="mb-3">
-            <%= f.label :text %>
-            <%= f.text_field :text, class: "form-control" %>
-          </div>
-          <div class="mb-3" id="form-quantity" style="display:none;">
-            <%= f.label :remmaining_quantity_id %>
-            <%= f.collection_radio_buttons :remmaining_quantity_id, @quantities, :id, :quantity, class: "form-check-input", required: true do |rb| %>
-              <%= rb.radio_button %>
-              <%= rb.label(class: "form-check-label") %>
-            <% end %>
+        <div class="mb-3">
+          <%= f.label :name %><span class="text-danger">*</span>
+          <%= f.text_field :name, class: "form-control", required: true %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :text %>
+          <%= f.text_field :text, class: "form-control" %>
+        </div>
+        <div class="mb-3" id="form-quantity" style="display:none;">
+          <%= f.label :remmaining_quantity_id %>
+          <%= f.collection_radio_buttons :remmaining_quantity_id, @quantities, :id, :quantity, class: "form-check-input", required: true do |rb| %>
+          <%= rb.radio_button %>
+          <%= rb.label(class: "form-check-label") %>
+          <% end %>
 
-            <div class="form-check form-check-inline">
-                <%= f.radio_button :remmaining_quantity_id, '', class: "form-check-input" %>
-                <%= f.label :remmaining_quantity_id, "指定しない", class: "form-check-label" %>
-            </div>
+          <div class="form-check form-check-inline">
+            <%= f.radio_button :remmaining_quantity_id, '', class: "form-check-input" %>
+            <%= f.label :remmaining_quantity_id, "指定しない", class: "form-check-label" %>
           </div>
+        </div>
 
-          <div class="mb-3" id="form-image">
-            <%= f.label :image %>
-            <%= f.file_field :image, class: "form-control" %>
-          </div>
+        <div class="mb-3" id="form-image">
+          <%= f.label :image %>
+          <%= f.file_field :image, class: "form-control" %>
+        </div>
 
-          <div class="row">
-            <div class="btn-group-vertical col-3" role="group" aria-label="Vertical radio toggle button group">
-              <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio1" autocomplete="off" checked>
-              <label class="btn btn-outline-danger" for="vbtn-radio1">画像ファイル</label>
-              <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio2" autocomplete="off">
-              <label class="btn btn-outline-danger" for="vbtn-radio2">量機能</label>
-            </div>
-            <div class="col-9">
-              <p>*実際の写真を使って量を管理することも、提供されている画像を参考に設定することも可能です。</p>
-              <p>*スマートフォン等で写真を撮り直接保存することはできません</p>
-            </div>
+        <div class="row">
+          <div class="btn-group-vertical col-3" role="group" aria-label="Vertical radio toggle button group">
+            <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio1" autocomplete="off" checked>
+            <label class="btn btn-outline-danger" for="vbtn-radio1">画像ファイル</label>
+            <input type="radio" class="btn-check" name="vbtn-radio" id="vbtn-radio2" autocomplete="off">
+            <label class="btn btn-outline-danger" for="vbtn-radio2">量機能</label>
           </div>
+          <div class="col-9">
+            <p>*実際の写真を使って量を管理することも、提供されている画像を参考に設定することも可能です。</p>
+            <p>*スマートフォン等で写真を撮り直接保存することはできません</p>
+          </div>
+        </div>
 
-          <div class="mb-3">
-            <%= f.label :category_names %><span class="text-danger">*</span>
-            <%= f.select :category_names, @category_names.map { |c| c.category_name }, { prompt: "選択してください" }, class: "form-control", required: true %>
-          </div>
-          <div class="mb-3">
-            <%= f.label :category_types %><span class="text-danger">*</span>
-            <%= f.select :category_types, @category_types.map { |c| c.category_type }, { prompt: "選択してください" }, class: "form-control", required: true %>
-          </div>
-          <div class="actions">
-            <%= f.submit t('helpers.submit.create'), class: "btn btn-outline-primary" %>
-          </div>
+        <div class="mb-3">
+          <%= f.label :category_names %><span class="text-danger">*</span>
+          <%= f.select :category_names, @category_names.map { |c| c.category_name }, { prompt: "選択してください" }, class: "form-control", required: true %>
+        </div>
+        <div class="mb-3">
+          <%= f.label :category_types %><span class="text-danger">*</span>
+          <%= f.select :category_types, @category_types.map { |c| c.category_type }, { prompt: "選択してください" }, class: "form-control", required: true %>
+        </div>
+        <div class="actions">
+          <%= f.submit t('helpers.submit.create'), class: "btn btn-outline-primary" %>
+        </div>
         <% end %>
       </div>
     </div>
-  
+
     <div class="col-md-6" id='previews-form'>
       <div class="image-container text-center">
         <div id="previews" class="border p-3">
@@ -79,5 +79,27 @@
     </div>
   </div>
 </div>
-</div>
+<style>
+  .edit {
+    @media (max-width: 992px) {
+      width: 90%;
+    }
+  }
 
+  .btn-outline-danger {
+    font-size: 15px;
+
+    @media (max-width: 992px) {
+      font-size: 8px;
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+  }
+
+  .actions {
+    @media (max-width: 992px) {
+      display: flex;
+      justify-content: center;
+    }
+  }
+</style>
